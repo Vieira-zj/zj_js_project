@@ -197,3 +197,14 @@
 //
 //foo();
 
+
+// demo 13
+//var str = ' add ';
+//(function (str) {
+//    'use strict';
+//    var x = 10,
+//        y = 100;
+//    console.log(x + str + y);
+//}(str));
+
+
