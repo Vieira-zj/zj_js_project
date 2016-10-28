@@ -4,4 +4,7 @@
 out/
 *.iml
 
+# local external modules
+*/node_modules/
+
 #.gitignore
