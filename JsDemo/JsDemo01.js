@@ -208,3 +208,16 @@
 //}(str));
 
 
+// demo 14, json parse
+//var obj = {
+//    'title': 'title test',
+//    'content': 'content test'
+//};
+//
+//console.log(obj.title);
+//console.log(obj['title']);
+//
+//var str = '{ "name": "Violet", "occupation": "character" }';
+//var obj = JSON.parse(str);
+//console.log(obj.name);
+//console.log(obj['occupation']);
