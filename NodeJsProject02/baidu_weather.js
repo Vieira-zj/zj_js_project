@@ -1,5 +1,7 @@
 /**
  * Created by zhengjin on 2016/11/1.
+ *
+ * Test Baidu weather API by using lib superagent.
  */
 var express = require('express');
 var superagent = require('superagent');
