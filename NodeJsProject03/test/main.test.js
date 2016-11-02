@@ -4,10 +4,13 @@
  * Refer to https://github.com/alsotang/node-lessons/tree/master/lesson6
  * Libraries: mocha, should, istanbul
  *
+ * Test function fibonacci() of main.js
+ *
+ * ENV:
  * "npm install mocha -g", use the command "mocha" in global ENV.
  * "npm i istanbul -g", use the command "istanbul cover _mocha" to get the code coverage.
  *
- * Note: use command "mocha" to run this test, but not "node".
+ * Note: use command "mocha" to run the test, but not "node".
  *
  */
 var main = require('./../main');
