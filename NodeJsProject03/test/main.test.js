@@ -2,9 +2,9 @@
  * Created by zhengjin on 2016/11/2.
  *
  * Refer to https://github.com/alsotang/node-lessons/tree/master/lesson6
- * Libraries: mocha, should, istanbul
+ * Lib: mocha, should, istanbul
  *
- * Test function fibonacci() of main.js
+ * Unit test: test function fibonacci() of main.js
  *
  * ENV:
  * "npm install mocha -g", use the command "mocha" in global ENV.

@@ -1,7 +1,7 @@
 {
     "name": "nodejs_project_03",
     "version": "1.0.0",
-    "description": "Nodejs demo project refer to GitHub lesson6.",
+    "description": "Nodejs unit test demo project refer to GitHub lesson6.",
     "main": "main.js",
     "directories": {
         "test": "test"

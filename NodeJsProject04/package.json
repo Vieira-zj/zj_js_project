@@ -1,7 +1,7 @@
 {
   "name": "nodejs_project_04",
   "version": "1.0.0",
-  "description": "Nodejs demo project refer to GitHub lesson8.",
+  "description": "Nodejs integration test demo project refer to GitHub lesson8.",
   "main": "app.js",
   "scripts": {
     "test": "make test"

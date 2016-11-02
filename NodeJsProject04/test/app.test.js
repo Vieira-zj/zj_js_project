@@ -1,7 +1,7 @@
 /**
  * Created by zhengjin on 2016/11/2.
  *
- * Test APIs of app.js
+ * Integration test: test APIs of app.js
  *
  */
 var app = require('./../app');
