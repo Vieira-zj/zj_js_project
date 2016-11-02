@@ -1,5 +1,8 @@
 /**
  * Created by zhengjin on 2016/11/1.
+ *
+ * Refer to https://github.com/alsotang/node-lessons/tree/master/lesson4
+ *
  */
 var eventproxy = require('eventproxy');
 var superagent = require('superagent');

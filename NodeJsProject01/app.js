@@ -1,5 +1,11 @@
 /**
  * Created by zhengjin on 2016/10/28.
+ *
+ * Refer to https://github.com/alsotang/node-lessons/tree/master/lesson2
+ * install libraries by "npm install express utility --save"
+ *
+ * npm install express --registry=https://registry.npm.taobao.org
+ *
  */
 
 var express = require('express');

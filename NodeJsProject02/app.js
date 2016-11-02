@@ -2,6 +2,8 @@
  * Created by zhengjin on 2016/11/1.
  *
  * Using libraries superagent and cheerio
+ * Refer to https://github.com/alsotang/node-lessons/tree/master/lesson5
+ *
  */
 var express = require('express');
 var cheerio = require('cheerio');
