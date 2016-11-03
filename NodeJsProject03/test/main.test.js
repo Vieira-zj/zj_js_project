@@ -7,8 +7,8 @@
  * Unit test: test function fibonacci() of main.js
  *
  * ENV:
- * "npm install mocha -g", use the command "mocha" in global ENV.
- * "npm i istanbul -g", use the command "istanbul cover _mocha" to get the code coverage.
+ * "npm install mocha -g", run command "mocha" in global ENV.
+ * "npm i istanbul -g", run command "istanbul cover _mocha" to get the code coverage.
  *
  * Note: use command "mocha" to run the test, but not "node".
  *

@@ -7,7 +7,6 @@
  * npm install express --registry=https://registry.npm.taobao.org
  *
  */
-
 var express = require('express');
 var utility = require('utility');
 
@@ -18,6 +17,7 @@ app.route('/').get(function (req, res) {
     var md5Value = utility.md5(q);
     res.send(md5Value);
 });
+// access by "http://localhost:3000/?q=5"
 
 app.listen(3000, function (req, res) {
     console.log('app is running at port 3000');
