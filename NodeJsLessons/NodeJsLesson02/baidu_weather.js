@@ -13,7 +13,7 @@ var app = express();
 
 app.route('/weather').get(function (req, res, next) {
     superagent.get(url)
-        // get request
+        // send GET request
         .set('apikey', '7705cca8df9fb3dbe696ce2310979a62')
         // set header
         .end(function (err, content) {
