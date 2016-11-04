@@ -8,27 +8,32 @@ function getPromise(msg, timeout, opt) {
     setTimeout(function () {
         console.log((msg));
         if (opt) {
-            defer.reject(msg);
+            defer.reject();
         } else {
-            defer.resolve(msg);
+            defer.resolve();
         }
     }, timeout);
     return defer.promise;
 }
 
-//getPromise('1', 1000)
-//    .then(function () {
-//        return getPromise('2', 2000, 'opt')
-//    })
-//    .then(function () {
-//        return getPromise('3', 3000)
-//    });
-
-getPromise('1', 1000)
-    .then(function () {
-        return getPromise('2', 2000, 'opt')
-    })
-    .then(function () {
-        return getPromise('3', 3000)
-    })
-    .done();
+var isDone = true;
+if (isDone) {
+    // run stop and throw error (un-handler rejected)
+    getPromise('1', 1000)
+        .then(function () {
+            return getPromise('2', 2000, 'opt')
+        })
+        .then(function () {
+            return getPromise('3', 3000)
+        })
+        .done();
+} else {
+    // run stop
+    getPromise('1', 1000)
+        .then(function () {
+            return getPromise('2', 2000, 'opt')
+        })
+        .then(function () {
+            return getPromise('3', 3000)
+        });
+}

@@ -4,7 +4,6 @@
  * Refer to https://github.com/alsotang/node-lessons/tree/master/lesson8
  *
  * Lib: mocha, should, supertest, express
- * Access url: http://localhost:3000/fib?n=10
  *
  */
 var express = require('express');
@@ -45,3 +44,4 @@ module.exports = app;
 app.listen(3000, function () {
     console.log('app is listening at port 3000');
 });
+// access by http://localhost:3000/fib?n=10

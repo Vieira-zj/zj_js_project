@@ -27,7 +27,7 @@ superagent.get(cnodeUrl).end(function (err, res) {
 
     // listen the event 'topic_html' (defined below) for topicUrls.length times
     ep.after('topic_html', topicUrls.length, function (topics) {
-        // topics = topicUrl, res.text]
+        // topics = [topicUrl, res.text]
         topics = topics.map(function (topicPair) {
             var topicUrl = topicPair[0];
             var topicHtml = topicPair[1];

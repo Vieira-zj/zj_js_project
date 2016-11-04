@@ -17,12 +17,13 @@ function printFileContent(fileName) {
     return defer.promise;
 }
 
-// run concurrent
+var dir = './NodeJsLessons/NodeJsLesson07/data/';
+// run concurrent, stop if one rejected
 Q.all([
-    printFileContent('./NodeJsProject07/data/sample01.txt'),
-    printFileContent('./NodeJsProject07/data/sample02.txt'),
-    printFileContent('./NodeJsProject07/data/sample03.txt'),
-    printFileContent('./NodeJsProject07/data/sample04.txt')])
+    printFileContent(dir + 'sample01.txt'),
+    printFileContent(dir + 'sample02.txt'),
+    printFileContent(dir + 'sample03.txt'),
+    printFileContent(dir + 'sample04.txt')])
     .then(function (success) {
         console.log(success);
     });
