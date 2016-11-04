@@ -1,10 +1,9 @@
-
 # IDEA files
 .idea/
 out/
 *.iml
 
 # local external modules
-*/node_modules/
+NodeJsLessons/*/node_modules/
 
 #.gitignore
