@@ -221,3 +221,22 @@
 //var obj = JSON.parse(str);
 //console.log(obj.name);
 //console.log(obj['occupation']);
+
+
+// demo 15
+//(function () {
+//    var arr = ['a', 'b', 'c'];
+//    arr.name = 'array';
+//    for (var ele in arr) {
+//        if (arr.hasOwnProperty(ele)) {
+//            console.log(ele);
+//        }
+//    }
+//})();
+
+//(function () {
+//    var arr = ['a', 'b', 'c'];
+//    arr.forEach(function (element, index) {
+//        console.log(index + ' -> ' + element);
+//    });
+//}());
