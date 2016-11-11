@@ -1,7 +1,7 @@
 /**
  * Created by Vieira on 2016/10/19.
  */
-'use strict';
+//'use strict';
 
 // demo 01
 //function count() {
@@ -240,3 +240,6 @@
 //        console.log(index + ' -> ' + element);
 //    });
 //}());
+
+
+//

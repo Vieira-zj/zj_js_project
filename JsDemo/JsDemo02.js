@@ -1,7 +1,7 @@
 /**
  * Created by zhengjin on 2016/10/26.
  */
-'use strict';
+//'use strict';
 
 // demo 01
 //function Thing() {
@@ -162,7 +162,7 @@
 //
 //    return a;
 //}
-//
+
 //var fn = fib(5);
 //console.log(fn.next());
 //console.log(fn.next());
@@ -199,3 +199,6 @@
 //console.log(fib.next());
 //console.log(fib.next());
 //console.log(fib.next());
+
+
+//
