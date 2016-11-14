@@ -1,8 +1,8 @@
+//'use strict';
+
 /**
  * Created by zhengjin on 2016/10/26.
  */
-//'use strict';
-
 // demo 01
 //function Thing() {
 //}
@@ -201,4 +201,116 @@
 //console.log(fib.next());
 
 
+// demo 09, RegExp
+//var re = new RegExp('^\\d{3}\\-\\d{3,8}$');
+//var re = /^\d{3}\-\d{3,8}$/;
+//console.log(re.test('010-12345'));
+//console.log(re.test('010-1234x'));
+//console.log(re.test('010 12345'));
+
+
+//console.log('a b   c'.split(/\s+/));
+//console.log('a,b, c,   d'.split(/[\s\,]+/));
+
+
+// RegExp, group
+//var re = /^(\d{3})\-(\d{3,8})$/;
+//console.log(re.exec('010-12345'));
+//console.log(re.exec('010 12345'));
+
+
+//var re = /^(\d+)(0*)$/;
+//console.log(re.exec('102300'));
+//var re = /^(\d+?)(0*)$/;
+//console.log(re.exec('102300'));
+
+
+// gloal search
+//var s = 'JavaScript, VBScript, JScript and ECMAScript';
+//var re = /[a-zA-Z]+cript/g;
+//console.log(re.exec(s));
+//console.log(re.lastIndex);
+//console.log(re.exec(s));
+//console.log(re.lastIndex);
+
+
+// demo 10, inherit
+//function Student(props) {
+//    this.name = props.name || 'Unnamed';
+//}
+//Student.prototype.hello = function () {
+//    console.log('Hello ' + this.name + '!');
+//};
 //
+//function PrimaryStudent(props) {
+//    Student.call(this, props);
+//    this.grade = props.grade || 1;
+//}
+//
+//
+//// method 01
+////function F() {
+////}
+////F.prototype = Student.prototype;
+////PrimaryStudent.prototype = new F();
+////PrimaryStudent.prototype.constructor = PrimaryStudent;
+//
+//// method 02
+//function inherits(Child, Parent) {
+//    var F = function () {
+//    };
+//    F.prototype = Parent.prototype;
+//    Child.prototype = new F();
+//    Child.prototype.constructor = Child;
+//}
+//inherits(PrimaryStudent, Student);
+//
+//PrimaryStudent.prototype.getGrade = function () {
+//    return this.grade;
+//};
+//
+//var xiaoming = new PrimaryStudent({
+//    name: 'XiaoMing',
+//    grade: 2
+//});
+//xiaoming.hello();
+//console.log(xiaoming.getGrade());
+//
+//console.log(xiaoming.__proto__ === PrimaryStudent.prototype);
+//console.log(xiaoming.__proto__.__proto__ === Student.prototype);
+//
+//console.log(xiaoming instanceof PrimaryStudent);
+//console.log(xiaoming instanceof Student);
+
+
+// demo 11, inherit
+//'use strict';
+//class Student {
+//    constructor(name) {
+//        this.name = name;
+//    }
+//
+//    hello() {
+//        console.log('Hello, ' + this.name + '!');
+//    }
+//}
+//
+//class PrimaryStudent extends Student {
+//    constructor(name, grade) {
+//        super(name);
+//        this.grade = grade;
+//    }
+//
+//    myGrade() {
+//        console.log('I am at grade ' + this.grade);
+//    }
+//}
+//
+//var xiaoming = new PrimaryStudent('XiaoMing', 2);
+//xiaoming.hello();
+//xiaoming.myGrade();
+//console.log(xiaoming instanceof PrimaryStudent);
+//console.log(xiaoming instanceof Student);
+
+
+console.log('DONE.');

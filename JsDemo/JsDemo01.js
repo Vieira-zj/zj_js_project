@@ -123,6 +123,7 @@
 //var capify = function (str) {
 //    return [str.charAt(0).toUpperCase(), str.substring(1)].join('');
 //};
+//
 //var processWords = function (fn, str) {
 //    return str.split(' ').map(fn).join(' ');
 //};
@@ -242,4 +243,10 @@
 //}());
 
 
-//
+// demo 16
+//var arr = [1, 2, 3, 4];
+//var target = arr.map(x => x + x);
+//console.log(target);
+
+
+console.log('DONE.');
