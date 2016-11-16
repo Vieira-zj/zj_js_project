@@ -249,4 +249,25 @@
 //console.log(target);
 
 
+// demo 17
+//function Student(name, age) {
+//    this.name = name;
+//    this.age = age;
+//}
+//var xiaoming = new Student('XiaoMing', 20);
+//Student.prototype.school = 'No.1 Middle School';
+
+//var xiaoming = {
+//    name: 'XiaoMing',
+//    age: 20
+//};
+//xiaoming.__proto__.school = 'No.1 Middle School';
+
+//for (var p in xiaoming) {
+//    if (xiaoming.hasOwnProperty(p)) {
+//        console.log(p);
+//    }
+//}
+
+
 console.log('DONE.');
