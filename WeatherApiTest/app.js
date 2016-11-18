@@ -18,21 +18,16 @@ superagent.get('http://www.weather.com.cn/weather/101200101.shtml')
             return;
         }
 
-        // jQuery
         var $ = cheerio.load(resp.text);
-
-        // get today weather data
-        weatherDataOfficial.push(
-            formatWeatherData($('#7d .clearfix li[class="sky skyid lv3 on"]').text()));
-
         // get forecast weather data
-        $('#7d .clearfix li[class="sky skyid lv3"]').each(function (idx, element) {
-            var $element = $(element);
-            weatherDataOfficial.push(formatWeatherData($element.text()));
+        $('#7d>ul.clearfix>li').each(function (idx, element) {
+            weatherDataOfficial.push(formatWeatherData($(element)));
         });
 
         console.log('Weather data from official:');
-        console.log(weatherDataOfficial);
+        weatherDataOfficial.forEach(function (element) {
+            console.log(JSON.stringify(element));
+        })
     });
 
 superagent.get('http://172.17.12.110:8480/tv_message/weather/city')
@@ -67,15 +62,18 @@ superagent.get('http://172.17.12.110:8480/tv_message/weather/city')
         });
 
         console.log('Weather data from funshion API:');
-        console.log(weatherDataFun);
+        weatherDataFun.forEach(function (element) {
+            console.log(JSON.stringify(element));
+        })
     });
 
-var formatWeatherData = function (item) {
-    var field = item.split(/\n+/);
+var formatWeatherData = function (element) {
+    var fields = element.text().split(/\n+/);
     return {
-        date: field[1],
-        type: field[2],
-        temp: field[3],
-        wind: field[4]
+        date: fields[1],
+        type: fields[2],
+        temp: fields[3],
+        WindForce: fields[4],
+        WindDirection: element.find('p.win>em>span').first().attr('title')
     }
 };
