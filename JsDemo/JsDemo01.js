@@ -245,8 +245,8 @@
 
 // demo 16
 //var arr = [1, 2, 3, 4];
-//var target = arr.map(x => x + x);
-//console.log(target);
+//console.log(arr.map(x => x + x));
+//console.log(arr.reduce((x, y) => x + y));
 
 
 // demo 17
@@ -268,6 +268,15 @@
 //        console.log(p);
 //    }
 //}
+
+
+// demo 18
+//(function (passed, first, second) {
+//    var fName = first || 'Null',
+//        sName = second || 'Null',  // if not exist, set default
+//        result = passed && true;  // if exist, set default
+//    console.log('Your first name: ' + fName + ', and second name: ' + sName + ', pass: ' + result);
+//})('pass', 'zheng');
 
 
 console.log('DONE.');
