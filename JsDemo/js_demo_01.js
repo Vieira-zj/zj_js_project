@@ -279,4 +279,13 @@
 //})('pass', 'zheng');
 
 
+// demo 19
+//var name = 'ZHENG JIN';
+//console.log('Hello, %s', name);
+//
+//var x = 3;
+//var y = 5;
+//console.log('%d + %d = %d', x, y, (x + y));
+
+
 console.log('DONE.');
