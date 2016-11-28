@@ -14,7 +14,12 @@ function getInputPromise() {
 
 var outputPromise = getInputPromise().then(function (fulfilled) {
     var myDefer = Q.defer();
-    fs.readFile('./NodeJsProject06/data.txt', 'utf8', function (err, data) {
+    var path = './NodeJsLessons/NodeJsLesson06/data.txt';  // run from IDE
+//    var path = './data.txt';  // run from command line
+    fs.readFile(path, 'utf8', function (err, data) {
+        if (err) {
+            console.error(err);
+        }
         if (!err && data) {
             myDefer.resolve(data);
         }
@@ -30,5 +35,5 @@ outputPromise.then(function (fulfilled) {
     console.log(rejected);
 });
 
-//defer.resolve();  // output: the content of file
-defer.reject();  // output: [Error: rejected]
+defer.resolve();  // output: the content of file
+//defer.reject();  // output: [Error: rejected]

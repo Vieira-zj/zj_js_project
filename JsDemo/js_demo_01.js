@@ -288,4 +288,19 @@
 //console.log('%d + %d = %d', x, y, (x + y));
 
 
+// demo 20
+//var add = function (x, y) {
+//    return x + y;
+//};
+//console.log(add(1, 2));
+//add_v2 = add;
+//console.log(add_v2(3, 4));
+//
+//function multiple(a, b) {
+//    return a * b;
+//}
+//multiple_v2 = multiple;
+//console.log(multiple_v2(2, 2));
+
+
 console.log('DONE.');

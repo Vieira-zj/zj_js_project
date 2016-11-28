@@ -60,13 +60,52 @@
 //    setTimeout(resolve, 500, 'P2');
 //});
 //
+//// run p1 and p2, and exec then after both p1 and p2 done
 //Promise.all([p1, p2]).then(function (results) {
 //    console.log(results);
 //});
 //
+//// run p1 and p2, and exec then when p1 or p2 done
 //Promise.race([p1, p2]).then(function (results) {
 //    console.log(results);
 //});
+
+
+// demo 04, Generator
+//function* Add(x) {
+//    yield x + 1;
+//    yield(null);
+//    var y = 6;
+//    return x + y;
+//}
+//
+//var gen = Add(5);
+//console.log(gen.next());
+//console.log(gen.next());
+//console.log(gen.next());
+
+//function timeDelay(ptime, callback) {
+//    setTimeout(function () {
+//        callback("Pause for " + ptime);
+//    }, ptime);
+//}
+//
+//function* Message() {
+//    yield timeDelay(3000, function (msg) {
+//        console.log(msg);
+//    });
+//    yield timeDelay(2000, function (msg) {
+//        console.log(msg);
+//    });
+//    yield timeDelay(1000, function (msg) {
+//        console.log(msg);
+//    });
+//}
+//
+//var gen = Message();
+//gen.next();
+//gen.next();
+//gen.next();
 
 
 console.log('DONE.');
