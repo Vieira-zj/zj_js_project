@@ -44,8 +44,8 @@ var formatWeatherData = function (element) {
     return {
         date: fields[1],
         type: fields[2],
-        temp: fields[3] + fields[4],
-        WindForce: fields[5],
+        temp: fields[3],
+        WindForce: fields[4],
         WindDirection: element.find('p.win>em>span').first().attr('title')
     }
 };
