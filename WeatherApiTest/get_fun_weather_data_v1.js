@@ -8,7 +8,7 @@ var settings = require('./run_settings');
 
 var getFunWeatherData = function (cityId) {
     return new Promise(function (resolve) {
-        console.log("Start get weather data for " + cityId + " from FUN apis.");
+        console.log("Start get weather data for " + cityId + " from FUN api.");
 
         superagent.get('http://172.17.12.110:8480/tv_message/weather/city')
             .query('plat_type=funtv&version=2.10.0.3_s&sid=FD5551A-SU&mac=28:76:CD:01:96:F6')
@@ -58,3 +58,11 @@ var getFunWeatherData = function (cityId) {
 };
 
 module.exports = getFunWeatherData;
+
+if (require.main === module) {
+    console.log('Start Promise...');
+
+    getFunWeatherData('101010100').then(function (resolve) {
+        console.log(resolve.funData.length);
+    });
+}

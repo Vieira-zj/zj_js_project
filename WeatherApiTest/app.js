@@ -4,18 +4,12 @@
  * Compare the weather data from government and FUN api.
  *
  */
-var cityList = ['101010100', '101200101'];
-
-function mainCompareWeatherDataV1(cityId) {
+function getWeatherDataBySeq(cityId) {
     var getGovDataV1 = require('./get_gov_weather_data_v1');
     var getFunDataV1 = require('./get_fun_weather_data_v1');
 
-    var p = new Promise(function (resolve) {
-        console.log('start compare weather data Promise...');
-        resolve(cityId);
-    });
-
-    p.then(getFunDataV1).then(getGovDataV1).then(function (resolve) {
+    console.log('Start Promise, get weather data by seq...');
+    getFunDataV1(cityId).then(getGovDataV1).then(function (resolve) {
         console.log(resolve.funData.length);
         console.log(resolve.GovData.length);
     }).catch(function (reason) {
@@ -23,26 +17,27 @@ function mainCompareWeatherDataV1(cityId) {
     });
 }
 
-//mainCompareWeatherDataV1(cityList[0]);
-
-function mainCompareWeatherDataV2(cityId) {
+function getWeatherDataByCon(cityId) {
     var getGovDataV2 = require('./get_gov_weather_data_v2');
     var getFunDataV2 = require('./get_fun_weather_data_v2');
 
-    var pGetFunData = new Promise(function (resolve) {
-        console.log('start get weather data from FUN Promise...');
-        resolve(cityId);
-    }).then(getFunDataV2);
-
-    var pGetGovData = new Promise(function (resolve) {
-        console.log('start get weather data from GOV Promise...');
-        resolve(cityId);
-    }).then(getGovDataV2);
-
-    Promise.all([pGetFunData, pGetGovData]).then(function (result) {
-        console.log(result[0].weatherData.length);
-        console.log(result[1].weatherData.length);
-    });
+    console.log('Start Promise, get weather data by concurrent...');
+    Promise.all([getFunDataV2(cityId), getGovDataV2(cityId)])
+        .then(function (result) {
+            console.log(result[0].weatherData.length);
+            console.log(result[1].weatherData.length);
+        }).catch(function (reason) {
+            console.error(reason);
+        });
 }
 
-mainCompareWeatherDataV2(cityList[0]);
+if (require.main === module) {
+    var cityList = ['101010100', '101200101'];
+    var isSeq = false;
+    if (isSeq) {
+        getWeatherDataBySeq(cityList[0]);
+    } else {
+        getWeatherDataByCon(cityList[0]);
+    }
+
+}

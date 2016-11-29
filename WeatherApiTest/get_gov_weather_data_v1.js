@@ -10,7 +10,7 @@ var settings = require('./run_settings');
 var getGovWeatherData = function (pData) {
     return new Promise(function (resolve) {
         var cityId = pData.cityId;
-        console.log("Start get weather data for " + cityId + " from government html page.");
+        console.log("Start get weather data for " + cityId + " from GOV website.");
 
         superagent.get('http://www.weather.com.cn/weather/' + cityId + '.shtml')
             .end(function (err, resp) {
@@ -26,7 +26,7 @@ var getGovWeatherData = function (pData) {
                 });
 
                 if (settings.isLog) {
-                    console.log('Weather data for ' + cityId + ' from government:');
+                    console.log('Weather data for ' + cityId + ' from GOV:');
                     weatherDataGov.forEach(function (element) {
                         console.log(JSON.stringify(element));
                     });
@@ -53,3 +53,11 @@ var formatWeatherData = function (element) {
 };
 
 module.exports = getGovWeatherData;
+
+if (require.main === module) {
+    console.log('Start Promise...');
+
+    getGovWeatherData({cityId: '101010100', funData: []}).then(function (resolve) {
+        console.log(resolve.GovData.length);
+    });
+}
