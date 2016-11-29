@@ -64,7 +64,7 @@
 //Promise.all([p1, p2]).then(function (results) {
 //    console.log(results);
 //});
-//
+
 //// run p1 and p2, and exec then when p1 or p2 done
 //Promise.race([p1, p2]).then(function (results) {
 //    console.log(results);

@@ -7,7 +7,9 @@ var superagent = require('superagent');
 var settings = require('./run_settings');
 
 var getFunWeatherData = function (cityId) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
+        console.log("Start get weather data for " + cityId + " from FUN apis.");
+
         superagent.get('http://172.17.12.110:8480/tv_message/weather/city')
             .query('plat_type=funtv&version=2.10.0.3_s&sid=FD5551A-SU&mac=28:76:CD:01:96:F6')
             .query('random=1479353604311820&sign=fcc9a70567a644eda0201fbc9bc1ef15')
@@ -19,10 +21,10 @@ var getFunWeatherData = function (cityId) {
                 }
 
                 var weatherDataFun = [];
-                var jsonObj = JSON.parse(resp.text);
+                var jsonRespData = JSON.parse(resp.text).data;
 
                 // get today weather data
-                var itemToday = jsonObj.data['today'];
+                var itemToday = jsonRespData['today'];
                 weatherDataFun.push({
                     date: itemToday['date'],
                     type: itemToday['type'],
@@ -31,7 +33,7 @@ var getFunWeatherData = function (cityId) {
                 });
 
                 // get forecast weather data
-                jsonObj.data['forecast'].forEach(function (element) {
+                jsonRespData['forecast'].forEach(function (element) {
                     weatherDataFun.push({
                         date: element['date'],
                         type: element['type'],
@@ -47,7 +49,10 @@ var getFunWeatherData = function (cityId) {
                     });
                 }
 
-                resolve(weatherDataFun);
+                resolve({
+                    cityId: cityId,
+                    funData: weatherDataFun
+                });
             });
     });
 };
