@@ -11,7 +11,7 @@ var resDataWeather = {
         cityid: '101010100',
         forecast: [
             {
-                date: '2016-12-01',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '8℃',
@@ -20,7 +20,7 @@ var resDataWeather = {
                 week: '星期四'
             },
             {
-                date: '2016-12-02',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '7℃',
@@ -29,7 +29,7 @@ var resDataWeather = {
                 week: '星期五'
             },
             {
-                date: '2016-12-03',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '7℃',
@@ -38,7 +38,7 @@ var resDataWeather = {
                 week: '星期六'
             },
             {
-                date: '2016-12-04',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '7℃',
@@ -50,7 +50,7 @@ var resDataWeather = {
         'history': [
             {
                 aqi: '43',
-                date: '2016-11-23',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '3℃',
@@ -60,7 +60,7 @@ var resDataWeather = {
             },
             {
                 aqi: '117',
-                date: '2016-11-24',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '4℃',
@@ -70,7 +70,7 @@ var resDataWeather = {
             },
             {
                 aqi: '211',
-                date: '2016-11-25',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '5℃',
@@ -80,7 +80,7 @@ var resDataWeather = {
             },
             {
                 aqi: '286',
-                date: '2016-11-26',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '8℃',
@@ -90,7 +90,7 @@ var resDataWeather = {
             },
             {
                 aqi: '30',
-                date: '2016-11-27',
+                date: '',
                 fengli: '3-4级',
                 fengxiang: '北风',
                 hightemp: '8℃',
@@ -100,7 +100,7 @@ var resDataWeather = {
             },
             {
                 aqi: '97',
-                date: '2016-11-28',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '8℃',
@@ -110,7 +110,7 @@ var resDataWeather = {
             },
             {
                 aqi: '142',
-                date: '2016-11-29',
+                date: '',
                 fengli: '微风级',
                 fengxiang: '无持续风向',
                 hightemp: '4℃',
@@ -122,7 +122,7 @@ var resDataWeather = {
         today: {
             aqi: '156',
             curTemp: '3℃',
-            date: '2016-11-30',
+            date: '',
             fengli: '微风级',
             fengxiang: '无持续风向',
             hightemp: '4℃',

@@ -21,5 +21,5 @@ app.route('/weather_v1').get(function (req, res) {
 });
 
 app.listen(3000, function () {
-    console.log('Mock api app is running at port 3000.');
+    console.log('Mock api application is running at port 3000.');
 });
