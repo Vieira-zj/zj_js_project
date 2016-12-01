@@ -16,7 +16,7 @@ var resDataWeather = {
                 fengxiang: '无持续风向',
                 hightemp: '8℃',
                 lowtemp: '-4℃',
-                type: '晴',
+                type: '大暴雨',
                 week: '星期四'
             },
             {

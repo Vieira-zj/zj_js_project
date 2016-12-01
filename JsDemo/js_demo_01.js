@@ -3,7 +3,7 @@
  */
 //'use strict';
 
-// demo 01
+// demo 01, closure
 //function count() {
 //    var c = 0;
 //
@@ -15,11 +15,11 @@
 //}
 //
 //var ct = count();
-//console.log(ct());
-//console.log(ct());
+//console.log(ct());  // 1
+//console.log(ct());  // 2
 
 
-// demo 02
+// demo 02, 'this'
 //var segmentFault = {
 //    name: "In ZJ",
 //    getNameFunc: function () {
@@ -42,7 +42,7 @@
 //console.log(segmentFault.getNameFunc()());
 
 
-// demo 03
+// demo 03, 'this'
 //var jane = {
 //    name: 'Jane',
 //    friends: ['Tr', 'Chee'],
@@ -56,8 +56,7 @@
 //};
 //jane.logHiToFriends();
 
-
-// demo 04, use bind() instead of "that = this"
+// use bind() instead of "that = this"
 //var jane = {
 //    name: 'Jane',
 //    friends: ['Tr', 'Chee'],
@@ -71,7 +70,33 @@
 //jane.logHiToFriends();
 
 
-// demo 05
+// demo 04, join()
+//var testArr = ['hello', 'zheng', 'jin!'];
+//console.log(testArr.join(' '));
+
+// map()
+//var nameArr = ['henry', 'price', 'vieira'];
+//var sayHello = function (str) {
+//    return 'hello ' + str;
+//};
+//
+//console.log(nameArr.map(sayHello));
+
+// reduce()
+//var intArr = [1, 2, 3, 4];
+//
+//var add = function (x, y) {
+//    return x + y;
+//};
+//var multiple = function (x, y) {
+//    return x * y;
+//};
+//
+//console.log(intArr.reduce(add));
+//console.log(intArr.reduce(multiple));
+
+
+// demo 05, use method
 //function getText(someText) {
 //    console.log(capWords(someText).join(' '));
 //}
@@ -138,10 +163,11 @@
 //}
 //
 //Person.prototype.getInfo = function () {
-//    console.log(this.name + " is " + this.age + " years old");
+//    console.log(this.name + " is " + this.age + " years old.");
 //};
 //
 //var will = new Person('Will', 28);
+//will.getInfo();
 //for (var attr in will) {
 //    if (will.hasOwnProperty(attr)) {
 //        console.log(attr);
@@ -149,7 +175,7 @@
 //}
 
 
-// demo 09
+// demo 09, closure
 //for (var i = 0; i < 5; i++) {
 //    setTimeout(function () {
 //        console.log(i);
@@ -165,15 +191,7 @@
 //}
 
 
-// demo 10, create class
-//var SomeClass = function () {
-//    this.value = 100;
-//};
-//var myCreate = new SomeClass();
-//console.log(myCreate.value);
-
-
-// demo 11
+// demo 10, bind object
 //var myObject = {value: 100};
 //var foo = function () {
 //    console.log(this);
@@ -187,7 +205,7 @@
 //newFoo();  // { value: 100 }
 
 
-// demo 12, function area, and there is no code block area
+// demo 11, function area, and there is no code block area
 //function foo() {
 //    for (var i = 0; i < 3; i++) {
 //        var value = 'hello world';
@@ -197,38 +215,47 @@
 //}
 //
 //foo();
+//console.log(i);  // not define
 
 
-// demo 13
+// demo 12
 //var str = ' add ';
-//(function (str) {
+//(function (input) {
 //    'use strict';
 //    var x = 10,
 //        y = 100;
-//    console.log(x + str + y);
+//    console.log(x + input + y);
 //}(str));
 
+//(function (input) {
+//    var x = 10,
+//        y = 100;
+//    console.log(x + input + y);
+//})(str);
 
-// demo 14, json parse
-//var obj = {
+
+// demo 13, object to string
+//var jsonObj = {
 //    'title': 'title test',
 //    'content': 'content test'
 //};
 //
-//console.log(obj.title);
-//console.log(obj['title']);
-//
+//console.log(jsonObj.title);
+//console.log(jsonObj['title']);
+//console.log(JSON.stringify(jsonObj));
+
+// str to object
 //var str = '{ "name": "Violet", "occupation": "character" }';
-//var obj = JSON.parse(str);
-//console.log(obj.name);
-//console.log(obj['occupation']);
+//var jsonObj = JSON.parse(str);
+//console.log(jsonObj.name);
+//console.log(jsonObj['occupation']);
 
 
-// demo 15
+// demo 14
 //(function () {
 //    var arr = ['a', 'b', 'c'];
 //    arr.name = 'array';
-//    for (var ele in arr) {
+//    for (var ele in arr) {  // index
 //        if (arr.hasOwnProperty(ele)) {
 //            console.log(ele);
 //        }
@@ -240,16 +267,16 @@
 //    arr.forEach(function (element, index) {
 //        console.log(index + ' -> ' + element);
 //    });
-//}());
+//})();
 
 
-// demo 16
+// demo 15, lambda
 //var arr = [1, 2, 3, 4];
 //console.log(arr.map(x => x + x));
 //console.log(arr.reduce((x, y) => x + y));
 
 
-// demo 17
+// demo 16, prototype object
 //function Student(name, age) {
 //    this.name = name;
 //    this.age = age;
@@ -262,7 +289,7 @@
 //    age: 20
 //};
 //xiaoming.__proto__.school = 'No.1 Middle School';
-
+//
 //for (var p in xiaoming) {
 //    if (xiaoming.hasOwnProperty(p)) {
 //        console.log(p);
@@ -270,7 +297,7 @@
 //}
 
 
-// demo 18
+// demo 17, set default value
 //(function (passed, first, second) {
 //    var fName = first || 'Null',
 //        sName = second || 'Null',  // if not exist, set default
@@ -279,22 +306,28 @@
 //})('pass', 'zheng');
 
 
-// demo 19
+// demo 18, print format
 //var name = 'ZHENG JIN';
 //console.log('Hello, %s', name);
 //
 //var x = 3;
 //var y = 5;
 //console.log('%d + %d = %d', x, y, (x + y));
+//
+//var util = require('util');
+//console.log(util.format('Hello, %s', name));
+//console.log(util.format('%d + %d = %d', x, y, (x + y)));
 
 
-// demo 20
+// demo 19, fn var
 //var add = function (x, y) {
 //    return x + y;
 //};
 //console.log(add(1, 2));
+//
 //add_v2 = add;
 //console.log(add_v2(3, 4));
+//
 //
 //function multiple(a, b) {
 //    return a * b;
