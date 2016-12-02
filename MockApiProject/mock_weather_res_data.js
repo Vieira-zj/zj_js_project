@@ -21,8 +21,8 @@ var historySize = 7;
 var forecastSize = 4;
 
 var formatWeekDay = function (weekDayNum) {
-    var weekDayArr = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
-    return weekDayArr[weekDayNum];
+    var cnWeekDayArr = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    return cnWeekDayArr[weekDayNum];
 };
 
 var getDateAndWeekArr = function () {
@@ -89,7 +89,7 @@ var initTodayDataEle = function (todayDate) {
 };
 
 var initWeatherData = function () {
-    var dateAndWeekArr = getDateAndWeekArr();
+    var dateArr = getDateAndWeekArr();
 
     var dataElement = mockedWeatherData.data;
     var historyArr = dataElement.history;
@@ -97,11 +97,11 @@ var initWeatherData = function () {
 
     for (var idx = 0, length = (historySize + forecastSize + 1); idx < length; idx++) {
         if (idx < historySize) {
-            historyArr.push(initHistoryDataEle(dateAndWeekArr[idx]));
+            historyArr.push(initHistoryDataEle(dateArr[idx]));
         } else if (idx > historySize) {
-            forecastArr.push(initForecastDataEle(dateAndWeekArr[idx]));
+            forecastArr.push(initForecastDataEle(dateArr[idx]));
         } else {
-            dataElement.today = initTodayDataEle(dateAndWeekArr[idx]);
+            dataElement.today = initTodayDataEle(dateArr[idx]);
         }
     }
 };
@@ -115,6 +115,7 @@ var updateWeatherData = function () {
 var getMockedWeatherData = function () {
     initWeatherData();
     updateWeatherData();
+
     return mockedWeatherData;
 };
 
