@@ -4,132 +4,14 @@
  * Mock the weather API response data.
  */
 
-var resDataWeather = {
+var mockedWeatherData = {
     data: {
         cacheTime: 0,
         city: '',
         cityid: '101010100',
-        forecast: [
-            {
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '8℃',
-                lowtemp: '-4℃',
-                type: '大暴雨',
-                week: '星期四'
-            },
-            {
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '7℃',
-                lowtemp: '-4℃',
-                type: '晴',
-                week: '星期五'
-            },
-            {
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '7℃',
-                lowtemp: '-2℃',
-                type: '霾',
-                week: '星期六'
-            },
-            {
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '7℃',
-                lowtemp: '-2℃',
-                type: '霾',
-                week: '星期天'
-            }
-        ],
-        'history': [
-            {
-                aqi: '43',
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '3℃',
-                lowtemp: '-6℃',
-                type: '晴',
-                week: '星期三'
-            },
-            {
-                aqi: '117',
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '4℃',
-                lowtemp: '-6℃',
-                type: '晴',
-                week: '星期四'
-            },
-            {
-                aqi: '211',
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '5℃',
-                lowtemp: '-3℃',
-                type: '霾',
-                week: '星期五'
-            },
-            {
-                aqi: '286',
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '8℃',
-                lowtemp: '0℃',
-                type: '霾',
-                week: '星期六'
-            },
-            {
-                aqi: '30',
-                date: '',
-                fengli: '3-4级',
-                fengxiang: '北风',
-                hightemp: '8℃',
-                lowtemp: '-4℃',
-                type: '晴',
-                week: '星期天'
-            },
-            {
-                aqi: '97',
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '8℃',
-                lowtemp: '-3℃',
-                type: '晴',
-                week: '星期一'
-            },
-            {
-                aqi: '142',
-                date: '',
-                fengli: '微风级',
-                fengxiang: '无持续风向',
-                hightemp: '4℃',
-                lowtemp: '-3℃',
-                type: '雨夹雪',
-                week: '星期二'
-            }
-        ],
-        today: {
-            aqi: '156',
-            curTemp: '3℃',
-            date: '',
-            fengli: '微风级',
-            fengxiang: '无持续风向',
-            hightemp: '4℃',
-            lowtemp: '-3℃',
-            times: [],
-            type: '雨夹雪'
-        }
+        forecast: [],
+        history: [],
+        today: {}
     },
     retCode: '200',
     retMsg: 'ok'
@@ -138,46 +20,108 @@ var resDataWeather = {
 var historySize = 7;
 var forecastSize = 4;
 
-var getDateArr = function () {
+var formatWeekDay = function (weekDayNum) {
+    var weekDayArr = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+    return weekDayArr[weekDayNum];
+};
+
+var getDateAndWeekArr = function () {
     var dateArr = [];
     var dayByMilli = 24 * 60 * 60 * 1000;
     var curDateTime = new Date().getTime();
 
     for (var i = historySize; i >= 0; i--) {
-        dateArr.push(new Date(curDateTime - (i * dayByMilli)).toLocaleDateString());
+        var tmpHistoryDate = new Date(curDateTime - (i * dayByMilli));
+        dateArr.push({
+            date: tmpHistoryDate.toLocaleDateString(),
+            week: formatWeekDay(tmpHistoryDate.getDay())
+        });
     }  // include today data
+
     for (var j = 1; j <= forecastSize; j++) {
-        dateArr.push(new Date(curDateTime + (j * dayByMilli)).toLocaleDateString());
+        var tmpForecastDate = new Date(curDateTime + (j * dayByMilli));
+        dateArr.push({
+            date: tmpForecastDate.toLocaleDateString(),
+            week: formatWeekDay(tmpForecastDate.getDay())
+        });
     }
 
     return dateArr;
 };
 
-var updateDateOfWeatherData = function () {
-    var dateArr = getDateArr();
-    var dataElement = resDataWeather.data;
+var initHistoryDataEle = function (historyDate) {
+    return {
+        aqi: '60',
+        date: historyDate.date,
+        fengli: '微风级',
+        fengxiang: '无持续风向',
+        hightemp: '25℃',
+        lowtemp: '15℃',
+        type: '晴',
+        week: historyDate.week
+    };
+};
+
+var initForecastDataEle = function (forecastDate) {
+    return {
+        date: forecastDate.date,
+        fengli: '微风级',
+        fengxiang: '无持续风向',
+        hightemp: '25℃',
+        lowtemp: '15℃',
+        type: '晴',
+        week: forecastDate.week
+    };
+};
+
+var initTodayDataEle = function (todayDate) {
+    return {
+        aqi: '60',
+        curTemp: '20℃',
+        date: todayDate.date,
+        fengli: '微风级',
+        fengxiang: '无持续风向',
+        hightemp: '25℃',
+        lowtemp: '15℃',
+        times: [],
+        type: '晴'
+    };
+};
+
+var initWeatherData = function () {
+    var dateAndWeekArr = getDateAndWeekArr();
+
+    var dataElement = mockedWeatherData.data;
     var historyArr = dataElement.history;
     var forecastArr = dataElement.forecast;
 
     for (var idx = 0, length = (historySize + forecastSize + 1); idx < length; idx++) {
         if (idx < historySize) {
-            historyArr[idx].date = dateArr[idx];
+            historyArr.push(initHistoryDataEle(dateAndWeekArr[idx]));
         } else if (idx > historySize) {
-            forecastArr[idx - historySize - 1].date = dateArr[idx];
+            forecastArr.push(initForecastDataEle(dateAndWeekArr[idx]));
         } else {
-            dataElement.today.date = dateArr[idx];
+            dataElement.today = initTodayDataEle(dateAndWeekArr[idx]);
         }
     }
 };
 
-var getResDataWeather = function () {
-    updateDateOfWeatherData();
-    return resDataWeather;
+var updateWeatherData = function () {
+    // do update here
+    var dataElement = mockedWeatherData.data;
+    dataElement.forecast[0].type = '大暴雨';
 };
 
-module.exports = getResDataWeather;
+var getMockedWeatherData = function () {
+    initWeatherData();
+    updateWeatherData();
+    return mockedWeatherData;
+};
+
+module.exports = getMockedWeatherData;
 
 if (require.main === module) {
-    updateDateOfWeatherData();
-    console.log(JSON.stringify(resDataWeather));
+    initWeatherData();
+    updateWeatherData();
+    console.log(JSON.stringify(mockedWeatherData));
 }

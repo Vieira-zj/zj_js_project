@@ -15,9 +15,9 @@ app.route('/').get(function (req, res) {
 });
 
 app.route('/weather_v1').get(function (req, res) {
-    var getResData = require('./mock_weather_res_data');
+    var getMockedWeatherData = require('./mock_weather_res_data');
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(getResData()));
+    res.send(JSON.stringify(getMockedWeatherData()));
 });
 
 app.listen(3000, function () {
