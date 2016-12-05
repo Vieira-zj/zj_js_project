@@ -1,5 +1,7 @@
 /**
  * Created by Vieira on 2016/10/24.
+ *
+ * Demo refer to "learn in 3 days".
  */
 var net = require('net');
 

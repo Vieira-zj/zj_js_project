@@ -2,7 +2,7 @@
  * Created by zhengjin on 2016/11/14.
  */
 
-// demo 01, Promise
+// demo 01, promise
 //function test(resolve, reject) {
 //    var timeOut = Math.random() * 2;
 //    console.log('set timeout to: ' + timeOut + ' seconds.');
@@ -26,7 +26,7 @@
 //});
 
 
-// demo 02, Promise, sync instead of async
+// demo 02, promise, multiple then
 //function multiply(input) {
 //    return new Promise(function (resolve, reject) {
 //        console.log('calculating ' + input + ' * ' + input + '...');
@@ -51,7 +51,7 @@
 //});
 
 
-// demo 03, Promise, async
+// demo 03, promise
 //var p1 = new Promise(function (resolve, reject) {
 //    setTimeout(resolve, 700, 'P1');
 //});
@@ -64,14 +64,14 @@
 //Promise.all([p1, p2]).then(function (results) {
 //    console.log(results);
 //});
-
+//
 //// run p1 and p2, and exec then when p1 or p2 done
 //Promise.race([p1, p2]).then(function (results) {
 //    console.log(results);
 //});
 
 
-// demo 04, Generator
+// demo 04, generator
 //function* Add(x) {
 //    yield x + 1;
 //    yield(null);
@@ -83,6 +83,7 @@
 //console.log(gen.next());
 //console.log(gen.next());
 //console.log(gen.next());
+
 
 //function timeDelay(ptime, callback) {
 //    setTimeout(function () {
@@ -108,4 +109,4 @@
 //gen.next();
 
 
-console.log('DONE.');
+console.log(__filename, 'DONE.');
