@@ -79,34 +79,38 @@
 //    return x + y;
 //}
 //
+//function* Add(x) {
+//    yield x + 1;
+//    var y = yield null;
+//    return x + y;
+//}
+//
 //var gen = Add(5);
 //console.log(gen.next());
-//console.log(gen.next());
+//console.log(gen.next(5));
 //console.log(gen.next());
 
 
-//function timeDelay(ptime, callback) {
+// demo 05, generator
+//function timeDelay(waittime, callback) {
 //    setTimeout(function () {
-//        callback("Pause for " + ptime);
-//    }, ptime);
+//        callback("Pause for " + waittime);
+//    }, waittime);
 //}
-//
-//function* Message() {
-//    yield timeDelay(3000, function (msg) {
-//        console.log(msg);
-//    });
-//    yield timeDelay(2000, function (msg) {
-//        console.log(msg);
-//    });
-//    yield timeDelay(1000, function (msg) {
-//        console.log(msg);
-//    });
-//}
-//
-//var gen = Message();
-//gen.next();
-//gen.next();
-//gen.next();
+
+// method1: callbacks
+//timeDelay(3000, function (message) {
+//    console.log(message);
+//    timeDelay(1000, function (message) {
+//        console.log(message);
+//        timeDelay(500, function (message) {
+//            console.log(message)
+//        })
+//    })
+//});
+
+// method2: generate
+
 
 
 console.log(__filename, 'DONE.');
