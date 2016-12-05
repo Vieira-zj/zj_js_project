@@ -336,4 +336,4 @@
 //console.log(multiple_v2(2, 2));
 
 
-console.log('DONE.');
+console.log(__filename, 'DONE.');
