@@ -124,6 +124,21 @@
 //setTimeout(fnHello, 2000, 'ZhengJin');
 
 
+// demo 07, generator
+//function* test(p) {
+//    console.log(p);
+//    var a = yield p + 1;
+//    console.log(a);  // 3
+//}
+//
+//var g = test(1);
+//var ret;
+//ret = g.next();
+//console.log(ret);
+//ret = g.next(ret.value + 1);
+//console.log(ret);
+
+
 // demo 11, generator
 //function timeDelay(waittime, callback) {
 //    setTimeout(function () {
