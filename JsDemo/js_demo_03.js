@@ -91,7 +91,40 @@
 //console.log(gen.next());
 
 
-// demo 05, generator
+// demo 05, utilities
+//var util = require('util');
+//
+//var fnHello = function (name, times) {
+//    console.log(util.format('Hello, %s; invoked at times %d.', name, times));
+//};
+//fnHello('ZhengJin', 5);
+
+
+// demo 06, setTimeOut
+//setTimeout(function fnHello() {
+//    console.log('hello');
+//}, 2000);
+
+//var fnHello = function () {
+//    console.log('hello');
+//};
+//setTimeout(function () {
+//    fnHello();
+//}, 2000);
+
+//var fnHello = function () {
+//    console.log('hello');
+//};
+//setTimeout(fnHello, 2000);
+
+// pass argument
+//var fnHello = function (message) {
+//    console.log('hello' + message);
+//};
+//setTimeout(fnHello, 2000, 'ZhengJin');
+
+
+// demo 11, generator
 //function timeDelay(waittime, callback) {
 //    setTimeout(function () {
 //        callback("Pause for " + waittime);
@@ -110,7 +143,6 @@
 //});
 
 // method2: generate
-
 
 
 console.log(__filename, 'DONE.');
