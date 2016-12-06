@@ -87,8 +87,8 @@
 //
 //var gen = Add(5);
 //console.log(gen.next());
-//console.log(gen.next(5));
 //console.log(gen.next());
+//console.log(gen.next(6).value);
 
 
 // demo 05, utilities
@@ -137,6 +137,10 @@
 //console.log(ret);
 //ret = g.next(ret.value + 1);
 //console.log(ret);
+
+
+// demo 08, search path
+//console.log(module.paths);
 
 
 // demo 11, generator
