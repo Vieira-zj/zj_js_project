@@ -9,7 +9,8 @@ var Q = require('q');
 var defer = Q.defer();
 
 var users = [
-    {'name': 'andrew', 'passwd': 'password'}
+    {'name': 'andrew', 'passwd': 'password'},
+    {'name': 'zhengjin', 'passwd': 'password'}
 ];
 
 function getUsername() {
@@ -17,12 +18,14 @@ function getUsername() {
 }
 
 function getUser(username) {
+    // sync
     var user = {'name': 'null', 'passwd': 'null'};
     users.forEach(function (element) {
         if (element.name === username) {
             user = element;
         }
     });
+
     return user;
 }
 
@@ -32,5 +35,5 @@ getUsername().then(function (username) {
     console.log(user);
 });
 
-//defer.resolve('andrew');
-defer.resolve('invalid');
+defer.resolve('andrew');
+//defer.resolve('invalid');

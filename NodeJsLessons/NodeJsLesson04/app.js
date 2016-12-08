@@ -8,6 +8,24 @@
  */
 var express = require('express');
 
+var app = express();
+
+app.route('/fib').get(function (req, res) {
+    var n = Number(req.query.n);
+    try {
+        res.send(String(fibonacci(n)));
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+});
+
+app.listen(3000, function () {
+    console.log('app is listening at port 3000');
+});
+// access by http://localhost:3000/fib?n=10
+
+module.exports = app;
+
 var fibonacci = function (n) {
     if (typeof n !== 'number' || isNaN(n)) {
         throw new Error('n should be a Number');
@@ -27,21 +45,3 @@ var fibonacci = function (n) {
 
     return fibonacci(n - 1) + fibonacci(n - 2);
 };
-
-var app = express();
-
-app.route('/fib').get(function (req, res) {
-    var n = Number(req.query.n);
-    try {
-        res.send(String(fibonacci(n)));
-    } catch (e) {
-        res.status(500).send(e.message);
-    }
-});
-
-module.exports = app;
-
-app.listen(3000, function () {
-    console.log('app is listening at port 3000');
-});
-// access by http://localhost:3000/fib?n=10
