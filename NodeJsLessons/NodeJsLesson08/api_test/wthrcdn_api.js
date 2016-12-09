@@ -1,7 +1,7 @@
 /**
  * Created by zhengjin on 2016/12/8.
  *
- * Verify weather data api from http://wthrcdn.etouch.cn/WeatherApi?citykey=?
+ * Verify weather data api from http://wthrcdn.etouch.cn/WeatherApi?citykey={value}
  *
  */
 
@@ -90,23 +90,30 @@ var createUrlsArr = function () {
 
 
 if (require.main === module) {
+    var profileTag = 'WeatherDataApiTestProfile';
+    console.time(profileTag);
+
     co(function* () {
         var urlsArr = yield createUrlsArr();
         var totalCities = urlsArr.length;
         console.log('Total cities: ' + totalCities);
 
-        try {
-            for(var idx = 0; idx < totalCities; idx++) {
-                console.log(util.format('Run at %d cities.', (idx + 1)));
+        for(var idx = 0; idx < totalCities; idx++) {
+            console.log(util.format('Run at %d cities.', (idx + 1)));
+            try {
                 var retXmlData = yield getWeatherXmlData(urlsArr[idx]);
                 var retData = yield parseWeatherXmlData(retXmlData);
                 console.log(JSON.stringify(retData));
-                console.log(yield common.timeDelay(1500));
             }
+            catch (e) {
+                console.error('Error when request data for ' + urlsArr[idx]);
+                console.error(e.message);
+            }
+            console.log(yield common.timeDelay(1000));
         }
-        catch (e) {
-            console.error(e.message);
-        }
+
+        console.timeEnd(profileTag);
+        console.log(__filename, 'DONE.');
     }).catch(function (err) {
         console.error(err.stack);
     });
