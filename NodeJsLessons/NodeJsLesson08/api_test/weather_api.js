@@ -9,12 +9,9 @@ var util = require('util');
 var fs = require('fs');
 var agent = require('superagent');
 var co = require('co');
-var reference = require('./reference_data.js');
 
-var getCurrentDate = function () {
-    var myDate = new Date();
-    return util.format('%d-%d-%d', myDate.getFullYear(), myDate.getMonth() + 1, myDate.getDate());
-};
+var common = require('./common_test_api');
+var reference = require('./reference_data.js');
 
 var getForecastData = function (url) {
     return new Promise(function (resolve) {
@@ -74,14 +71,6 @@ var getTodayData = function (url) {
     });
 };
 
-var timeDelay = function (waitTime) {
-    return new Promise(function (resolve) {
-        setTimeout(function () {
-            resolve('Pause for ' + waitTime);
-        }, waitTime);
-    });
-};
-
 var createUrlsArr = function () {
     return new Promise(function (resolve) {
         var urlTmpToday = 'http://www.weather.com.cn/data/sk/%s.html';
@@ -106,7 +95,7 @@ var createUrlsArr = function () {
 
 
 if (require.main === module) {
-    var curDate = getCurrentDate();
+    var curDate = common.getCurrentDate();
 
     co(function* () {
         var urlsObj = yield createUrlsArr();
@@ -122,7 +111,7 @@ if (require.main === module) {
                     forecast: yield getForecastData(urlsObj.urlForecastArr[idx])
                 };
                 console.log(JSON.stringify(retWeatherData));
-                console.log(yield timeDelay(1000));
+                console.log(yield common.timeDelay(3000));
             }
         } catch (e) {
             console.error(e.message);

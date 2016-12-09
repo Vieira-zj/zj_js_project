@@ -5,9 +5,13 @@
  *
  */
 
+var util = require('util');
+var fs = require('fs');
 var agent = require('superagent');
 var co = require('co');
 var xml2js = require('xml2js');
+
+var common = require('./common_test_api');
 
 var getWeatherXmlData = function (url) {
     return new Promise(function (resolve) {
@@ -41,7 +45,7 @@ var parseWeatherXmlData = function (xmlData) {
                 retJson.forecast.push(buildForecastDataFromXml(element));
             });
 
-            resolve(JSON.stringify(retJson));
+            resolve(retJson);
         })
     });
 };
@@ -68,16 +72,42 @@ var buildForecastDataFromXml = function (xmlEle) {
     };
 };
 
-if (require.main === module) {
-    var url = 'http://wthrcdn.etouch.cn/WeatherApi?citykey=101200101';
+var createUrlsArr = function () {
+    return new Promise(function (resolve) {
+        var urlTemplate = 'http://wthrcdn.etouch.cn/WeatherApi?citykey=%s';
+        var retUrls = [];
 
+        fs.readFile('./../data_test/city_list_test.txt', 'utf8', function (err, data) {
+            data.split('\n').forEach(function (element) {
+                var cityId = element.split(',')[0];
+                retUrls.push(util.format(urlTemplate, cityId));
+            });
+
+            resolve(retUrls);
+        })
+    });
+};
+
+
+if (require.main === module) {
     co(function* () {
-        var retXmlData = yield getWeatherXmlData(url);
-        var retData = yield parseWeatherXmlData(retXmlData);
-        console.log(retData);
+        var urlsArr = yield createUrlsArr();
+        var totalCities = urlsArr.length;
+        console.log('Total cities: ' + totalCities);
+
+        try {
+            for(var idx = 0; idx < totalCities; idx++) {
+                console.log(util.format('Run at %d cities.', (idx + 1)));
+                var retXmlData = yield getWeatherXmlData(urlsArr[idx]);
+                var retData = yield parseWeatherXmlData(retXmlData);
+                console.log(JSON.stringify(retData));
+                console.log(yield common.timeDelay(1500));
+            }
+        }
+        catch (e) {
+            console.error(e.message);
+        }
     }).catch(function (err) {
         console.error(err.stack);
     });
-
-    console.log(__filename, 'DONE.');
 }
