@@ -9,7 +9,7 @@
     "author": "vieira",
     "license": "ISC",
     "dependencies": {
-        "express": "^4.14.0",
+        "express": "^4.14.0"
     },
     "devDependencies": {
         "mocha": "^3.1.2",

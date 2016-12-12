@@ -274,6 +274,12 @@
 //var arr = [1, 2, 3, 4];
 //console.log(arr.map(x => x + x));
 //console.log(arr.reduce((x, y) => x + y));
+//console.log(arr.reduce((x, y) => {return x + y}));
+
+//var helloMeg = (message) => {
+//    console.log('Hello, ' + message);
+//};
+//helloMeg('ZhengJin');
 
 
 // demo 16, prototype object
@@ -334,6 +340,29 @@
 //}
 //multiple_v2 = multiple;
 //console.log(multiple_v2(2, 2));
+
+
+// demo 20, let
+//var fnTestLet = (function () {
+//    "use strict";
+//    var fnArr = [];
+//
+////    for (var idx = 0; idx < 10; idx++) {
+////        fnArr[idx] = function () {
+////            console.log(idx);
+////        }
+////    }
+////    fnArr[8]();
+//
+//    // use let instead of var
+//    for (let idx = 0; idx < 10; idx++) {
+//        fnArr[idx] = function () {
+//            console.log(idx);
+//        }
+//    }
+//    fnArr[8]();
+//    console.log(idx);  // error, not defined
+//})();
 
 
 console.log(__filename, 'DONE.');
