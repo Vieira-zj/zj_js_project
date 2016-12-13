@@ -365,4 +365,17 @@
 //})();
 
 
+// demo 21, length
+//var tmpStr = 'hello world';
+//console.log(tmpStr.length);
+
+//var tmpArr = ['beijing', 'shanghai'];
+//console.log(tmpArr.length);
+
+
+// demo 22, cn words
+//var cnStr = '中国';
+//console.log(escape(cnStr));
+
+
 console.log(__filename, 'DONE.');
