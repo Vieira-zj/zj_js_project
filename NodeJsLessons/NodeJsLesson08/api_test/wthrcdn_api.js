@@ -74,17 +74,14 @@ var buildForecastDataFromXml = function (xmlEle) {
 
 var createUrlsArr = function () {
     return new Promise(function (resolve) {
-        var urlTemplate = 'http://wthrcdn.etouch.cn/WeatherApi?citykey=%s';
+        var pathByNode = './../data_test/city_list_test.txt';
+        var urlTemplate = 'http://wthrcdn.etouch.cn/WeatherApi?citykey=';
         var retUrls = [];
 
-        fs.readFile('./../data_test/city_list_test.txt', 'utf8', function (err, data) {
-            data.split('\n').forEach(function (element) {
-                var cityId = element.split(',')[0];
-                retUrls.push(util.format(urlTemplate, cityId));
-            });
-
-            resolve(retUrls);
-        })
+        common.getCityList(pathByNode, common.cityType.byId).forEach((ele, idx) => {
+            retUrls.push(urlTemplate + ele);
+        });
+        resolve(retUrls);
     });
 };
 
@@ -98,7 +95,7 @@ if (require.main === module) {
         var totalCities = urlsArr.length;
         console.log('Total cities: ' + totalCities);
 
-        for(var idx = 0; idx < totalCities; idx++) {
+        for (var idx = 0; idx < totalCities; idx++) {
             console.log(util.format('Run at %d cities.', (idx + 1)));
             try {
                 var retXmlData = yield getWeatherXmlData(urlsArr[idx]);

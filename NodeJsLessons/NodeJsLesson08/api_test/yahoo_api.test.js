@@ -8,6 +8,7 @@
 var agent = require('superagent');
 var fs = require('fs');
 var should = require('should');
+var common = require('./common_test_api');
 
 var buildUrl = function (cityName) {
     var yahooUrl = 'https://query.yahooapis.com/v1/public/yql?';
@@ -23,17 +24,6 @@ var getCurrentDateAsYaHoo = function () {
     var monthArr = ['Jun', 'Fre', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var myDate = new Date();
     return myDate.getDate() + ' ' + monthArr[myDate.getMonth()] + ' ' + myDate.getFullYear();
-};
-
-var createCityList = function () {
-    var cities = [];
-    var content = fs.readFileSync('./data_test/city_list_test.txt', 'utf8');
-    content.split('\r\n').forEach(function (element) {
-        var cityName = element.split(',')[1];
-        cities.push(cityName);
-    });
-
-    return cities;
 };
 
 var testYaHooApi = function (cityName) {
@@ -61,9 +51,12 @@ var testYaHooApi = function (cityName) {
     });
 };
 
+
+// main test
 (function () {
-    var cities = createCityList();
-    cities.forEach(function (ele, idx) {
-        testYaHooApi(ele);
-    });
+    var pathForMocha = './data_test/city_list_test.txt';
+    common.getCityList(pathForMocha, common.cityType.byNameCn)
+        .forEach(function (ele, idx) {
+            testYaHooApi(ele);
+        });
 })();
