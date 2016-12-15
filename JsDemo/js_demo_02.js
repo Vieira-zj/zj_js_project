@@ -331,9 +331,19 @@
 
 
 // demo 12, join
-var myDate = new Date();
-var dateItems = [myDate.getFullYear(), myDate.getMonth() + 1, myDate.getDate()];
-console.log(dateItems.join('-'));
+//var myDate = new Date();
+//var dateItems = [myDate.getFullYear(), myDate.getMonth() + 1, myDate.getDate()];
+//console.log(dateItems.join('-'));
+
+
+// demo 13, for of
+//(function () {
+//    'use strict';
+//    const tmpArr = ['a', 'b', 'c'];
+//    for (let item of tmpArr) {
+//        console.log(item);
+//    }
+//})();
 
 
 console.log(__filename, 'DONE.');

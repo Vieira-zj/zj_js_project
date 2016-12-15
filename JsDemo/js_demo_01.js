@@ -343,7 +343,7 @@
 
 
 // demo 20, let
-//var fnTestLet = (function () {
+//(function () {
 //    "use strict";
 //    var fnArr = [];
 //
