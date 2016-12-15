@@ -23,7 +23,8 @@ var buildUrl = function (cityName) {
 var getCurrentDateAsYaHoo = function () {
     var monthArr = ['Jun', 'Fre', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var myDate = new Date();
-    return myDate.getDate() + ' ' + monthArr[myDate.getMonth()] + ' ' + myDate.getFullYear();
+    var dateItems = [myDate.getDate(), monthArr[myDate.getMonth()], myDate.getFullYear()];
+    return dateItems.join(' ');
 };
 
 var testYaHooApi = function (cityName) {

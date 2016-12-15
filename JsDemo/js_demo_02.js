@@ -330,4 +330,10 @@
 //console.log(xiaoming instanceof Student);
 
 
+// demo 12, join
+var myDate = new Date();
+var dateItems = [myDate.getFullYear(), myDate.getMonth() + 1, myDate.getDate()];
+console.log(dateItems.join('-'));
+
+
 console.log(__filename, 'DONE.');
