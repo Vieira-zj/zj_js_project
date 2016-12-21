@@ -24,6 +24,10 @@
 
 
 // demo 03, expr
+//var tmpStr = '-2';
+//var re = /-?[0-9]+/;
+//console.log(re.exec(tmpStr));
+
 //var tmpStr = '低温 -2℃';
 //var re = /(-?\d+)℃/;
 //console.log(re.exec(tmpStr));
