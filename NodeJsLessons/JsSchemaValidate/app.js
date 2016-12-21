@@ -1,7 +1,9 @@
 /**
  * Created by zhengjin on 2016/12/21.
  *
- * JS schema validate demo refer to: https://github.com/geraintluff/tv4
+ * JS schema validate demo.
+ * tv4 reference: https://github.com/geraintluff/tv4
+ * JS schema reference: https://spacetelescope.github.io/understanding-json-schema/
  */
 var tv4 = require('tv4');
 
