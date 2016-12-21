@@ -28,6 +28,10 @@
 //var re = /(-?\d+)℃/;
 //console.log(re.exec(tmpStr));
 
+//var tmpStr = '(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22{{BeiJing}}%22)%20and%20u%3D%22c%22';
+//var re = /{{(.+)}}/;
+//console.log(re.exec(tmpStr));
+
 
 // demo 04, exit
 //var tmpFlag = false;
