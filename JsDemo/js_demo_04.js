@@ -47,4 +47,11 @@
 //}
 
 
+// demo 05, path module
+//var path = require('path');
+//
+//var tmpPath = path.join(__dirname, 'js_demo_04.js');
+//console.log(tmpPath);
+
+
 console.log(__filename, 'DONE.');

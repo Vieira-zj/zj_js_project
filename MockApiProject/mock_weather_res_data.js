@@ -1,7 +1,7 @@
 /**
  * Created by zhengjin on 2016/11/30.
  *
- * Mock the weather API response data.
+ * Mock the weather API resource data.
  */
 
 var mockedWeatherData = {
@@ -115,14 +115,13 @@ var updateWeatherData = function () {
 var getMockedWeatherData = function () {
     initWeatherData();
     updateWeatherData();
-
-    return mockedWeatherData;
+    return JSON.stringify(mockedWeatherData);
 };
+
 
 module.exports = getMockedWeatherData;
 
 if (require.main === module) {
-    initWeatherData();
-    updateWeatherData();
-    console.log(JSON.stringify(mockedWeatherData));
+    console.log(getMockedWeatherData());
+    console.log(__filename, 'DONE!');
 }
