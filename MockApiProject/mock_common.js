@@ -1,8 +1,10 @@
 /**
  * Created by zhengjin on 2016/12/26.
+ *
+ * Include common constants and utils.
  */
 
-var weatherTypeArr = {
+var weatherTypesMap = {
     SUNNY: 0,// 晴
     CLOUDY: 1,// 多云
     OVERCAST: 2,// 阴
@@ -41,5 +43,5 @@ var weatherTypeArr = {
 
 
 module.exports = {
-    weatherTypes: weatherTypeArr
+    weatherTypes: weatherTypesMap
 };
