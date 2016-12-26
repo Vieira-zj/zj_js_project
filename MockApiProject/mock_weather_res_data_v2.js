@@ -4,6 +4,8 @@
  * Mock the weather API resource data for version 2.
  */
 
+var fs = require('fs');
+
 var common = require('./mock_common');
 var commWeatherTypes = common.weatherTypes;
 
@@ -73,22 +75,30 @@ var initWeatherRespData = function () {
     }
 };
 
-var updateWeatherRespData = function () {
-    // do update here
-    var dataElement = mockedWeatherRespData.data;
-    dataElement.forecast[0].type = commWeatherTypes.HEAVY_STORM;
+var saveWeatherRespData = function(content) {
+    fs.writeFile(common.weatherDataFilePath, content, function (err) {
+        if (err) {
+            console.error(err);
+        }
+    });
 };
 
-var getMockedWeatherRespData = function () {
+var updateWeatherRespData = function () {
+    // do update here, or update weather_resp_data.data directly.
+    var dataElement = mockedWeatherRespData.data;
+    dataElement.today.type = commWeatherTypes.CLOUDY;
+};
+
+var buildMockedWeatherRespData = function () {
     initWeatherRespData();
     updateWeatherRespData();
-    return JSON.stringify(mockedWeatherRespData);
+    saveWeatherRespData(JSON.stringify(mockedWeatherRespData));
 };
 
 
-module.exports = getMockedWeatherRespData;
+module.exports = buildMockedWeatherRespData;
 
 if (require.main === module) {
-    console.log(getMockedWeatherRespData());
+    buildMockedWeatherRespData();
     console.log(__filename, 'DONE!');
 }

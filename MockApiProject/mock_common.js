@@ -4,6 +4,8 @@
  * Include common constants and utils.
  */
 
+var weatherRespDataFilePath = './private/weather_resp_data.data';
+
 var weatherTypesMap = {
     SUNNY: 0,// 晴
     CLOUDY: 1,// 多云
@@ -43,5 +45,6 @@ var weatherTypesMap = {
 
 
 module.exports = {
+    weatherDataFilePath: weatherRespDataFilePath,
     weatherTypes: weatherTypesMap
 };
