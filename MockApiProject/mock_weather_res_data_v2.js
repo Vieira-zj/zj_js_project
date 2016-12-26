@@ -4,6 +4,9 @@
  * Mock the weather API resource data for version 2.
  */
 
+var common = require('./mock_common');
+var commWeatherTypes = common.weatherTypes;
+
 var mockedWeatherRespData = {
     data: {
         city: '北京',
@@ -31,28 +34,29 @@ var getDateArr = function () {
     return dateArr;
 };
 
+var weatherTypeSunny = commWeatherTypes.SUNNY;
 var initForecastDataEle = function (forecastDate) {
     return {
         date: forecastDate,
         fengLi: '微风级',
         fengXiang: '无持续风向',
-        highTemp: '25℃',
-        lowTemp: '15℃',
-        type: '晴'
+        highTemp: '25',
+        lowTemp: '15',
+        type: weatherTypeSunny
     };
 };
 
 var initTodayDataEle = function (todayDate) {
     return {
         aqi: '60',
-        curTemp: '20℃',
+        curTemp: '20',
         date: todayDate,
         fengLi: '微风级',
         fengXiang: '无持续风向',
-        highTemp: '25℃',
-        lowTemp: '15℃',
+        highTemp: '25',
+        lowTemp: '15',
         times: null,
-        type: '晴'
+        type: weatherTypeSunny
     };
 };
 
@@ -72,7 +76,7 @@ var initWeatherRespData = function () {
 var updateWeatherRespData = function () {
     // do update here
     var dataElement = mockedWeatherRespData.data;
-    dataElement.forecast[0].type = '大暴雨';
+    dataElement.forecast[0].type = commWeatherTypes.HEAVY_STORM;
 };
 
 var getMockedWeatherRespData = function () {
