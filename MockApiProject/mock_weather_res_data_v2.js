@@ -75,7 +75,7 @@ var initWeatherRespData = function () {
     }
 };
 
-var saveWeatherRespData = function(content) {
+var saveWeatherRespData = function (content) {
     fs.writeFile(common.weatherDataFilePath, content, function (err) {
         if (err) {
             console.error(err);

@@ -13,7 +13,10 @@ var app = express();
 
 var getMockedWeatherRespDataV1 = require('./mock_weather_res_data');
 var buildMockedWeatherRespDataV2 = require('./mock_weather_res_data_v2');
-var mockWeatherRespDataV1 = {};
+var mockedWeatherRespDataV1 = {};
+
+// set run profile
+var timeDelay = 250;
 
 app.route('/').get(function (req, res) {
     res.send('Mock API Project. Access index.html for the mock API list.');
@@ -21,24 +24,26 @@ app.route('/').get(function (req, res) {
 
 app.route('/weather_v1').get(function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    res.send(mockWeatherRespDataV1);
+    res.send(mockedWeatherRespDataV1);
 });
 
 app.route('/weather_v2').get(function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    fs.readFile(comm.weatherDataFilePath, 'utf-8', function (err, data) {
-        if (err) {
-            console.error(err);
-            res.send('Error in get response data!');
-        }
-        return res.send(data);
-    });
+    setTimeout(function () {
+        res.setHeader('Content-Type', 'application/json');
+        fs.readFile(comm.weatherDataFilePath, 'utf-8', function (err, data) {
+            if (err) {
+                console.error(err);
+                res.send('Error in get response data from file!');
+            }
+            return res.send(data);
+        });
+    }, timeDelay);
 });
 
 app.use(express.static(path.join(__dirname, 'public')))
     .listen(3000, function () {
         console.log('Mock api application is running at port 3000.');
 
-        mockWeatherRespDataV1 = getMockedWeatherRespDataV1();
+        mockedWeatherRespDataV1 = getMockedWeatherRespDataV1();
         buildMockedWeatherRespDataV2();
     });
