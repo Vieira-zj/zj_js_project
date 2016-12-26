@@ -18,6 +18,7 @@ var mockedWeatherRespDataV1 = {};
 // set run profile
 var timeDelay = 250;
 
+
 app.route('/').get(function (req, res) {
     res.send('Mock API Project. Access index.html for the mock API list.');
 });
@@ -35,10 +36,25 @@ app.route('/weather_v2').get(function (req, res) {
                 console.error(err);
                 res.send('Error in get response data from file!');
             }
-            return res.send(data);
+            return res.send(updateMockedWeatherRespDataV2FromQuery(data, req.query));
         });
     }, timeDelay);
 });
+
+var updateMockedWeatherRespDataV2FromQuery = function (data, query) {
+    var respJsonObj = JSON.parse(data);
+    var cityCn = query.city;
+    if (cityCn && cityCn.length > 0) {
+        respJsonObj.data.city = cityCn;
+    }
+    var cityId = query.cityId;
+    if (cityId && cityId.length > 0) {
+        respJsonObj.data.cityId = cityId;
+    }
+
+    return JSON.stringify(respJsonObj);
+};
+
 
 app.use(express.static(path.join(__dirname, 'public')))
     .listen(3000, function () {
