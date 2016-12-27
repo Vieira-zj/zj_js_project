@@ -1,12 +1,16 @@
 /**
  * Created by zhengjin on 2016/11/28.
  *
- * Define the common utils and run settings.
+ * Define the common utils and run profiles.
  */
 
 var getNumberFromTemp = function (temp) {
-    var re = /(-?\d+)℃/;
-    return re.exec(temp)[1];
+    var re = /(-?\d+)℃?/;
+    var result = re.exec(temp);
+    if (result) {
+        return result[1];
+    }
+    return 'null';
 };
 
 

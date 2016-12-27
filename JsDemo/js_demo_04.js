@@ -29,7 +29,8 @@
 //console.log(re.exec(tmpStr));
 
 //var tmpStr = '低温 -2℃';
-//var re = /(-?\d+)℃/;
+//var tmpStr = '-2';
+//var re = /(-?\d+)℃?/;
 //console.log(re.exec(tmpStr));
 
 //var tmpStr = '(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22{{BeiJing}}%22)%20and%20u%3D%22c%22';
@@ -52,6 +53,19 @@
 //
 //var tmpPath = path.join(__dirname, 'js_demo_04.js');
 //console.log(tmpPath);
+
+
+// demo 06, foreach
+//var tmpArr = ['Java', 'C++', 'Python'];
+//
+//tmpArr.forEach(function (ele) {
+//    console.log(ele);
+//});
+//
+//tmpArr.forEach(function (ele, idx) {
+//   console.log(ele + ' at position ' + idx);
+//});
+
 
 
 console.log(__filename, 'DONE.');
