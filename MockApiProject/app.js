@@ -16,7 +16,7 @@ var buildMockedWeatherRespDataV2 = require('./mock_weather_res_data_v2');
 var mockedWeatherRespDataV1 = {};
 
 // set run profile
-var timeDelay = 250;
+var timeDelay = 5000;
 
 
 app.route('/').get(function (req, res) {
