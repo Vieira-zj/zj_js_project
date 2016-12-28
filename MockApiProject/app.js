@@ -1,7 +1,7 @@
 /**
  * Created by zhengjin on 2016/11/30.
  *
- * Get request and return response data.
+ * Return mocked weather response data.
  */
 
 var path = require('path');

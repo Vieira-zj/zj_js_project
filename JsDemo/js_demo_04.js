@@ -26,16 +26,21 @@
 // demo 03, expr
 //var tmpStr = '-2';
 //var re = /-?[0-9]+/;
-//console.log(re.exec(tmpStr));
 
 //var tmpStr = '低温 -2℃';
 //var tmpStr = '-2';
 //var re = /(-?\d+)℃?/;
-//console.log(re.exec(tmpStr));
 
 //var tmpStr = '(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22{{BeiJing}}%22)%20and%20u%3D%22c%22';
 //var re = /{{(.+)}}/;
-//console.log(re.exec(tmpStr));
+
+//var tmpStr = '2016-1-28';
+//var re = /\d{4}-\d{1,2}-\d{1,2}/;
+
+var tmpStr = '101010100';
+var re = /\d{9}/;
+
+console.log(re.exec(tmpStr));
 
 
 // demo 04, exit
