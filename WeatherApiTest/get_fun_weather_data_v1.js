@@ -7,6 +7,8 @@
 var agent = require('superagent');
 var comm = require('./common');
 
+var isLog = comm.runProfiles.isLog;
+
 var getFunWeatherDataV1 = function (cityId) {
     return new Promise(function (resolve) {
         console.log("\nStart get weather data for " + cityId + " from FUN api v1.");
@@ -46,7 +48,7 @@ var getFunWeatherDataV1 = function (cityId) {
                     });
                 });
 
-                if (comm.isLog) {
+                if (isLog) {
                     console.log('Weather data for ' + cityId + ' from FUN API:');
                     weatherDataFun.forEach(function (element) {
                         console.log(JSON.stringify(element));
@@ -62,10 +64,11 @@ var getFunWeatherDataV1 = function (cityId) {
 module.exports = getFunWeatherDataV1;
 
 if (require.main === module) {
+    isLog = true;
     console.log('Start Promise...');
 
     getFunWeatherDataV1('101010100').then(function (resolve) {
-        console.log('Count: ' + resolve.funData.length);
+        console.log('Count: ' + resolve.length);
     }).catch(function (err) {
         console.error(err);
     });

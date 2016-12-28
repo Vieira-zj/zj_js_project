@@ -60,7 +60,9 @@ var getNumberFromTemp = function (temp) {
 
 
 module.exports = {
-    isLog: false,
+    runProfiles: {
+        isLog: false
+    },
     getNumFromTemp: getNumberFromTemp,
     getWeatherType: getWeatherTypeNameFromCode
 };

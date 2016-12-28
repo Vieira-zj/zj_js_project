@@ -9,12 +9,12 @@ var co = require('co');
 
 var getFunDataV1 = require('./get_fun_weather_data_v1');
 var getFunDataV2 = require('./get_fun_weather_data_v2');
-var getGovData = require('./get_gov_weather_data');
+var GovWeatherData = require('./get_gov_weather_data');
 
 
 function compareWeatherDataByCon(cityId) {
     console.log('Start Promise, get weather data by concurrent...');
-    Promise.all([getFunDataV1(cityId), getGovData(cityId)])
+    Promise.all([getFunDataV1(cityId), GovWeatherData.getForecastData(cityId)])
         .then(function (result) {
             console.log(result[0].length);
             console.log(result[1].length);
@@ -33,13 +33,13 @@ function compareWeatherDataBySeq() {
             let cityId = cityArr[idx];
             console.log('\n\nCOMPARE FOR: ' + cityId);
 
-            var funWeatherData = yield getFunDataV2(cityId);
-            funWeatherData.forEach(function (element) {
+            let funWeaData = yield getFunDataV2(cityId);
+            funWeaData.forEach(function (element) {
                 console.log(JSON.stringify(element));
             });
 
-            var GovWeatherData = yield getGovData(cityId);
-            GovWeatherData.forEach(function (element) {
+            let GovWeaData = yield GovWeatherData.getForecastData(cityId);
+            GovWeaData.forEach(function (element) {
                 console.log(JSON.stringify(element));
             });
         }
