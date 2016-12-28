@@ -4,40 +4,54 @@
  * Compare the weather data from government and FUN api.
  *
  */
-function getWeatherDataBySeq(cityId) {
-    var getGovDataV1 = require('./get_gov_weather_data_v1');
-    var getFunDataV1 = require('./get_fun_weather_data_v1');
 
-    console.log('Start Promise, get weather data by seq...');
-    getFunDataV1(cityId).then(getGovDataV1).then(function (resolve) {
-        console.log(resolve.funData.length);
-        console.log(resolve.GovData.length);
-    }).catch(function (reason) {
-        console.error(reason);
-    });
-}
+var co = require('co');
 
-function getWeatherDataByCon(cityId) {
-    var getGovDataV2 = require('./get_gov_weather_data_v2');
-    var getFunDataV2 = require('./get_fun_weather_data_v2');
+var getFunDataV1 = require('./get_fun_weather_data_v1');
+var getFunDataV2 = require('./get_fun_weather_data_v2');
+var getGovData = require('./get_gov_weather_data');
 
+
+function compareWeatherDataByCon(cityId) {
     console.log('Start Promise, get weather data by concurrent...');
-    Promise.all([getFunDataV2(cityId), getGovDataV2(cityId)])
+    Promise.all([getFunDataV1(cityId), getGovData(cityId)])
         .then(function (result) {
-            console.log(result[0].weatherData.length);
-            console.log(result[1].weatherData.length);
+            console.log(result[0].length);
+            console.log(result[1].length);
         }).catch(function (reason) {
             console.error(reason);
         });
 }
 
-if (require.main === module) {
-    var cityList = ['101010100', '101200101'];
-    var isSeq = false;
-    if (isSeq) {
-        getWeatherDataBySeq(cityList[0]);
-    } else {
-        getWeatherDataByCon(cityList[0]);
-    }
+function compareWeatherDataBySeq() {
+    co(function* () {
+        'use strict';
+        var cityArr = ['101010100', '101200101'];
 
+        // note: cannot use forEach() instead of for iterator
+        for (var idx = 0, length = cityArr.length; idx < length; idx++) {
+            let cityId = cityArr[idx];
+            console.log('\n\nCOMPARE FOR: ' + cityId);
+
+            var funWeatherData = yield getFunDataV2(cityId);
+            funWeatherData.forEach(function (element) {
+                console.log(JSON.stringify(element));
+            });
+
+            var GovWeatherData = yield getGovData(cityId);
+            GovWeatherData.forEach(function (element) {
+                console.log(JSON.stringify(element));
+            });
+        }
+    }).catch(function (err) {
+        console.error(err);
+    });
+}
+
+
+if (require.main === module) {
+//    compareWeatherDataByCon('101010100');
+    compareWeatherDataBySeq();
+
+    console.log(__filename, 'DONE!');
 }

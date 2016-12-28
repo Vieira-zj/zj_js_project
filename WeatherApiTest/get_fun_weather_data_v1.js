@@ -9,7 +9,7 @@ var comm = require('./common');
 
 var getFunWeatherDataV1 = function (cityId) {
     return new Promise(function (resolve) {
-        console.log("Start get weather data for " + cityId + " from FUN api.");
+        console.log("\nStart get weather data for " + cityId + " from FUN api v1.");
 
         agent.get('http://172.17.12.110:8480/tv_message/weather/city')
             .query('plat_type=funtv&version=2.10.0.3_s&sid=FD5551A-SU&mac=28:76:CD:01:96:F6')
@@ -53,10 +53,7 @@ var getFunWeatherDataV1 = function (cityId) {
                     });
                 }
 
-                resolve({
-                    cityId: cityId,
-                    funData: weatherDataFun
-                });
+                resolve(weatherDataFun);
             });
     });
 };

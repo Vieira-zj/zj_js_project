@@ -11,7 +11,7 @@ var comm = require('./common');
 
 var getGovForecastWeatherData = function (cityId) {
     return new Promise(function (resolve) {
-        console.log("Start get forecast weather data for " + cityId + " from GOV website.");
+        console.log("\nStart get forecast weather data for " + cityId + " from GOV website.");
 
         agent.get('http://www.weather.com.cn/weather/' + cityId + '.shtml')
             .end(function (err, resp) {

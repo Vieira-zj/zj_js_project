@@ -8,7 +8,7 @@ var comm = require('./common');
 
 var getFunWeatherDataV2 = function (cityId) {
     return new Promise(function (resolve) {
-        console.log("Start get weather data for " + cityId + " from FUN api.");
+        console.log("\nStart get weather data for " + cityId + " from FUN api v2.");
 
         agent.get('http://card.tv.funshion.com/api/rest/tv/weather/get')
             .query('plat_type=funtv&version=2.10.0.11_s&sid=FD4351A-LU&account=28:76:CD:01:45:64')
@@ -27,8 +27,8 @@ var getFunWeatherDataV2 = function (cityId) {
                 var itemToday = jsonRespData['today'];
                 weatherDataFun.push({
                     date: itemToday['date'],
-                    type: itemToday['type'],
-                    temp: itemToday['lowTemp'] + ' / ' + itemToday['highTemp'],
+                    type: comm.getWeatherType(itemToday['type']),
+                    temp: itemToday['lowTemp'] + '/' + itemToday['highTemp'],
                     curTemp: itemToday['curTemp'],
                     wind: itemToday['fengXiang'] + '/' + itemToday['fengLi']
                 });
@@ -37,7 +37,7 @@ var getFunWeatherDataV2 = function (cityId) {
                 jsonRespData['forecast'].forEach(function (element) {
                     weatherDataFun.push({
                         date: element['date'],
-                        type: element['type'],
+                        type: comm.getWeatherType(element['type']),
                         temp: element['lowTemp'] + '/' + element['highTemp'],
                         wind: itemToday['fengXiang'] + '/' + itemToday['fengLi']
                     });
@@ -50,10 +50,7 @@ var getFunWeatherDataV2 = function (cityId) {
                     });
                 }
 
-                resolve({
-                    cityId: cityId,
-                    weatherData: weatherDataFun
-                });
+                resolve(weatherDataFun);
             });
     });
 };
@@ -65,7 +62,7 @@ if (require.main === module) {
     console.log('Start Promise...');
 
     getFunWeatherDataV2('101010100').then(function (resolve) {
-        console.log('Count: ' + resolve.weatherData.length);
+        console.log('Count: ' + resolve.length);
     }).catch(function (reason) {
         console.error(reason);
     });
