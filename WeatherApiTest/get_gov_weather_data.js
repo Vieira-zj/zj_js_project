@@ -63,21 +63,50 @@ var getGovTodayWeatherData = function (cityId) {
 
                 var $ = cheerio.load(resp.text);
                 var $today = $('html').find('div#today');
+
                 var curWeatherData = buildTodayWeatherDataForCur($today);
+
+                var scriptData = getScriptsText($, $today);
+                var WeatherDataArrPerHour = buildTodayWeatherDataForHours(scriptData.per3HourData);
+                var airDataArrPerHour = buildTodayAirDataForHours(scriptData.air24HourData);
+
                 if (isLog) {
                     console.log('\nCurrent weather data: ' + JSON.stringify(curWeatherData));
-                }
-                var WeatherDataArrPerHours = buildTodayWeatherDataForHours($today);
-                if (isLog) {
                     console.log('\nWeather data per 3 hours: ');
-                    WeatherDataArrPerHours.forEach(function (element) {
+                    WeatherDataArrPerHour.forEach(function (element) {
                         console.log(JSON.stringify(element));
-                    })
+                    });
+                    console.log('\nAir data per hours: ');
+                    airDataArrPerHour.forEach(function (element) {
+                        console.log(JSON.stringify(element));
+                    });
                 }
-
-                resolve(WeatherDataArrPerHours);
+                resolve({
+                    weaData: curWeatherData,
+                    weaDataPerHour: WeatherDataArrPerHour,
+                    weaAirPerHour: airDataArrPerHour
+                });
             });
     });
+};
+
+var getScriptsText = function ($, $today) {
+    var retData = {
+        per3HourData: '',
+        air24HourData: ''
+    };
+
+    $today.parent().find('script').each(function (idx, element) {
+        var scriptText = $(element).text();
+        if (scriptText.indexOf('hour3data') !== -1) {
+            retData.per3HourData = scriptText.replace(new RegExp('\n', 'gm'), '');
+        }
+        if (scriptText.indexOf('observe24h_data') !== -1) {
+            retData.air24HourData = scriptText.replace(new RegExp('\n', 'gm'), '');
+        }
+    });
+
+    return retData;
 };
 
 var buildTodayWeatherDataForCur = function ($today) {
@@ -104,8 +133,12 @@ var buildTodayWeatherDataForCur = function ($today) {
     return todayWeatherDataForCur;
 };
 
-var buildTodayWeatherDataForHours = function ($today) {
-    var scriptObj = JSON.parse($today.find('script').text().split('=')[1]);
+var buildTodayWeatherDataForHours = function (scriptText) {
+    if (scriptText.length === 0) {
+        return 'null';
+    }
+
+    var scriptObj = JSON.parse(scriptText.split('=')[1]);
     var todayWeatherDataForHours = scriptObj['1d'];
     if (todayWeatherDataForHours) {
         return todayWeatherDataForHours;
@@ -113,6 +146,21 @@ var buildTodayWeatherDataForHours = function ($today) {
     return 'null';
 };
 
+var buildTodayAirDataForHours = function (scriptText) {
+    var airDataArr = [];
+
+    var obj24HourData = JSON.parse(scriptText.split('=')[1].replace(';', ''));
+    var hourData = obj24HourData['od']['od2'];
+    for (var length = hourData.length, idx = length - 1; idx >= 0; idx--) {
+        var item = hourData[idx];
+        var air = item['od28'];
+        if (air.length > 0) {
+            airDataArr.push({time: item['od21'], aqi: air});
+        }
+    }
+
+    return airDataArr;
+};
 
 module.exports = {
     getForecastData: getGovForecastWeatherData,
@@ -128,7 +176,7 @@ if (require.main === module) {
 //    });
 
     getGovTodayWeatherData('101200101').then(function (resolve) {
-        console.log('Count: ' + resolve.length);
+        console.log('Get GOV today weather data done.');
     });
 
     console.log(__filename, 'DONE!');

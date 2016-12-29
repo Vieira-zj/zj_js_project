@@ -22,22 +22,26 @@ var getFunWeatherDataV2 = function (cityId) {
                     return;
                 }
 
-                var weatherDataFun = [];
+                var weatherDataFun = {
+                    today: {},
+                    forecast: []
+                };
 
                 // get today weather data
                 var jsonRespData = JSON.parse(resp.text).data;
                 var itemToday = jsonRespData['today'];
-                weatherDataFun.push({
+                weatherDataFun.today = {
                     date: itemToday['date'],
                     type: comm.getWeatherType(itemToday['type']),
                     temp: itemToday['lowTemp'] + '/' + itemToday['highTemp'],
                     curTemp: itemToday['curTemp'],
-                    wind: itemToday['fengXiang'] + '/' + itemToday['fengLi']
-                });
+                    wind: itemToday['fengXiang'] + '/' + itemToday['fengLi'],
+                    aqi: itemToday['aqi']
+                };
 
                 // get forecast weather data
                 jsonRespData['forecast'].forEach(function (element) {
-                    weatherDataFun.push({
+                    weatherDataFun.forecast.push({
                         date: element['date'],
                         type: comm.getWeatherType(element['type']),
                         temp: element['lowTemp'] + '/' + element['highTemp'],
