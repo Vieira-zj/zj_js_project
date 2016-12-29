@@ -24,16 +24,17 @@ var mockedWeatherRespData = {
 var forecastSize = 5;
 
 var getDateArr = function () {
-    var dateArr = [];
+    var retDateArr = [];
     var dayByMilli = 24 * 60 * 60 * 1000;
-    var curDateTime = new Date().getTime();
 
-    for (var j = 0; j <= forecastSize; j++) {
-        var tmpForecastDate = new Date(curDateTime + (j * dayByMilli));
-        dateArr.push(tmpForecastDate.toLocaleDateString());
-    }
+    var myDate = new Date();
+    retDateArr.push(myDate.toLocaleDateString());  // today
 
-    return dateArr;
+    for (var idx = 1, curDateTime = myDate.getTime(); idx <= forecastSize; idx++) {
+        retDateArr.push(new Date(curDateTime + (idx * dayByMilli)).toLocaleDateString());
+    }  // forecast
+
+    return retDateArr;
 };
 
 var weatherTypeSunny = commWeatherTypes.SUNNY;

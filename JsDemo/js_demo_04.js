@@ -37,10 +37,10 @@
 //var tmpStr = '2016-1-28';
 //var re = /\d{4}-\d{1,2}-\d{1,2}/;
 
-var tmpStr = '101010100';
-var re = /\d{9}/;
+//var tmpStr = '101010100';
+//var re = /\d{9}/;
 
-console.log(re.exec(tmpStr));
+//console.log(re.exec(tmpStr));
 
 
 // demo 04, exit
@@ -71,6 +71,10 @@ console.log(re.exec(tmpStr));
 //   console.log(ele + ' at position ' + idx);
 //});
 
+
+// demo 07, replace
+//var tmpStr = '2016/12/29';
+//console.log(tmpStr.replace(new RegExp('/', 'gm'), '-'));
 
 
 console.log(__filename, 'DONE.');
