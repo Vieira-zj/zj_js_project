@@ -1,7 +1,7 @@
 /**
  * Created by zhengjin on 2016/11/30.
  *
- * Return mocked weather response data.
+ * Mocked response data for Fun weather API.
  */
 
 var path = require('path');

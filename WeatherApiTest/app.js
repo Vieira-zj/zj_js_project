@@ -1,8 +1,7 @@
 /**
  * Created by zhengjin on 2016/11/18.
  *
- * Compare the weather data from government and FUN api.
- *
+ * Compare the weather data from FUN api and crawl from weather.com (GOV).
  */
 
 var co = require('co');
@@ -14,7 +13,7 @@ var GovWeatherData = require('./get_gov_weather_data');
 
 var compareWeatherDataByCon = function (cityId) {
     console.log('Start Promise, compare weather data by concurrent...');
-    Promise.all([getFunDataV1(cityId), GovWeatherData.getForecastData(cityId)])
+    Promise.all([getFunDataV1(cityId), GovWeatherData.getForecastWeaData(cityId)])
         .then(function (result) {
             console.log(result[0].length);
             console.log(result[1].length);
@@ -86,7 +85,7 @@ var logGovTodayWeaData = function (weaData) {
 
 
 if (require.main === module) {
-    // todo: read file instead, 2016/12/30
+    // TODO: read from file, 2016/12/30
     var cityArr = ['101010100', '101020100', '101030100', '101040100', '101200101'];
 
 //    compareWeatherDataByCon('101010100');
