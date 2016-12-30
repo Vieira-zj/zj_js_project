@@ -11,7 +11,6 @@ var getFunDataV1 = require('./get_fun_weather_data_v1');
 var getFunDataV2 = require('./get_fun_weather_data_v2');
 var GovWeatherData = require('./get_gov_weather_data');
 
-var cityArr = ['101010100', '101020100', '101030100', '101040100', '101200101'];
 
 var compareWeatherDataByCon = function (cityId) {
     console.log('Start Promise, compare weather data by concurrent...');
@@ -25,7 +24,7 @@ var compareWeatherDataByCon = function (cityId) {
         });
 };
 
-var compareForecastWeatherDataBySeq = function () {
+var compareForecastWeatherDataBySeq = function (cityArr) {
     co(function* () {
         'use strict';
         var cityArrTest = cityArr;
@@ -52,7 +51,7 @@ var compareForecastWeatherDataBySeq = function () {
     });
 };
 
-var compareTodayWeatherDataBySeq = function () {
+var compareTodayWeatherDataBySeq = function (cityArr) {
     co(function* () {
         'use strict';
         var cityArrTest = cityArr;
@@ -87,7 +86,10 @@ var logGovTodayWeaData = function (weaData) {
 
 
 if (require.main === module) {
+    // todo: read file instead, 2016/12/30
+    var cityArr = ['101010100', '101020100', '101030100', '101040100', '101200101'];
+
 //    compareWeatherDataByCon('101010100');
-//    compareForecastWeatherDataBySeq();
-    compareTodayWeatherDataBySeq();
+//    compareForecastWeatherDataBySeq(cityArr);
+    compareTodayWeatherDataBySeq(cityArr);
 }
