@@ -10,7 +10,7 @@ var isLog = comm.runProfiles.isLog;
 
 var getFunWeatherDataV2 = function (cityId) {
     return new Promise(function (resolve) {
-        console.log("\nStart get weather data for " + cityId + " from FUN api v2.");
+        console.log("\nSTART get weather data for " + cityId + " from FUN api v2.");
 
         agent.get('http://card.tv.funshion.com/api/rest/tv/weather/get')
             .query('plat_type=funtv&version=2.10.0.11_s&sid=FD4351A-LU&account=28:76:CD:01:45:64')

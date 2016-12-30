@@ -40,7 +40,7 @@ var compareForecastWeatherDataBySeq = function () {
                 console.log(JSON.stringify(element));
             });
 
-            let govWeaData = yield GovWeatherData.getForecastData(cityId);
+            let govWeaData = yield GovWeatherData.getForecastWeaData(cityId);
             govWeaData.forEach(function (element) {
                 console.log(JSON.stringify(element));
             });
@@ -55,7 +55,7 @@ var compareForecastWeatherDataBySeq = function () {
 var compareTodayWeatherDataBySeq = function () {
     co(function* () {
         'use strict';
-        var cityArrTest = ['101010100'];
+        var cityArrTest = cityArr;
 
         for (let idx = 0, length = cityArrTest.length; idx < length; idx++) {
             let cityId = cityArrTest[idx];
@@ -64,15 +64,24 @@ var compareTodayWeatherDataBySeq = function () {
             let funWeaData = yield getFunDataV2(cityId);
             console.log(JSON.stringify(funWeaData.today));
 
-            let govWeaData = yield GovWeatherData.getTodayData(cityId);
-            govWeaData.forEach(function (element) {
-                console.log(JSON.stringify(element));
-            });
+            logGovTodayWeaData(yield GovWeatherData.getTodayWeaData(cityId));
         }
 
         console.log('\nCOMPARE DONE!');
     }).catch(function (err) {
         console.error(err);
+    });
+};
+
+var logGovTodayWeaData = function (weaData) {
+    console.log('\nCurrent weather data: ' + JSON.stringify(weaData.weaData));
+    console.log('\nWeather data per 3 hours: ');
+    weaData.per3HoursWeaData.forEach(function (element) {
+        console.log(JSON.stringify(element));
+    });
+    console.log('\nThe 24 hours air data: ');
+    weaData.air24HourWeaData.forEach(function (element) {
+        console.log(JSON.stringify(element));
     });
 };
 
