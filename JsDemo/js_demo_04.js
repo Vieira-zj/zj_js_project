@@ -1,6 +1,7 @@
 /**
  * Created by zhengjin on 2016/12/8.
  */
+
 // demo 01, date
 //var myDate = new Date();
 //console.log('cur date: %d-%d-%d', myDate.getFullYear(), myDate.getMonth()+1, myDate.getDate());
@@ -75,6 +76,63 @@
 // demo 07, replace
 //var tmpStr = '2016/12/29';
 //console.log(tmpStr.replace(new RegExp('/', 'gm'), '-'));
+
+
+//demo 08, json validate
+//var tmpJsonObj = {
+//    data: {
+//        cityId: '0001',
+//        city: 'wuhan'
+//    }
+//};
+//
+//var data = tmpJsonObj.data;
+//
+//if (!data.cityId) {
+//    console.log('City id is un-define.');
+//}
+//
+//// error
+////var tmpCity = data.cityId;
+////if (tmpCity) {
+////    tmpCity = '0002';
+////}
+//// correct
+//if (data.cityId) {
+//    data.cityId = '0002';
+//}
+//
+//console.log(JSON.stringify(tmpJsonObj));
+
+
+// demo 09, json validate
+////var tmpJsonObj = {
+////    data: null
+////};
+//
+////var tmpJsonObj = {
+////    data: {
+////        city: 'wuhan'
+////    }
+////};
+//
+//var tmpJsonObj = {
+//    data: {
+//        cityId: '0001',
+//        city: 'wuhan'
+//    }
+//};
+//
+//var logCityId = function (tmpJsonObj) {
+//    if (tmpJsonObj.data) {
+//        if (tmpJsonObj.data.cityId) {
+//            console.log('City id: ' + tmpJsonObj.data.cityId);
+//        }
+//    }
+//};
+//
+//console.log(JSON.stringify(tmpJsonObj));
+//logCityId(tmpJsonObj);
 
 
 console.log(__filename, 'DONE.');

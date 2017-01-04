@@ -16,7 +16,7 @@ var buildMockedWeatherRespDataV2 = require('./mock_weather_res_data_v2');
 var mockedWeatherRespDataV1 = {};
 
 // set run profile
-var timeDelay = 5000;
+var timeDelay = 200;
 
 
 app.route('/').get(function (req, res) {
@@ -42,14 +42,26 @@ app.route('/weather_v2').get(function (req, res) {
 });
 
 var updateMockedWeatherRespDataV2FromQuery = function (data, query) {
-    var respJsonObj = JSON.parse(data);
-    var cityCn = query.city;
-    if (cityCn && cityCn.length > 0) {
-        respJsonObj.data.city = cityCn;
+    var queryCityCn = query.city;
+    if (!queryCityCn || queryCityCn.length === 0) {
+        return data;
     }
-    var cityId = query.cityId;
-    if (cityId && cityId.length > 0) {
-        respJsonObj.data.cityId = cityId;
+    var queryCityId = query.cityId;
+    if (!queryCityId || queryCityId.length === 0) {
+        return data;
+    }
+
+    var respJsonObj = JSON.parse(data);
+    var respData = respJsonObj.data;
+    if (!respData) {  // fix issue: {data: null}
+        return data;
+    }
+
+    if (respData.city) {
+        respData.city = queryCityCn;
+    }
+    if (respData.cityId) {
+        respData.cityId = queryCityId;
     }
 
     return JSON.stringify(respJsonObj);
