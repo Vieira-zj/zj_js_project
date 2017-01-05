@@ -76,30 +76,22 @@ var initWeatherRespData = function () {
     }
 };
 
-var saveWeatherRespData = function (content) {
-    fs.writeFile(common.weatherDataFilePath, content, function (err) {
-        if (err) {
-            console.error(err);
-        }
-    });
-};
-
 var updateWeatherRespData = function () {
     // do update here, or update weather_resp_data.data directly.
     var dataElement = mockedWeatherRespData.data;
     dataElement.today.type = commWeatherTypes.CLOUDY;
 };
 
-var buildMockedWeatherRespData = function () {
+var getMockedWeatherRespData = function () {
     initWeatherRespData();
     updateWeatherRespData();
-    saveWeatherRespData(JSON.stringify(mockedWeatherRespData));
+    return JSON.stringify(mockedWeatherRespData);
 };
 
 
-module.exports = buildMockedWeatherRespData;
+module.exports = getMockedWeatherRespData;
 
 if (require.main === module) {
-    buildMockedWeatherRespData();
+    console.log(getMockedWeatherRespData());
     console.log(__filename, 'DONE!');
 }
