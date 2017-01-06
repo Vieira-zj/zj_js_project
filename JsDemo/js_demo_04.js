@@ -135,4 +135,21 @@
 //logCityId(tmpJsonObj);
 
 
+// demo 10, fn define, lambda
+//function myPrint(text) {
+//    console.log('Value: ' + text);
+//}
+//
+//var myPrintRef = myPrint;
+//myPrintRef('test');
+//
+//var tmpArr = ['test1', 'test2', 'test3'];
+//tmpArr.forEach(myPrintRef);
+//
+//tmpArr.forEach((x, y) => {
+//    console.log('Value: ' + x);
+//    console.log('Position at: ' + y)
+//});
+
+
 console.log(__filename, 'DONE.');
