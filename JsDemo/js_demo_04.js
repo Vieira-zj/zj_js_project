@@ -152,4 +152,34 @@
 //});
 
 
+// demo 11, time with random
+//var getRandom = function (range) {
+//    var tmpRandom = Math.round(Math.random() * range);
+//    if (tmpRandom === 10) {
+//        return 0;
+//    }
+//    return tmpRandom;
+//
+//};
+//
+//var myTime = new Date().getTime();
+//console.log('Current time: ' + (myTime + getRandom(10)).toString());
+
+
+// demo 12, return from callback
+//var flagTest = false;
+//
+//var myCallback = function (myFlag) {
+//    setTimeout(function () {
+//        if (!myFlag) {
+//            console.log('False, return from callback.');
+//            return;
+//        }
+//        console.log('True, run end.')
+//    }, 1000);
+//};
+//
+//myCallback(flagTest);
+
+
 console.log(__filename, 'DONE.');

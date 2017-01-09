@@ -1,10 +1,8 @@
 /**
  * Created by zhengjin on 2016/12/26.
  *
- * Include common constants and utils.
+ * Include common constants.
  */
-
-var weatherRespDataFilePath = './private/weather_resp_data.data';
 
 var weatherTypesMap = {
     SUNNY: 0,// 晴
@@ -45,6 +43,13 @@ var weatherTypesMap = {
 
 
 module.exports = {
-    weatherDataFilePath: weatherRespDataFilePath,
-    weatherTypes: weatherTypesMap
+    weatherTypes: weatherTypesMap,
+    weatherDataFilePath: {
+        v1: './private/weather_resp_data_v1.data',
+        v2: './private/weather_resp_data_v2.data'
+    },
+    appVersionNum: {
+        v1: 1,
+        v2: 2
+    }
 };

@@ -7,15 +7,12 @@
 var path = require('path');
 var fs = require('fs');
 var comm = require('./mock_common');
+var mockWeatherFns = require('./mock_weather_fns');
 
 var express = require('express');
 var app = express();
 
-var getMockedWeatherRespDataV1 = require('./mock_weather_res_data');
-var getMockedWeatherRespDataV2 = require('./mock_weather_res_data_v2');
-
-var mockedWeatherRespDataV1 = {};
-var isDataSaved = false;
+var numDataSaved = 0;
 var timeDelay = 200;
 
 
@@ -24,46 +21,58 @@ app.route('/').get(function (req, res) {
 });
 
 app.route('/weather_v1').get(function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(mockedWeatherRespDataV1);
+    sendRespData(req, res, comm.weatherDataFilePath.v1, timeDelay);
 });
 
 app.route('/weather_v2').get(function (req, res) {
-    setTimeout(function () {
-        if (isDataSaved) {
-            res.setHeader('Content-Type', 'application/json');
-            fs.readFile(comm.weatherDataFilePath, 'utf-8', function (err, data) {
-                if (err) {
-                    console.error(err);
-                    res.send('Error in loading response data in file!');
-                }
-                res.send(updateMockedWeatherRespDataV2FromQuery(data, req.query));
-            });
-        } else {
-            res.send('Data is loading..., refresh after 5 seconds.');
-        }
-    }, timeDelay);
+    sendRespData(req, res, comm.weatherDataFilePath.v2, timeDelay);
 });
 
 app.use(express.static(path.join(__dirname, 'public')))
     .listen(3000, function () {
-        console.log('Mock api application is running at port 3000.');
         initData();
+        console.log('Mock api application is running at port 3000.');
     });
 
 
 var initData = function () {
-    mockedWeatherRespDataV1 = getMockedWeatherRespDataV1();
-    saveWeatherRespData(getMockedWeatherRespDataV2());
+    dumpWeatherRespData(comm.appVersionNum.v1);
+    dumpWeatherRespData(comm.appVersionNum.v2);
 };
 
-var saveWeatherRespData = function (content) {
-    fs.writeFile(comm.weatherDataFilePath, content, function (err) {
+var dumpWeatherRespData = function (version) {
+    if (version === 1) {
+        writeFileContent(comm.weatherDataFilePath.v1, mockWeatherFns.v1());
+    } else {  // version === 2
+        writeFileContent(comm.weatherDataFilePath.v2, mockWeatherFns.v2());
+    }
+};
+
+var writeFileContent = function (path, content) {
+    fs.writeFile(path, content, function (err) {
         if (err) {
             console.error(err);
         }
-        isDataSaved = true;
+        ++numDataSaved;
     });
+};
+
+var sendRespData = function (req, res, path, delay) {
+    setTimeout(function () {
+        if (numDataSaved < 2) {  // check data saved done
+            res.send('Data is loading ..., refresh after 5 seconds.');
+            return;
+        }
+
+        res.setHeader('Content-Type', 'application/json');
+        fs.readFile(path, 'utf-8', function (err, data) {
+            if (err) {
+                console.error(err);
+                res.send('Error in loading response data in file!');
+            }
+            res.send(updateMockedWeatherRespDataV2FromQuery(data, req.query));
+        });
+    }, delay);
 };
 
 var updateMockedWeatherRespDataV2FromQuery = function (data, query) {
