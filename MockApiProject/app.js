@@ -17,7 +17,7 @@ var timeDelay = 200;
 
 
 app.route('/').get(function (req, res) {
-    res.send('Mock API Project. Access index.html for the mocked APIs list.');
+    res.send('Mock API Project. Access <b>index.html</b> to get the mocked APIs list.');
 });
 
 app.route('/weather_v1').get(function (req, res) {
