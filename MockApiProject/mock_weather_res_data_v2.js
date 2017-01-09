@@ -2,6 +2,7 @@
  * Created by zhengjin on 2016/12/22.
  *
  * Mock the weather API resource data for version 2.
+ * Url: http://card.tv.funshion.com/api/rest/tv/weather/get
  */
 
 var fs = require('fs');

@@ -1,7 +1,8 @@
 /**
  * Created by zhengjin on 2016/11/30.
  *
- * Mock the weather API resource data.
+ * Mock the weather API resource data for v1.
+ * Url: http://card.tv.funshion.com/weather/city
  */
 
 var mockedWeatherData = {
