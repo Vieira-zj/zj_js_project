@@ -13,6 +13,7 @@ var testJsonObject = {
     firstName: 'Zheng',
     lastName: 'Jin',
     age: 30,
+    high: "173 cm",
     status: 'ok',
     skill: ['Java', 'C#', 'Python', 'JS'],
     job: {
@@ -35,6 +36,10 @@ var testJsonSchema = {
         'status': {
             'type': 'string',
             'pattern': '(o|O)(k|K)'
+        },
+        'high': {
+            'type': 'string',
+            'pattern': '[0-9]{3}'
         },
         'age': {
             'type': 'integer',
@@ -61,7 +66,7 @@ var testJsonSchema = {
             'required': ['company', 'role']
         }
     },
-    'required': ['firstName', 'lastName', 'status', 'age', 'skill']
+    'required': ['firstName', 'lastName', 'status', 'high', 'age', 'skill']
 };
 
 

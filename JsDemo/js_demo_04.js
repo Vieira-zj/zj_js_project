@@ -24,8 +24,9 @@
 //console.log(tmpStr.length);
 
 
-// demo 03, expr
+// demo 03, RegExp
 //var tmpStr = '-2';
+//var tmpStr = '-2℃';
 //var re = /-?[0-9]+/;
 
 //var tmpStr = '低温 -2℃';
@@ -40,6 +41,9 @@
 
 //var tmpStr = '101010100';
 //var re = /\d{9}/;
+
+//var tmpStr = '';
+//var re = /\d{1,3}|\s*/;
 
 //console.log(re.exec(tmpStr));
 
