@@ -111,7 +111,7 @@ var updateWeatherData = function () {
     // do update here
     var dataElement = mockedWeatherData.data;
     dataElement.forecast[0].type = '大暴雨';
-    dataElement.history = {};  // ignore history
+    dataElement.history = [];  // ignore history
 };
 
 var getMockedWeatherData = function () {
