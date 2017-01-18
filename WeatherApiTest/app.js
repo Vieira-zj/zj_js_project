@@ -88,7 +88,21 @@ if (require.main === module) {
     // TODO: read from file, 2016/12/30
     var cityArr = ['101010100', '101020100', '101030100', '101040100', '101200101'];
 
-//    compareWeatherDataByCon('101010100');
-//    compareForecastWeatherDataBySeq(cityArr);
-    compareTodayWeatherDataBySeq(cityArr);
+    const runTypeByCon = 1;
+    const runTypeBySeqForToday = 2;
+    const runTypeBySeqForForecast = 3;
+
+    switch (runTypeBySeqForForecast) {
+        case runTypeByCon:
+            compareWeatherDataByCon('101010100');
+            break;
+        case runTypeBySeqForToday:
+            compareTodayWeatherDataBySeq(cityArr);
+            break;
+        case runTypeBySeqForForecast:
+            compareForecastWeatherDataBySeq(cityArr);
+            break;
+        default:
+            compareTodayWeatherDataBySeq(cityArr);
+    }
 }

@@ -186,4 +186,26 @@
 //myCallback(flagTest);
 
 
+// demo 13, array, push/pop, shift/unshift
+// from bottom
+//var tmpArrPush = [];
+//tmpArrPush.push('a');
+//tmpArrPush.push('b');
+//tmpArrPush.push('c');
+//console.log('Push: ' + tmpArrPush);
+//
+//tmpArrPush.pop();
+//console.log('Pop: ' + tmpArrPush);
+//
+//// from top
+//var tmpArrShift = [];
+//tmpArrShift.unshift('a');
+//tmpArrShift.unshift('b');
+//tmpArrShift.unshift('c');
+//console.log('Unshift: ' + tmpArrShift);
+//
+//tmpArrShift.shift();
+//console.log('Shift: ' + tmpArrShift);
+
+
 console.log(__filename, 'DONE.');

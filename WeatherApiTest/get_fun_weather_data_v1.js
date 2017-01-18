@@ -13,9 +13,9 @@ var getFunWeatherDataV1 = function (cityId) {
     return new Promise(function (resolve) {
         console.log("\nSTART get weather data for " + cityId + " from FUN api v1.");
 
-        agent.get('http://172.17.12.110:8480/tv_message/weather/city')
-            .query('plat_type=funtv&version=2.10.0.3_s&sid=FD5551A-SU&mac=28:76:CD:01:96:F6')
-            .query('random=1479353604311820&sign=fcc9a70567a644eda0201fbc9bc1ef15')
+        agent.get('http://card.tv.funshion.com/weather/city')
+            .query('plat_type=funtv&version=2.8.0.8_s&sid=FD5551A-SU&mac=28:76:CD:01:96:F6')
+            .query('random=1483946026114266&sign=f56d8ebc07bd370101f06b2d84be0e2f')
             .query('province=&city=&area=&cityId=' + cityId)
             .end(function (err, resp) {
                 if (err) {
