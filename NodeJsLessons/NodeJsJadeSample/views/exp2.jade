@@ -1,0 +1,48 @@
+//
+   Created by zhengjin on 2017/1/20.
+
+doctype html
+html
+    head
+        title Jade statment demo
+    body
+        div(style="background-color:#CCCCCC;") demo01, var expr
+            - var scr = "<script></script>"
+            div scr=
+                = scr
+            div scr!=
+                != scr
+            div scr
+                scr
+        div demo02_1, if statement
+            - var title = "express"
+            - if (title == "express")
+                div.
+                    Welcome to #{title},
+                this is another row in div.
+            - else
+                div another line.
+        div(style="background-color:#CCCCCC;") demo02_2, if statement
+            if (title == "express")
+                div.
+                    Welcome to #{title},
+                this is another row in div.
+            else
+                div another line.
+        div demo 03_1, for statement
+            - var num = 0
+            - for (; num < 5; num++)
+                div num= #{num}
+            div At last, the num = #{num}
+        div(style="background-color:#CCCCCC;") demo 03_2, for in statement
+            - var obj = {a:"111",b:"222",c:"333",d:"444"};
+            for value, key in obj
+                div The key is #{key}, and the value is #{value}.
+        div demo 04, maxin
+            - var myNum = 0
+            mixin node
+                div The number in mixin node is #{myNum++}
+            - for (var i = 0; i < 3; i++)
+                +node()
+            div At last, the number in mixin node is #{myNum++}
+        div <b>end demo</b>

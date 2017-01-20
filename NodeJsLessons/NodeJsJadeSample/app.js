@@ -23,3 +23,7 @@ app.route('/jade').get(function (req, res) {
 
     res.render('exp1', {info: 'Test info from js src.'});
 });
+
+app.route('/jadeEx').get(function (req, res) {
+    res.render('exp2');
+});
