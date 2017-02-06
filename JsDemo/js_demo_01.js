@@ -319,7 +319,12 @@
 //var x = 3;
 //var y = 5;
 //console.log('%d + %d = %d', x, y, (x + y));
-//
+
+//'use strict';
+//let firstName = 'ZHENG';
+//let lastName = 'JIN';
+//console.log('Hello, ${firstName} ${lastName}!');
+
 //var util = require('util');
 //console.log(util.format('Hello, %s', name));
 //console.log(util.format('%d + %d = %d', x, y, (x + y)));
