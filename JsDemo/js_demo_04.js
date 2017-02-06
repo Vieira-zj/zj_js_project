@@ -224,4 +224,62 @@
 //console.log(kittens);
 
 
+// demo 15, prototype, __proto__
+//var Person = function() {};
+//Person.prototype.type = 'Person';
+//Person.prototype.maxAge = 100;
+//
+//var p = new Person();
+//p.name = 'rainy';
+//console.log(p.maxAge);
+//
+//console.log(Person.prototype.constructor === Person);
+//console.log(p.__proto__ === Person.prototype);
+
+
+// demo 16, Function object, prototype chain
+//var MyObj = function() {};
+//var o = new MyObj();
+//
+//console.log('instance.__proto__ = Constructor.prototype = prototype_object =>');
+//console.log(o.__proto__ === MyObj.prototype);
+//console.log('prototype_object.constructor = Constructor =>');
+//console.log(o.__proto__.constructor === MyObj);
+//
+//// Function object
+//// Constructor is a Function
+//console.log('MyObj: Constructor.__proto__ = Function.prototype = prototype_object =>');
+//console.log(MyObj.__proto__ === Function.prototype);
+//console.log('prototype_object.constructor = Constructor =>');
+//console.log(MyObj.__proto__.constructor === Function);
+//
+//console.log('Object: Constructor.__proto__ = Function.prototype = prototype_object =>');
+//console.log(Object.__proto__ === Function.prototype);
+//console.log('prototype_object.constructor = Constructor =>');
+//console.log(Object.__proto__.constructor === Function);
+//
+//console.log('Function: Constructor.__proto__ = Function.prototype = prototype_object =>');
+//console.log(Function.__proto__ === Function.prototype);
+//console.log('prototype_object.constructor = Constructor =>');
+//console.log(Function.__proto__.constructor === Function);
+//
+//// prototype object chain
+//// Root object: Object
+//// 'prototype': find related prototype object
+//// '__proto__': find super prototype object
+//console.log('MyObj_prototype_object.__proto__ = Object_prototype_object =>');
+//console.log(MyObj.prototype.__proto__ === Object.prototype);
+//console.log('o_instance.__proto__.__proto__ = Object_prototype_object =>');
+//console.log(o.__proto__.__proto__ === Object.prototype);
+//console.log('Function_prototype_object.__proto__ = Object_prototype_object =>');
+//console.log(Function.prototype.__proto__ === Object.prototype);
+//console.log('Object_prototype_object.__proto__ = null =>');
+//console.log(Object.prototype.__proto__ === null);
+//
+//// instanceof
+//console.log('o instanceof MyObj => ' + String(o instanceof MyObj));
+//console.log('o instanceof Object => ' + (o instanceof Object ? 'true' : 'false'));
+//console.log('o instanceof Function => ' + (o instanceof Function ? 'true' : 'false'));
+
+
 console.log(__filename, 'DONE.');
