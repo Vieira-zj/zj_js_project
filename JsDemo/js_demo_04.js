@@ -282,4 +282,54 @@
 //console.log('o instanceof Function => ' + (o instanceof Function ? 'true' : 'false'));
 
 
+// demo 17, OO inherit
+//function SuperType() {
+//    this.property = 'super';
+//    this.colors = ['red', 'green', 'blue'];
+//}
+//SuperType.prototype.getSuperValue = function () {
+//    return this.property;
+//};
+//
+//function SubType() {
+//    this.subProperty = 'sub';
+//}
+//// the order for below 2 statements can NOT change
+//SubType.prototype = new SuperType();
+//SubType.prototype.getSubValue = function () {
+//    return this.subProperty;
+//};
+//
+//var instance = new SubType();
+//console.log(instance.getSubValue());
+//console.log(instance.getSuperValue());
+//
+//console.log(instance instanceof SubType);
+//console.log(instance instanceof SuperType);
+//console.log(instance instanceof Object);
+//
+//
+//// prototype chain check
+//console.log(instance.__proto__ === SubType.prototype);
+//console.log('SubType_prototype_object.__proto__ = SuperType_prototype_object =>');
+//console.log(instance.__proto__.__proto__ === SuperType.prototype);
+//console.log(SubType.prototype.__proto__ === SuperType.prototype);
+//
+//
+//// 1. update instance var which is reference
+//instance.colors.push('black');
+//console.log(instance.colors);
+//
+//// 2. change is applied to another SupType instance
+//var instance1 = new SubType();
+//console.log(instance1.colors);
+//
+//// 3. SuperType instance is not changed
+//var instance2 = new SuperType();
+//console.log(instance2.colors);
+//
+//console.log('SubType_prototype_object is an instance of SuperType =>');
+//console.log(instance.__proto__ instanceof SuperType);
+
+
 console.log(__filename, 'DONE.');
