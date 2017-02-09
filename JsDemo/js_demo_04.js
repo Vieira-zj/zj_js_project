@@ -332,4 +332,50 @@
 //console.log(instance.__proto__ instanceof SuperType);
 
 
+// demo 18, "this" in "=>function"
+//function Foo() {
+//    var that = this;
+//    this.arrow = () => {
+//        console.log(this.name);
+//    };
+//    this.simulationArrow = () => {
+//        console.log(that.name);
+//    };
+//    this.common = function () {
+//        console.log(this.name);
+//    };
+//    this.commonBind = function () {
+//        console.log(this.name);
+//    }.bind(this);
+//}
+//
+//var f = new Foo();
+//f.name = 'foo';
+//name = 'global';
+//
+//arrow = f.arrow;
+//simulationArrow = f.simulationArrow;
+//common = f.common;
+//commonBind = f.commonBind;
+//
+//arrow();
+//simulationArrow();
+//common();
+//commonBind();
+
+
+// demo 19, "this" in "=>function"
+//var tmp_obj = {
+//    foo: 'test',
+//    bar: function () {
+//        console.log(this.foo);
+//    },
+////    arrow: () => {console.log(this.foo);}
+//    arrow: () => console.log(this.foo)
+//};
+//
+//tmp_obj.bar();
+//tmp_obj.arrow();
+
+
 console.log(__filename, 'DONE.');
