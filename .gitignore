@@ -7,5 +7,6 @@ out/
 NodeJsLessons/*/node_modules/
 WeatherApiTest/node_modules/
 MockApiProject/node_modules/
+SocketDemo/node_modules/
 
 #.gitignore
