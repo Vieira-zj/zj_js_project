@@ -365,7 +365,7 @@
 
 
 // demo 19, "this" in "=>function"
-//var tmp_obj = {
+//var tmpObj = {
 //    foo: 'test',
 //    bar: function () {
 //        console.log(this.foo);
@@ -374,8 +374,8 @@
 //    arrow: () => console.log(this.foo)
 //};
 //
-//tmp_obj.bar();
-//tmp_obj.arrow();
+//tmpObj.bar();
+//tmpObj.arrow();
 
 
 console.log(__filename, 'DONE.');
