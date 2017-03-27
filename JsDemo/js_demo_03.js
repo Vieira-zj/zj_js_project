@@ -266,4 +266,105 @@
 //});
 
 
+// demo 12, array elements unique
+//var arr = [1, 2, 3, 4, 5, 3, 2];
+
+//// method 01
+//var arrUnique01 = function (srcArr) {
+//    var targetArr = [];
+//    for (var idx = 0, length = srcArr.length; idx < length; idx++) {
+//        if (targetArr.indexOf(srcArr[idx]) === -1) {
+//            targetArr.push(srcArr[idx]);
+//        }
+//    }
+//
+//    return targetArr;
+//};
+//console.log(arrUnique01(arr));
+
+// method 02
+//var arrUnique02 = function (srcArr) {
+//    var targetArr = [];
+//    var tmpObj = {};
+//
+//    // override for duplicated property
+////    for (var idx = 0, length = srcArr.length; idx < length; idx++) {
+////        tmpObj[srcArr[idx]] = null;
+////    }
+//    srcArr.map(item => tmpObj[item] = null);
+//
+//    for (var key in tmpObj) {
+//        if (tmpObj.hasOwnProperty(key)) {
+//            targetArr.push(Number(key));
+//        }
+//    }
+//
+//    return targetArr;
+//};
+//
+//arrUnique02(arr).forEach(function (element) {
+//    console.log('Element: ' + element);
+//});
+
+//method 03
+//var arrUnique03 = function (srcArr) {
+//    var targetArr = [];
+//    var tmpObj = {};
+//    var tmpElement;
+//
+//    for (var idx = 0, length = srcArr.length; idx < length; idx++) {
+//        tmpElement = srcArr[idx];
+//        if (!tmpObj[tmpElement]) {
+//            tmpObj[tmpElement] = 1;
+//            targetArr.push(tmpElement);
+//        }
+//    }
+//
+//    return targetArr;
+//};
+//console.log(arrUnique03(arr));
+
+// method 04
+//var arrUnique04 = function (srcArr) {
+//    var targetArr = [];
+//    srcArr.sort();
+//    for (var idx = 0, length = srcArr.length; idx < length; idx++) {
+//        if (srcArr[idx] !== targetArr[targetArr.length - 1]) {
+//            targetArr.push(srcArr[idx]);
+//        }
+//    }
+//
+//    return targetArr;
+//};
+//console.log(arrUnique04(arr));
+
+// method 05
+//var tmpSet = new Set(arr);
+//tmpSet.forEach(element => console.log('Element:', element));
+
+
+// demo 13, unicode
+// utf-16 with 2 bytes
+//var helloCn = '\u597D';
+//console.log(helloCn);
+//console.log(String.fromCodePoint(0x597D));
+//
+//// special char with one or two bytes
+//var tmpCharByOneByte = '\u01D1';
+//console.log(tmpCharByOneByte);
+//var tmpCharByTwoBytes = '\u004F\u030C';
+//console.log(tmpCharByTwoBytes);
+//
+//if (tmpCharByOneByte.normalize() === tmpCharByTwoBytes.normalize()) {
+//    console.log('The same char.');
+//}
+//
+//// fromCodePoint()
+//console.log(String.fromCodePoint(42));  // Decimal
+//console.log(String.fromCodePoint(0x002A));  // Hex Decimal
+//
+//// codePointAt()
+//console.log('*'.codePointAt(0));
+
+
 console.log(__filename, 'DONE.');
