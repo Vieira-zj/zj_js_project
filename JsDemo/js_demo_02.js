@@ -240,7 +240,7 @@
 //console.log(re.exec('102300'));
 
 
-// gloal search
+// global search
 //var s = 'JavaScript, VBScript, JScript and ECMAScript';
 //var re = /[a-zA-Z]+cript/g;
 //console.log(re.exec(s));
@@ -344,6 +344,46 @@
 //        console.log(item);
 //    }
 //})();
+
+
+// demo 14, RegExp in replace
+//var myTrim = function (tmpStr) {
+//    var re = /^\s+|\s+$/g;
+//    return tmpStr.replace(re, '');
+//};
+//
+//console.log(myTrim('  test trim spaces.  '));
+
+
+// demo 15, get sub array
+//var items = [12, 548 , 'a' , 2 , 5478 , 'foo' , 8852, 'Doe' , 2154 , 119];
+
+// method 01, slice(start, end)
+//console.log(items.slice(3, 5));
+
+// method 02, by length which is a RW property
+//items.length = 4;
+//items.length = 11;
+//console.log(items);
+
+
+// demo 16, splice(start, number), remove element in array
+//var items = [12, 548 , 'a' , 2 , 5478 , 'foo' , 8852, 'Doe' , 2154 , 119];
+//console.log('length:', items.length);
+//
+//// bad, delete is used for object property, but not array element
+////delete items[3];
+//// good
+//console.log('remove at:', items.splice(3, 1));
+//
+//console.log('length:', items.length);
+//console.log(items);
+
+
+// demo 17, toFixed(), toPrecision()
+//var num = 2.446242342;
+//console.log(num.toFixed(2));
+//console.log(num.toPrecision(3));
 
 
 console.log(__filename, 'DONE.');
