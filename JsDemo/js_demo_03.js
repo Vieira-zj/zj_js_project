@@ -79,6 +79,12 @@
 //    return x + y;
 //}
 //
+//var gen = Add(5);
+//console.log(gen.next());
+//console.log(gen.next());
+//console.log(gen.next());
+
+// return in generator
 //function* Add(x) {
 //    yield x + 1;
 //    var y = yield null;
@@ -88,7 +94,7 @@
 //var gen = Add(5);
 //console.log(gen.next());
 //console.log(gen.next());
-//console.log(gen.next(6).value);
+//console.log(gen.next(7).value);
 
 
 // demo 05, utilities

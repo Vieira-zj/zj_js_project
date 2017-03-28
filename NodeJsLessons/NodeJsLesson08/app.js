@@ -14,6 +14,4 @@ fs.readFileAsync('./data.txt', 'utf8').then(function (content) {
     console.error(e.message);
 }).catch(Promise.OperationalError, function (e) {
     console.error("unable to read file, because: ", e.message);
-}).catch(function (reason) {
-    console.error(reason);
-});
+}).catch(reason => console.log(reason));
