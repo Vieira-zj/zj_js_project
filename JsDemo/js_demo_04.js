@@ -224,7 +224,8 @@
 //console.log(kittens);
 
 
-// demo 15, prototype, __proto__
+// demo 15
+// fn_object.prototype and instance.__proto__ point to prototype_object
 //var Person = function() {};
 //Person.prototype.type = 'Person';
 //Person.prototype.maxAge = 100;
@@ -232,47 +233,56 @@
 //var p = new Person();
 //p.name = 'rainy';
 //console.log(p.maxAge);
+//console.log(p.name);
 //
-//console.log(Person.prototype.constructor === Person);
 //console.log(p.__proto__ === Person.prototype);
+//console.log(Person.prototype.constructor === Person);
 
 
-// demo 16, Function object, prototype chain
+// demo 16, prototype
 //var MyObj = function() {};
 //var o = new MyObj();
 //
-//console.log('instance.__proto__ = Constructor.prototype = prototype_object =>');
+//// Line1
+//// function chain: instance => constructor => Function
+//// instance => constructor
+//// constructor.prototype: find related prototype object
+//// constructor.__proto__: find super prototype object
+//console.log('o_instance.__proto__ = MyObj_constructor.prototype = MyObj_prototype_object =>');
 //console.log(o.__proto__ === MyObj.prototype);
-//console.log('prototype_object.constructor = Constructor =>');
+//console.log('MyObj_prototype_object.constructor = MyObj_constructor =>');
 //console.log(o.__proto__.constructor === MyObj);
 //
-//// Function object
-//// Constructor is a Function
-//console.log('MyObj: Constructor.__proto__ = Function.prototype = prototype_object =>');
+//// constructor => Function
+//console.log('MyObj_constructor.__proto__ = Function.prototype = fn_prototype_object =>');
 //console.log(MyObj.__proto__ === Function.prototype);
-//console.log('prototype_object.constructor = Constructor =>');
+//console.log('fn_prototype_object.constructor = Function_constructor =>');
 //console.log(MyObj.__proto__.constructor === Function);
 //
-//console.log('Object: Constructor.__proto__ = Function.prototype = prototype_object =>');
+//console.log('Object_constructor.__proto__ = Function.prototype = fn_prototype_object =>');
 //console.log(Object.__proto__ === Function.prototype);
-//console.log('prototype_object.constructor = Constructor =>');
+//console.log('fn_prototype_object.constructor = Function_constructor =>');
 //console.log(Object.__proto__.constructor === Function);
 //
-//console.log('Function: Constructor.__proto__ = Function.prototype = prototype_object =>');
+//// Function self
+//console.log('Function_constructor.__proto__ = Function.prototype = fn_prototype_object =>');
 //console.log(Function.__proto__ === Function.prototype);
-//console.log('prototype_object.constructor = Constructor =>');
+//console.log('fn_prototype_object.constructor = Function_constructor =>');
 //console.log(Function.__proto__.constructor === Function);
 //
-//// prototype object chain
+//// Line2
+//// prototype objects chain: my_prototype_object => Object_prototype_object
 //// Root object: Object
-//// 'prototype': find related prototype object
-//// '__proto__': find super prototype object
 //console.log('MyObj_prototype_object.__proto__ = Object_prototype_object =>');
 //console.log(MyObj.prototype.__proto__ === Object.prototype);
-//console.log('o_instance.__proto__.__proto__ = Object_prototype_object =>');
+//console.log('MyObj_prototype_object.__proto__ = Object_prototype_object =>');
 //console.log(o.__proto__.__proto__ === Object.prototype);
+//
+//// Function_prototype_object => Object_prototype_object
 //console.log('Function_prototype_object.__proto__ = Object_prototype_object =>');
 //console.log(Function.prototype.__proto__ === Object.prototype);
+//
+//// Object_prototype_object => null
 //console.log('Object_prototype_object.__proto__ = null =>');
 //console.log(Object.prototype.__proto__ === null);
 //
@@ -294,6 +304,13 @@
 //function SubType() {
 //    this.subProperty = 'sub';
 //}
+//
+//
+//// for statement: SubType.prototype = new SuperType();
+//// it contains 2 steps:
+//// step1. SubType.prototype = {};
+//// step2. SubType.prototype.__proto__ = SuperType.prototype
+//
 //// the order for below 2 statements can NOT change
 //SubType.prototype = new SuperType();
 //SubType.prototype.getSubValue = function () {
@@ -308,12 +325,19 @@
 //console.log(instance instanceof SuperType);
 //console.log(instance instanceof Object);
 //
+//console.log('SuperType_constructor.__proto__ === SubType_constructor.__proto__ === fn_prototype_object =>');
+//console.log(SuperType.__proto__ === Function.prototype);
+//console.log(SubType.__proto__ === Function.prototype);
 //
 //// prototype chain check
-//console.log(instance.__proto__ === SubType.prototype);
 //console.log('SubType_prototype_object.__proto__ = SuperType_prototype_object =>');
-//console.log(instance.__proto__.__proto__ === SuperType.prototype);
 //console.log(SubType.prototype.__proto__ === SuperType.prototype);
+//console.log(instance.__proto__.__proto__ === SuperType.prototype);
+//
+//console.log('SuperType_prototype_object.__proto__ = Object_prototype_object =>');
+//console.log(SuperType.prototype.__proto__ === Object.prototype);
+//console.log('SuperType_prototype_object is an instance of Object =>');
+//console.log(SuperType.prototype instanceof Object);
 //
 //
 //// 1. update instance var which is reference

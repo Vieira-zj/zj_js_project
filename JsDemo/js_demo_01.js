@@ -383,4 +383,10 @@
 //console.log(escape(cnStr));
 
 
+// demo 23, access invalid array element
+//var tmpArr = [];
+//console.log(tmpArr[1]);
+//console.log(tmpArr[-1]);
+
+
 console.log(__filename, 'DONE.');
