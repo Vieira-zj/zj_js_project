@@ -373,4 +373,28 @@
 //console.log('*'.codePointAt(0));
 
 
+// demo 14, generator
+//var myGenerator = function* (maxValue) {
+//    for (var i = 0; i < maxValue; i++) {
+//        yield i;
+//    }
+//};
+//
+//var gen1 = myGenerator(3);
+//console.log('Type:', typeof(gen1));
+//console.log(gen1.next());
+//console.log(gen1.next());
+//console.log(gen1.next());
+//console.log(gen1.next());
+
+//// cannot iterator on generator
+//var gen2 = myGenerator(10);
+//for (var item in gen2) {
+//    console.log('item:', item);
+//}
+//
+//// error
+//gen2.forEach(item => console.log('item:', item));
+
+
 console.log(__filename, 'DONE.');
