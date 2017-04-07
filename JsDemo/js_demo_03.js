@@ -372,6 +372,10 @@
 //// codePointAt()
 //console.log('*'.codePointAt(0));
 
+//// ascii
+//var charAsc = '\x41';
+//console.log('char:', charAsc);
+
 
 // demo 14, generator
 //var myGenerator = function* (maxValue) {
