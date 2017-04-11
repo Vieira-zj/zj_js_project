@@ -90,4 +90,22 @@
 //console.log('Age:', myObj.getAge(2015));
 
 
+// demo 05, RegExp, global search
+// g - global, i - ignore case
+//var srcStr = 'JavaScript, VBScript, JScript and ECMAScript';
+////var re = /[a-zA-Z]+cript/g;
+//var re = /[a-z]+cript/gi;
+//
+//var myPrintLog = console.log;
+//
+//while (true) {
+//    var tmpResult = re.exec(srcStr);
+//    if (!tmpResult) {
+//        break;
+//    }
+//    myPrintLog(tmpResult[0]);
+//    myPrintLog(re.lastIndex);
+//}
+
+
 console.log(__filename, 'DONE.');
