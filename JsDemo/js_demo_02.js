@@ -250,7 +250,7 @@
 
 
 // demo 10, inherit by prototype
-// step1: define object
+// step1: define parent and child class
 //function Student(props) {
 //    this.name = props.name || 'Unnamed';
 //}
@@ -273,34 +273,39 @@
 //
 //// method 02
 //function inherits(Child, Parent) {
-//    var F = function () {
+//    var tmpObj = function () {
 //    };
-//    F.prototype = Parent.prototype;
-//    Child.prototype = new F();
+//    tmpObj.prototype = Parent.prototype;
+//    Child.prototype = new tmpObj();
 //    Child.prototype.constructor = Child;
 //}
 //inherits(PrimaryStudent, Student);
 //
-//// step3: run
 //PrimaryStudent.prototype.getGrade = function () {
 //    return this.grade;
 //};
 //
+//// step3: create object and check relationship
 //var xiaoming = new PrimaryStudent({
 //    name: 'XiaoMing',
 //    grade: 2
 //});
 //xiaoming.hello();
-//console.log(xiaoming.getGrade());
+//console.log('Grade at:', xiaoming.getGrade());
+//
+//console.log('object:', xiaoming.__proto__);
 //
 //console.log(xiaoming.__proto__ === PrimaryStudent.prototype);
 //console.log(xiaoming.__proto__.__proto__ === Student.prototype);
 //
 //console.log(xiaoming instanceof PrimaryStudent);
 //console.log(xiaoming instanceof Student);
+//
+//console.log(PrimaryStudent.__proto__);
+//console.log(Student.__proto__);
 
 
-// demo 11, inherit by class
+// demo 11, inherit by using keyword 'class'
 //'use strict';
 //class Student {
 //    constructor(name) {
@@ -326,6 +331,7 @@
 //var xiaoming = new PrimaryStudent('XiaoMing', 2);
 //xiaoming.hello();
 //xiaoming.myGrade();
+//
 //console.log(xiaoming instanceof PrimaryStudent);
 //console.log(xiaoming instanceof Student);
 
