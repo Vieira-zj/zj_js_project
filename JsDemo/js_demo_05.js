@@ -108,4 +108,11 @@
 //}
 
 
+// demo 06, empty function
+//var myEmptyFn = function () {
+//    // default return undefined
+//};
+//console.log('myEmptyFn return:', myEmptyFn());
+
+
 console.log(__filename, 'DONE.');
