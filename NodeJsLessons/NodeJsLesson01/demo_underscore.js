@@ -11,5 +11,12 @@ if (require.main === module) {
     tmpObj = {one: 1, two: 2, three: 3};
     _.each(tmpObj, (key, value) => console.log([key, value].join(':')));
 
+    // chain()
+    var chainRet = _.chain([1, 4, 9, 16, 25])
+        .map(Math.sqrt)
+        .filter(x => x % 2 === 1)
+        .value();
+    console.log(chainRet);
+
     console.log(__filename, 'DONE!');
 }
