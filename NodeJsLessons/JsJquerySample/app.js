@@ -13,6 +13,7 @@ var getTextOfDomObject = function (domObject) {
 
 var testFindById = function ($) {
     var tmpDiv = $('#div_test1');
+    console.log('html:', tmpDiv.html());
 
     // jquery object => dom object
     var divDom = tmpDiv.get(0);
@@ -39,10 +40,10 @@ var testFindByLevels = function ($) {
 
     // filter
     var tmpLiLua = $('div#div_test2>ul.lang>li:last-child');
-    console.log('child text:', tmpLiLua.text());
+    console.log('last child text:', tmpLiLua.text());
 
     var tmpLiPy = $('div#div_test2>ul.lang>li:nth-child(2)');
-    console.log('child text:', tmpLiPy.text());
+    console.log('child text at position 2:', tmpLiPy.text());
 };
 
 var testFindFromJqObject = function ($) {
@@ -66,21 +67,34 @@ var testFindFromJqObject = function ($) {
     console.log('language text:', py.text());
 };
 
-var testFilterFromJqObject = function ($) {
-    var tmpLangLis = $('div#div_test3>ul.lang>li');
+var testIteratorForJqArrays = function ($) {
+    var tmpLangLis = $('div#div_test3>ul.lang li');
+
+    // get jquery object from jquery array
+    var idx = 2;
+    var swfObject = tmpLangLis.eq(idx);
+    console.log('language at position', idx, swfObject.text());
+
+    // get dom object from jquery array
+    var swfDomObject = tmpLangLis.get(idx);
+    console.log('language at position', idx, getTextOfDomObject(swfDomObject));
 
     // each
-    tmpLangLis.each(function () {
-        console.log('language:', getTextOfDomObject(this));
+    tmpLangLis.each(function (idx) {
+        console.log('language:', getTextOfDomObject(this), 'at position:', idx);
     });
 
     tmpLangLis.each(function (idx, element) {
         console.log('language:', $(element).text(), 'at position:', idx);
     });
+};
+
+var testFilterForJqArray = function ($) {
+    var tmpLangLis = $('div#div_test3>ul.lang>li');
 
     // filter
     var swf = tmpLangLis.filter('#swift');
-    console.log('filter language:', swf.text());
+    console.log('language swift:', swf.text());
 
     var tmpLangs = tmpLangLis.filter(function () {
         return getTextOfDomObject(this).indexOf('S') === 0;
@@ -95,7 +109,7 @@ var testFilterFromJqObject = function ($) {
     console.log('Languages:', tmpArr);
 };
 
-var testGetJqObjectAttr = function ($) {
+var testGetJqObjectAttrVal = function ($) {
     var tmpLangs = $('div#div_test3>ul>li');
     var tmpLang = tmpLangs.filter(function () {
         return getTextOfDomObject(this) === 'Haskell';
@@ -113,8 +127,9 @@ if (require.main === module) {
     testFindByClass($);
     testFindByLevels($);
     testFindFromJqObject($);
-    testFilterFromJqObject($);
-    testGetJqObjectAttr($);
+    testIteratorForJqArrays($);
+    testFilterForJqArray($);
+    testGetJqObjectAttrVal($);
 
     console.log('JQuery demo done!');
 }
