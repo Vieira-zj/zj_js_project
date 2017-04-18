@@ -5,6 +5,7 @@
 var _ = require('lodash');
 
 if (require.main === module) {
+
     var users = [
         { 'user': 'barney', 'age': 36 },
         { 'user': 'fred', 'age': 40 },

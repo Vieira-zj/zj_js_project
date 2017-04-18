@@ -115,4 +115,39 @@
 //console.log('myEmptyFn return:', myEmptyFn());
 
 
+// demo 07, typeof
+//var tmpStr = 'test';
+//console.log(typeof(tmpStr) === 'string');
+//
+//var tmpNumber = 1;
+//console.log(typeof(tmpNumber) === 'number');
+//
+//var tmpBool = false;
+//console.log(typeof(tmpBool) === 'boolean');
+
+
+// demo 08, function
+//var factorial = (function f(num) {
+//    if (num === 1) {
+//        return 1;
+//    } else {
+//        return num * factorial(num - 1);
+//    }
+//});
+//console.log('factorial:', factorial(5));
+//
+//function superFunc() {
+//    var subFuncs = [];
+//    for (var i = 0; i < 10; i++) {
+//        subFuncs[i] = (function () {
+//            return i;
+//        })(i);
+//    }
+//    return subFuncs;
+//}
+//var fns = superFunc();
+//console.log('fns instanceof Array:', fns instanceof Array);
+//console.log('value:', fns);
+
+
 console.log(__filename, 'DONE.');

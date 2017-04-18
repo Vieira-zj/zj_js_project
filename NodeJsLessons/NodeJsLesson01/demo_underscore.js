@@ -5,6 +5,7 @@
 _ = require('underscore');
 
 if (require.main === module) {
+
     tmpArr = ['a', 'b', 'c'];
     _.each(tmpArr, (num) => console.log(num));
 
