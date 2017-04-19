@@ -150,4 +150,150 @@
 //console.log('value:', fns);
 
 
+// demo 09, keyword "this"
+// #1
+//function Thing() {
+//}
+//Thing.prototype.foo = "bar";
+//Thing.prototype.logFoo = function () {
+//    console.log(this.foo);
+//};
+//Thing.prototype.setFoo = function (newFoo) {
+//    this.foo = newFoo;  // this => instance
+////    this.__proto__.foo = newFoo;
+//};
+//
+//var thing1 = new Thing();
+//var thing2 = new Thing();
+//
+//thing1.logFoo(); //logs "bar"
+//thing2.logFoo(); //logs "bar"
+//
+//thing1.setFoo("foo");
+//thing1.logFoo(); //logs "foo";
+//thing2.logFoo(); //logs "bar";
+//
+//thing2.foo = "foobar";
+//thing1.logFoo(); //logs "foo";
+//thing2.logFoo(); //logs "foobar";
+
+// #2
+//function Thing() {
+//}
+//Thing.prototype.foo = "bar";
+//Thing.prototype.logFoo = function () {
+//    var info = "attempting to log this.foo:";
+//
+//    function doIt() {
+//        // "this" is not inherit from out_method
+//        console.log(info, this.foo);
+//    }
+//
+//    doIt();
+//};
+//
+//var thing = new Thing();
+//thing.logFoo();  //logs "attempting to log this.foo: undefined"
+
+// #2, fix
+//function Thing() {
+//}
+//Thing.prototype.foo = "bar";
+//Thing.prototype.logFoo = function () {
+//    var self = this;
+//    var info = "attempting to log this.foo:";
+//
+//    function doIt() {
+//        console.log(info, self.foo);
+//    }
+//
+//    doIt();
+//};
+//
+//var thing = new Thing();
+//thing.logFoo();  //logs "attempting to log this.foo: bar"
+
+// #3
+//function Thing() {
+//}
+//Thing.prototype.foo = "bar";
+//Thing.prototype.logFoo = function () {
+//    console.log(this.foo);
+//};
+//
+//function doIt(method) {
+//    method();
+//}
+//
+//var thing = new Thing();
+//thing.logFoo(); //logs "bar"
+//doIt(thing.logFoo); //logs undefined
+
+// #3, fix
+//function Thing() {
+//}
+//Thing.prototype.foo = "bar";
+//Thing.prototype.logFoo = function () {
+//    console.log(this.foo);
+//};
+//
+//function doIt(method) {
+//    method();
+//}
+//
+//var thing = new Thing();
+//doIt(thing.logFoo.bind(thing)); //logs bar
+
+
+// #4
+//var obj = {
+//    foo: "bar"
+//};
+//
+//function logFoo() {
+//    console.log(this.foo);
+//}
+//logFoo.apply(obj);
+
+// #5
+//var obj = {
+//    foo: "bar",
+//    deeper: {
+//        logFoo: function () {
+//            console.log(this.foo);
+//        }
+//    }
+//};
+//
+//obj.deeper.logFoo();
+
+
+// #5, fix
+//var obj = {
+//    foo: "bar",
+//    deeper: {
+//        logFoo: function () {
+//            console.log(obj.foo);
+//        }
+//    }
+//};
+//
+//obj.deeper.logFoo();
+
+
+// #6
+//function Thing(type) {
+//    this.type = type;
+//}
+//Thing.prototype.log = function (thing) {
+//    console.log(this.type, thing);
+//};
+//Thing.prototype.logThings = function (arr) {
+//    arr.forEach(this.log, this);
+//};
+//
+//var thing = new Thing('fruit');
+//thing.logThings(["apples", "oranges", "strawberries", "bananas"]);
+
+
 console.log(__filename, 'DONE.');
