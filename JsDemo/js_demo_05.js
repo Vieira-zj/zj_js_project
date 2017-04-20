@@ -296,4 +296,27 @@
 //thing.logThings(["apples", "oranges", "strawberries", "bananas"]);
 
 
+// demo 10, OO inherit
+//function Super() {
+//}
+//function Sub() {
+//}
+//Sub.prototype = new Super();
+//
+//var sub = new Sub();
+//console.log('sub instanceof Sub:', sub instanceof Sub);
+//console.log('sub instanceof Super:', sub instanceof Super);
+//
+//console.log(sub.constructor);
+//console.log(sub.__proto__.constructor);
+//
+//console.log('sub.constructor === Sub:', sub.constructor === Sub);  // false
+//console.log('sub.constructor === Super:', sub.constructor === Super);  // true
+//
+//console.log(sub.__proto__.__proto__ === Super.prototype);
+//console.log('Super.prototype.constructor === Super:', Super.prototype.constructor === Super);
+//
+//console.log('Sub.prototype instanceof Super:', Sub.prototype instanceof Super);
+
+
 console.log(__filename, 'DONE.');
