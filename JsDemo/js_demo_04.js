@@ -344,7 +344,7 @@
 //instance.colors.push('black');
 //console.log(instance.colors);
 //
-//// 2. change is applied to another SupType instance
+//// 2. change is applied to another SubType instance
 //var instance1 = new SubType();
 //console.log(instance1.colors);
 //

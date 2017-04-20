@@ -307,9 +307,10 @@
 //console.log('sub instanceof Sub:', sub instanceof Sub);
 //console.log('sub instanceof Super:', sub instanceof Super);
 //
-//console.log(sub.constructor);
+//console.log(sub.constructor);  // access constructor of prototype_object
 //console.log(sub.__proto__.constructor);
 //
+////sub.constructor = Sub;  // reset constructor to point to self
 //console.log('sub.constructor === Sub:', sub.constructor === Sub);  // false
 //console.log('sub.constructor === Super:', sub.constructor === Super);  // true
 //
@@ -317,6 +318,25 @@
 //console.log('Super.prototype.constructor === Super:', Super.prototype.constructor === Super);
 //
 //console.log('Sub.prototype instanceof Super:', Sub.prototype instanceof Super);
+//
+//
+//const subPrototypeObject = Sub.prototype;
+//console.log(subPrototypeObject);
+//console.log('Sub attributes:');
+//for (let attr in subPrototypeObject) {
+//    if (subPrototypeObject.hasOwnProperty(attr)) {
+//        console.log(attr);
+//    }
+//}
+//
+//const superPrototypeObject = Super.prototype;
+//console.log(superPrototypeObject);
+//console.log('Super attributes:');
+//for (let attr in superPrototypeObject) {
+//    if (superPrototypeObject.hasOwnProperty(attr)) {
+//        console.log(attr);
+//    }
+//}
 
 
 console.log(__filename, 'DONE.');
