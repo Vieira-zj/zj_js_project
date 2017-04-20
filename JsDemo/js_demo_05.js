@@ -177,6 +177,24 @@
 //thing1.logFoo(); //logs "foo";
 //thing2.logFoo(); //logs "foobar";
 
+// #1.1
+//function Thing1() {
+//    this.foo = 'foo'
+//}
+//Thing1.prototype.foo = "bar";
+//Thing1.prototype.logFoo = function () {
+//    console.log(this.foo);
+//};
+//
+//function Thing2() {
+//    this.foo = "foobar";
+//}
+//Thing2.prototype = new Thing1();
+//
+//var thing = new Thing2();
+// logFoo() is bind thing (Thing2)
+//thing.logFoo(); // foobar
+
 // #2
 //function Thing() {
 //}
@@ -244,7 +262,6 @@
 //var thing = new Thing();
 //doIt(thing.logFoo.bind(thing)); //logs bar
 
-
 // #4
 //var obj = {
 //    foo: "bar"
@@ -267,7 +284,6 @@
 //
 //obj.deeper.logFoo();
 
-
 // #5, fix
 //var obj = {
 //    foo: "bar",
@@ -280,8 +296,18 @@
 //
 //obj.deeper.logFoo();
 
-
 // #6
+//function Thing() {
+//    this.handleEvent();
+//}
+//
+//Thing.prototype.handleEvent = function () {
+//    console.log('handle event.');
+//};
+//
+//var thing = new Thing();
+
+// #7
 //function Thing(type) {
 //    this.type = type;
 //}
