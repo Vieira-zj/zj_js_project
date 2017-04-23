@@ -365,4 +365,22 @@
 //}
 
 
+// demo 11, let
+//var tmpArr = [];
+//for (var i = 0; i < 10; i++) {
+//    tmpArr[i] = function () {
+//        console.log(i);
+//    }
+//}
+//tmpArr[8]();
+//
+//var tmpArr1 = [];
+//for (let m = 0; m < 10; m++) {
+//    tmpArr1[m] = function () {
+//        console.log(m);
+//    }
+//}
+//tmpArr1[8]();
+
+
 console.log(__filename, 'DONE.');
