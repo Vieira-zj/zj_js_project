@@ -383,4 +383,45 @@
 //tmpArr1[8]();
 
 
+// demo 12, callback vs. generator
+//var timeDelay = function (ptime, callback) {
+//    setTimeout(function () {
+//        callback('Pausing for ' + ptime);
+//    }, ptime);
+//};
+//
+//// sync by callbacks
+//timeDelay(1000, function (message) {
+//    console.log(message);
+//    timeDelay(2000, function (message) {
+//        console.log(message);
+//        timeDelay(3000, function (message) {
+//            console.log(message);
+//        });
+//    });
+//});
+//
+//// sync by generator
+//function *Messages() {
+//    yield(timeDelay(1000, function (message) {
+//        console.log(message);
+//    }));
+//    yield(timeDelay(2000, function (message) {
+//        console.log(message);
+//    }));
+//    return timeDelay(3000, function (message) {
+//        console.log(message);
+//    });
+//}
+//
+//var messages = Messages();
+//while (true) {
+//    if (messages.next().done) {
+//        break;
+//    }
+//}
+//
+//console.log('callback vs. generator demo.');
+
+
 console.log(__filename, 'DONE.');

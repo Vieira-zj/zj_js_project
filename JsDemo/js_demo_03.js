@@ -24,6 +24,8 @@
 //}).catch(function (reason) {
 //    console.log('failed: ' + reason);
 //});
+//
+//console.log('promise demo.');
 
 
 // demo 02, promise, multiple then

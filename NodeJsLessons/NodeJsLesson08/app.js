@@ -15,3 +15,5 @@ fs.readFileAsync('./data.txt', 'utf8').then(function (content) {
 }).catch(Promise.OperationalError, function (e) {
     console.error("unable to read file, because: ", e.message);
 }).catch(reason => console.log(reason));
+
+console.log('bluebird demo ...');
