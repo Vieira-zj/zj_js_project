@@ -383,7 +383,7 @@
 //tmpArr1[8]();
 
 
-// demo 12, sync by callback, generator and promise
+// demo 12, sync by callbacks, generator and promise
 //var timeDelay = function (waitTime, callback) {
 //    setTimeout(function () {
 //        callback('Pausing for ' + waitTime);

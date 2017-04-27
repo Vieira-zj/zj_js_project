@@ -29,4 +29,40 @@
 //logDelay4('test4');
 
 
+// demo 02, check object property exist
+// match null, undefined, false, '' and 0
+//var isPropertyExist1 = function (tmpProperty) {
+//    return Boolean(tmpProperty);
+//};
+//
+//// == null match for both null and undefined
+//var isPropertyExist2 = function (tmpProperty) {
+//    return tmpProperty != null;
+//};
+//
+//var tmpObject = {
+//    name: 'test',
+//    age: 17,
+//    tmpUndefined: undefined,
+//    tmpFalse: false,
+//    tmpEmpty: '',
+//    tmpZero: 0
+//};
+//
+//console.log(isPropertyExist1(tmpObject.name));
+//console.log(isPropertyExist2(tmpObject.name));
+//
+//console.log(isPropertyExist1(tmpObject.tmpUndefined));
+//console.log(isPropertyExist2(tmpObject.tmpUndefined));
+//
+//console.log(isPropertyExist1(tmpObject.tmpFalse));
+//console.log(isPropertyExist2(tmpObject.tmpFalse));
+//
+//console.log(isPropertyExist1(tmpObject.tmpEmpty));
+//console.log(isPropertyExist2(tmpObject.tmpEmpty));
+//
+//console.log(isPropertyExist1(tmpObject.tmpZero));
+//console.log(isPropertyExist2(tmpObject.tmpZero));
+
+
 console.log(__filename, 'DONE.');
