@@ -6,9 +6,11 @@
 var co = require('co');
 
 function timeDelay(waitTime) {
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
         setTimeout(function () {
-            resolve("Pause for " + waitTime);
+            waitTime >= 1000 ?
+                resolve("Pause for " + waitTime) :
+                reject('Wait time less than 1000ms');
         }, waitTime);
     });
 }
@@ -16,7 +18,7 @@ function timeDelay(waitTime) {
 co(function* () {
     var step1Ret = yield timeDelay(3000);
     console.log(step1Ret);
-    var step2Ret = yield timeDelay(1000);
+    var step2Ret = yield timeDelay(2000);
     console.log(step2Ret);
     var step3Ret = yield timeDelay(500);
     console.log(step3Ret);
@@ -25,7 +27,7 @@ co(function* () {
 }).then(function (value) {
     console.log(value);
 }, function (err) {
-    console.log(err.stack);
+    console.error(err);
 });
 
 console.log(__filename, 'DONE.');

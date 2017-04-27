@@ -28,7 +28,7 @@
 //console.log('promise demo.');
 
 
-// demo 02, promise, multiple then
+// demo 02, promise chain
 //function multiply(input) {
 //    return new Promise(function (resolve, reject) {
 //        console.log('calculating ' + input + ' * ' + input + '...');
@@ -39,18 +39,23 @@
 //function add(input) {
 //    return new Promise(function (resolve, reject) {
 //        console.log('calculating ' + input + ' + ' + input + '...');
-//        setTimeout(resolve, 500, input + input);
+//        setTimeout(resolve, 1000, input + input);
 //    });
 //}
 //
+//// promise
 //var p = new Promise(function (resolve, reject) {
 //    console.log('start new Promise...');
 //    resolve(2);
 //});
 //
 //p.then(multiply).then(add).then(multiply).then(add).then(function (result) {
-//   console.log('Got value: ' + result);
+//    console.log('Got value: ' + result);
+//}).catch(function (err) {
+//    console.error(err);
 //});
+//
+//console.log('promise chain demo.');
 
 
 // demo 03, promise

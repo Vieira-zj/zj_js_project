@@ -383,45 +383,61 @@
 //tmpArr1[8]();
 
 
-// demo 12, callback vs. generator
-//var timeDelay = function (ptime, callback) {
+// demo 12, sync by callback, generator and promise
+//var timeDelay = function (waitTime, callback) {
 //    setTimeout(function () {
-//        callback('Pausing for ' + ptime);
-//    }, ptime);
+//        callback('Pausing for ' + waitTime);
+//    }, waitTime);
 //};
 //
-//// sync by callbacks
-//timeDelay(1000, function (message) {
+//// 1. sync by callbacks: ok
+//timeDelay(3000, function (message) {
 //    console.log(message);
 //    timeDelay(2000, function (message) {
 //        console.log(message);
-//        timeDelay(3000, function (message) {
+//        timeDelay(1000, function (message) {
 //            console.log(message);
 //        });
 //    });
 //});
 //
-//// sync by generator
+//// 2. sync by generator, bad
 //function *Messages() {
-//    yield(timeDelay(1000, function (message) {
+//    yield(timeDelay(3000, function (message) {
 //        console.log(message);
 //    }));
 //    yield(timeDelay(2000, function (message) {
 //        console.log(message);
 //    }));
-//    return timeDelay(3000, function (message) {
+//    return timeDelay(1000, function (message) {
 //        console.log(message);
 //    });
 //}
 //
 //var messages = Messages();
-//while (true) {
-//    if (messages.next().done) {
-//        break;
-//    }
+//while (!messages.next().done) {
 //}
 //
-//console.log('callback vs. generator demo.');
+//// 3. sync by promise: ok
+//var promiseTimeDelay = function (waitTime) {
+//    return new Promise(function (resolve, reject) {
+//        setTimeout(function () {
+//            console.log('Pausing for', waitTime);
+//            waitTime -= 1000;
+//            waitTime >= 1000 ? resolve(waitTime) : reject('time < 1000ms');
+//        }, waitTime);
+//    })
+//};
+//
+//promiseTimeDelay(3000, 1)
+//    .then(promiseTimeDelay)
+//    .then(promiseTimeDelay)
+//    .then(promiseTimeDelay)
+//    .catch(function (err) {
+//        console.error('Error:', err);
+//    });
+//
+//console.log('sync demo.');
 
 
 console.log(__filename, 'DONE.');
