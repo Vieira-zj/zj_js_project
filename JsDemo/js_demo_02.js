@@ -236,7 +236,7 @@ if (isDemo0802Run) {
         }
 
         console.log('Iterator 2:');
-        for (var x of fib(10)) {
+        for (let x of fib(10)) {
             console.log(x);
         }
     })();
