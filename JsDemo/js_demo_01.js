@@ -271,19 +271,14 @@ if (isDemo11Run) {
 // demo 12, self run function
 var isDemo12Run = false;
 if (isDemo12Run) {
+    var x = 10,
+        y = 100;
     var tmpStr = ' add ';
-    (function (input) {
-        'use strict';
-        var x = 10,
-            y = 100;
-        console.log(x + input + y);
-    }(tmpStr));
 
     (function (input) {
-        var x = 10,
-            y = 100;
+        'use strict';
         console.log(x + input + y);
-    })(tmpStr);
+    }(tmpStr));
 }
 
 
