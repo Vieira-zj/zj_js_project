@@ -83,13 +83,17 @@ if (isUtilDemoRun) {
 
 
 // #4, url
-var isUrlDemoRun = true;
+// http://www.cnblogs.com/qiuzhimutou/p/4793231.html
+var isUrlDemoRun = false;
 if (isUrlDemoRun) {
     (function () {
         var url = require('url');
 
+        // url.parse()
         var testUrl = 'http://localhost:8888/select?aa=001&bb=002';
         var tmpParseUrl = url.parse(testUrl);
+
+        console.log(tmpParseUrl);
 
         console.log('href:', tmpParseUrl.href);
         console.log('protocol:', tmpParseUrl.protocol);
@@ -101,7 +105,27 @@ if (isUrlDemoRun) {
         console.log('Query string:', tmpParseUrl.query);
 
         console.log('Query object', url.parse(testUrl, true).query);
+
+        // url.resolve()
+        console.log(url.resolve('http://imooc.com/', '/course/list'));
+
+        // url.format()
+        var tmpUrlObj = { protocol: 'http:',
+            slashes: true,
+            auth: null,
+            host: 'www.imooc.com',
+            port: null,
+            hostname: 'www.imooc.com',
+            hash: null,
+            search: null,
+            query: null,
+            pathname: '/video/6710',
+            path: '/video/6710',
+            href: 'http://www.imooc.com/video/6710' };
+        console.log(url.format(tmpUrlObj));
     })();
 }
 
+
+console.log(__filename, 'Done!');
 // end

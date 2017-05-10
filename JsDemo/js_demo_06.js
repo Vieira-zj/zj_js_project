@@ -35,7 +35,7 @@ if (isDemo01Run) {
 
 
 // demo 02, check object property exist
-var isDemo02Run = true;
+var isDemo02Run = false;
 if (isDemo02Run) {
     (function demo02() {
         // match null, undefined, false, '' and 0
@@ -72,6 +72,18 @@ if (isDemo02Run) {
         console.log(isPropertyExist1(tmpObject.tmpZero));
         console.log(isPropertyExist2(tmpObject.tmpZero));
     })();
+}
+
+
+// demo 03, args
+var isDemo03Run = false;
+if (isDemo03Run) {
+    var tmpInputArgs = process.argv;
+    if (tmpInputArgs.length > 0) {
+        tmpInputArgs.forEach(function (val, idx) {
+            console.log(idx + ': ' + val);
+        });
+    }
 }
 
 
