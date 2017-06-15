@@ -87,4 +87,73 @@ if (isDemo03Run) {
 }
 
 
+// demo 04-01, arrays of fns
+var isDemo0401Run = false;
+if (isDemo0401Run) {
+    (function () {
+        var stack = [];
+
+        function fn1() {
+            console.log('fn1 invoked.');
+        }
+
+        stack.push(fn1);
+
+        function fn2() {
+            console.log('fn2 invoked.');
+        }
+
+        stack.push(fn2, function () {
+            console.log('fn3 invoked.');
+        });
+
+        stack.forEach(fn => fn());
+    })();
+}
+
+
+// demo 04-02, arrays of fns, sync
+var isDemo0402Run = true;
+if (isDemo0402Run) {
+    (function () {
+        var stack = [];
+        var index = 0;
+
+        function next() {
+            if (index > (stack.length - 1)) {
+                console.log('End of stack.');
+                return;
+            }
+
+            var fn = stack[index];
+            index = index + 1;
+            if (typeof fn === 'function') {
+                fn();
+            }
+        }
+
+        function fn1() {
+            console.log('fn1 invoked.');
+            next();
+        }
+
+        stack.push(fn1);
+
+        function fn2() {
+            setTimeout(function fn2Timeout() {
+                console.log('fn2Timeout invoked.');
+                next();
+            }, 1000);
+        }
+
+        stack.push(fn2, function () {
+            console.log('fn3 invoked.');
+            next();
+        });
+
+        next();
+    })();
+}
+
+
 console.log(__filename, 'DONE.');
