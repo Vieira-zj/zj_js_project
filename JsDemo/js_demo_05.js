@@ -211,7 +211,7 @@ if (isDemo0901Run) {
         function Thing() {
         }
 
-        Thing.prototype.foo = "bar";
+        Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             console.log(this.foo);
         };
@@ -226,11 +226,11 @@ if (isDemo0901Run) {
         thing1.logFoo(); //logs "bar"
         thing2.logFoo(); //logs "bar"
 
-        thing1.setFoo("foo");
+        thing1.setFoo('foo');
         thing1.logFoo(); //logs "foo";
         thing2.logFoo(); //logs "bar";
 
-        thing2.foo = "foobar";
+        thing2.foo = 'foobar';
         thing1.logFoo(); //logs "foo";
         thing2.logFoo(); //logs "foobar";
 
@@ -274,9 +274,9 @@ if (isDemo0903Run) {
         function Thing() {
         }
 
-        Thing.prototype.foo = "bar";
+        Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
-            var info = "attempting to log this.foo:";
+            var info = 'attempting to log this.foo:';
 
             function doIt() {
                 // "this" is not inherit from out_method
@@ -298,10 +298,10 @@ if (isDemo0904Run) {
         function Thing() {
         }
 
-        Thing.prototype.foo = "bar";
+        Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             var self = this;
-            var info = "attempting to log this.foo:";
+            var info = 'attempting to log this.foo:';
 
             function doIt() {
                 console.log(info, self.foo);
@@ -322,7 +322,7 @@ if (isDemo0905Run) {
         function Thing() {
         }
 
-        Thing.prototype.foo = "bar";
+        Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             console.log(this.foo);
         };
@@ -340,11 +340,11 @@ if (isDemo0905Run) {
 var isDemo0906Run = false;
 if (isDemo0906Run) {
     (function demo0906() {
-// #3, fix
+        // #3, fix
         function Thing() {
         }
 
-        Thing.prototype.foo = "bar";
+        Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             console.log(this.foo);
         };
@@ -364,7 +364,7 @@ if (isDemo0907Run) {
     (function demo0907() {
         // #4
         var tmpObj = {
-            foo: "bar"
+            foo: 'bar'
         };
 
         function logFoo() {
@@ -381,7 +381,7 @@ if (isDemo0908Run) {
     (function demo0908() {
         // #5
         var tmpObj = {
-            foo: "bar",
+            foo: 'bar',
             deeper: {
                 logFoo: function () {
                     console.log(this.foo);
@@ -397,7 +397,7 @@ if (isDemo0909Run) {
     (function demo0909() {
         // #5, fix
         var tmpObj = {
-            foo: "bar",
+            foo: 'bar',
             deeper: {
                 logFoo: function () {
                     console.log(tmpObj.foo);
@@ -442,7 +442,7 @@ if (isDemo0911Run) {
         };
 
         var thing = new Thing('fruit');
-        thing.logThings(["apples", "oranges", "strawberries", "bananas"]);
+        thing.logThings(['apples', 'oranges', 'strawberries', 'bananas']);
     })();
 }
 
@@ -557,7 +557,7 @@ if (isDemo1202Run) {
     })();
 }
 
-var isDemo1203Run = false;
+var isDemo1203Run = true;
 if (isDemo1203Run) {
     (function demo1203() {
         // #3, sync by promise: ok
@@ -571,7 +571,7 @@ if (isDemo1203Run) {
             })
         };
 
-        promiseTimeDelay(3000, 1)
+        promiseTimeDelay(3000)
             .then(promiseTimeDelay)
             .then(promiseTimeDelay)
             .then(promiseTimeDelay)

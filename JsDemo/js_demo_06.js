@@ -113,7 +113,7 @@ if (isDemo0401Run) {
 
 
 // demo 04-02, arrays of fns, sync
-var isDemo0402Run = true;
+var isDemo0402Run = false;
 if (isDemo0402Run) {
     (function () {
         var stack = [];

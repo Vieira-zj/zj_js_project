@@ -7,8 +7,15 @@
 var fs = require('fs');
 var cheerio = require('cheerio');
 
+
+const separatorLine = '---------------------------';
+
 var getTextOfDomObject = function (domObject) {
     return domObject.children[0].data;
+};
+
+var isJqueryObject = function (tmpObject) {
+    return Boolean(tmpObject.options);
 };
 
 var testFindById = function ($) {
@@ -17,16 +24,20 @@ var testFindById = function ($) {
 
     // jquery object => dom object
     var divDom = tmpDiv.get(0);
+    console.log('is jquery object:', isJqueryObject(divDom));
     console.log('text from dom object:', getTextOfDomObject(divDom));
 
     // dom object => jquery object
     var divJqObject = $(divDom);
-    console.log('text from jquery object', divJqObject.text());
+    console.log('is jquery object:', isJqueryObject(divJqObject));
+    console.log('text from jquery object:', divJqObject.text());
+    console.log(separatorLine);
 };
 
 var testFindByClass = function ($) {
     var tmpDiv = $('div.green');
     console.log('inner html:', tmpDiv.html());
+    console.log(separatorLine);
 };
 
 var testFindByLevels = function ($) {
@@ -44,6 +55,7 @@ var testFindByLevels = function ($) {
 
     var tmpLiPy = $('div#div_test2>ul.lang>li:nth-child(2)');
     console.log('child text at position 2:', tmpLiPy.text());
+    console.log(separatorLine);
 };
 
 var testFindFromJqObject = function ($) {
@@ -51,20 +63,21 @@ var testFindFromJqObject = function ($) {
 
     // find()
     var swf = tmpLangUl.find('#swift');
-    console.log('language text:', swf.text());
+    console.log('by id, language text:', swf.text());
 
     var hsk = tmpLangUl.find('[name=haskell]');
-    console.log('language text:', hsk.text());
+    console.log('by name, language text:', hsk.text());
 
     // parent()
     var js = hsk.parent().find('.js');
-    console.log('language text:', js.text());
+    console.log('from parent, language text:', js.text());
 
     // next() and prev()
     var sch = swf.next();
-    console.log('language text:', sch.text());
+    console.log('by next, language text:', sch.text());
     var py = swf.prev();
-    console.log('language text:', py.text());
+    console.log('by prev, language text:', py.text());
+    console.log(separatorLine);
 };
 
 var testIteratorForJqArrays = function ($) {
@@ -87,6 +100,7 @@ var testIteratorForJqArrays = function ($) {
     tmpLangLis.each(function (idx, element) {
         console.log('language:', $(element).text(), 'at position:', idx);
     });
+    console.log(separatorLine);
 };
 
 var testFilterForJqArray = function ($) {
@@ -96,25 +110,28 @@ var testFilterForJqArray = function ($) {
     var swf = tmpLangLis.filter('#swift');
     console.log('language swift:', swf.text());
 
-    var tmpLangs = tmpLangLis.filter(function () {
+    var tmpLanguages = tmpLangLis.filter(function () {
         return getTextOfDomObject(this).indexOf('S') === 0;
     });
-    console.log('language start with S at 1st:', tmpLangs.first().text());
-    console.log('language start with S at 2nd:', getTextOfDomObject(tmpLangs.get(1)));
+    console.log('language start with S at 1st:', tmpLanguages.first().text());
+    console.log('language start with S at 2nd:', getTextOfDomObject(tmpLanguages.get(1)));
 
     // map
     var tmpArr = tmpLangLis.map(function () {
         return $(this).text();
     }).get();
     console.log('Languages:', tmpArr);
+    console.log(separatorLine);
 };
 
 var testGetJqObjectAttrVal = function ($) {
-    var tmpLangs = $('div#div_test3>ul>li');
-    var tmpLang = tmpLangs.filter(function () {
-        return getTextOfDomObject(this) === 'Haskell';
+    var tmpLanguages = $('div#div_test3>ul>li');
+    var tmpLang = tmpLanguages.filter(function () {
+        return $(this).text() === 'Haskell';
     });
+    console.log('is jquery object:', isJqueryObject(tmpLang));
     console.log('Haskell name attribute value:', tmpLang.attr('name'));
+    console.log(separatorLine);
 };
 
 
