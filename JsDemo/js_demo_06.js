@@ -156,4 +156,99 @@ if (isDemo0402Run) {
 }
 
 
+// demo 05, define private var
+var isDemo05Run = false;
+if (isDemo05Run) {
+    (function () {
+        function Product(value, price) {
+            var name = value;
+            this.price = price;
+            this.setName = function (value) {
+                name = value;
+            };
+            this.getName = function () {
+                return name;
+            };
+        }
+
+        var p = new Product();
+        p.setName('FundBug');
+        p.price = 100;
+
+        console.log(p.name);
+        console.log(p.price);
+        console.log(p.getName());
+    })();
+}
+
+
+// demo 06, script as module
+var isDemo06Run = false;
+if (isDemo06Run) {
+    var module = (function () {
+        var N = 5;  // as private var
+
+        function print(x) {  // as private method
+            console.log('The result is:', x);
+        }
+
+        function add(a) {  // as public method
+            var x = a + N;
+            print(x);
+        }
+
+        return {
+            desc: 'This is description',  // as public var
+            add: add
+        };
+    })();
+
+    console.log(module.desc);
+    module.add(5);
+}
+
+
+// demo 07, call and apply
+var isDemo07Run = false;
+if (isDemo07Run) {
+    (function () {
+        var user = {
+            greet: 'Hello!',
+            greetUser: function (userName) {
+                console.log(this.greet, userName);
+            }
+        };
+
+        var greet1 = {
+            greet: 'Hola'
+        };
+
+        user.greetUser.call(greet1, 'Raul');
+        user.greetUser.apply(greet1, ['Raul']);
+    })();
+}
+
+
+// demo 08
+// built-in arguments: args when function is invoked
+// fn.length: args when function is defined
+var isDemo08Run = false;
+if (isDemo08Run) {
+    function argTest(arg1, arg2) {  // define with 2 args
+        console.log('outer args:', arguments);
+        console.log(arg1, arg2);
+
+        return function () {  // define without args
+            console.log('inner args:', arguments);
+        }
+    }
+
+    fn = argTest('test_arg1', 'test_arg2', 'test_arg3');  // pass 3 args
+    fn('test_arg4');  // pass 1 arg
+
+    console.log(argTest.length);  // 2
+    console.log(fn.length);  // 0
+}
+
+
 console.log(__filename, 'DONE.');
