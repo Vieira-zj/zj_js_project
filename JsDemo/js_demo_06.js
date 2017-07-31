@@ -161,7 +161,7 @@ var isDemo05Run = false;
 if (isDemo05Run) {
     (function () {
         function Product(value, price) {
-            var name = value;
+            var name = value;  // private
             this.price = price;
             this.setName = function (value) {
                 name = value;
@@ -209,8 +209,8 @@ if (isDemo06Run) {
 
 
 // demo 07, call and apply
-var isDemo07Run = false;
-if (isDemo07Run) {
+var isDemo0701Run = false;
+if (isDemo0701Run) {
     (function () {
         var user = {
             greet: 'Hello!',
@@ -228,9 +228,25 @@ if (isDemo07Run) {
     })();
 }
 
+var isDemo0702Run = false;
+if (isDemo0702Run) {
+    (function () {
+        var myPrints = function (v1, v2, v3) {
+            console.log('value1=' + v1, 'value2=' + v2, 'value3=' + v3);
+        };
+
+        // individual arguments
+        myPrints.call(this, 'test1', 'test2', 'test3');
+
+        // pass array of values
+        var values = ['test1', 'test2', 'test3'];
+        myPrints.apply(this, values)
+    })();
+}
+
 
 // demo 08
-// built-in arguments: args when function is invoked
+// built-in "arguments": args when function is invoked
 // fn.length: args when function is defined
 var isDemo08Run = false;
 if (isDemo08Run) {
