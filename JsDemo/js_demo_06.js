@@ -267,4 +267,14 @@ if (isDemo08Run) {
 }
 
 
+// demo 09, var in output string
+var isDemo09Run = false;
+if (isDemo09Run) {
+    (function () {
+        var user_name = 'zheng jin';
+        console.log(`hello world, ${user_name}`);
+    })();
+}
+
+
 console.log(__filename, 'DONE.');
