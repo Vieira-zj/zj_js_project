@@ -11,8 +11,9 @@
  * "npm i istanbul -g", run command "istanbul cover _mocha" to get the code coverage.
  *
  * Run command:
- * 1)Global: mocha  # run test cases in /test default.
- * 2)Local with opts: .\node_modules\.bin\mocha --opts .\test\mocha.opts
+ * 1) Global: mocha  # run test cases in .\test default.
+ * 2) Local with opts: .\node_modules\.bin\mocha --opts .\test\mocha.opts
+ * Note: bin file at .\node_modules\.bin\ but NOT .\node_modules\mocha\bin\
  *
  * Options:
  * -s, slow
