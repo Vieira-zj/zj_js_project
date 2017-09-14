@@ -378,4 +378,37 @@ if (isDemo12Run) {
 }
 
 
+// demo 14, js code style for es6
+var isDemo14Run = false;
+if (isDemo14Run) {
+    (function () {
+        // #1, object shorthand
+        let title = 'test:';
+        const tmpObj = {
+            title,  // title: title
+            desc: 'create object shorthand',
+            myPrint() {  // myPrint: function() {...}
+                console.log(title, this.desc);
+            }
+        };
+        tmpObj.myPrint();
+
+        // #2, de-construct
+        let tmpObj1 = {
+            top: 0,
+            bottom: 1080,
+            left: 0,
+            right: 1920
+        };
+        const { right, bottom } = tmpObj1;
+        console.log(`\nscreen size: ${right} * ${bottom}`);
+
+        // #3, array copy
+        let tmpArr = ['java', 'python', 'javascript', 'c++'];
+        let copyArr = [...tmpArr];
+        console.log('\narray copy: ' + copyArr.join(', '));
+    })();
+}
+
+
 console.log(__filename, 'DONE.');
