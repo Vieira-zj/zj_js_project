@@ -294,11 +294,11 @@ if (isDemo10Run) {
 
 
 // demo 11, Object build-in methods
-var isDemo13Run = false;
-if (isDemo13Run) {
+var isDemo11Run = false;
+if (isDemo11Run) {
     (function () {
         // #1
-        console.log('fn Object.is(): ', Object.is('test', 'test'));
+        console.log('fn Object.is():', Object.is('test', 'test'));
 
         // #2
         var tmpObj1 = {name: 'kong', age: 18, func: function () {
@@ -325,18 +325,49 @@ if (isDemo13Run) {
 
         // #4
         console.log('\nfn Object.hasOwnProperty:');
-        var s = new String('abc');
-        console.log(s.hasOwnProperty('split'));
-        console.log(s.__proto__.hasOwnProperty('split'));
+        var tmpStr = new String('abc');
+        console.log(tmpStr.hasOwnProperty('split'));
+        console.log(tmpStr.__proto__.hasOwnProperty('split'));
+
+        // #5, prototype chain and hasOwnProperty()
+        function SuperType() {
+            this.type = 'super type';
+        }
+
+        SuperType.prototype.toString = function () {
+            console.log('type:', this.type);
+        };
+        SuperType.sayHello = function () {
+            console.log('hello, world');
+        };
+
+        function SubType() {
+            this.type = 'sub type';
+        }
+
+        SubType.prototype = new SuperType();
+
+        var t = new SubType();
+        console.log('\nfn Object.hasOwnProperty:');
+        console.log(t.hasOwnProperty('toString'));
+        console.log(t.__proto__.hasOwnProperty('sayHello'));
+        console.log(t.__proto__.constructor.hasOwnProperty('sayHello'));
+        console.log(t.__proto__.constructor.prototype.hasOwnProperty('toString'));
     })();
 }
 
 
 // demo 12, Object.assign()
-var isDemo11Run = false;
-if (isDemo11Run) {
+var isDemo12Run = false;
+if (isDemo12Run) {
     (function () {
-        var tmpObj1 = {firstName: 'zheng', lastName: 'jin'};
+        var id = Symbol('id');
+        var tmpObj1 = {firstName: 'zheng', lastName: 'jin', [id]: 'WH'};
+        Object.defineProperty(tmpObj1, 'age', {
+            value: 30,
+            enumerable: false
+        });
+
         var copy = Object.assign({}, tmpObj1);
         console.log('Object copy:\n', JSON.stringify(copy, null, '  '));
 
@@ -348,8 +379,8 @@ if (isDemo11Run) {
 
 
 // demo 13, enumerable property, only be defined by Object.defineProperty()
-var isDemo12Run = false;
-if (isDemo12Run) {
+var isDemo13Run = false;
+if (isDemo13Run) {
     (function () {
         function Person() {
             this.name = 'zhengjin';
@@ -367,9 +398,9 @@ if (isDemo12Run) {
         console.log('sex property enumerable:', p.propertyIsEnumerable('sex'));
 
         console.log('\niterator:');
-        for (var attr in p) {
-            if (p.hasOwnProperty(attr)) {
-                console.log('p.' + attr + ' = ' + p[attr]);
+        for (var key in p) {
+            if (p.hasOwnProperty(key)) {
+                console.log('p.' + key + ' = ' + p[key]);
             }
         }
         console.log('\nObject.keys:\n' + Object.keys(p));
@@ -378,9 +409,42 @@ if (isDemo12Run) {
 }
 
 
-// demo 14, js code style for es6
+// demo 14, Symbol
 var isDemo14Run = false;
 if (isDemo14Run) {
+    (function () {
+        var id1 = Symbol('id');
+        var id2 = Symbol('id');
+        console.log(id1);
+        console.log(typeof id1);
+        console.log('Symbol with same value equals:', (id1 === id2));
+
+        // set key as symbol
+        var person = {
+            name: 'zheng jin',
+            [id1]: 'WH'
+        };
+        person[id2] = 'SH';
+
+        // get symbol
+        console.log('\nPerson name:', person['name']);
+        console.log(`Person ids: id1=${person[id1]}, id2=${person[id2]}`);
+
+        // iterator on symbol key
+        console.log('\nGet person properties:');
+        for (var key in person) {
+            if (person.hasOwnProperty(key)) {
+                console.log(key);
+            }
+        }
+        console.log('Get person keys:', Object.keys(person));
+    })();
+}
+
+
+// demo 15, js code style for es6
+var isDemo15Run = false;
+if (isDemo15Run) {
     (function () {
         // #1, object shorthand
         let title = 'test:';
