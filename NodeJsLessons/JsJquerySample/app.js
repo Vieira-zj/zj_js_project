@@ -40,6 +40,12 @@ var testFindByClass = function ($) {
     console.log(separatorLine);
 };
 
+var testFindByProperty = function ($) {
+    var tmpLang = $('div#div_test3 li[name=haskell]');
+    console.log('css selector by property name:', tmpLang.text());
+    console.log(separatorLine);
+};
+
 var testFindByLevels = function ($) {
     // parent => children
     var tmpLiJs1 = $('div#div_test2 li.lang-javascript');
@@ -142,6 +148,7 @@ if (require.main === module) {
 
     testFindById($);
     testFindByClass($);
+    testFindByProperty($);
     testFindByLevels($);
     testFindFromJqObject($);
     testIteratorForJqArrays($);

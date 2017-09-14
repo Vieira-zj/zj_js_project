@@ -271,8 +271,109 @@ if (isDemo08Run) {
 var isDemo09Run = false;
 if (isDemo09Run) {
     (function () {
-        var user_name = 'zheng jin';
-        console.log(`hello world, ${user_name}`);
+        var userName = 'zheng jin';
+        console.log(`hello world, ${userName}`);
+    })();
+}
+
+
+// demo 10, boolean convert
+var isDemo10Run = false;
+if (isDemo10Run) {
+    (function () {
+        var strTrue = 'True';
+        console.log(Boolean(strTrue) ? 'pass' : 'fail');  // always pass
+        console.log((strTrue.toLowerCase() === 'true') ? 'pass' : 'fail');
+
+        var tmpInt = 1;
+        console.log('source value:', tmpInt++);
+        console.log('increase:', tmpInt);
+        console.log('increase:', ++tmpInt);
+    })();
+}
+
+
+// demo 11, Object build-in methods
+var isDemo13Run = false;
+if (isDemo13Run) {
+    (function () {
+        // #1
+        console.log('fn Object.is(): ', Object.is('test', 'test'));
+
+        // #2
+        var tmpObj1 = {name: 'kong', age: 18, func: function () {
+        }};
+        console.log('\nfn Object.keys():', Object.keys(tmpObj1));
+
+        // #3
+        var tmpObj2 = {};
+        Object.defineProperty(tmpObj2, 'name', {
+            value: 'zheng jin',
+            enumerable: true
+        });
+        Object.defineProperties(tmpObj2, {
+            age: {
+                value: 30,
+                enumerable: true
+            },
+            job: {
+                value: 'tester',
+                enumerable: false
+            }
+        });
+        console.log('\nfn Object.defineProperties():\n', JSON.stringify(tmpObj2, null, '  '));
+
+        // #4
+        console.log('\nfn Object.hasOwnProperty:');
+        var s = new String('abc');
+        console.log(s.hasOwnProperty('split'));
+        console.log(s.__proto__.hasOwnProperty('split'));
+    })();
+}
+
+
+// demo 12, Object.assign()
+var isDemo11Run = false;
+if (isDemo11Run) {
+    (function () {
+        var tmpObj1 = {firstName: 'zheng', lastName: 'jin'};
+        var copy = Object.assign({}, tmpObj1);
+        console.log('Object copy:\n', JSON.stringify(copy, null, '  '));
+
+        var tmpObj2 = {score: 91, skills: ['Java', 'Python', 'JS']};
+        var merge = Object.assign({}, tmpObj1, tmpObj2);
+        console.log('\nObject merge:\n', JSON.stringify(merge, null, '  '));
+    })();
+}
+
+
+// demo 13, enumerable property, only be defined by Object.defineProperty()
+var isDemo12Run = false;
+if (isDemo12Run) {
+    (function () {
+        function Person() {
+            this.name = 'zhengjin';
+        }
+
+        Person.prototype = {
+            constructor: Person,
+            job: 'tester'
+        };
+
+        var p = new Person();
+        Object.defineProperty(p, 'sex', {value: 'male', enumerable: false});
+        console.log(`person sex: ${p.sex}`);
+        console.log('name property enumerable:', p.propertyIsEnumerable('name'));
+        console.log('sex property enumerable:', p.propertyIsEnumerable('sex'));
+
+        console.log('\niterator:');
+        for (var attr in p) {
+            if (p.hasOwnProperty(attr)) {
+                console.log('p.' + attr + ' = ' + p[attr]);
+            }
+        }
+        console.log('\nObject.keys:\n' + Object.keys(p));
+        console.log('\nJSON string:\n' + JSON.stringify(p, null, '  '));
     })();
 }
 
