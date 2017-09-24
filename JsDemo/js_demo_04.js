@@ -428,7 +428,7 @@ if (isDemo16Run) {
 
 
 // demo 17, "this" in "=>function"
-var isDemo17Run = true;
+var isDemo17Run = false;
 if (isDemo17Run) {
     (function demo17() {
         var tmpObj = {

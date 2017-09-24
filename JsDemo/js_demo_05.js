@@ -38,13 +38,13 @@ if (isDemo01Run) {
 }
 
 
-// demo 02, iterator, for in, for of and forEach
+// demo 02, iterator: for in, for of and forEach
 var isDemo02Run = false;
 if (isDemo02Run) {
     (function demo02() {
         var tmpArr1 = ['a', 'b', 'c'];
         tmpArr1.name = 'tmp array1';
-        for (let attr in tmpArr1) {  // for attribute (array index)
+        for (let attr in tmpArr1) { // for attribute (array index)
             if (tmpArr1.hasOwnProperty(attr)) {
                 console.log('for in, element:', tmpArr1[attr]);
             }
@@ -52,12 +52,12 @@ if (isDemo02Run) {
 
         var tmpArr2 = ['m', 'n', 'p'];
         tmpArr2.name = 'tmp array2';
-        for (let attr of tmpArr2) {  // for element
+        for (let attr of tmpArr2) { // for element
             console.log('for of, tmpArr element:', attr);
         }
 
         var tmpArr3 = ['x', 'y', 'z'];
-        tmpArr3.forEach(function (element, idx) {  // for index and element
+        tmpArr3.forEach(function (element, idx) { // for index and element
             console.log('Foreach, element:', element, 'at index:', idx);
         });
     })();
@@ -110,11 +110,11 @@ if (isDemo0402Run) {
                 var fn = function (year) {
                     return year - this.birth;
                 };
-                return fn.call({birth: 2000}, year);
+                return fn.call({birth: 2000}, year); // this.birth = 2000
             },
             getAgeArrow: function (year) {
                 var fn = (y) => y - this.birth;
-                return fn.call({birth: 2000}, year);
+                return fn.call({birth: 2000}, year); // this.birth = 1990
             }
         };
 
@@ -160,13 +160,15 @@ var isDemo07Run = false;
 if (isDemo07Run) {
     (function demo07() {
         var tmpStr = 'test';
-        console.log(typeof(tmpStr) === 'string');
+        console.log(typeof tmpStr === 'string');
 
         var tmpNumber = 1;
         console.log(typeof tmpNumber === 'number');
 
         var tmpBool = false;
         console.log(typeof tmpBool === 'boolean');
+
+        console.log(typeof {name: 'test'} === 'object');
     })();
 }
 
@@ -207,7 +209,7 @@ if (isDemo08Run) {
 var isDemo0901Run = false;
 if (isDemo0901Run) {
     (function demo0901() {
-        // #1
+        // #1.1
         function Thing() {
         }
 
@@ -216,23 +218,25 @@ if (isDemo0901Run) {
             console.log(this.foo);
         };
         Thing.prototype.setFoo = function (newFoo) {
-            this.foo = newFoo;  // this => instance
+            this.foo = newFoo; // this => instance
 //            this.__proto__.foo = newFoo;
         };
 
         var thing1 = new Thing();
         var thing2 = new Thing();
 
-        thing1.logFoo(); //logs "bar"
-        thing2.logFoo(); //logs "bar"
+        thing1.logFoo(); // logs "bar"
+        thing2.logFoo(); // logs "bar"
 
+        // set new property foo with value 'foo'
         thing1.setFoo('foo');
-        thing1.logFoo(); //logs "foo";
-        thing2.logFoo(); //logs "bar";
+        thing1.logFoo(); // logs "foo";
+        thing2.logFoo(); // logs "bar";
 
+        // set new property foo with value 'foobar'
         thing2.foo = 'foobar';
-        thing1.logFoo(); //logs "foo";
-        thing2.logFoo(); //logs "foobar";
+        thing1.logFoo(); // logs "foo";
+        thing2.logFoo(); // logs "foobar";
 
         console.log(thing1.__proto__.foo);
         console.log(thing2.__proto__.foo);
@@ -242,7 +246,7 @@ if (isDemo0901Run) {
 var isDemo0902Run = false;
 if (isDemo0902Run) {
     (function demo0902() {
-        // #1.1
+        // #1.2
         function Thing1() {
             this.foo = 'foo'
         }
@@ -259,11 +263,14 @@ if (isDemo0902Run) {
         Thing2.prototype = new Thing1();
 
         var thing = new Thing2();
-        //logFoo() is bind thing (Thing2)
+        // logFoo() is bind thing (Thing2)
         thing.logFoo(); // foobar
         console.log(thing.__proto__ instanceof Thing1);
         console.log(thing.__proto__.foo);  // foo
-        console.log(thing.__proto__.__proto__.foo);  // bar
+
+        var superPrototype = thing.__proto__.__proto__;
+        console.log(superPrototype.constructor.name);  // fn: Thing1
+        console.log(superPrototype.foo);  // bar
     })();
 }
 
@@ -279,7 +286,7 @@ if (isDemo0903Run) {
             var info = 'attempting to log this.foo:';
 
             function doIt() {
-                // "this" is not inherit from out_method
+                // keyword "this" is not inherit from out_method
                 console.log(info, this.foo);
             }
 
@@ -287,7 +294,7 @@ if (isDemo0903Run) {
         };
 
         var thing = new Thing();
-        thing.logFoo();  //logs "attempting to log this.foo: undefined"
+        thing.logFoo(); // logs "attempting to log this.foo: undefined"
     })();
 }
 
@@ -300,8 +307,9 @@ if (isDemo0904Run) {
 
         Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
-            var self = this;
             var info = 'attempting to log this.foo:';
+
+            var self = this;
 
             function doIt() {
                 console.log(info, self.foo);
@@ -311,7 +319,7 @@ if (isDemo0904Run) {
         };
 
         var thing = new Thing();
-        thing.logFoo();  //logs "attempting to log this.foo: bar"
+        thing.logFoo(); // logs "attempting to log this.foo: bar"
     })();
 }
 
@@ -332,8 +340,8 @@ if (isDemo0905Run) {
         }
 
         var thing = new Thing();
-        thing.logFoo();  //logs "bar"
-        doIt(thing.logFoo);  //logs undefined
+        thing.logFoo(); // logs "bar"
+        doIt(thing.logFoo); // logs undefined
     })();
 }
 
@@ -355,7 +363,7 @@ if (isDemo0906Run) {
 
         var thing = new Thing();
         thing.logFoo();
-        doIt(thing.logFoo.bind(thing)); //logs bar
+        doIt(thing.logFoo.bind(thing)); // logs bar
     })();
 }
 
@@ -420,7 +428,7 @@ if (isDemo0910Run) {
             console.log('handle event.');
         };
 
-        var thing = new Thing();
+        var thing = new Thing(); // logs
         console.dir(thing);
     })();
 }
@@ -433,12 +441,12 @@ if (isDemo0911Run) {
             this.type = type;
         }
 
-        Thing.prototype.log = function (thing) {
-            console.log(this.type, thing);
+        Thing.prototype.log = function (strThingValue) {
+            console.log(`${this.type}: ${strThingValue}`);
         };
-        Thing.prototype.logThings = function (arr) {
-//            arr.forEach(this.log.bind(this));
-            arr.forEach(this.log, this);  // bind context
+        Thing.prototype.logThings = function (arrThings) {
+//            arrThings.forEach(this.log.bind(this));
+            arrThings.forEach(this.log, this); // bind context
         };
 
         var thing = new Thing('fruit');
@@ -463,28 +471,18 @@ if (isDemo10Run) {
         console.log('sub instanceof Sub:', sub instanceof Sub);
         console.log('sub instanceof Super:', sub instanceof Super);
 
-        console.log(sub.constructor);  // access constructor of prototype_object
-        console.log(sub.__proto__.constructor);
+        console.log(sub.constructor); // Super
+        console.log(sub.__proto__.constructor); // Super
 
         //sub.constructor = Sub;  // reset constructor to point to self
-        console.log('sub.constructor === Sub:', sub.constructor === Sub);  // false
-        console.log('sub.constructor === Super:', sub.constructor === Super);  // true
+        console.log('sub.constructor === Sub:', sub.constructor === Sub); // false
+        console.log('sub.constructor === Super:', sub.constructor === Super); // true
 
         console.log(sub.__proto__.__proto__ === Super.prototype);
         console.log('Super.prototype.constructor === Super:', Super.prototype.constructor === Super);
 
         console.log('Sub.prototype instanceof Super:', Sub.prototype instanceof Super);
-
-
-        const subPrototypeObject = Sub.prototype;
-        console.log(subPrototypeObject);
-        console.log('Sub attributes:');
-        console.dir(subPrototypeObject);
-
-        const superPrototypeObject = Super.prototype;
-        console.log(superPrototypeObject);
-        console.log('Super attributes:');
-        console.dir(superPrototypeObject);
+        console.log('Super.prototype instanceof Object:', Super.prototype instanceof Object);
     })();
 }
 
@@ -499,7 +497,7 @@ if (isDemo11Run) {
                 console.log(i);
             }
         }
-        tmpArr[8]();
+        tmpArr[8](); // 10
 
         var tmpArr1 = [];
         for (let m = 0; m < 10; m++) {
@@ -507,7 +505,7 @@ if (isDemo11Run) {
                 console.log(m);
             }
         }
-        tmpArr1[8]();
+        tmpArr1[8](); // 8
     })();
 }
 
@@ -538,7 +536,7 @@ if (isDemo1201Run) {
 var isDemo1202Run = false;
 if (isDemo1202Run) {
     (function demo1202() {
-        // #2, sync by generator, bad
+        // #2, sync by generator, failed
         function *Messages() {
             yield(timeDelay(3000, function (message) {
                 console.log(message);
@@ -557,7 +555,7 @@ if (isDemo1202Run) {
     })();
 }
 
-var isDemo1203Run = true;
+var isDemo1203Run = false;
 if (isDemo1203Run) {
     (function demo1203() {
         // #3, sync by promise: ok
