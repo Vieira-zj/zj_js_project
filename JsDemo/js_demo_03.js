@@ -345,7 +345,7 @@ if (isDemo1003Run) {
 }
 
 
-// demo 11, array elements unique
+// demo 11, array elements distinct
 var tmpDuplicatedArr = [1, 2, 3, 4, 5, 3, 2];
 
 var isDemo1101Run = false;

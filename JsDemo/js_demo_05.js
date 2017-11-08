@@ -155,20 +155,37 @@ if (isDemo06Run) {
 }
 
 
-// demo 07, typeof
+// demo 07, typeof and instanceof
 var isDemo07Run = false;
 if (isDemo07Run) {
     (function demo07() {
         var tmpStr = 'test';
+        console.log('is String:');
         console.log(typeof tmpStr === 'string');
+        console.log(tmpStr instanceof String); // false
 
         var tmpNumber = 1;
+        console.log('is Number:');
         console.log(typeof tmpNumber === 'number');
 
         var tmpBool = false;
+        console.log('is Boolean:');
         console.log(typeof tmpBool === 'boolean');
 
-        console.log(typeof {name: 'test'} === 'object');
+        var tmpArr = ['a', 'b', 'c'];
+        console.log('is Array:');
+        console.log(typeof tmpArr === 'object'); // true
+        console.log(tmpArr instanceof Array);
+
+        var tmpObject = {name: 'test'};
+        console.log('is Object:');
+        console.log(typeof tmpObject === 'object');
+        console.log(tmpObject instanceof Object);
+
+        var tmpFn = () => console.log('hello world');
+        console.log('is Function:');
+        console.log(typeof tmpFn === 'function');
+        console.log(tmpFn instanceof Function);
     })();
 }
 
