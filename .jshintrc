@@ -1,7 +1,6 @@
 {
     "esversion": 6,
     "indent": true,
-    "quotmark": true,
     "asi": true,
     "boss": true
 }
