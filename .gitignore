@@ -4,9 +4,14 @@ out/
 *.iml
 
 # local external modules
+node_modules/
 NodeJsLessons/*/node_modules/
 WeatherApiTest/node_modules/
 MockApiProject/node_modules/
 SocketDemo/node_modules/
+
+# vue
+VueDemo/build/
+VueDemo/node_modules/
 
 #.gitignore

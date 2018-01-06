@@ -1,7 +1,7 @@
 /**
  * Created by zhengjin on 2017/2/28.
  *
- * A socket demo.
+ * A web socket demo.
  */
 var fs = require('fs');
 var url = require('url');
