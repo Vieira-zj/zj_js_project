@@ -474,5 +474,29 @@ if (isDemo15Run) {
     })();
 }
 
+// demo 16, fn in object
+var isDemo16Run = false;
+if (isDemo16Run) {
+    (function () {
+        obj = {
+            id: 'test id',
+            retFn1: function() {
+                return 'ret string from retFn1';
+            },
+            retFn2: () => {
+                return 'ret string from retFn2';
+            },
+            'retFn3' (){
+                return 'ret string from retFn3';
+            },
+        };
+
+        console.log(obj.id);
+        console.log(obj.retFn1());
+        console.log(obj.retFn2());
+        console.log(obj.retFn3());
+    })();
+}
+
 
 console.log(__filename, 'DONE.');

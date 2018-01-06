@@ -46,7 +46,7 @@ if (isDemo02Run) {
                     }
                     resolve(input * input);
                 }, 500);
-            })
+            });
         }
 
         function add(input) {
@@ -238,7 +238,7 @@ if (isDemo09Run) {
             // yield fn instead of expression
             yield function (callback) {
                 console.log(callback.toString());
-            }
+            };
         }
 
         var result = fn();
@@ -268,9 +268,9 @@ if (isDemo1001Run) {
             timeDelay(1000, function (message) {
                 console.log(message);
                 timeDelay(500, function (message) {
-                    console.log(message)
-                })
-            })
+                    console.log(message);
+                });
+            });
         });
     })();
 }
@@ -338,8 +338,8 @@ if (isDemo1003Run) {
                 var step2 = result.next(res);
                 step2.value(function (res) {
                     result.next(res);
-                })
-            })
+                });
+            });
         });
     })();
 }

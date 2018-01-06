@@ -6,19 +6,21 @@
 // demo 01, closure
 var isDemo01Run = false;
 if (isDemo01Run) {
-    function count() {
-        var c = 0;
-
-        function add() {
-            return ++c;
+    (function() {
+        function count() {
+            var c = 0;
+    
+            function add() {
+                return ++c;
+            }
+    
+            return add;
         }
-
-        return add;
-    }
-
-    var ct = count();
-    console.log(ct());  // 1
-    console.log(ct());  // 2
+    
+        var ct = count();
+        console.log(ct());  // 1
+        console.log(ct());  // 2
+    })();
 }
 
 
@@ -349,7 +351,7 @@ if (isDemo15Run) {
 
         console.log(tmpArr.reduce((x, y) => x + y));
         console.log(tmpArr.reduce((x, y) => {
-            return x + y
+            return x + y;
         }));
 
         var helloMeg = (message) => {
