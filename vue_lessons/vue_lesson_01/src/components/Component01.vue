@@ -17,7 +17,7 @@ export default {
   data () {
     return {
       message1: 'My hello world vue.js!',
-      message2: 'Send http get request.'
+      message2: 'Send http get request'
     }
   },
   methods: {
