@@ -1,7 +1,13 @@
 <template>
   <div id="component-01">
     <h1>My First Component</h1>
-    <span>{{ message }}</span>
+    <span>{{ message1 }}</span>
+    <br/>
+    <button v-on:click="myEchoMessage">Echo message</button>
+    <br/>
+    <span>{{ message2 }}</span>
+    <br/>
+    <button v-on:click="myHttpGet">Send get</button>
   </div>
 </template>
 
@@ -10,7 +16,20 @@ export default {
   name: 'Component01',
   data () {
     return {
-      message: 'My hello world vue.js!'
+      message1: 'My hello world vue.js!',
+      message2: 'Send http get request.'
+    }
+  },
+  methods: {
+    myEchoMessage: function () {
+      console.log(this.message1)
+    },
+    myHttpGet: function () {
+      this.$http.get('').then(response => {
+        console.log(response.status)
+      }, response => {
+        console.log(response.status)
+      })
     }
   }
 }

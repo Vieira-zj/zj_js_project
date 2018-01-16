@@ -11,9 +11,9 @@ weather_api_test/node_modules/
 web_socket_demo/node_modules/
 
 # vue
-vue_demos/*/build/
+#vue_demos/*/build/
 vue_demos/*/node_modules/
-vue_lessons/*/build/
+#vue_lessons/*/build/
 vue_lessons/*/node_modules/
 
 #.gitignore
