@@ -25,11 +25,11 @@ export default {
       console.log(this.message1)
     },
     myHttpGet: function () {
-      this.$http.get('').then(response => {
-        console.log(response.status)
-      }, response => {
-        console.log(response.status)
-      })
+      // this.$http.get('').then(response => {
+      //   console.log(response.status)
+      // }, response => {
+      //   console.log(response.status)
+      // })
     }
   }
 }
