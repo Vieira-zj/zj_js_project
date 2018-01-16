@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LessonOne from '../components/LessonOne'
+import LessonOne from '@/components/LessonOne'
 
 export default {
   name: 'App2',
