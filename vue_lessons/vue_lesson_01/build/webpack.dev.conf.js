@@ -10,6 +10,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+const express = require('express')
+const app = express()
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -22,6 +25,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    before(){
+      app.get('/api1', (req, res) => {
+        res.json({code: 200, data: {msg: 'ok'}})
+      })
+      app.listen(8081, function () {
+        console.log('api server init.')
+      })
+    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
