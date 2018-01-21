@@ -8,5 +8,11 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router
+  router,
+  created: function () {
+    console.log('hook: vue instance created.')
+  },
+  updated: function () {
+    console.log('hook: virtual DOM re-render and patch.')
+  }
 })
