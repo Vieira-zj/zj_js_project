@@ -25,11 +25,13 @@ export default {
       console.log(this.message1)
     },
     myHttpGet: function () {
-      this.$http.get('http://localhost:8080/api/api1').then(response => {
-        console.log(response.status)
-        this.message2 = response.data
-      }).catch(function (err) {
-        console.error(err)
+      this.$http.get('http://localhost:8080/api/api1')
+        .then(response => {
+          console.log(response.status)
+          this.message2 = response.data
+        })
+        .catch(function (err) {
+          console.error(err)
       })
     }
   }
