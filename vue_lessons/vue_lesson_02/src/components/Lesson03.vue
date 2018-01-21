@@ -1,5 +1,5 @@
 <template>
-  <div id="Lesson-03">
+  <div id="lesson-03">
     <h1>Lesson 03</h1>
     <div id="example-01" v-if="seen1">
       <h2>Example 01: computed properties</h2>
@@ -11,8 +11,10 @@
       <div id="watch-property">
         <h3>watch property</h3>
         <div>
-          <input type="text" v-model="firstName" placeholder="first name"><br>
-          <input type="text" v-model="lastName" placeholder="last name">
+          <label for="first-name">first name</label>
+          <input id="first-name" type="text" v-model="firstName"><br>
+          <label for="last-name">last name</label>
+          <input id="last-name" type="text" v-model="lastName">
         </div>
         <p>{{ fullName }}</p>
       </div>
@@ -102,8 +104,7 @@ export default {
 </script>
 
 <style scoped>
-h1,
-h2 {
+h1, h2 {
   font-weight: normal;
 }
 ul {
