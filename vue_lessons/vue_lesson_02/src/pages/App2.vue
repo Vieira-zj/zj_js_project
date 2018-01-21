@@ -1,25 +1,29 @@
 <template>
   <div id="app2">
-    <lesson-one v-if="seen1"></lesson-one>
-    <lesson-two v-if="seen2"></lesson-two>
+    <lesson-01 v-if="seen1"></lesson-01>
+    <lesson-02 v-if="seen2"></lesson-02>
+    <lesson-03 v-if="seen3"></lesson-03>
   </div>
 </template>
 
 <script>
-import LessonOne from '@/components/LessonOne'
-import LessonTwo from '@/components/LessonTwo'
+import Lesson01 from '@/components/Lesson01'
+import Lesson02 from '@/components/Lesson02'
+import Lesson03 from '@/components/Lesson03'
 
 export default {
   name: 'App2',
   data () {
     return {
       seen1: false,
-      seen2: true
+      seen2: false,
+      seen3: true
     }
   },
   components: {
-    LessonOne,
-    LessonTwo
+    Lesson01,
+    Lesson02,
+    Lesson03
   }
 }
 </script>
