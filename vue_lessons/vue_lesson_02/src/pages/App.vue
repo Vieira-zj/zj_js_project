@@ -2,6 +2,10 @@
   <div id="app">
     <img src="@/assets/logo.png">
     <hello-world></hello-world>
+    <h2>Link List</h2>
+    <nav>
+      <router-link to="app2">App2</router-link>
+    </nav>
   </div>
 </template>
 

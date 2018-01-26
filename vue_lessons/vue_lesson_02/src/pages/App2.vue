@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import Lesson01 from '@/components/Lesson01'
-import Lesson02 from '@/components/Lesson02'
-import Lesson03 from '@/components/Lesson03'
-import Lesson04 from '@/components/Lesson04'
-import Lesson05 from '@/components/Lesson05'
+import Lesson01 from '@/components/lessons/Lesson01'
+import Lesson02 from '@/components/lessons/Lesson02'
+import Lesson03 from '@/components/lessons/Lesson03'
+import Lesson04 from '@/components/lessons/Lesson04'
+import Lesson05 from '@/components/lessons/Lesson05'
 
 export default {
   name: 'App2',
