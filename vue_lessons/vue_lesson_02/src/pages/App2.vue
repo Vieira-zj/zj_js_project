@@ -5,6 +5,7 @@
     <lesson-03 v-if="seen3"></lesson-03>
     <lesson-04 v-if="seen4"></lesson-04>
     <lesson-05 v-if="seen5"></lesson-05>
+    <lesson-06 v-if="seen6"></lesson-06>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Lesson02 from '@/components/lessons/Lesson02'
 import Lesson03 from '@/components/lessons/Lesson03'
 import Lesson04 from '@/components/lessons/Lesson04'
 import Lesson05 from '@/components/lessons/Lesson05'
+import Lesson06 from '@/components/lessons/Lesson06'
 
 export default {
   name: 'App2',
@@ -23,7 +25,8 @@ export default {
       seen2: false,
       seen3: false,
       seen4: false,
-      seen5: true
+      seen5: false,
+      seen6: true
     }
   },
   components: {
@@ -31,7 +34,8 @@ export default {
     Lesson02,
     Lesson03,
     Lesson04,
-    Lesson05
+    Lesson05,
+    Lesson06
   }
 }
 </script>
