@@ -1,11 +1,13 @@
 <template>
   <div id="app2">
-    <lesson-01 v-if="seen1"></lesson-01>
-    <lesson-02 v-if="seen2"></lesson-02>
-    <lesson-03 v-if="seen3"></lesson-03>
-    <lesson-04 v-if="seen4"></lesson-04>
-    <lesson-05 v-if="seen5"></lesson-05>
-    <lesson-06 v-if="seen6"></lesson-06>
+    <h1>Vue Lessons</h1>
+    <lesson-01 v-if="dynamicSegment === '1'"></lesson-01>
+    <lesson-02 v-if="dynamicSegment === '2'"></lesson-02>
+    <lesson-03 v-if="dynamicSegment === '3'"></lesson-03>
+    <lesson-04 v-if="dynamicSegment === '4'"></lesson-04>
+    <lesson-05 v-if="dynamicSegment === '5'"></lesson-05>
+    <lesson-06 v-if="dynamicSegment === '6'"></lesson-06>
+    <lesson-07 v-if="dynamicSegment === '7'"></lesson-07>
   </div>
 </template>
 
@@ -16,26 +18,23 @@ import Lesson03 from '@/components/lessons/Lesson03'
 import Lesson04 from '@/components/lessons/Lesson04'
 import Lesson05 from '@/components/lessons/Lesson05'
 import Lesson06 from '@/components/lessons/Lesson06'
+import Lesson07 from '@/components/lessons/Lesson07'
 
 export default {
   name: 'App2',
-  data () {
-    return {
-      seen1: false,
-      seen2: false,
-      seen3: false,
-      seen4: false,
-      seen5: false,
-      seen6: true
-    }
-  },
   components: {
     Lesson01,
     Lesson02,
     Lesson03,
     Lesson04,
     Lesson05,
-    Lesson06
+    Lesson06,
+    Lesson07
+  },
+  computed: {
+    dynamicSegment: function () {
+      return this.$route.params.lessonId
+    }
   }
 }
 </script>

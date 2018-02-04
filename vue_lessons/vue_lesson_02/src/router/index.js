@@ -19,6 +19,11 @@ export default new Router({
       component: App2
     },
     {
+      path: '/app2/:lessonId',
+      name: 'App2',
+      component: App2
+    },
+    {
       path: '/app3',
       name: 'App3',
       component: App3
