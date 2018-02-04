@@ -8,6 +8,7 @@
     <lesson-05 v-if="dynamicSegment === '5'"></lesson-05>
     <lesson-06 v-if="dynamicSegment === '6'"></lesson-06>
     <lesson-07 v-if="dynamicSegment === '7'"></lesson-07>
+    <lesson-08 v-if="dynamicSegment === '8'"></lesson-08>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import Lesson04 from '@/components/lessons/Lesson04'
 import Lesson05 from '@/components/lessons/Lesson05'
 import Lesson06 from '@/components/lessons/Lesson06'
 import Lesson07 from '@/components/lessons/Lesson07'
+import Lesson08 from '@/components/lessons/Lesson08'
 
 export default {
   name: 'App2',
@@ -29,7 +31,8 @@ export default {
     Lesson04,
     Lesson05,
     Lesson06,
-    Lesson07
+    Lesson07,
+    Lesson08
   },
   computed: {
     dynamicSegment: function () {

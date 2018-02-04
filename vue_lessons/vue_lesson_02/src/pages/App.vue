@@ -15,7 +15,8 @@
           <router-link to="/app2/5">lesson-05,</router-link>
           <router-link to="/app2/6">lesson-06</router-link>
           <br>
-          <router-link to="/app2/7">lesson-07</router-link>
+          <router-link to="/app2/7">lesson-07,</router-link>
+          <router-link to="/app2/8">lesson-08</router-link>
         </li>
         <li>
           <router-link to="/app3">App3 iframe</router-link>
