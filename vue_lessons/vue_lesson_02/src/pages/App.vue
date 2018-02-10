@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app1">
     <img src="@/assets/logo.png">
     <hello-world></hello-world>
     <h2>Link List</h2>
@@ -7,16 +7,6 @@
       <ul>
         <li>
           <router-link to="/app2">App2 lessons</router-link><br>
-          <router-link to="/app2/1">lesson-01,</router-link>
-          <router-link to="/app2/2">lesson-02,</router-link>
-          <router-link to="/app2/3">lesson-03</router-link>
-          <br>
-          <router-link to="/app2/4">lesson-04,</router-link>
-          <router-link to="/app2/5">lesson-05,</router-link>
-          <router-link to="/app2/6">lesson-06</router-link>
-          <br>
-          <router-link to="/app2/7">lesson-07,</router-link>
-          <router-link to="/app2/8">lesson-08</router-link>
         </li>
         <li>
           <router-link to="/app3">App3 iframe</router-link>
@@ -30,7 +20,7 @@
 import HelloWorld from '@/components/HelloWorld'
 
 export default {
-  name: 'App',
+  name: 'App1',
   components: {
     HelloWorld
   }

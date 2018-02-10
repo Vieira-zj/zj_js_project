@@ -1,7 +1,11 @@
 <template>
-  <div id="todo">
-    <router-link to="/hello">Hello World</router-link><br>
-    <router-link to="/demo">Vue Demo</router-link>
+  <div id="index">
+    <h1>Page Index</h1>
+    <nav>
+      <router-link to="/hello">Hello World</router-link><br>
+      <router-link to="/mydemo">My Demo</router-link><br>
+      <router-link to="/router">Router Demo</router-link><br>
+    </nav>
   </div>
 </template>
 
