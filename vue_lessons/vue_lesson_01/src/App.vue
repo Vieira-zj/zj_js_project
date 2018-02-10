@@ -1,8 +1,7 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <!-- router/index.js -->
-    <router-view/>
+  <div id="todo">
+    <router-link to="/hello">Hello World</router-link><br>
+    <router-link to="/demo">Vue Demo</router-link>
   </div>
 </template>
 
