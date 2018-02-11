@@ -20,12 +20,14 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'home',
       component: App
     },
     { path: '/hello', component: HelloWorld },
     { path: '/mydemo', component: VueDemo },
     {
       path: '/router',
+      name: 'router_home',
       component: RouterIndex,
       children: [
         { path: 'user/foo', component: Foo },
@@ -38,7 +40,7 @@ export default new Router({
       component: RouterDemo01,
       children: [
         { path: '', component: Default },
-        { path: 'details', name: 'router-details', component: Details }
+        { path: 'details', name: 'router_details', component: Details }
       ]
     }
   ]

@@ -1,12 +1,11 @@
 <template>
   <div id="router-demo01">
-    <div>
-      <h3>Router Demo 01</h3>
-      <p>ID: {{ routerId }}</p>
-      <p>ID stat: <span>{{ statMsg }}</span></p>
-      <p>navigation: {{ navMsg }}</p>
-      <router-view/>
-    </div>
+    <h3>Router Demo 01</h3>
+    <p>ID: {{ routerId }}</p>
+    <p>ID stat: <span>{{ statMsg }}</span></p>
+    <p>navigation: {{ navMsg }}</p>
+    <router-view/>
+    <a v-on:click="goRouterHome">Router Home</a>
   </div>
 </template>
 
@@ -28,6 +27,11 @@ export default {
     '$route' (to, from) {
       this.statMsg = 'ID is reload'
       this.navMsg = 'from ' + from.path + ' to ' + to.path
+    }
+  },
+  methods: {
+    goRouterHome () {
+      this.$router.push({ name: 'router_home' })
     }
   }
 }

@@ -13,7 +13,8 @@
     </nav>
     <router-view/>
     <p>
-      <a v-on:click="goBack">Go Back</a>
+      <a v-on:click="goBack">Go Back</a><br>
+      <a v-on:click="goHome">Go Home</a>
     </p>
   </div>
 </template>
@@ -22,11 +23,15 @@
 export default {
   name: 'RouterIndex',
   methods: {
+    goHome () {
+      // this.$router.push('/')
+      this.$router.push({ name: 'home' })
+    },
     goBack () {
       if (window.history.length > 1) {
         this.$router.go(-1)
       } else {
-        this.$router.push('/')
+        this.goHome()
       }
     }
   }
