@@ -11,6 +11,10 @@ Vue.use(Router)
 
 const Foo = { template: '<span>username: foo</span>' }
 const Bar = { template: '<span>username: bar</span>' }
+const User = { template: '<span>userid: {{ $route.params.userid }}</span>' }
+
+const Default = { template: '<p>details: none</p>' }
+const Details = { template: '<p>details: {{ $route.params.id }}, {{ $route.path }}, {{ $route.name }}</p>' }
 
 export default new Router({
   routes: [
@@ -24,9 +28,17 @@ export default new Router({
       path: '/router',
       component: RouterIndex,
       children: [
-        { path: 'foo', component: Foo },
-        { path: 'bar', component: Bar },
-        { path: ':userid', component: RouterDemo01 }
+        { path: 'user/foo', component: Foo },
+        { path: 'user/bar', component: Bar },
+        { path: 'user/:userid', component: User }
+      ]
+    },
+    {
+      path: '/router/:id',
+      component: RouterDemo01,
+      children: [
+        { path: '', component: Default },
+        { path: 'details', name: 'router-details', component: Details }
       ]
     }
   ]
