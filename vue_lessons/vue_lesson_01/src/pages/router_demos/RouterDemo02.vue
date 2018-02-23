@@ -1,7 +1,7 @@
 <template>
   <div id="router-demo02">
-    <h3>Router Demo 03</h3>
-    <!-- TODO: CH6 -->
+    <h3>Router Demo 02</h3>
+    <!-- TODO: CH7 -->
   </div>
 </template>
 

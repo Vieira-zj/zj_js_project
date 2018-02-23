@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     goRouterHome () {
-      this.$router.push({ name: 'router_home' })
+      this.$router.push({ name: 'user_home' })
     }
   }
 }

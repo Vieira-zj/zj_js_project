@@ -2,14 +2,15 @@
   <div id="router-index">
     <h1>Router Demos</h1>
     <nav>
-      <p>User Test</p>
-      <router-link to="/router/user/foo">User Foo</router-link><br>
-      <router-link to="/router/user/bar">User Bar</router-link><br>
-      <router-link to="/router/user/001">Userid 001</router-link><br>
-      <router-link to="/router/user/002">Userid 002</router-link><br>
-      <p>Router Test</p>
+      <h3>Router Test</h3>
       <router-link to="/router/01">Router (01)</router-link><br>
       <router-link to="/router/01/details">Router Info (01)</router-link>
+      <h3>User Test</h3>
+      <router-link to="/user/foo">User Foo</router-link><br>
+      <router-link to="/user/bar">User Bar</router-link><br>
+      <router-link to="/user/001">Userid 001</router-link><br>
+      <router-link to="/user/002">Userid 002</router-link><br>
+      <router-link to="/user/settings">User Settings</router-link><br>
     </nav>
     <router-view/>
     <p>

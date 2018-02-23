@@ -4,7 +4,7 @@
     <nav>
       <router-link to="/hello">Hello World</router-link><br>
       <router-link to="/mydemo">My Demo</router-link><br>
-      <router-link to="/router">Router Demo</router-link><br>
+      <router-link to="/user">Router Demo</router-link><br>
     </nav>
   </div>
 </template>
