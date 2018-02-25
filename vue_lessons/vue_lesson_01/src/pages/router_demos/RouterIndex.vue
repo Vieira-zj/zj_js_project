@@ -3,14 +3,26 @@
     <h1>Router Demos</h1>
     <nav>
       <h3>Router Test</h3>
-      <router-link to="/router/01">Router (01)</router-link><br>
-      <router-link to="/router/01/details">Router Info (01)</router-link>
+      <ul>
+        <li><router-link to="/router/01">Router (01)</router-link></li>
+        <li><router-link to="/router/01/details">Router Info (01)</router-link></li>
+      </ul>
       <h3>User Test</h3>
-      <router-link to="/user/foo">User Foo</router-link><br>
-      <router-link to="/user/bar">User Bar</router-link><br>
-      <router-link to="/user/001">Userid 001</router-link><br>
-      <router-link to="/user/002">Userid 002</router-link><br>
-      <router-link to="/user/settings">User Settings</router-link><br>
+      <ul>
+        <li><router-link to="/users/foo">User Foo</router-link></li>
+        <li><router-link to="/users/bar">User Bar</router-link></li>
+      </ul>
+      <ul>
+        <li><router-link to="/users/list/001">Userid 001</router-link></li>
+        <li><router-link to="/users/list/002">Userid 002</router-link></li>
+      </ul>
+      <ul>
+        <li><router-link to="/users/settings">User Settings</router-link></li>
+      </ul>
+      <h3>Props Test</h3>
+      <ul>
+        <li><router-link to="/props">Props Example</router-link></li>
+      </ul>
     </nav>
     <router-view/>
     <p>
