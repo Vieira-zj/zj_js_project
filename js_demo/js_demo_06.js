@@ -449,9 +449,9 @@ if (isDemo15Run) {
         // #1, object shorthand
         let title = 'test:';
         const tmpObj = {
-            title,  // title: title
+            title, // title: title
             desc: 'create object shorthand',
-            myPrint() {  // myPrint: function() {...}
+            myPrint() { // myPrint: function() {...}
                 console.log(title, this.desc);
             }
         };

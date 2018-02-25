@@ -1,6 +1,7 @@
 import { Line } from 'vue-chartjs'
 
 // https://github.com/apertureless/vue-chartjs/tree/develop/src/examples
+// https://github.com/apertureless/vue-chartjs-demo
 export default {
   extends: Line,
   data () {

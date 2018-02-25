@@ -24,4 +24,22 @@ if (isDemo01Run) {
     })()
 }
 
+// demo 02, object property
+let isDemo02Run = false
+if (isDemo02Run) {
+    (function () {
+        let obj1 = {
+            data: ['Jan', 'Feb', 'Mar']
+        }
+        console.log('object data:', obj1.data)
+
+        let obj2 = {
+            data: (() => {
+                return ['Jan', 'Feb', 'Mar']
+            })()
+        }
+        console.log('object data:', obj2.data)
+    })()
+}
+
 console.log(__filename, 'DONE.')

@@ -13,9 +13,9 @@ new Vue({
   el: '#app',
   router,
   created: function () {
-    console.log('hook: vue instance created.')
+    console.info('hook: vue instance created.')
   },
   updated: function () {
-    console.log('hook: virtual DOM re-render and patch.')
+    console.info('hook: virtual DOM re-render and patch.')
   }
 })

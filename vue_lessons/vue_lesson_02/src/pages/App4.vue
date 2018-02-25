@@ -3,16 +3,24 @@
     <div id="chart_list">
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
       <div class="chart">
-        <h2>Line Chart Test</h2>
-        <line-chart></line-chart>
-      </div>
-      <div>
         <h2>Bar Chart Test</h2>
         <bar-chart></bar-chart>
       </div>
-      <div>
+      <div class="chart" v-if="seenReactive">
+        <h2>Bar Reactive Chart Test</h2>
+        <bar-reactive-chart></bar-reactive-chart>
+      </div>
+      <div class="chart">
+        <h2>Line Chart Test</h2>
+        <line-chart></line-chart>
+      </div>
+      <div class="chart">
         <h2>Doughnut Chart Test</h2>
         <doughnut-chart></doughnut-chart>
+      </div>
+      <div class="chart">
+        <h2>Pie Chart Test</h2>
+        <pie-chart></pie-chart>
       </div>
     </div>
   </div>
@@ -20,15 +28,24 @@
 
 <script>
 import BarChart from '@/components/charts/BarChart.js'
+import BarReactiveChart from '@/components/charts/BarReactiveChart.js'
 import LineChart from '@/components/charts/LineChart.js'
 import DoughnutChart from '@/components/charts/DoughnutChart.js'
+import PieChart from '@/components/charts/PieChart.js'
 
 export default {
   name: 'App4',
   components: {
     BarChart,
+    BarReactiveChart,
     LineChart,
-    DoughnutChart
+    DoughnutChart,
+    PieChart
+  },
+  data () {
+    return {
+      seenReactive: true
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
-import { Doughnut } from 'vue-chartjs'
+import { Pie } from 'vue-chartjs'
 
 export default {
-  extends: Doughnut,
+  extends: Pie,
   mounted () {
     this.renderChart({
       labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
