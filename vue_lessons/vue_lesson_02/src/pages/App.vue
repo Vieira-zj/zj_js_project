@@ -11,6 +11,9 @@
         <li>
           <router-link to="/app3">App3 iframe</router-link>
         </li>
+        <li>
+          <router-link to="/app4">App4 charts</router-link>
+        </li>
       </ul>
     </nav>
   </div>
@@ -27,7 +30,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

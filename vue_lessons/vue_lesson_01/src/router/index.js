@@ -132,7 +132,7 @@ export default new Router({
         { path: 'details', component: Details }
       ]
     },
-    // props: examples
+    // router props: examples
     {
       path: '/props',
       component: RouterDemo02,

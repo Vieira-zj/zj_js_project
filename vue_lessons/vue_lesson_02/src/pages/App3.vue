@@ -1,6 +1,6 @@
 <template>
   <div id="app3">
-    <h2>iFrame test</h2>
+    <h2>iFrame Test</h2>
     <table>
       <tr>
         <td>
