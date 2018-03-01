@@ -2,11 +2,14 @@
   <div id="app1">
     <img src="@/assets/logo.png">
     <hello-world></hello-world>
-    <h2>Link List</h2>
+    <h1>Link List</h1>
     <nav>
       <ul>
         <li>
-          <router-link to="/app2">App2 lessons</router-link><br>
+          <router-link to="/app1">App1 vue lessons</router-link><br>
+        </li>
+        <li>
+          <router-link to="/app2">App2 vuex lessons</router-link><br>
         </li>
         <li>
           <router-link to="/app3">App3 iframe</router-link>

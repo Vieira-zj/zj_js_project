@@ -2,6 +2,7 @@
   <div id="app4">
     <div id="chart_list">
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
+      <h1>ChartJs Lessons</h1>
       <div class="chart">
         <h2>Bar Chart Test</h2>
         <bar-chart></bar-chart>
