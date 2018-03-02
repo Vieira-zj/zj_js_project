@@ -2,12 +2,15 @@
   <div id="app2">
     <h1>Vuex Lessons</h1>
     <div id="lesson01">
-      <!-- TODO -->
-    </div>
-    <div id="demo01">
-      <p>Count: {{ $store.state.count }}</p>
+      <p>Value: {{ count }}</p>
+      <p>Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.</p>
       <button v-on:click="increment">+1</button>
-      <button v-on:click="decrement">-1</button>
+      <button v-on:click="decrement">-1</button><br>
+      <button @click="incrementIfOdd">Increment if odd</button><br>
+      <button @click="incrementAsync">Increment async</button>
+    </div>
+    <div>
+      <p>Recent History (last 5 entries): {{ recentHistory }}</p>
     </div>
   </div>
 </template>
@@ -16,10 +19,16 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  computed: mapGetters([]),
+  computed: mapGetters([
+    'count',
+    'evenOrOdd',
+    'recentHistory'
+  ]),
   methods: mapActions([
     'increment',
-    'decrement'
+    'decrement',
+    'incrementIfOdd',
+    'incrementAsync'
   ])
 }
 </script>

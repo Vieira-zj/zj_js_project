@@ -4,8 +4,9 @@ import Vue from 'vue'
 import router from './router'
 
 // https://www.jianshu.com/p/13bec8f5b17d
-import store from './vuex/store'
-// import store from './store'
+// https://github.com/vuejs/vuex/tree/dev/examples
+// import store from './vuex/store'
+import store from './store'
 
 import axios from 'axios'
 Vue.prototype.$http = axios
