@@ -2,7 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import router from './router'
-import store from '@/vuex/store'
+
+// https://www.jianshu.com/p/13bec8f5b17d
+import store from './vuex/store'
+// import store from './store'
 
 import axios from 'axios'
 Vue.prototype.$http = axios
