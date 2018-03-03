@@ -1,35 +1,37 @@
 <template>
   <div id="app2">
     <h1>Vuex Lessons</h1>
-    <div id="lesson01">
-      <p>Value: {{ count }}</p>
-      <p>Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.</p>
-      <button v-on:click="increment">+1</button>
-      <button v-on:click="decrement">-1</button><br>
-      <button @click="incrementIfOdd">Increment if odd</button><br>
-      <button @click="incrementAsync">Increment async</button>
+    <div v-show="seen1">
+      <counter-01></counter-01>
     </div>
-    <div>
-      <p>Recent History (last 5 entries): {{ recentHistory }}</p>
+    <div v-show="seen2">
+      <counter-02></counter-02>
+    </div>
+    <div v-show="seen3">
+      <counter-03></counter-03>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import Counter01 from '@/components/counter/Counter01'
+import Counter02 from '@/components/counter/Counter02'
+import Counter03 from '@/components/counter/Counter03'
 
 export default {
-  computed: mapGetters([
-    'count',
-    'evenOrOdd',
-    'recentHistory'
-  ]),
-  methods: mapActions([
-    'increment',
-    'decrement',
-    'incrementIfOdd',
-    'incrementAsync'
-  ])
+  name: 'App2',
+  data () {
+    return {
+      seen1: true,
+      seen2: false,
+      seen3: false
+    }
+  },
+  components: {
+    Counter01,
+    Counter02,
+    Counter03
+  }
 }
 </script>
 

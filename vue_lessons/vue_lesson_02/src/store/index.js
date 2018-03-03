@@ -9,7 +9,12 @@ Vue.use(Vuex)
 
 const state = {
   count: 0,
-  history: []
+  history: [],
+  todos: [
+    { id: 1, text: 'Java', done: true },
+    { id: 2, text: 'JavaScript', done: true },
+    { id: 3, text: 'Golang', done: false }
+  ]
 }
 
 const store = new Vuex.Store({

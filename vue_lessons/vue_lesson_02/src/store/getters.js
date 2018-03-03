@@ -1,5 +1,18 @@
 export const count = state => state.count
 
+export const doneTodos = state => {
+  let todos = state.todos.filter(todo => todo.done)
+  let retTodos = []
+  for (let todo of todos) {
+    retTodos.push(todo.text)
+  }
+  return retTodos
+}
+
+export const doneTodosCount = (state, getters) => {
+  return getters.doneTodos.length
+}
+
 export const evenOrOdd = state => {
   return state.count % 2 === 0 ? 'even' : 'odd'
 }
