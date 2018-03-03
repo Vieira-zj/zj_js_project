@@ -1,5 +1,8 @@
 /**
  * Created by zhengjin on 2017/4/14.
+ * 
+ * Docs: 
+ * https://lodash.com/docs/
  */
 
 var _ = require('lodash');
