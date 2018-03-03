@@ -73,8 +73,8 @@ if (isDemo03Run) {
     })()
 }
 
-// demo 04, operator ...
-let isDemo04Run = true
+// demo 04, es6 operator ...
+let isDemo04Run = false
 if (isDemo04Run) {
     (function () {
         // #1
@@ -97,7 +97,7 @@ if (isDemo04Run) {
         // let obj1 = { k1: 'value1' }
         // let obj2 = { k2: 'value2' }
         // let tmpObj = {
-        //     desc: 'object combine',
+        //     desc: 'objects combine',
         //     ...obj1,
         //     ...obj2
         // }
