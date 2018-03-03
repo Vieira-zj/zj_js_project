@@ -73,5 +73,36 @@ if (isDemo03Run) {
     })()
 }
 
+// demo 04, operator ...
+let isDemo04Run = true
+if (isDemo04Run) {
+    (function () {
+        // #1
+        let myAdd = function (x, y, z) {
+            return x + y + z
+        }
+        let tmpArr = [1, 2, 3]
+        console.log('results:', myAdd(...tmpArr))
+
+        // #2
+        let myFilterOdd = function (...items) {
+            return items.filter(item => item % 2 === 0)
+        }
+        console.log('results', myFilterOdd(1, 2, 3, 4, 5).join(', '))
+
+        // #3, jslint error
+        // jshint:
+        // https://www.cnblogs.com/tadini/p/5279335.html
+        // http://www.htmlhifive.com/conts/web/view/library/JSLint_JSHint
+        // let obj1 = { k1: 'value1' }
+        // let obj2 = { k2: 'value2' }
+        // let tmpObj = {
+        //     desc: 'object combine',
+        //     ...obj1,
+        //     ...obj2
+        // }
+        // console.log('results:', JSON.stringify(tmpObj))
+    })()
+}
 
 console.log(__filename, 'DONE.')
