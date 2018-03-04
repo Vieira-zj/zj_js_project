@@ -42,8 +42,16 @@ export default {
       return 'Local Count: ' + String(this.localCount)
     },
     ...mapState({
-      count: state => state.count,
+      count: state => {
+        if (state.part1) {
+          return state.part1.count
+        }
+        return state.count
+      },
       countPlusLocalState (state) {
+        if (state.part1) {
+          return state.part1.count + this.localCount
+        }
         return state.count + this.localCount
       }
     }),

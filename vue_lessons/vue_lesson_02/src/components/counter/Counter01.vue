@@ -41,9 +41,15 @@ export default {
       return 'Local Count: ' + String(this.localCount)
     },
     count () {
+      if (this.$store.state.part1) {
+        return this.$store.state.part1.count
+      }
       return this.$store.state.count
     },
-    countPlusLocalState (state) {
+    countPlusLocalState () {
+      if (this.$store.state.part1) {
+        return this.$store.state.part1.count + this.localCount
+      }
       return this.$store.state.count + this.localCount
     },
     // vuex getters
