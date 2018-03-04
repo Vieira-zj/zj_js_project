@@ -7,7 +7,7 @@ export default {
   mixins: [reactiveProp],
   props: ['options'],
   mounted () {
-    console.info('hook: line reactive chart mounted in js.')
+    console.info('js hook: line reactive chart mounted.')
     // this.chartData is created in the mixin.
     this.renderChart(this.chartData, this.options)
   }

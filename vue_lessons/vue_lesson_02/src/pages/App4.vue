@@ -1,6 +1,6 @@
 <template>
   <div id="app4">
-    <div id="chart_list">
+    <div>
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
       <h1>ChartJs Lessons</h1>
       <div class="chart">

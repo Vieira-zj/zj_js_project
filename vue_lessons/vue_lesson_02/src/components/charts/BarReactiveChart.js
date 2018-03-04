@@ -11,20 +11,20 @@ export default {
     }
   },
   created () {
-    console.info('hook: bar reactive chart created.')
+    console.info('js hook: bar reactive chart created.')
     this.fillData()
   },
   mounted () {
-    console.info('hook: bar reactive chart mounted.')
+    console.info('js hook: bar reactive chart mounted.')
     this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
-    this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)') // show this color at 0%
+    this.gradient.addColorStop(0, 'rgba(255, 0, 0, 0.5)') // show this color at 0%
     this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)') // show this color at 50%
     this.gradient.addColorStop(1, 'rgba(145, 67, 204, 0.46)') // show this color at 100%
 
     this.chartData.datasets[0].backgroundColor = this.gradient
-
     this.renderChart(this.chartData, { responsive: true, maintainAspectRatio: false })
 
+    // refresh data at interval
     setInterval(() => { this.fillData() }, 5000)
   },
   methods: {

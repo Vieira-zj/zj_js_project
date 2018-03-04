@@ -1,14 +1,15 @@
 <template>
   <div id="app5">
-    <div id="chart_list">
+    <div>
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
-      <h1>ChartJs Lessons (Reactive)</h1>
+      <h1>ChartJs Lessons - Reactive</h1>
       <div class="chart" v-if="seenReactiveBar">
         <h2>Bar Reactive Chart Test</h2>
         <bar-reactive></bar-reactive>
       </div>
       <div class="chart" v-if="seenReactiveLine">
         <h2>Line Reactive Chart Test</h2>
+        <!-- error: use tag line-reactive-chart? -->
         <line-reactive :chart-data="datacollection" :options="chartOptions"></line-reactive>
       </div>
       <button @click="fillData()">Randomize</button>
@@ -38,7 +39,7 @@ export default {
     }
   },
   mounted () {
-    console.info('hook: line reactive chart mounted in vue.')
+    console.info('vue hook: virtual dom mounted.')
     this.fillData()
   },
   methods: {
@@ -48,7 +49,7 @@ export default {
         datasets: [
           {
             label: 'Data One',
-            backgroundColor: 'rgba(255, 0,0, 0.5)',
+            backgroundColor: 'rgba(255, 0, 0, 0.5)',
             data: this.getRandomCollection(7)
           },
           {
