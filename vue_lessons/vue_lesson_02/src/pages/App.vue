@@ -17,6 +17,9 @@
         <li>
           <router-link to="/app4">App4 charts</router-link>
         </li>
+        <li>
+          <router-link to="/app5">App5 reactive charts</router-link>
+        </li>
       </ul>
     </nav>
   </div>

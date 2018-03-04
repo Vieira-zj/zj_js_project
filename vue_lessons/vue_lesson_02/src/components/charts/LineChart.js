@@ -6,6 +6,29 @@ export default {
   extends: Line,
   data () {
     return {
+      datacollection: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Data One',
+            borderColor: '#FC2525',
+            pointBackgroundColor: 'white',
+            borderWidth: 1,
+            pointBorderColor: 'white',
+            backgroundColor: 'red',
+            data: [40, 39, 10, 40, 39, 80, 40]
+          },
+          {
+            label: 'Data Two',
+            borderColor: '#05CBE1',
+            pointBackgroundColor: 'white',
+            pointBorderColor: 'white',
+            borderWidth: 1,
+            backgroundColor: 'blue',
+            data: [60, 55, 32, 10, 2, 12, 53]
+          }
+        ]
+      },
       gradient: null,
       gradient2: null
     }
@@ -22,30 +45,9 @@ export default {
     this.gradient2.addColorStop(0.5, 'rgba(0, 231, 255, 0.25)')
     this.gradient2.addColorStop(1, 'rgba(0, 231, 255, 0)')
 
-    let datacollection = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'Data One',
-          borderColor: '#FC2525',
-          pointBackgroundColor: 'white',
-          borderWidth: 1,
-          pointBorderColor: 'white',
-          backgroundColor: this.gradient,
-          data: [40, 39, 10, 40, 39, 80, 40]
-        },
-        {
-          label: 'Data Two',
-          borderColor: '#05CBE1',
-          pointBackgroundColor: 'white',
-          pointBorderColor: 'white',
-          borderWidth: 1,
-          backgroundColor: this.gradient2,
-          data: [60, 55, 32, 10, 2, 12, 53]
-        }
-      ]
-    }
+    this.datacollection.datasets[0].backgroundColor = this.gradient
+    this.datacollection.datasets[1].backgroundColor = this.gradient2
 
-    this.renderChart(datacollection, { responsive: true, maintainAspectRatio: false })
+    this.renderChart(this.datacollection, { responsive: true, maintainAspectRatio: false })
   }
 }

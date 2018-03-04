@@ -21,6 +21,8 @@ export default {
     this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)') // show this color at 50%
     this.gradient.addColorStop(1, 'rgba(145, 67, 204, 0.46)') // show this color at 100%
 
+    this.chartData.datasets[0].backgroundColor = this.gradient
+
     this.renderChart(this.chartData, { responsive: true, maintainAspectRatio: false })
 
     setInterval(() => { this.fillData() }, 5000)
@@ -40,12 +42,11 @@ export default {
               }
               return nums
             })()
-          }
-        ]
+          }]
       }
     },
     getRandomInt () {
-      return Math.floor(Math.random() * 50)
+      return Math.floor(Math.random() * (50 - 5 + 1)) + 5
     }
   }
 }

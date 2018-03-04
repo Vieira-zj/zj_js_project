@@ -7,10 +7,6 @@
         <h2>Bar Chart Test</h2>
         <bar-chart></bar-chart>
       </div>
-      <div class="chart" v-if="seenReactive">
-        <h2>Bar Reactive Chart Test</h2>
-        <bar-reactive-chart></bar-reactive-chart>
-      </div>
       <div class="chart">
         <h2>Line Chart Test</h2>
         <line-chart></line-chart>
@@ -28,25 +24,18 @@
 </template>
 
 <script>
-import BarChart from '@/components/charts/BarChart.js'
-import BarReactiveChart from '@/components/charts/BarReactiveChart.js'
-import LineChart from '@/components/charts/LineChart.js'
-import DoughnutChart from '@/components/charts/DoughnutChart.js'
-import PieChart from '@/components/charts/PieChart.js'
+import BarChart from '@/components/charts/BarChart'
+import LineChart from '@/components/charts/LineChart'
+import DoughnutChart from '@/components/charts/DoughnutChart'
+import PieChart from '@/components/charts/PieChart'
 
 export default {
   name: 'App4',
   components: {
     BarChart,
-    BarReactiveChart,
     LineChart,
     DoughnutChart,
     PieChart
-  },
-  data () {
-    return {
-      seenReactive: false
-    }
   }
 }
 </script>

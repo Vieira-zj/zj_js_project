@@ -6,6 +6,16 @@ export default {
   extends: Bar,
   data () {
     return {
+      datacollection: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: 'while',
+            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+          }
+        ]
+      },
       gradient: null
     }
   },
@@ -15,17 +25,8 @@ export default {
     this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)') // show this color at 50%
     this.gradient.addColorStop(1, 'rgba(145, 67, 204, 0.46)') // show this color at 100%
 
-    let datacollection = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      datasets: [
-        {
-          label: 'Data One',
-          backgroundColor: this.gradient,
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-        }
-      ]
-    }
+    this.datacollection.datasets[0].backgroundColor = this.gradient
 
-    this.renderChart(datacollection, {responsive: true, maintainAspectRatio: false})
+    this.renderChart(this.datacollection, {responsive: true, maintainAspectRatio: false})
   }
 }
