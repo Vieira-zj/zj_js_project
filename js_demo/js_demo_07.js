@@ -105,4 +105,53 @@ if (isDemo04Run) {
     })()
 }
 
+// demo 05, reuse object
+let isDemo05Run = false
+if (isDemo05Run) {
+    (function () {
+        getDataByType = (dataObj) => {
+            if (typeof dataObj.data === 'function') {
+                return dataObj.data()
+            }
+            return dataObj.data
+        }
+
+        myPrintData = (dataObj) => {
+            let data = getDataByType(dataObj)
+            console.log("object:", JSON.stringify(data))
+        }
+
+        myAddDataAndPrint = (dataObj) => {
+            let data = getDataByType(dataObj)
+            data.count++
+            console.log("object:", JSON.stringify(data))
+        }
+
+        console.log('shared object:')
+        sharedDataObj = {
+            data: {
+                state: "done",
+                count: 0
+            }
+        }
+        sharedDataObj.data.count++
+        myAddDataAndPrint(sharedDataObj)
+        myPrintData(sharedDataObj)
+
+        console.log('non-shared object:')
+        nonSharedDataObj = {
+            data () {
+                return {
+                    state: "done",
+                    count: 0
+                }
+            }
+        }
+        nonSharedDataObj.data().count++
+        myAddDataAndPrint(nonSharedDataObj)
+        myPrintData(nonSharedDataObj)
+    })()
+}
+
+
 console.log(__filename, 'DONE.')
