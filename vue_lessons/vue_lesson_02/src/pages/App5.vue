@@ -10,6 +10,7 @@
       <div class="chart" v-if="seenReactiveLine">
         <h2>Line Reactive Chart Test</h2>
         <!-- error: use tag line-reactive-chart? -->
+        <!-- TODO: get canvas context -->
         <line-reactive :chart-data="datacollection" :options="chartOptions"></line-reactive>
       </div>
       <button @click="fillData()">Randomize</button>
