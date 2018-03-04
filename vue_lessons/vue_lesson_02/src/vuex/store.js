@@ -6,7 +6,36 @@ Vue.use(Vuex)
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
-  count: 0
+  count: 0,
+  history: [],
+  todos: [
+    { id: 1, text: 'Java', done: true },
+    { id: 2, text: 'JavaScript', done: true },
+    { id: 3, text: 'Golang', done: false }
+  ]
+}
+
+// getters are functions
+const getters = {
+  count: state => state.count,
+  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
+  doneTodos: state => {
+    let todos = state.todos.filter(todo => todo.done)
+    let retTodos = []
+    for (let todo of todos) {
+      retTodos.push(todo.text)
+    }
+    return retTodos
+  },
+  doneTodosCount: (state, getters) => {
+    return getters.doneTodos.length
+  },
+  recentHistory: state => {
+    const limit = 5
+    const end = state.history.length
+    const begin = end - limit < 0 ? 0 : (end - limit)
+    return state.history.slice(begin, end).toString().replace(/,/g, ', ')
+  }
 }
 
 // mutations are operations that actually mutates the state.
@@ -16,9 +45,11 @@ const state = {
 const mutations = {
   increment (state) {
     state.count++
+    state.history.push('add')
   },
   decrement (state) {
     state.count--
+    state.history.push('min')
   }
 }
 
@@ -38,12 +69,15 @@ const actions = {
         resolve()
       }, 1000)
     })
+  },
+  incrementAsyncPromise: ({ commit }) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        commit('increment')
+        resolve('increment done.')
+      }, 1000)
+    })
   }
-}
-
-// getters are functions
-const getters = {
-  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
 }
 
 // A Vuex instance is created by combining the state, mutations, actions, and getters.

@@ -22,8 +22,8 @@ export default {
   name: 'App2',
   data () {
     return {
-      seen1: true,
-      seen2: false,
+      seen1: false,
+      seen2: true,
       seen3: false
     }
   },

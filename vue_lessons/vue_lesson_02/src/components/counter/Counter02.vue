@@ -6,6 +6,7 @@
       <p>{{ textLocalCount }}</p>
       <p>Global Count: {{ count }}</p>
       <p>Total: {{ countPlusLocalState }}</p>
+      <p>Recent History (last 5 entries): {{ recentHistory }}</p>
     </div>
     <div>
       <h4>Vuex Getter</h4>
@@ -20,7 +21,8 @@
     <div>
       <h4>Vuex Actions</h4>
       <button @click="addIfOdd">Add If Odd</button>
-      <button @click="addAsync">Add Async</button>
+      <button @click="addAsync">Add Async</button><br>
+      <button @click="addAsyncWithNotify">Add Async And Notify</button>
     </div>
   </div>
 </template>
@@ -47,7 +49,8 @@ export default {
     }),
     ...mapGetters([
       'doneTodos',
-      'doneTodosCount'
+      'doneTodosCount',
+      'recentHistory'
     ])
   },
   methods: {
@@ -57,8 +60,12 @@ export default {
     }),
     ...mapActions({
       addIfOdd: 'incrementIfOdd',
-      addAsync: 'incrementAsync'
-    })
+      addAsync: 'incrementAsync',
+      addAsyncPromise: 'incrementAsyncPromise'
+    }),
+    addAsyncWithNotify () {
+      this.addAsyncPromise().then(text => alert(text))
+    }
   }
 }
 </script>

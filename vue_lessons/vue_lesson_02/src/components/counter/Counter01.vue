@@ -6,6 +6,7 @@
       <p>{{ textLocalCount }}</p>
       <p>Global Count: {{ count }}</p>
       <p>Total: {{ countPlusLocalState }}</p>
+      <p>Recent History (last 5 entries): {{ recentHistory }}</p>
     </div>
     <div>
       <h4>Vuex Getter</h4>
@@ -51,6 +52,9 @@ export default {
     },
     doneTodosCount () {
       return this.$store.getters.doneTodosCount
+    },
+    recentHistory () {
+      return this.$store.getters.recentHistory
     }
   },
   methods: {

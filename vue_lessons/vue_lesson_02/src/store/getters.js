@@ -1,5 +1,9 @@
 export const count = state => state.count
 
+export const evenOrOdd = state => {
+  return state.count % 2 === 0 ? 'even' : 'odd'
+}
+
 export const doneTodos = state => {
   let todos = state.todos.filter(todo => todo.done)
   let retTodos = []
@@ -11,10 +15,6 @@ export const doneTodos = state => {
 
 export const doneTodosCount = (state, getters) => {
   return getters.doneTodos.length
-}
-
-export const evenOrOdd = state => {
-  return state.count % 2 === 0 ? 'even' : 'odd'
 }
 
 const limit = 5
