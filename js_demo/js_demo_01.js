@@ -483,7 +483,7 @@ if (isDemo22Run) {
 
 
 // demo 23, prototype methods
-var isDemo23Run = true;
+var isDemo23Run = false;
 if (isDemo23Run) {
     (function () {
         // max and min
