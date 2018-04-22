@@ -6,17 +6,17 @@
 // demo 01, closure
 var isDemo01Run = false;
 if (isDemo01Run) {
-    (function() {
+    (function () {
         function count() {
             var c = 0;
-    
+
             function add() {
                 return ++c;
             }
-    
+
             return add;
         }
-    
+
         var ct = count();
         console.log(ct());  // 1
         console.log(ct());  // 2
@@ -278,7 +278,6 @@ if (isDemo12Run) {
     var tmpStr = ' add ';
 
     (function (input) {
-        'use strict';
         console.log(x + input + y);
     }(tmpStr));
 }
@@ -479,6 +478,38 @@ if (isDemo22Run) {
         var tmpArr = [];
         console.log(tmpArr[1]);  // do not throw exception
         console.log(tmpArr[-1]);
+    })();
+}
+
+
+// demo 23, prototype methods
+var isDemo23Run = true;
+if (isDemo23Run) {
+    (function () {
+        // max and min
+        console.log('max:', Math.max(5, 11, 1, -10));
+        var getMaxNumber = function (numbers) {
+            return Math.max.apply(null, numbers); // use args[] instead of arg1, arg2...
+        };
+
+        console.log('min', Math.min(5, 11, 1, -10));
+        var getMinNumber = function (numbers) {
+            return Math.min.apply(null, numbers);
+        };
+
+        var numbers = [5, 458 , 120 , -215 , 228 , 400 , 122205, -85411];
+        console.log('max number:', getMaxNumber(numbers));
+        console.log('min number:', getMinNumber(numbers));
+
+        // array push
+        var array1 = [12 , "foo" , {name: "Joe"} , -2458];
+        var array2 = ["Doe" , 555 , 100];
+
+        array1.push([35, 'foo'], 'bar');
+        console.log('array:', array1);
+
+        Array.prototype.push.apply(array1, array2); // use args[] instead of arg1, arg2...
+        console.log('array:', array1);
     })();
 }
 

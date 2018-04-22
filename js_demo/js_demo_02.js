@@ -498,4 +498,40 @@ if (isDemo17Run) {
 }
 
 
+// demo 18, static func, prototype func, instance func
+var isDemo18Run = false;
+if (isDemo18Run) {
+    (function () {
+        function MyClass(name, age) {
+            this.name = name;
+            this.age = age;
+            this.instanceSay = function () {
+                console.log(`name: ${this.name}, age: ${this.age}`);
+            }
+        }
+
+        MyClass.staticSay = function () {
+            console.log('this is static function in MyClass.');
+        };
+
+        MyClass.prototype.protoSay = function () {
+            console.log('this is prototype function in MyClass.');
+        };
+
+        var c1 = new MyClass('Jone', 21);
+
+        var c2 = new MyClass('Jerry', 19);
+
+        MyClass.staticSay();
+        c1.protoSay();
+//        c1.staticSay(); // error
+        c1.instanceSay();
+        c2.instanceSay();
+
+        console.log('instance func equal:', c1.instanceSay == c2.instanceSay);
+        console.log('prototype func equal:', c1.protoSay == c2.protoSay)
+    })();
+}
+
+
 console.log(__filename, 'DONE.');
