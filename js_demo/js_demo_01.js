@@ -482,14 +482,14 @@ if (isDemo22Run) {
 }
 
 
-// demo 23, prototype methods
+// demo 23, apply()
 var isDemo23Run = false;
 if (isDemo23Run) {
     (function () {
         // max and min
         console.log('max:', Math.max(5, 11, 1, -10));
         var getMaxNumber = function (numbers) {
-            return Math.max.apply(null, numbers); // use args[] instead of arg1, arg2...
+            return Math.max.apply(null, numbers); // apply() => use args[] instead of arg1, arg2...
         };
 
         console.log('min', Math.min(5, 11, 1, -10));
@@ -508,7 +508,7 @@ if (isDemo23Run) {
         array1.push([35, 'foo'], 'bar');
         console.log('array:', array1);
 
-        Array.prototype.push.apply(array1, array2); // use args[] instead of arg1, arg2...
+        Array.prototype.push.apply(array1, array2); // apply() => use args[] instead of arg1, arg2...
         console.log('array:', array1);
     })();
 }
