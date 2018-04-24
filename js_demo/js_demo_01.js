@@ -514,4 +514,30 @@ if (isDemo23Run) {
 }
 
 
+// demo 24, text replace()
+var isDemo24Run = false;
+if (isDemo24Run) {
+    (function () {
+        var str1 = 'Visit Microsoft!';
+        console.log(str1.replace(/Microsoft/, 'W3School'));
+
+        var str2 = "Welcome to Microsoft! ";
+        str2 = str2 + "We are proud to announce that Microsoft has ";
+        str2 = str2 + "one of the largest Web Developers sites in the world.";
+        console.log(str2.replace(/Microsoft/g, 'W3School')); //global
+
+        var text = "Javascript Tutorial";
+        console.log(text.replace(/javascript/i, 'JavaScript')); // ignore case
+
+        var name = "Doe, John";
+        console.log(name.replace(/(\w+)\s*,\s*(\w+)/, "$2 $1"));
+
+        var words = 'java javascript python golang';
+        console.log(words.replace(/\b\w+\b/g, function (word) {
+            return word.substring(0, 1).toUpperCase() + word.substring(1);
+        }));
+    })();
+}
+
+
 console.log(__filename, 'DONE.');

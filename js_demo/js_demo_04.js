@@ -446,4 +446,55 @@ if (isDemo17Run) {
 }
 
 
+// demo 18, value vs reference
+var isDemo18Run = true;
+if (isDemo18Run) {
+    (function () {
+        // #1 pass value
+        console.log('test string:');
+        var srcStr = 'init1';
+        var str = srcStr;
+        srcStr = 'ini2';
+        console.log(`source string ${srcStr}, target string ${str}`);
+
+        // #2 pass value
+        console.log('\ntest function:');
+        var srcFn = function () {
+            console.log('print ini3');
+        };
+        var tmpFn = srcFn;
+        srcFn = function () {
+            console.log('print ini4');
+        };
+        tmpFn();
+        srcFn();
+
+        // #3 pass value
+        console.log('\ntest function:');
+        var person = {
+            name: 'Tom',
+            age: 25
+        };
+        person.say = function () {
+            console.log(`my name is ${this.name} and age ${this.age}`);
+        };
+        var fnSay = person.say;
+        person.say = function () {
+            console.log(`name => ${this.name}, age => ${this.age}`);
+        };
+        fnSay.call(person);
+
+        // #4 pass reference
+        console.log('\ntest object:');
+        var skillJS = {
+            name: 'JavaScript',
+            level: 2
+        };
+        var s = skillJS;
+        skillJS.name = 'javascript';
+        console.log('skill name', s.name);
+    })();
+}
+
+
 console.log(__filename, 'DONE.');
