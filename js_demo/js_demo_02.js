@@ -534,4 +534,41 @@ if (isDemo18Run) {
 }
 
 
+// demo 19, closure
+var isDemo19Run = false;
+if (isDemo19Run) {
+    (function () {
+        // #1
+        console.log('closure in object:');
+        function Foo() {
+            var myPrivate = 'init';
+            this.getPrivate = function () {
+                return myPrivate;
+            };
+            this.setPrivate = function (text) {
+                myPrivate = text;
+            };
+        }
+
+        var f = new Foo();
+        console.log('private value:', f.getPrivate());
+        f.setPrivate('changed');
+        console.log('updated private value:', f.getPrivate());
+    })();
+
+    // #2
+    console.log('closure in function:');
+    function addBase(base) {
+        return function (x) {
+            return base + x;
+        }
+    }
+
+    base2 = addBase(2);
+    console.log('output base2:', base2(4));
+    base4 = addBase(4);
+    console.log('output base4:', base4(10));
+}
+
+
 console.log(__filename, 'DONE.');

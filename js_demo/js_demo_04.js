@@ -447,7 +447,7 @@ if (isDemo17Run) {
 
 
 // demo 18, value vs reference
-var isDemo18Run = true;
+var isDemo18Run = false;
 if (isDemo18Run) {
     (function () {
         // #1 pass value
@@ -493,6 +493,74 @@ if (isDemo18Run) {
         var s = skillJS;
         skillJS.name = 'javascript';
         console.log('skill name', s.name);
+    })();
+}
+
+
+// demo 19, arrow function
+var isDemo19Run = false;
+if (isDemo19Run) {
+    (function () {
+        // #1, arguments from parent
+        console.log('test arguments in arrow function:');
+        function foo() {
+            return () => console.log('arg:', arguments[0]);
+        }
+
+        foo(1, 2)('a', 'b');
+
+        // #2, no domain in object block
+        console.log('\ntest arrow function in object:');
+        let obj = {
+            foo: 'test',
+            fnArrow: () => console.log(this.foo),
+            fnCommon: function () {
+                console.log(this.foo);
+            }
+        };
+        obj.fnArrow(); // undefined
+        obj.fnCommon();
+
+        // #3, construct create a sub domain
+        console.log('\ntest arrow func in construct:');
+        function Bar() {
+            var that = this;
+            this.arrow = () => {
+                console.log(this.name);
+            };
+            this.simulationArrow = () => {
+                console.log(that.name);
+            };
+            this.common = function () {
+                console.log(this.name);
+            }
+        }
+
+        var b = new Bar();
+        b.name = 'local';
+
+        console.log('in function sub domain:');
+        b.arrow();
+        b.simulationArrow();
+        b.common();
+
+        var arrow = b.arrow;
+        var simulationArrow = b.simulationArrow;
+        var common = b.common;
+
+        console.log('in windows domain:');
+        arrow();
+        simulationArrow();
+        common(); // undefined
+        common.apply(b);
+
+        // #4, no domain in if block
+        console.log('\ntest access var defined in if block:');
+        var myBool = true;
+        if (myBool) {
+            var ifVar = 'var_in_if';
+        }
+        console.log('var in if block:', ifVar);
     })();
 }
 
