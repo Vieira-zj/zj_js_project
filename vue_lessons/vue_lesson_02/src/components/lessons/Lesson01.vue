@@ -26,8 +26,10 @@
   </div>
   <div id="example-05" v-if="seen5">
     <h2>Example 05, two-way bind</h2>
-    <p>{{ message5 }}</p>
-    <input type="text" v-model="message5">
+    <label for="input">Input:</label>
+    <input id="input" type="text" v-model="message5">
+    <p>Characters: {{ message5.length }}</p>
+    <p>Text: {{ message5 }}</p>
   </div>
   <div id="example-06" v-if="seen6">
     <h2>Example 06, custom component</h2>
@@ -35,6 +37,17 @@
       <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.key">
       </todo-item>
     </ul>
+  </div>
+  <div id="example-ex-07" v-if="seen7">
+    <h2>Example 07, methods vs. computed</h2>
+    <p>Reverse Message (no-cached): {{ reverseMsg1() }}</p>
+    <p>Reverse Message (cached): {{ reverseMsg2 }}</p>
+  </div>
+  <div id="example-ex-08" v-if="seen8">
+    <h2>Example 08, update data</h2>
+    <button v-on:click="plusCount">Add 1</button>
+    <button v-on:click="minusCount">Minus 1</button>
+    <p>Count: {{ count }}</p>
   </div>
 </div>
 </template>
@@ -46,9 +59,9 @@ export default {
   name: 'Lesson01',
   data () {
     return {
-      seen1: true,
+      seen1: false,
       message1: 'Vieira vue lessons.',
-      seen2: false,
+      seen2: true,
       message2: 'You loaded this page on ' + new Date().toLocaleString(),
       seen3: false,
       todos: [
@@ -56,7 +69,7 @@ export default {
         { index: 2, text: 'Learn Vue' },
         { index: 3, text: 'Build something awesome' }
       ],
-      seen4: false,
+      seen4: true,
       message4: 'Hello Vue.js!',
       seen5: true,
       message5: 'Hello Vue!',
@@ -65,12 +78,32 @@ export default {
         { id: 0, text: 'Vegetables' },
         { id: 1, text: 'Cheese' },
         { id: 2, text: 'Whatever else' }
-      ]
+      ],
+      seen7: true,
+      seen8: false,
+      count: 0
     }
   },
   methods: {
     reverseMessage: function () {
       this.message4 = this.message4.split('').reverse().join('')
+    },
+    reverseMsg1: function () {
+      // method will be invoked each time when enter an char in "input"
+      console.log('exec reverseMsg() from methods.')
+      return this.message4.split('').reverse().join('')
+    },
+    plusCount: function () {
+      this.count++
+    },
+    minusCount: function () {
+      this.count--
+    }
+  },
+  computed: {
+    reverseMsg2: function () {
+      console.log('exec reverseMsg() from computed.')
+      return this.message4.split('').reverse().join('')
     }
   },
   components: {

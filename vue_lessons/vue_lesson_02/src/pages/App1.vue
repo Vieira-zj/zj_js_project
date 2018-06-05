@@ -2,6 +2,8 @@
   <div id="app1">
     <h1>Vue Lessons</h1>
     <nav>
+      <router-link to="/app1/10?key=value&amp;k=v">router args test</router-link>
+      <br>
       <router-link to="/app1/1">lesson-01,</router-link>
       <router-link to="/app1/2">lesson-02,</router-link>
       <router-link to="/app1/3">lesson-03</router-link>
@@ -14,14 +16,18 @@
       <router-link to="/app1/8">lesson-08</router-link>
     </nav>
     <div>
-      <lesson-01 v-if="dynamicSegment === '1'"></lesson-01>
-      <lesson-02 v-if="dynamicSegment === '2'"></lesson-02>
-      <lesson-03 v-if="dynamicSegment === '3'"></lesson-03>
-      <lesson-04 v-if="dynamicSegment === '4'"></lesson-04>
-      <lesson-05 v-if="dynamicSegment === '5'"></lesson-05>
-      <lesson-06 v-if="dynamicSegment === '6'"></lesson-06>
-      <lesson-07 v-if="dynamicSegment === '7'"></lesson-07>
-      <lesson-08 v-if="dynamicSegment === '8'"></lesson-08>
+      <p>router params: {{ routerParams() }}</p>
+      <p>router query: {{ routerQuerys() }}</p>
+    </div>
+    <div>
+      <lesson-01 v-if="isSegmentShow() === '1'"></lesson-01>
+      <lesson-02 v-if="isSegmentShow() === '2'"></lesson-02>
+      <lesson-03 v-if="isSegmentShow() === '3'"></lesson-03>
+      <lesson-04 v-if="isSegmentShow() === '4'"></lesson-04>
+      <lesson-05 v-if="isSegmentShow() === '5'"></lesson-05>
+      <lesson-06 v-if="isSegmentShow() === '6'"></lesson-06>
+      <lesson-07 v-if="isSegmentShow() === '7'"></lesson-07>
+      <lesson-08 v-if="isSegmentShow() === '8'"></lesson-08>
     </div>
   </div>
 </template>
@@ -48,8 +54,22 @@ export default {
     Lesson07,
     Lesson08
   },
-  computed: {
-    dynamicSegment: function () {
+  methods: {
+    routerParams: function () {
+      var p = this.$route.params
+      if (JSON.stringify(p) === '{}') {
+        return 'null'
+      }
+      return p
+    },
+    routerQuerys: function () {
+      var q = this.$route.query
+      if (JSON.stringify(q) === '{}') {
+        return 'null'
+      }
+      return q
+    },
+    isSegmentShow: function () {
       return this.$route.params.lessonId
     }
   }
