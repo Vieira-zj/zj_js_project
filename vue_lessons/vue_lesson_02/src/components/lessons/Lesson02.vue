@@ -3,21 +3,19 @@
     <h1>Lesson 02</h1>
     <div id="example-01" v-if="seen1">
       <h2>Example 01, freeze value</h2>
-      <p>{{ obj.foo }}</p>
-      <button v-on:click="obj.foo = 'baz'">Change it</button>
+      <button v-on:click="obj.foo='baz'">Change it</button>
+      <p>Text freezed: {{ obj.foo }}</p>
     </div>
     <div id="example-02" v-if="seen2">
-      <h2>Example 02, one time bind</h2>
-      <span>This will change: {{ msg }}</span>
-      <br>
-      <span v-once>This will never change: {{ msg }}</span>
-      <br>
-      <button @click="msg=msg.split('').reverse().join('')">Change it</button>
+      <h2>Example 02, bind once: v-once</h2>
+      <button @click="msg=msg.split('').reverse().join('')">Change it</button><br>
+      <p>Text change: {{ msg }}</p>
+      <p v-once>Text bind once: {{ msg }}</p>
     </div>
     <div id="example-03" v-if="seen3">
-      <h2>Example 03, raw html</h2>
-      <p>Using mustaches: {{ rawHtml }}</p>
-      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+      <h2>Example 03, show html</h2>
+      <p><b>Raw text:</b><br>{{ rawHtml }}</p>
+      <p><b>Tag v-html:</b><br><span v-html="rawHtml"></span></p>
     </div>
     <div id="example-04" v-if="seen4">
       <h2>Example 04, js expression</h2>
@@ -31,22 +29,20 @@
 </template>
 
 <script>
-var obj = {
-  foo: 'bar'
-}
-Object.freeze(obj)
-
 export default {
   name: 'Lesson02',
   data () {
     return {
       seen1: false,
-      obj: obj,
+      // object cannot be updated
+      obj: Object.freeze({
+        foo: 'bar'
+      }),
       seen2: true,
       msg: 'init message',
       seen3: true,
       rawHtml: 'Using mustaches: <span style="color:red">This should be red.</span>',
-      seen4: true,
+      seen4: false,
       num: 8,
       seen5: true,
       url: 'https://vuejs.org/v2/guide/instance.html'

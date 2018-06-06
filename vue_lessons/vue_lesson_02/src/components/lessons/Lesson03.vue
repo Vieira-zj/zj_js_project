@@ -11,20 +11,20 @@
       <div id="watch-property">
         <h3>watch property</h3>
         <div>
-          <label for="first-name">first name</label>
-          <input id="first-name" type="text" v-model="firstName"><br>
-          <label for="last-name">last name</label>
-          <input id="last-name" type="text" v-model="lastName">
+          <label for="first-name">First name</label>
+          <input id="first-name" type="text" v-model="firstName01"><br>
+          <label for="last-name">Last name</label>
+          <input id="last-name" type="text" v-model="lastName01">
         </div>
-        <p>{{ fullName }}</p>
+        <p><b>Full name:</b> {{ fullName01 }}</p>
       </div>
       <div id="computed-property">
         <h3>computed property</h3>
         <div>
-          <input type="text" v-model="firstName1" placeholder="first name"><br>
-          <input type="text" v-model="lastName1" placeholder="last name">
+          <input type="text" v-model="firstName02" placeholder="first name"><br>
+          <input type="text" v-model="lastName02" placeholder="last name">
         </div>
-        <p>{{ fullName1 }}</p>
+        <p><b>Full name:</b> {{ fullName02 }}</p>
       </div>
     </div>
     <div id="example-03" v-if="seen3">
@@ -47,14 +47,43 @@ export default {
       seen1: false,
       message: 'Hello',
       seen2: true,
-      firstName: 'Foo',
-      lastName: 'Bar',
-      fullName: 'Foo Bar',
-      firstName1: 'Foo',
-      lastName1: 'Bar',
+      // watch
+      firstName01: 'Foo',
+      lastName01: 'Bar',
+      fullName01: 'Foo Bar',
+      // computed
+      firstName02: 'Zheng',
+      lastName02: 'Jin',
       seen3: true,
       question: '',
       answer: 'I cannot give you an answer until you ask a question!'
+    }
+  },
+  computed: {
+    // cached value
+    reversedMessage: function() {
+      return this.message.split('').reverse().join('')
+    },
+    fullName02: function() {
+      return this.firstName02 + ' ' + this.lastName02
+    }
+  },
+  watch: {
+    firstName01: function(val, old) {
+      console.log(`watch: firstname from ${old} to ${val}`)
+      this.fullName01 = val + ' ' + this.lastName01
+    },
+    lastName01: function(val, old) {
+      console.log(`watch: lastname from ${old} to ${val}`)
+      this.fullName01 = this.firstName01 + ' ' + val
+    },
+    question: function(question, old) {
+      if (question === '') {
+        this.answer = 'I cannot give you an answer until you ask a question!'
+        return
+      }
+      this.answer = 'Waiting for you to stop typing...'
+      setTimeout(this.getAnswer, 2000)
     }
   },
   methods: {
@@ -73,31 +102,6 @@ export default {
         .catch(function(error) {
           vm.answer = 'Error! Could not reach the API. ' + error
         })
-    }
-  },
-  computed: {
-    // field for cached value
-    reversedMessage: function() {
-      return this.message.split('').reverse().join('')
-    },
-    fullName1: function() {
-      return this.firstName1 + ' ' + this.lastName1
-    }
-  },
-  watch: {
-    firstName: function(val) {
-      this.fullName = val + ' ' + this.lastName
-    },
-    lastName: function(val) {
-      this.fullName = this.firstName + ' ' + val
-    },
-    question: function(newQuestion, oldQuestion) {
-      if (newQuestion === '') {
-        this.answer = 'I cannot give you an answer until you ask a question!'
-        return
-      }
-      this.answer = 'Waiting for you to stop typing...'
-      setTimeout(this.getAnswer, 2000)
     }
   }
 }

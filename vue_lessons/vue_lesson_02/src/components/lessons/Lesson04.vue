@@ -1,12 +1,13 @@
 <template>
   <div id="lesson-04">
     <h1>Lesson 04</h1>
+    <!-- class value related to css properties -->
     <div id="example-01" v-if="seen1">
-      <h1>Example 01: class bind</h1>
+      <h1>Example 01: class bind, object</h1>
       <div v-bind:class="classObject">fatal error text1</div>
     </div>
     <div id="example-02" v-if="seen2">
-      <h1>Example 02: class bind, array syntax</h1>
+      <h1>Example 02: class bind, array</h1>
       <div v-bind:class="[isStatic ? staticClass : '', errorClass]">fatal error text2</div>
     </div>
     <div id="example-03" v-if="seen3">
@@ -39,7 +40,7 @@ export default {
   computed: {
     classObject: function () {
       return {
-        static: this.isStatic,
+        static: this.isStatic, // true or false
         'text-danger': this.error && this.error.type === 'fatal'
       }
     }

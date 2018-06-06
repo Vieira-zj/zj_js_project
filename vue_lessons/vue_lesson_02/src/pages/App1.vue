@@ -15,7 +15,7 @@
       <router-link to="/app1/7">lesson-07,</router-link>
       <router-link to="/app1/8">lesson-08</router-link>
     </nav>
-    <div>
+    <div id="test" v-if="routerQuerys() !== 'null'">
       <p>router params: {{ routerParams() }}</p>
       <p>router query: {{ routerQuerys() }}</p>
     </div>
