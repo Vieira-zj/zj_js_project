@@ -2,7 +2,7 @@
   <div id="app5">
     <div>
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
-      <h1>ChartJs Lessons - Reactive</h1>
+      <h1>Reactive ChartJs Lessons</h1>
       <div class="chart" v-if="seenReactiveBar">
         <h2>Bar Reactive Chart Test</h2>
         <bar-reactive></bar-reactive>
@@ -11,10 +11,13 @@
         <h2>Line Reactive Chart Test</h2>
         <!-- error: use tag line-reactive-chart? -->
         <!-- TODO: get canvas context -->
+        <!-- set props of "reactiveProp" -->
         <line-reactive :chart-data="datacollection" :options="chartOptions"></line-reactive>
       </div>
-      <button @click="fillData()">Randomize</button><br>
-      <button @click="goBack()">GoBack</button>
+      <div id="trailer">
+        <button @click="fillData()">Randomize</button><br>
+        <button @click="goBack()">GoBack</button>
+      </div>
     </div>
   </div>
 </template>
@@ -40,9 +43,19 @@ export default {
       datacollection: null
     }
   },
+  // workflow:
+  // #1. vir dom created, init data
+  // #2. chart mounted, set gradient, and render data
+  // #3. vir dom mounted
+  // #4. refresh data by click button
+  created () {
+    console.info('vue hook: virtual dom created.')
+    this.fillData() // init datacollection
+  },
   mounted () {
     console.info('vue hook: virtual dom mounted.')
-    this.fillData()
+    // note: cannot create linear gradient here
+    // TypeError: Cannot read property 'getContext' of undefined
   },
   methods: {
     fillData () {

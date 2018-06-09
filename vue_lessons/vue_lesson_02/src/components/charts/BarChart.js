@@ -19,7 +19,10 @@ export default {
       gradient: null
     }
   },
+  // vue lifecycle hooks:
+  // beforeCreate, created, beforeMount, mounted, beforeUpdate, updated, beforeDestroy, destroyed
   mounted () {
+    // canvas createLinearGradient()
     this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
     this.gradient.addColorStop(0, 'rgba(255, 0, 0, 0.5)') // show this color at 0%
     this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)') // show this color at 50%

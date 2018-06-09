@@ -24,6 +24,8 @@ new Vue({
   el: '#app',
   router,
   store,
+  // vue lifecycle hooks:
+  // beforeCreate, created, beforeMount, mounted, beforeUpdate, updated, beforeDestroy, destroyed
   created: function () {
     console.info('hook: vue instance created.')
   },

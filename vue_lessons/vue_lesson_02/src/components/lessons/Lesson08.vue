@@ -3,7 +3,7 @@
     <h1>Lesson 08, components and props</h1>
     <div id="example 01" v-show="seen1">
       <h4>Example 01, Component, Passing Data with Props</h4>
-      <child01 message='hello, from parent!'></child01>
+      <child01 message="hello, from parent."></child01>
     </div>
     <!-- TODO: CH10, props -->
   </div>
