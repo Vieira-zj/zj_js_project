@@ -1,3 +1,5 @@
+// count example
+
 // shared state
 // state used as: state.part1.count
 const state = {
@@ -17,8 +19,12 @@ const getters = {
 }
 
 const mutations = {
-  increment (state) {
-    state.count++
+  increment (state, playload) {
+    if (playload) {
+      state.count += playload.amount
+    } else {
+      state.count++
+    }
     state.history.push('add')
   },
   decrement (state) {
@@ -35,20 +41,20 @@ const actions = {
       commit('increment')
     }
   },
-  incrementAsync ({ commit }) {
+  incrementAsync ({ commit }, playload) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        commit('increment')
+        commit('increment', playload)
         resolve()
-      }, 1000)
+      }, 500)
     })
   },
-  incrementAsyncPromise: ({ commit }) => {
+  incrementAsyncAndRet: ({ commit }) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         commit('increment')
         resolve('increment done.')
-      }, 1000)
+      }, 500)
     })
   }
 }

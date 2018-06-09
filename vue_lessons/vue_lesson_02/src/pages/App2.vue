@@ -4,7 +4,8 @@
     <nav>
       <router-link to="/app2/1">lesson-01,</router-link>
       <router-link to="/app2/2">lesson-02,</router-link>
-      <router-link to="/app2/3">lesson-03</router-link>
+      <router-link to="/app2/3">lesson-03</router-link><br>
+      <router-link to="/">Home</router-link><br>
     </nav>
     <div v-if="$route.params.lessonId === '1'">
       <counter-01></counter-01>
@@ -16,8 +17,7 @@
       <counter-03></counter-03>
     </div>
     <div id="trailer">
-    <router-link to="/">Home</router-link><br>
-    <button @click="goTop">Go Top</button>
+    <button @click="goTop($)">Go Top</button>
     </div>
   </div>
 </template>
@@ -40,11 +40,6 @@ export default {
     Counter01,
     Counter02,
     Counter03
-  },
-  methods: {
-    goTop: function () {
-      this.$('html,body').animate({ scrollTop: '0px' }, 200)
-    }
   }
 }
 </script>

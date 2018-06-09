@@ -13,7 +13,8 @@
         <!-- TODO: get canvas context -->
         <line-reactive :chart-data="datacollection" :options="chartOptions"></line-reactive>
       </div>
-      <button @click="fillData()">Randomize</button>
+      <button @click="fillData()">Randomize</button><br>
+      <button @click="goBack()">GoBack</button>
     </div>
   </div>
 </template>

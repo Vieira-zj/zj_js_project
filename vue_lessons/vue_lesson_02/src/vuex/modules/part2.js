@@ -1,3 +1,5 @@
+// todos example
+
 // non-shared state
 const state = () => {
   return {
@@ -21,6 +23,10 @@ const getters = {
   },
   doneTodosCount: (state, getters) => {
     return getters.doneTodos.length
+  },
+  // if return method, value will not be cached
+  getTodoById: state => id => {
+    return state.todos.find(todo => id === todo.id)
   }
 }
 

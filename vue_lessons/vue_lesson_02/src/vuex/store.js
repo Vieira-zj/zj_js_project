@@ -1,4 +1,5 @@
 // store.js, single file include all vuex components.
+// https://github.com/vuejs/vuex/tree/dev/examples
 import Vue from 'vue'
 import Vuex from 'vuex'
 

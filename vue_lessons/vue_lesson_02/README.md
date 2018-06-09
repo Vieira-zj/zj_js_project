@@ -37,8 +37,9 @@ index.html, <div id="app">, <router-view/> => @/main.js, router => @/router/inde
 
 2) vuex lessons 
 vue => @/pages/App2.vue => @/components/counter/*
-vuex => @/man.js => @/vuex/store.js
-vuex => @/man.js => @/vuex/index.js => @/vuex/modules/*
+vuex => @/main.js => @/vuex/store.js
+vuex => @/main.js => @/store/index.js => @/store/getters.js, @/store/mutations.js, @/store/action.js
+vuex => @/main.js => @/vuex/index.js => @/vuex/modules/*
 
 3) charts => @/pages/App4.vue => @/components/charts/*
 

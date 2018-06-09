@@ -1,6 +1,6 @@
 <template>
   <div id="app4">
-    <div>
+    <div id="charts">
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
       <h1>ChartJs Lessons</h1>
       <div class="chart">
@@ -20,6 +20,10 @@
         <pie-chart></pie-chart>
       </div>
     </div>
+    <div id="trailer">
+      <button @click="goTop($)">Go Top</button><br>
+      <button @click="navBack">Go Back</button>
+    </div>
   </div>
 </template>
 
@@ -36,6 +40,11 @@ export default {
     LineChart,
     DoughnutChart,
     PieChart
+  },
+  methods: {
+    navBack () {
+      this.goBack()
+    }
   }
 }
 </script>

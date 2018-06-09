@@ -13,6 +13,7 @@ const getCount = store => {
   return store.state.count
 }
 
+// vuex plugin
 const myPlugin = store => {
   // called when the store is initialized
   console.log('store init.')

@@ -31,7 +31,7 @@
       <lesson-08 v-if="isSegmentShow() === '8'"></lesson-08>
     </div>
     <div id="trailer">
-      <button v-on:click="goTop">Go Top</button>
+      <button v-on:click="navTop">Go Top</button>
     </div>
   </div>
 </template>
@@ -76,8 +76,8 @@ export default {
     isSegmentShow: function () {
       return this.$route.params.lessonId
     },
-    goTop: function () {
-      this.$('html,body').animate({ scrollTop: '0px' }, 200) // jquery
+    navTop: function () {
+      this.goTop(this.$)
     }
   }
 }

@@ -7,17 +7,17 @@ export const incrementIfOdd = ({ commit, state }) => {
   }
 }
 
-export const incrementAsync = ({ commit }) => {
+export const incrementAsync = ({ commit }, playload) => {
   setTimeout(() => {
-    commit('increment')
-  }, 800)
+    commit('increment', playload)
+  }, 500)
 }
 
-export const incrementAsyncPromise = ({ commit }) => {
+export const incrementAsyncAndRet = ({ commit }) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       commit('increment')
       resolve('increment done.')
-    }, 1000)
+    }, 500)
   })
 }

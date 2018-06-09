@@ -17,6 +17,10 @@ export const doneTodosCount = (state, getters) => {
   return getters.doneTodos.length
 }
 
+export const getTodoById = state => id => {
+  return state.todos.find(todo => id === todo.id)
+}
+
 const limit = 5
 
 export const recentHistory = state => {
