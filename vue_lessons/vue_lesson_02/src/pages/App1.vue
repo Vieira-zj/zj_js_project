@@ -6,14 +6,15 @@
       <br>
       <router-link to="/app1/1">lesson-01,</router-link>
       <router-link to="/app1/2">lesson-02,</router-link>
-      <router-link to="/app1/3">lesson-03</router-link>
+      <router-link to="/app1/3">lesson-03,</router-link>
+      <router-link to="/app1/4">lesson-04</router-link>
       <br>
-      <router-link to="/app1/4">lesson-04,</router-link>
       <router-link to="/app1/5">lesson-05,</router-link>
-      <router-link to="/app1/6">lesson-06</router-link>
-      <br>
+      <router-link to="/app1/6">lesson-06,</router-link>
       <router-link to="/app1/7">lesson-07,</router-link>
       <router-link to="/app1/8">lesson-08</router-link>
+      <br>
+      <router-link to="/">Home</router-link>
     </nav>
     <div id="test" v-if="routerQuerys() !== 'null'">
       <p>router params: {{ routerParams() }}</p>
@@ -28,6 +29,9 @@
       <lesson-06 v-if="isSegmentShow() === '6'"></lesson-06>
       <lesson-07 v-if="isSegmentShow() === '7'"></lesson-07>
       <lesson-08 v-if="isSegmentShow() === '8'"></lesson-08>
+    </div>
+    <div id="trailer">
+      <button v-on:click="goTop">Go Top</button>
     </div>
   </div>
 </template>
@@ -71,6 +75,9 @@ export default {
     },
     isSegmentShow: function () {
       return this.$route.params.lessonId
+    },
+    goTop: function () {
+      this.$('html,body').animate({ scrollTop: '0px' }, 200) // jquery
     }
   }
 }

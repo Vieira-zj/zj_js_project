@@ -10,6 +10,10 @@
     <div v-show="seen3">
       <counter-03></counter-03>
     </div>
+    <div id="trailer">
+    <router-link to="/">Home</router-link><br>
+    <button @click="goTop">Go Top</button>
+    </div>
   </div>
 </template>
 
@@ -22,8 +26,8 @@ export default {
   name: 'App2',
   data () {
     return {
-      seen1: false,
-      seen2: true,
+      seen1: true,
+      seen2: false,
       seen3: false
     }
   },
@@ -31,6 +35,11 @@ export default {
     Counter01,
     Counter02,
     Counter03
+  },
+  methods: {
+    goTop: function () {
+      this.$('html,body').animate({ scrollTop: '0px' }, 200)
+    }
   }
 }
 </script>

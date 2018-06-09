@@ -97,7 +97,7 @@ export default {
       this.$http
         .get('https://yesno.wtf/api')
         .then(function(response) {
-          vm.answer = _.capitalize(response.data.answer)
+          vm.answer = _.capitalize(response.data.answer) // lodash
         })
         .catch(function(error) {
           vm.answer = 'Error! Could not reach the API. ' + error

@@ -30,6 +30,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 **Workflow**
 
+```
 index.html, <div id="app">, <router-view/> => /src/main.js, router => src/router/index.js => src/pages/App.vue
 
 1) vue lessons => @/pages/App1.vue => @/components/lessons/*
@@ -37,4 +38,6 @@ index.html, <div id="app">, <router-view/> => /src/main.js, router => src/router
 2) vuex lessons => @/pages/App2.vue => @/components/counter/*
 
 3) charts => @/pages/App4.vue => @/components/charts/*
+
+```
 

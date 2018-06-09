@@ -9,7 +9,10 @@ import router from './router'
 // import store from './vuex/store'
 import store from './vuex'
 
+import $ from 'jquery'
 import axios from 'axios'
+
+Vue.prototype.$ = $
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
