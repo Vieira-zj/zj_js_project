@@ -15,7 +15,8 @@ export default new Router({
     { path: '/', component: App },
     { path: '/app1', component: App1 },
     { path: '/app1/:lessonId', component: App1 },
-    { path: '/app2', component: App2 },
+    { path: '/app2/', component: App2 },
+    { path: '/app2/:lessonId', component: App2 },
     { path: '/app3', component: App3 },
     { path: '/app4', component: App4 },
     { path: '/app5', component: App5 }

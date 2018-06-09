@@ -1,6 +1,6 @@
 <template>
   <div id="counter01">
-    <h3>Vuex Lesson 01</h3>
+    <h3>Lesson 01, Vuex Components</h3>
     <div>
       <h4>Vuex State</h4>
       <p>{{ textLocalCount }}</p>
@@ -21,9 +21,9 @@
     </div>
     <div>
       <h4>Vuex Actions (Async)</h4>
-      <button @click="addIfOdd">Add If Odd</button><br>
-      <button @click="addAsync">Add Async</button><br>
-      <button @click="addAsyncWithNotify">Add Async And Notify</button>
+      <button @click="addAsync">+2 Async</button><br>
+      <button @click="addAsyncWithNotify">+1 Async And Notify</button><br>
+      <button @click="addIfOdd">+1 Async If Odd</button>
     </div>
   </div>
 </template>
@@ -83,7 +83,7 @@ export default {
       this.$store.dispatch('incrementAsync', { amount: 2 })
     },
     addAsyncWithNotify () {
-      this.$store.dispatch('incrementAsyncPromise').then((text) => alert(text))
+      this.$store.dispatch('incrementAsyncAndRet').then((text) => alert(text))
     }
   }
 }

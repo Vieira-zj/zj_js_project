@@ -79,7 +79,7 @@ const actions = {
       }, 500)
     })
   },
-  incrementAsyncPromise: ({ commit }) => {
+  incrementAsyncAndRet: ({ commit }) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         commit('increment')

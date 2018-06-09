@@ -1,13 +1,18 @@
 <template>
   <div id="app2">
     <h1>Vuex Lessons</h1>
-    <div v-show="seen1">
+    <nav>
+      <router-link to="/app2/1">lesson-01,</router-link>
+      <router-link to="/app2/2">lesson-02,</router-link>
+      <router-link to="/app2/3">lesson-03</router-link>
+    </nav>
+    <div v-if="$route.params.lessonId === '1'">
       <counter-01></counter-01>
     </div>
-    <div v-show="seen2">
+    <div v-if="$route.params.lessonId === '2'">
       <counter-02></counter-02>
     </div>
-    <div v-show="seen3">
+    <div v-if="$route.params.lessonId === '3'">
       <counter-03></counter-03>
     </div>
     <div id="trailer">
