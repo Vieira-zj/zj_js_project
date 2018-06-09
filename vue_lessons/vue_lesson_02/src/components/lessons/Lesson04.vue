@@ -1,6 +1,6 @@
 <template>
   <div id="lesson-04">
-    <h1>Lesson 04</h1>
+    <h1>Lesson 04, set css properties</h1>
     <!-- class value related to css properties -->
     <div id="example-01" v-if="seen1">
       <h1>Example 01: class bind, object</h1>

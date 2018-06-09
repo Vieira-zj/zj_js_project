@@ -1,6 +1,6 @@
 <template>
   <div id="lesson-03">
-    <h1>Lesson 03</h1>
+    <h1>Lesson 03, computed and watch values</h1>
     <div id="example-01" v-if="seen1">
       <h2>Example 01: computed properties</h2>
       <p>Original message: "{{ message }}"</p>

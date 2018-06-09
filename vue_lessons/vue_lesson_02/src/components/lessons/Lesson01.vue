@@ -1,6 +1,6 @@
 <template>
 <div id="lesson-01">
-  <h1>Lesson 01</h1>
+  <h1>Lesson 01, hello world</h1>
   <div id="example-01" v-if="seen1">
     <h2>Example 01, bind text</h2>
     <p>{{ message1 }}</p>

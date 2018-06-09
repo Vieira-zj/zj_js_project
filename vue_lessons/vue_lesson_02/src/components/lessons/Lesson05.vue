@@ -1,6 +1,6 @@
 <template>
   <div id="lesson-05">
-    <h1>Lesson 05</h1>
+    <h1>Lesson 05, control statements</h1>
     <div id="example-01" v-if="seen1">
       <h2>Example 01: v-if and v-else</h2>
       <div v-if="Math.random() > 0.5">Now you see me</div>

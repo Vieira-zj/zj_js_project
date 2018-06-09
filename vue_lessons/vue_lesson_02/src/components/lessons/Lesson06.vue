@@ -1,6 +1,6 @@
 <template>
   <div id="lesson-06">
-    <h1>Lesson 06</h1>
+    <h1>Lesson 06, event handler</h1>
     <div id="example-01" v-show="seen1">
       <h2>Example 01: listening to event</h2>
       <button v-on:click="counter += 1">Add 1</button>

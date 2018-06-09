@@ -1,6 +1,6 @@
 <template>
   <div id="lesson-02">
-    <h1>Lesson 02</h1>
+    <h1>Lesson 02, value bind</h1>
     <div id="example-01" v-if="seen1">
       <h2>Example 01, freeze value</h2>
       <button v-on:click="obj.foo='baz'">Change it</button>
