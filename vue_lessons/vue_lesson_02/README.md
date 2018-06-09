@@ -31,11 +31,14 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 **Workflow**
 
 ```
-index.html, <div id="app">, <router-view/> => /src/main.js, router => src/router/index.js => src/pages/App.vue
+index.html, <div id="app">, <router-view/> => @/main.js, router => @/router/index.js => @/pages/App.vue
 
 1) vue lessons => @/pages/App1.vue => @/components/lessons/*
 
-2) vuex lessons => @/pages/App2.vue => @/components/counter/*
+2) vuex lessons 
+vue => @/pages/App2.vue => @/components/counter/*
+vuex => @/man.js => @/vuex/store.js
+vuex => @/man.js => @/vuex/index.js => @/vuex/modules/*
 
 3) charts => @/pages/App4.vue => @/components/charts/*
 

@@ -1,3 +1,4 @@
+// store.js, single file include all vuex components.
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -15,7 +16,7 @@ const state = {
   ]
 }
 
-// getters are functions
+// getters are functions, like computed properties in vue.
 const getters = {
   count: state => state.count,
   evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd',
@@ -30,6 +31,10 @@ const getters = {
   doneTodosCount: (state, getters) => {
     return getters.doneTodos.length
   },
+  // if return method, value will not be cached
+  getTodoById: state => id => {
+    return state.todos.find(todo => id === todo.id)
+  },
   recentHistory: state => {
     const limit = 5
     const end = state.history.length
@@ -43,8 +48,12 @@ const getters = {
 // followed by additional payload arguments.
 // mutations must be synchronous and can be recorded by plugins for debugging purposes.
 const mutations = {
-  increment (state) {
-    state.count++
+  increment (state, playload) {
+    if (playload) {
+      state.count += playload.amount
+    } else {
+      state.count++
+    }
     state.history.push('add')
   },
   decrement (state) {
@@ -55,19 +64,19 @@ const mutations = {
 
 // actions are functions that cause side effects and can involve asynchronous operations.
 const actions = {
-  increment: ({ commit }) => commit('increment'),
+  increment: (context) => context.commit('increment'),
   decrement: ({ commit }) => commit('decrement'),
   incrementIfOdd ({ commit, state }) {
     if ((state.count + 1) % 2 === 0) {
       commit('increment')
     }
   },
-  incrementAsync ({ commit }) {
+  incrementAsync (context, playload) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        commit('increment')
+        context.commit('increment', playload)
         resolve()
-      }, 1000)
+      }, 500)
     })
   },
   incrementAsyncPromise: ({ commit }) => {
@@ -75,7 +84,7 @@ const actions = {
       setTimeout(() => {
         commit('increment')
         resolve('increment done.')
-      }, 1000)
+      }, 500)
     })
   }
 }

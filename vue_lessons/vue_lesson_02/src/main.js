@@ -6,8 +6,8 @@ import router from './router'
 // https://www.jianshu.com/p/13bec8f5b17d
 // https://github.com/vuejs/vuex/tree/dev/examples
 // import store from './store'
-// import store from './vuex/store'
-import store from './vuex'
+import store from './vuex/store'
+// import store from './vuex'
 
 import $ from 'jquery'
 import axios from 'axios'

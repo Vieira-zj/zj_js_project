@@ -4,23 +4,24 @@
     <div>
       <h4>Vuex State</h4>
       <p>{{ textLocalCount }}</p>
-      <p>Global Count: {{ count }}</p>
-      <p>Total: {{ countPlusLocalState }}</p>
+      <p><b>Global Count:</b> {{ count }}</p>
+      <p>Total (local + global): {{ countPlusLocalState }}</p>
       <p>Recent History (last 5 entries): {{ recentHistory }}</p>
     </div>
     <div>
       <h4>Vuex Getter</h4>
       <p>Done ToDos Count: {{ doneTodosCount }}</p>
       <p>Done ToDos: {{ doneTodos.join(', ') }}</p>
+      <p>Get Todo By ID: {{ getTodoById }}</p>
     </div>
     <div>
-      <h4>Vuex Mutations</h4>
-      <button v-on:click="add">+1</button>
+      <h4>Vuex Mutations (Sync)</h4>
+      <button v-on:click="add">+2</button>
       <button v-on:click="min">-1</button><br>
     </div>
     <div>
-      <h4>Vuex Actions</h4>
-      <button @click="addIfOdd">Add If Odd</button>
+      <h4>Vuex Actions (Async)</h4>
+      <button @click="addIfOdd">Add If Odd</button><br>
       <button @click="addAsync">Add Async</button><br>
       <button @click="addAsyncWithNotify">Add Async And Notify</button>
     </div>
@@ -36,10 +37,10 @@ export default {
     }
   },
   computed: {
-    // vuex state
     textLocalCount () {
       return 'Local Count: ' + String(this.localCount)
     },
+    // #1, vuex state
     count () {
       if (this.$store.state.part1) {
         return this.$store.state.part1.count
@@ -52,31 +53,34 @@ export default {
       }
       return this.$store.state.count + this.localCount
     },
-    // vuex getters
+    // #2, vuex getters
     doneTodos () {
       return this.$store.getters.doneTodos
     },
     doneTodosCount () {
       return this.$store.getters.doneTodosCount
     },
+    getTodoById () {
+      return this.$store.getters.getTodoById(2)
+    },
     recentHistory () {
       return this.$store.getters.recentHistory
     }
   },
   methods: {
-    // vuex mutations
+    // #3, vuex mutations
     add () {
-      this.$store.commit('increment')
+      this.$store.commit('increment', { amount: 2 })
     },
     min () {
       this.$store.commit('decrement')
     },
-    // vuex actions
+    // #4, vuex actions
     addIfOdd () {
       this.$store.dispatch('incrementIfOdd')
     },
     addAsync () {
-      this.$store.dispatch('incrementAsync')
+      this.$store.dispatch('incrementAsync', { amount: 2 })
     },
     addAsyncWithNotify () {
       this.$store.dispatch('incrementAsyncPromise').then((text) => alert(text))
