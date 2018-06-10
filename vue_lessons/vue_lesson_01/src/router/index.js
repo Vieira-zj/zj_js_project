@@ -68,17 +68,16 @@ const UserProfilePreview = {
   `
 }
 
-// props
-function dynamicPropsFn (route) {
-  const now = new Date()
-  return {
-    name: (now.getFullYear() + parseInt(route.params.years)).toString()
-  }
-}
-
 // template, 404
 const NotFound = {
   template: `<h1 style='color:red;text-align:center'>Page Not Found!</h1>`
+}
+
+function propsFnGetNextYears (route) {
+  const now = new Date()
+  return {
+    year: now.getFullYear() + parseInt(route.params.num)
+  }
 }
 
 export default new Router({
@@ -89,16 +88,14 @@ export default new Router({
       name: 'home',
       component: App
     },
+    // redirect pages
+    { path: '/home', redirect: '/' },
+    { path: '/index', redirect: { name: 'home' } },
+    // hello wrold
     { path: '/hello', component: HelloWorld },
     { path: '/mydemo', component: VueDemo },
-    // redirect pages
-    {
-      path: '/home', redirect: '/'
-    },
-    {
-      path: '/index', redirect: { name: 'home' }
-    },
-    // #2. example: user info
+
+    // #2.1 example: user info
     // "children" map to "<router-view/>"
     {
       path: '/users',
@@ -125,7 +122,7 @@ export default new Router({
         { path: 'list/:userid', component: User }
       ]
     },
-    // #3. example: router
+    // #2.2 example: router
     {
       path: '/router/:id',
       component: RouterDemo01, // page
@@ -134,19 +131,19 @@ export default new Router({
         { path: 'details', component: Details }
       ]
     },
-    // #4. example: router props
+    // #2.3 example: router props
     {
       path: '/props',
       component: RouterDemo02, // page
       children: [
-        { path: 'params/:name', component: Hello, props: true }, // pass route.params to props
-        { path: 'static', component: Hello, props: { name: 'world' } }, // static values
-        // custom logic for mapping between route and props
-        { path: 'dynamic/:years', component: Hello, props: dynamicPropsFn },
-        { path: 'search', component: Hello, props: (route) => ({ query: route.query.q }) }
+        { path: 'args', component: Hello, props: { name: 'world' } }, // pass object
+        { path: 'args/:name', component: Hello, props: true }, // pass ":name" to props
+        { path: 'custom/:num', component: Hello, props: propsFnGetNextYears }, // custom func
+        { path: 'search', component: Hello, props: (route) => ({ query: route.query }) }
       ]
     },
-    // #5. 404 - page not found
+
+    // #3. 404 - page not found
     {
       path: '*',
       component: NotFound,

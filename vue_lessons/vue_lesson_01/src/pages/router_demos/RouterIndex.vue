@@ -25,6 +25,7 @@
       </ul>
     </nav>
     <p><b>Router View Content:</b></p>
+    <!-- router view template from @/router/index.js -->
     <router-view/>
     <p id="trailer">
       <a v-on:click="goBack">Go Back</a><br>

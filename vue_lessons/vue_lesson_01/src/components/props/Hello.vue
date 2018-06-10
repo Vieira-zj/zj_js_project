@@ -1,8 +1,9 @@
 <template>
   <div>
-    <p>Prop: {{ name }}</p>
-    <p v-show="name !== 'null'">Hello {{ getName }}</p>
-    <p v-show="query !== 'null'">Query: {{ query }}</p>
+    <p><b>Router View Content:</b></p>
+    <p v-show="name !== 'null'">Hello {{ helloName }}</p>
+    <p v-show="year !== 0">Next Year: {{ year }}</p>
+    <p v-show="query !== null">Query: {{ JSON.stringify(query) }}</p>
   </div>
 </template>
 
@@ -15,16 +16,17 @@ export default {
       type: String,
       default: 'null'
     },
+    year: {
+      type: Number,
+      default: 0
+    },
     query: {
-      type: String,
-      default: 'null'
+      type: Object,
+      default: null
     }
   },
   computed: {
-    getName () {
-      if (_.isNumber(this.name)) {
-        return this.name + '!'
-      }
+    helloName () {
       return _.upperFirst(this.name) + '!'
     }
   }

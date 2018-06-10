@@ -1,20 +1,46 @@
 <template>
   <div id="router-demo02">
     <h3>Router Demo 02, Props</h3>
-    <ul>
-      <li><router-link to="/props/params/zhengjin">Hello Name</router-link></li>
-      <li><router-link to="/props/static">Hello World</router-link></li>
-      <li><router-link to="/props/dynamic/1">Hello Dynamic</router-link></li>
-      <li><router-link to="/props/search?q=vue">Hello Attrs</router-link></li>
-    </ul>
-    <router-view/>
-    <a v-on:click="goRouterHome">Router Home</a>
+    <div>
+      <label for="inputname">Input Name:</label>
+      <input id="inputname" type="text" v-model.lazy="inputName"><br>
+      <label for="inputnext">Input Next:</label>
+      <input id="inputnext" type="text" v-model.lazy="inputNext">
+    </div>
+    <div>
+      <ul>
+        <li><router-link to="/props/args">Hello World</router-link></li>
+        <li><a @click="goHelloName" v-bind:title="message">Hello Name</a></li>
+        <li><a @click="goNextYears" v-bind:title="message">Next Years</a></li>
+        <li><router-link to="/props/search?key=vue">Query Test</router-link></li>
+      </ul>
+    </div>
+    <div>
+      <!-- component: Hello -->
+      <router-view/>
+    </div>
+    <div>
+      <a v-on:click="goRouterHome">Router Home</a>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      inputName: 'null',
+      inputNext: 0,
+      message: 'Click me'
+    }
+  },
   methods: {
+    goHelloName () {
+      this.$router.push('/props/args/' + this.inputName)
+    },
+    goNextYears () {
+      this.$router.push('/props/custom/' + this.inputNext)
+    },
     goRouterHome () {
       this.$router.push({ name: 'user_home' })
     }

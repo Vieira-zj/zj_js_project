@@ -8,7 +8,7 @@
       <router-view/>
     </div>
     <div>
-      <label for="routeid">Input ID:</label>
+      <label for="routeid">Input route ID:</label>
       <input id="routeid" type="text" v-model.lazy="routerId" v-on:keyup.enter="navByRouteId"><br>
       <button @click="navByRouteId">Submit</button>
     </div>
@@ -29,6 +29,7 @@ export default {
     }
   },
   watch: {
+    // ?
     '$route' (to, from) {
       this.statMsg = 'ID is reload'
       this.navMsg = 'from ' + from.path + ' to ' + to.path
