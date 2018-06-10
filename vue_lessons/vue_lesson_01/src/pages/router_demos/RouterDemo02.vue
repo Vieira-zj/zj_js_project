@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     goHelloName () {
+      // as <router-link to="xxx">, navigate and add a history
       this.$router.push('/props/args/' + this.inputName)
     },
     goNextYears () {

@@ -42,7 +42,7 @@ Vuex
 vuex lessons 
 vue => @/pages/App2.vue => @/components/counter/*
 vuex => @/main.js => @/vuex/store.js
-vuex => @/main.js => @/store/index.js => @/store/getters.js, @/store/mutations.js, @/store/action.js
+vuex => @/main.js => @/store/index.js => getters.js, mutations.js, action.js
 vuex => @/main.js => @/vuex/index.js => @/vuex/modules/*
 ```
 
