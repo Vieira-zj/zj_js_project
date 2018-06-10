@@ -1,11 +1,20 @@
 <template>
   <div id="router-demo01">
-    <h3>Router Demo 01</h3>
-    <p>ID: {{ routerId }}</p>
-    <p>ID stat: <span>{{ statMsg }}</span></p>
-    <p>navigation: {{ navMsg }}</p>
-    <router-view/>
-    <a v-on:click="goRouterHome">Router Home</a>
+    <div>
+      <h3>Router Demo 01</h3>
+      <p>ID: {{ routerId }}</p>
+      <p>ID stat: <span>{{ statMsg }}</span></p>
+      <p>Navigation: {{ navMsg }}</p>
+      <router-view/>
+    </div>
+    <div>
+      <label for="routeid">Input ID:</label>
+      <input id="routeid" type="text" v-model.lazy="routerId" v-on:keyup.enter="navByRouteId"><br>
+      <button @click="navByRouteId">Submit</button>
+    </div>
+    <div id="trailer">
+      <a v-on:click="goRouterHome">Router Home</a>
+    </div>
   </div>
 </template>
 
@@ -15,24 +24,31 @@ export default {
   data () {
     return {
       statMsg: 'none',
-      navMsg: 'none'
-    }
-  },
-  computed: {
-    routerId () {
-      return this.$route.params.id
+      navMsg: 'none',
+      routerId: this.$route.params.id
     }
   },
   watch: {
     '$route' (to, from) {
       this.statMsg = 'ID is reload'
       this.navMsg = 'from ' + from.path + ' to ' + to.path
+      this.routerId = this.$route.params.id
     }
   },
   methods: {
+    navByRouteId () {
+      if (this.$route.path.indexOf('details') < 0) {
+        this.$router.push(`/router/${this.routerId}`)
+      } else {
+        this.$router.push(`/router/${this.routerId}/details`)
+      }
+    },
     goRouterHome () {
       this.$router.push({ name: 'user_home' })
     }
+  },
+  updated () {
+    console.log('vue hook: page updated.')
   }
 }
 </script>

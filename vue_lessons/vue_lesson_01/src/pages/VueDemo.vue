@@ -1,14 +1,14 @@
 <template>
-  <div id="vue-demo">
+  <div id="vuedemo">
     <div>
       <h3>Display Msg</h3>
       <button v-on:click="myEchoMessage">Echo Message</button><br>
-      <span>{{ message1 }}</span>
+      <span>Message: {{ message1 }}</span>
     </div>
     <div>
-      <h3>Http Test</h3>
-      <button v-on:click="myHttpGet">Get Request</button><br>
-      <span>{{ message2 }}</span>
+      <h3>Http Get Test</h3>
+      <button v-on:click="myHttpGet">Get Request</button>
+      <p>Http Resp Body: {{ message2 }}</p>
     </div>
     <div>
       <h3>Browser Navigation</h3>
@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       message1: 'My hello world vue.js!',
-      message2: 'http Get response content'
+      message2: 'null'
     }
   },
   methods: {
@@ -31,6 +31,7 @@ export default {
       alert(this.message1)
     },
     myHttpGet: function () {
+      // access express server declared in webpack.dev.conf.js
       this.$http.get('http://localhost:8080/api/api1')
         .then(response => {
           console.log(response.status)

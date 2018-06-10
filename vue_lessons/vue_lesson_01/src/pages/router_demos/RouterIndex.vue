@@ -24,8 +24,9 @@
         <li><router-link to="/props">Props Example</router-link></li>
       </ul>
     </nav>
+    <p><b>Router View Content:</b></p>
     <router-view/>
-    <p>
+    <p id="trailer">
       <a v-on:click="goBack">Go Back</a><br>
       <a v-on:click="goHome">Go Home</a>
     </p>
@@ -37,6 +38,7 @@ export default {
   name: 'RouterIndex',
   methods: {
     goHome () {
+      // open home page and add a record in history, as <router-link to="xxx">
       // this.$router.push('/')
       this.$router.push({ name: 'home' })
     },

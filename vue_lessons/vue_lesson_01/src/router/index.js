@@ -13,20 +13,21 @@ import Hello from '@/components/props/Hello'
 
 Vue.use(Router)
 
-// user data
-const Foo = { template: '<span>username: foo</span>' }
-const Bar = { template: '<span>username: bar</span>' }
-const User = { template: '<span>userid: {{ $route.params.userid }}</span>' }
-const Default = { template: '<p>details: none</p>' }
-const Details = { template: '<p>details: {{ $route.params.id }}, {{ $route.path }}, {{ $route.name }}</p>' }
+// template, user info
+const Foo = { template: '<span>User Name: foo</span>' }
+const Bar = { template: '<span>User Name: bar</span>' }
+const User = { template: '<span>User ID: {{ $route.params.userid }}</span>' }
 
-// user settings
+const Default = { template: '<p>Details: none</p>' }
+const Details = { template: '<p>Details: {{ $route.params.id }}, {{ $route.path }}, {{ $route.name }}</p>' }
+
+// template, user settings info
 const UserSettingsNav = {
   template: `
 <div class="us__nav">
-  <router-link to="/user/settings/emails">emails</router-link>
+  <router-link to="/user/settings/emails">Emails</router-link>
   <br>
-  <router-link to="/user/settings/profile">profile</router-link>
+  <router-link to="/user/settings/profile">Profile</router-link>
 </div>
 `
 }
@@ -75,14 +76,14 @@ function dynamicPropsFn (route) {
   }
 }
 
-// 404 - page not found
+// template, 404
 const NotFound = {
   template: `<h1 style='color:red;text-align:center'>Page Not Found!</h1>`
 }
 
 export default new Router({
   routes: [
-    // main pages
+    // #1. main pages
     {
       path: '/',
       name: 'home',
@@ -97,12 +98,13 @@ export default new Router({
     {
       path: '/index', redirect: { name: 'home' }
     },
-    // router: user info pages
+    // #2. example: user info
+    // "children" map to "<router-view/>"
     {
       path: '/users',
       name: 'user_home',
-      component: RouterIndex,
-      alias: 'user',
+      component: RouterIndex, // page
+      alias: '/user', // match to "/users"
       children: [
         { path: 'foo', component: Foo },
         { path: 'bar', component: Bar },
@@ -113,7 +115,7 @@ export default new Router({
             { path: 'emails', component: UserEmails },
             {
               path: 'profile',
-              components: {
+              components: { // 2 components here
                 default: UserProfile,
                 helper: UserProfilePreview
               }
@@ -123,19 +125,19 @@ export default new Router({
         { path: 'list/:userid', component: User }
       ]
     },
-    // router: examples
+    // #3. example: router
     {
       path: '/router/:id',
-      component: RouterDemo01,
+      component: RouterDemo01, // page
       children: [
         { path: '', component: Default },
         { path: 'details', component: Details }
       ]
     },
-    // router props: examples
+    // #4. example: router props
     {
       path: '/props',
-      component: RouterDemo02,
+      component: RouterDemo02, // page
       children: [
         { path: 'params/:name', component: Hello, props: true }, // pass route.params to props
         { path: 'static', component: Hello, props: { name: 'world' } }, // static values
@@ -144,7 +146,7 @@ export default new Router({
         { path: 'search', component: Hello, props: (route) => ({ query: route.query.q }) }
       ]
     },
-    // 404 - page not found
+    // #5. 404 - page not found
     {
       path: '*',
       component: NotFound,

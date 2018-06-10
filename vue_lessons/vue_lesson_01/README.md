@@ -25,3 +25,18 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Workflow
+
+```
+index.html => @/main.js => @/router/index.js => main page, @/pages/App.vue
+
+http Get test => @/pages/VueDemo.vue
+```
+
+Router
+
+```
+@/router/index.js => @/pages/router_demo/*
+```
+
