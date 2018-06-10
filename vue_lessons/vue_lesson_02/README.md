@@ -33,15 +33,30 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ```
 index.html, <div id="app">, <router-view/> => @/main.js, router => @/router/index.js => @/pages/App.vue
 
-1) vue lessons => @/pages/App1.vue => @/components/lessons/*
+vue lessons => @/pages/App1.vue => @/components/lessons/*
+```
 
-2) vuex lessons 
+Vuex
+
+```
+vuex lessons 
 vue => @/pages/App2.vue => @/components/counter/*
 vuex => @/main.js => @/vuex/store.js
 vuex => @/main.js => @/store/index.js => @/store/getters.js, @/store/mutations.js, @/store/action.js
 vuex => @/main.js => @/vuex/index.js => @/vuex/modules/*
+```
 
-3) charts => @/pages/App4.vue => @/components/charts/*
+ChartJs
 
+```
+charts => @/pages/App4.vue => @/components/charts/*
+
+1) bar-reactive-chart
+BarReactiveChart.js => chart created, init chartData => chart mounted, set gradient, and render chartData => mixins, reactiveData => watch "chartData" updates
+
+2) line-reactive-chart
+App5.vue => page created
+LineReactiveChart.js => chart created => chart mounted, render chartData => mixins, reactiveProp => watch props "chartData" updates
+App5.vue => page mounted, fill dataCollection, and set gradient => on button click, re-fill dataCollection
 ```
 

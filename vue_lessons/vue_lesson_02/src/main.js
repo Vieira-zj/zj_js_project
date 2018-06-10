@@ -3,9 +3,9 @@
 import Vue from 'vue'
 import router from './router'
 
-// import store from './vuex/store'
+import store from './vuex/store'
 // import store from './store'
-import store from './vuex'
+// import store from './vuex'
 
 // custom funcs
 import base from './base'

@@ -3,15 +3,14 @@
     <div>
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
       <h1>Reactive ChartJs Lessons</h1>
-      <div class="chart" v-if="seenReactiveBar">
+      <div id="barchart" class="chart" v-if="seenReactiveBar">
         <h2>Bar Reactive Chart Test</h2>
         <bar-reactive></bar-reactive>
       </div>
-      <div class="chart" v-if="seenReactiveLine">
+      <div id="linechart" class="chart" v-if="seenReactiveLine">
         <h2>Line Reactive Chart Test</h2>
         <!-- error: use tag line-reactive-chart? -->
         <!-- TODO: get canvas context -->
-        <!-- set props of "reactiveProp" -->
         <line-reactive :chart-data="datacollection" :options="chartOptions"></line-reactive>
       </div>
       <div id="trailer">
@@ -34,57 +33,89 @@ export default {
   },
   data () {
     return {
-      seenReactiveBar: false,
+      seenReactiveBar: true,
       seenReactiveLine: true,
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
       },
-      datacollection: null
+      datacollection: null,
+      gradient: null,
+      gradient2: null
     }
-  },
-  // workflow:
-  // #1. vir dom created, init data
-  // #2. chart mounted, set gradient, and render data
-  // #3. vir dom mounted
-  // #4. refresh data by click button
-  created () {
-    console.info('vue hook: virtual dom created.')
-    this.fillData() // init datacollection
-  },
-  mounted () {
-    console.info('vue hook: virtual dom mounted.')
-    // note: cannot create linear gradient here
-    // TypeError: Cannot read property 'getContext' of undefined
   },
   methods: {
     fillData () {
+      this.setRandomDataCollection()
+      this.setCanvasGradient()
+    },
+    setRandomDataCollection () {
+      var getRandomInt = () => {
+        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+      }
+
+      var getRandomCollection = (count) => {
+        let collection = []
+        for (let idx = 0; idx < count; idx++) {
+          collection.push(getRandomInt())
+        }
+        return collection
+      }
+
       this.datacollection = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
           {
             label: 'Data One',
             backgroundColor: 'rgba(255, 0, 0, 0.5)',
-            data: this.getRandomCollection(7)
+            data: getRandomCollection(7)
           },
           {
             label: 'Data Two',
             backgroundColor: 'rgba(0, 231, 255, 0.5)',
-            data: this.getRandomCollection(7)
+            data: getRandomCollection(7)
           }
         ]
       }
     },
-    getRandomInt () {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-    },
-    getRandomCollection (count) {
-      let collection = []
-      for (let idx = 0; idx < count; idx++) {
-        collection.push(this.getRandomInt())
+    setCanvasGradient () {
+      if (!this.datacollection) {
+        return
       }
-      return collection
+
+      // get canvas context
+      // use "document.querySelector('#linechart canvas')" instead of "this.$refs.canvas"
+      var canvas = document.querySelector('#linechart canvas')
+      if (!canvas) {
+        return
+      }
+      var context = canvas.getContext('2d')
+      this.gradient = context.createLinearGradient(0, 0, 0, 450)
+      this.gradient2 = context.createLinearGradient(0, 0, 0, 450)
+
+      this.gradient.addColorStop(0, 'rgba(255, 0, 0, 0.5)')
+      this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)')
+      this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)')
+
+      this.gradient2.addColorStop(0, 'rgba(0, 231, 255, 0.9)')
+      this.gradient2.addColorStop(0.5, 'rgba(0, 231, 255, 0.25)')
+      this.gradient2.addColorStop(1, 'rgba(0, 231, 255, 0)')
+
+      this.datacollection.datasets[0].backgroundColor = this.gradient
+      this.datacollection.datasets[1].backgroundColor = this.gradient2
     }
+  },
+  // workflow:
+  // #1. vir dom created, then chart created
+  // #2. chart mounted, render data, and set watch to chartData
+  // #3. vir dom mounted, fill data, and set gradient
+  // #4. re-fill data by button on click
+  created () {
+    console.info('vue hook: virtual dom created.')
+  },
+  mounted () {
+    console.info('vue hook: virtual dom mounted.')
+    this.fillData()
   }
 }
 </script>
