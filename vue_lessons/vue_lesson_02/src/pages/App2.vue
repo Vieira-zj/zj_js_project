@@ -7,6 +7,9 @@
       <router-link to="/app2/3">lesson-03</router-link><br>
       <router-link to="/">Home</router-link><br>
     </nav>
+    <div>
+      <p id="count"><b>Global Count Value: {{ count }}</b></p>
+    </div>
     <div v-if="$route.params.lessonId === '1'">
       <counter-01></counter-01>
     </div>
@@ -29,6 +32,11 @@ import Counter03 from '@/components/counter/Counter03'
 
 export default {
   name: 'App2',
+  components: {
+    Counter01,
+    Counter02,
+    Counter03
+  },
   data () {
     return {
       seen1: true,
@@ -36,10 +44,13 @@ export default {
       seen3: false
     }
   },
-  components: {
-    Counter01,
-    Counter02,
-    Counter03
+  computed: {
+    count () {
+      if (this.$store.state.part1) {
+        return this.$store.state.part1.count
+      }
+      return this.$store.state.count
+    }
   }
 }
 </script>
@@ -52,5 +63,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#count {
+  background: black;
+  color: white;
 }
 </style>

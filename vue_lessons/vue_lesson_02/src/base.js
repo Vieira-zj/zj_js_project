@@ -9,6 +9,6 @@ exports.install = function (Vue, options) {
 
   // by jpuery
   Vue.prototype.goTop = function ($) {
-    $('html,body').animate({ scrollTop: '0px' }, 500)
+    $('html,body').animate({ scrollTop: '0px' }, 300)
   }
 }

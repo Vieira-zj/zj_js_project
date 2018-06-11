@@ -2,7 +2,7 @@
   <div id="counter03">
     <h3>Lessons 03, Vuex Components by Map</h3>
     <div>
-      <p>Value: {{ count }}</p>
+      <p><b>Count</b>: {{ count }}</p>
       <p>Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.</p>
       <button v-on:click="increment">+1</button>
       <button v-on:click="decrement">-1</button><br>

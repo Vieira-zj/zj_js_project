@@ -5,7 +5,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// root state object.
+// root state object (global shared).
 // each Vuex instance is just a single state tree.
 const state = {
   count: 0,
