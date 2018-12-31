@@ -41,7 +41,7 @@ if (isDemo02Run) {
         console.log('object2 data:', obj2.data.join(', '))
 
         let obj3 = {
-            data () {
+            data() {
                 return ['Jan', 'Feb', 'Mar']
             }
         }
@@ -56,11 +56,11 @@ if (isDemo03Run) {
         inst = {
             count: 1,
             cal: {
-                increment (num) {
+                increment(num) {
                     // cannot use this.count
                     inst.count = inst.count + num
                 },
-                decrement (num) {
+                decrement(num) {
                     inst.count = inst.count - num
                 }
             }
@@ -140,7 +140,7 @@ if (isDemo05Run) {
 
         console.log('non-shared object:')
         nonSharedDataObj = {
-            data () {
+            data() {
                 return {
                     state: "done",
                     count: 0
@@ -150,6 +150,30 @@ if (isDemo05Run) {
         nonSharedDataObj.data().count++
         myAddDataAndPrint(nonSharedDataObj)
         myPrintData(nonSharedDataObj)
+    })()
+}
+
+// demo 06, Array.includes and Array.some
+let isDemo06Run = false
+if (isDemo06Run) {
+    (function () {
+        let nameList = ['jim', 'henry', 'vieira', 'jin']
+        console.log('name found:', nameList.includes('jin'))
+
+        let userList = [{
+                name: 'jim',
+                age: '12'
+            },
+            {
+                name: 'vieira',
+                age: '15'
+            },
+            {
+                name: 'jin',
+                age: '22'
+            },
+        ]
+        console.log('user with age 15 found:', userList.some(user => user.age === '15'))
     })()
 }
 
