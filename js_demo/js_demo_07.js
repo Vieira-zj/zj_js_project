@@ -177,5 +177,35 @@ if (isDemo06Run) {
     })()
 }
 
+// demo 07, class and object
+let isDemo07Run = false
+if (isDemo07Run) {
+    (function () {
+        var myapp = {}
+
+        myapp.Model = function () {
+            var val = 0
+
+            this.add = function (v) {
+                if (val < 100) val += v
+            }
+
+            this.sub = function (v) {
+                if (val > 0) val -= v
+            }
+
+            this.getVal = function () {
+                return val
+            }
+        }
+
+        model = new myapp.Model()
+        model.add(10)
+        console.log('add results:', model.getVal())
+        model.sub(5)
+        console.log('sub results:', model.getVal())
+    })()
+}
+
 
 console.log(__filename, 'DONE.')
