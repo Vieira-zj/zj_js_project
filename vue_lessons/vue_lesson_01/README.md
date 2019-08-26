@@ -4,7 +4,7 @@
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -28,7 +28,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## Workflow
 
-```
+```text
 index.html => @/main.js => @/router/index.js => main page, @/pages/App.vue
 
 http Get test => @/pages/VueDemo.vue
@@ -36,7 +36,7 @@ http Get test => @/pages/VueDemo.vue
 
 Router
 
-```
+```text
 @/router/index.js => @/pages/router_demo/*
 ```
 

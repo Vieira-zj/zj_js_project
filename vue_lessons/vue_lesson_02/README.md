@@ -28,9 +28,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## Guide
 
-**Workflow**
+#### Workflow
 
-```
+```text
 index.html, <div id="app">, <router-view/> => @/main.js, router => @/router/index.js => @/pages/App.vue
 
 vue lessons => @/pages/App1.vue => @/components/lessons/*
@@ -38,7 +38,7 @@ vue lessons => @/pages/App1.vue => @/components/lessons/*
 
 Vuex
 
-```
+```text
 vuex lessons 
 vue => @/pages/App2.vue => @/components/counter/*
 vuex => @/main.js => @/vuex/store.js
@@ -48,7 +48,7 @@ vuex => @/main.js => @/vuex/index.js => @/vuex/modules/*
 
 ChartJs
 
-```
+```text
 charts => @/pages/App4.vue => @/components/charts/*
 
 1) bar-reactive-chart

@@ -9,11 +9,9 @@ if (isDemo01Run) {
     (function () {
         function count() {
             var c = 0;
-
             function add() {
                 return ++c;
             }
-
             return add;
         }
 
@@ -59,11 +57,10 @@ if (isDemo0301Run) {
     var jane01 = {
         name: 'Jane',
         friends: ['Tr', 'Chee'],
-
         logHiToFriends: function () {
             var that = this;
             this.friends.forEach(function (friend) {
-                console.log(that.name + 'say hi to ' + friend);
+                console.log(that.name + ' say hi to ' + friend);
             });
         }
     };
@@ -75,10 +72,9 @@ if (isDemo0302Run) {
     var jane = {
         name: 'Jane',
         friends: ['Tr', 'Chee'],
-
         logHiToFriends: function () {
             this.friends.forEach(function (friend) {
-                console.log(this.name + 'say hi to ' + friend);
+                console.log(this.name + ' say hi to ' + friend);
             }.bind(this));
         }
     };
@@ -115,7 +111,7 @@ if (isDemo04Run) {
 }
 
 
-// demo 05, use method
+// demo 05, capWords by method
 var isDemo05Run = false;
 if (isDemo05Run) {
     function getText(someText) {
@@ -134,7 +130,6 @@ if (isDemo05Run) {
             ].join('');
             result.push(transformed);
         }
-
         return result;
     }
 
@@ -142,7 +137,7 @@ if (isDemo05Run) {
 }
 
 
-// demo 06, use object
+// demo 06, capWords by object
 var isDemo06Run = false;
 if (isDemo06Run) {
     var SomeText = function (text) {
@@ -169,7 +164,7 @@ if (isDemo06Run) {
 }
 
 
-// demo 07, use map()
+// demo 07, capWords by map()
 var isDemo07Run = false;
 if (isDemo07Run) {
     var capify = function (str) {
@@ -252,20 +247,20 @@ if (isDemo10Run) {
 }
 
 
-// demo 11, function area, and there is no code block area in JS
+// demo 11, function area, and there is no "for" code block area in JS
 var isDemo11Run = false;
 if (isDemo11Run) {
     (function demo11() {
         function foo() {
             for (var i = 0; i < 3; i++) {
-                var value = 'hello world';
+                var value = 'iterator' + i;
             }
             console.log(i);
             console.log(value);
         }
 
         foo();
-        console.log(i);
+        console.log(i); // ReferenceError: i is not defined
     })();
 }
 
@@ -324,16 +319,18 @@ var isDemo14Run = false;
 if (isDemo14Run) {
     (function () {
         var tmpArr = ['a', 'b', 'c'];
-        tmpArr.name = 'my temp array';
+        tmpArr.name = 'tmp_array';
         for (var ele in tmpArr) {  // iterator on index
             if (tmpArr.hasOwnProperty(ele)) {
                 console.log(ele + ' -> ' + tmpArr[ele]);
             }
         }
     })();
+    console.log();
 
     (function () {
         var tmpArr = ['a', 'b', 'c'];
+        tmpArr.desc = 'iterator array elements without attrs';
         tmpArr.forEach(function (element, index) {
             console.log(index + ' -> ' + element);
         });
@@ -366,8 +363,8 @@ var isDemo16Run = false;
 if (isDemo16Run) {
     (function (passed, first, second) {
         var fName = first || 'null',
-            sName = second || 'null',  // if not exist, set default
-            result = passed && true;  // if exist, set default
+            sName = second || 'null';  // if not exist, set default
+        var result = passed && true;  // if exist, set default
         console.log('Your first name: ' + fName + ', and second name: ' + sName + ', pass: ' + result);
     })('pass', 'zheng');
 }
@@ -380,15 +377,13 @@ if (isDemo17Run) {
         var name = 'ZHENG JIN';
         console.log('Hello, %s', name);
 
-        var x = 3,
-            y = 5;
+        var x = 3, y = 5;
         console.log('%d + %d = %d', x, y, (x + y));
     })();
 
     (function demo1702() {
-        let firstName = 'ZHENG';
-        let lastName = 'JIN';
-        console.log('Hello, ${firstName} ${lastName}');
+        let firstName = 'ZHENG', lastName = 'JIN';
+        console.log(`Hello, ${firstName} ${lastName}`);
     })();
 
     (function demo1703() {
@@ -396,9 +391,7 @@ if (isDemo17Run) {
 
         var name = 'ZHENG JIN';
         console.log(util.format('Hello, %s', name));
-
-        var x = 3,
-            y = 5;
+        var x = 3, y = 5;
         console.log(util.format('%d + %d = %d', x, y, (x + y)));
     })();
 }
@@ -416,41 +409,40 @@ if (isDemo18Run) {
         function multiple(a, b) {
             return a * b;
         }
-
-        var multiple02 = multiple;
-        console.log(multiple02(2, 2));
+        var tmp_mul = multiple;
+        console.log(tmp_mul(2, 2));
     })();
 }
 
 
-// demo 19, let
+// demo 19, let keyword
 var isDemo19Run = false;
 if (isDemo19Run) {
     (function demo1901() {
         var fnArr = [];
-        for (var idx = 0; idx < 10; idx++) {
+        for (var idx = 0; idx < 3; idx++) {
             fnArr[idx] = function () {
                 console.log(idx);
             }
         }
 
         console.log(idx);
-        fnArr[8]();
+        fnArr[1]();
     })();
 
     (function demo1902() {
         var fnArr = [];
-        for (let idx = 0; idx < 10; idx++) {
+        for (let idx = 0; idx < 3; idx++) {
             fnArr[idx] = function () {
                 console.log(idx);
             }
         }
-        fnArr[8]();
+        fnArr[1]();
     })();
 }
 
 
-// demo 20, length
+// demo 20, length attr
 var isDemo20Run = false;
 if (isDemo20Run) {
     (function demo20() {
@@ -471,25 +463,25 @@ if (isDemo21Run) {
 }
 
 
-// demo 22, access invalid array element
+// demo 22, access OutOfIndex array element, do not throw exception
 var isDemo22Run = false;
 if (isDemo22Run) {
     (function demo22() {
         var tmpArr = [];
-        console.log(tmpArr[1]);  // do not throw exception
-        console.log(tmpArr[-1]);
+        console.log(tmpArr[1]);  // undefined
+        console.log(tmpArr[-1]);  // undefined
     })();
 }
 
 
-// demo 23, apply()
+// demo 23, apply(): use args[] instead of arg1, arg2...
 var isDemo23Run = false;
 if (isDemo23Run) {
     (function () {
-        // max and min
+        // #1, max and min fns
         console.log('max:', Math.max(5, 11, 1, -10));
         var getMaxNumber = function (numbers) {
-            return Math.max.apply(null, numbers); // apply() => use args[] instead of arg1, arg2...
+            return Math.max.apply(null, numbers);
         };
 
         console.log('min', Math.min(5, 11, 1, -10));
@@ -501,14 +493,14 @@ if (isDemo23Run) {
         console.log('max number:', getMaxNumber(numbers));
         console.log('min number:', getMinNumber(numbers));
 
-        // array push
+        // #2, array push
         var array1 = [12 , "foo" , {name: "Joe"} , -2458];
         var array2 = ["Doe" , 555 , 100];
 
         array1.push([35, 'foo'], 'bar');
         console.log('array:', array1);
 
-        Array.prototype.push.apply(array1, array2); // apply() => use args[] instead of arg1, arg2...
+        Array.prototype.push.apply(array1, array2);
         console.log('array:', array1);
     })();
 }
@@ -524,7 +516,7 @@ if (isDemo24Run) {
         var str2 = "Welcome to Microsoft! ";
         str2 = str2 + "We are proud to announce that Microsoft has ";
         str2 = str2 + "one of the largest Web Developers sites in the world.";
-        console.log(str2.replace(/Microsoft/g, 'W3School')); //global
+        console.log(str2.replace(/Microsoft/g, 'W3School')); // global
 
         var text = "Javascript Tutorial";
         console.log(text.replace(/javascript/i, 'JavaScript')); // ignore case
