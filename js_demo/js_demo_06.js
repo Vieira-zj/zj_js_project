@@ -38,12 +38,12 @@ if (isDemo01Run) {
 var isDemo02Run = false;
 if (isDemo02Run) {
     (function demo02() {
-        // match null, undefined, false, '' and 0
+        // match: null, undefined, false, '' and 0
         var isPropertyExist1 = function (tmpProperty) {
             return Boolean(tmpProperty);
         };
 
-        // == null match for both null and undefined
+        // "== null" match: both null and undefined
         var isPropertyExist2 = function (tmpProperty) {
             return tmpProperty != null;
         };
@@ -75,7 +75,7 @@ if (isDemo02Run) {
 }
 
 
-// demo 03, args
+// demo 03, input args
 var isDemo03Run = false;
 if (isDemo03Run) {
     var tmpInputArgs = process.argv;
@@ -96,13 +96,11 @@ if (isDemo0401Run) {
         function fn1() {
             console.log('fn1 invoked.');
         }
-
         stack.push(fn1);
 
         function fn2() {
             console.log('fn2 invoked.');
         }
-
         stack.push(fn2, function () {
             console.log('fn3 invoked.');
         });
@@ -126,7 +124,7 @@ if (isDemo0402Run) {
             }
 
             var fn = stack[index];
-            index = index + 1;
+            index += 1;
             if (typeof fn === 'function') {
                 fn();
             }
@@ -136,7 +134,6 @@ if (isDemo0402Run) {
             console.log('fn1 invoked.');
             next();
         }
-
         stack.push(fn1);
 
         function fn2() {
@@ -145,7 +142,6 @@ if (isDemo0402Run) {
                 next();
             }, 1000);
         }
-
         stack.push(fn2, function () {
             console.log('fn3 invoked.');
             next();
@@ -161,7 +157,7 @@ var isDemo05Run = false;
 if (isDemo05Run) {
     (function () {
         function Product(value, price) {
-            var name = value;  // private
+            var name = value; // private
             this.price = price;
             this.setName = function (value) {
                 name = value;
@@ -175,9 +171,9 @@ if (isDemo05Run) {
         p.setName('FundBug');
         p.price = 100;
 
-        console.log(p.name);
-        console.log(p.price);
+        console.log(p.name); // undefined
         console.log(p.getName());
+        console.log(p.price);
     })();
 }
 
@@ -238,7 +234,7 @@ if (isDemo0702Run) {
         // individual arguments
         myPrints.call(this, 'test1', 'test2', 'test3');
 
-        // pass array of values
+        // pass array as argument
         var values = ['test1', 'test2', 'test3'];
         myPrints.apply(this, values)
     })();
@@ -247,12 +243,12 @@ if (isDemo0702Run) {
 
 // demo 08
 // built-in "arguments": args when function is invoked
-// fn.length: args when function is defined
+// "fn.length": args when function is defined
 var isDemo08Run = false;
 if (isDemo08Run) {
     function argTest(arg1, arg2) {  // define with 2 args
         console.log('outer args:', arguments);
-        console.log(arg1, arg2);
+        console.log('arg1=%s, arg2=%s', arg1, arg2);
 
         return function () {  // define without args
             console.log('inner args:', arguments);
@@ -261,13 +257,12 @@ if (isDemo08Run) {
 
     fn = argTest('test_arg1', 'test_arg2', 'test_arg3');  // pass 3 args
     fn('test_arg4');  // pass 1 arg
-
     console.log(argTest.length);  // 2
     console.log(fn.length);  // 0
 }
 
 
-// demo 09, var in output string
+// demo 09, var in console.log()
 var isDemo09Run = false;
 if (isDemo09Run) {
     (function () {
@@ -286,9 +281,9 @@ if (isDemo10Run) {
         console.log((strTrue.toLowerCase() === 'true') ? 'pass' : 'fail');
 
         var tmpInt = 1;
-        console.log('source value:', tmpInt++);
-        console.log('increase:', tmpInt);
-        console.log('increase:', ++tmpInt);
+        console.log('\ninit value:', tmpInt++);  // 1
+        console.log('increase:', tmpInt);  // 2
+        console.log('++increase:', ++tmpInt);  // 3
     })();
 }
 
@@ -301,8 +296,12 @@ if (isDemo11Run) {
         console.log('fn Object.is():', Object.is('test', 'test'));
 
         // #2
-        var tmpObj1 = {name: 'kong', age: 18, func: function () {
-        }};
+        var tmpObj1 = {
+            name: 'kong',
+            age: 18, 
+            func: function () {
+            }
+        };
         console.log('\nfn Object.keys():', Object.keys(tmpObj1));
 
         // #3
@@ -322,14 +321,20 @@ if (isDemo11Run) {
             }
         });
         console.log('\nfn Object.defineProperties():\n', JSON.stringify(tmpObj2, null, '  '));
+    })();
+}
 
-        // #4
+var isDemo1101Run = false;
+if (isDemo1101Run) {
+    (function () {
         console.log('\nfn Object.hasOwnProperty:');
         var tmpStr = new String('abc');
         console.log(tmpStr.hasOwnProperty('split'));
         console.log(tmpStr.__proto__.hasOwnProperty('split'));
+    })();
 
-        // #5, prototype chain and hasOwnProperty()
+    // prototype chain and hasOwnProperty()
+    (function () {
         function SuperType() {
             this.type = 'super type';
         }
@@ -344,15 +349,14 @@ if (isDemo11Run) {
         function SubType() {
             this.type = 'sub type';
         }
-
         SubType.prototype = new SuperType();
 
         var t = new SubType();
         console.log('\nfn Object.hasOwnProperty:');
-        console.log(t.hasOwnProperty('toString'));
-        console.log(t.__proto__.hasOwnProperty('sayHello'));
-        console.log(t.__proto__.constructor.hasOwnProperty('sayHello'));
-        console.log(t.__proto__.constructor.prototype.hasOwnProperty('toString'));
+        console.log(t.hasOwnProperty('toString')); // false
+        console.log(t.__proto__.hasOwnProperty('sayHello')); // false
+        console.log(t.__proto__.constructor.hasOwnProperty('sayHello')); // true
+        console.log(t.__proto__.constructor.prototype.hasOwnProperty('toString')); // true
     })();
 }
 

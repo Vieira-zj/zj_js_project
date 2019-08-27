@@ -2,7 +2,7 @@
  * Created by zhengjin on 2017/3/28.
  */
 
-// demo 01, switch with expression
+// demo 01, switch by expression
 var isDemo01Run = false;
 if (isDemo01Run) {
     (function demo01() {
@@ -77,17 +77,17 @@ if (isDemo03Run) {
         console.log('Value:', tmpArr);
 
         var mySet = new Set(myArr);
-//        var tmpSet = mySet.filter(ele => ele && ele.trim());  // error
+        // var tmpSet = mySet.filter(ele => ele && ele.trim());  // error
         console.log(mySet);
     })();
 }
 
 
-// demo 04, arrow function
+// demo 04, arrow =>fn
 var isDemo0401Run = false;
 if (isDemo0401Run) {
+    // #1. non-fixed variables
     (function demo0401() {
-        // 1. non-fixed vars
         var myArrowFn = (x, y, ...rest) => {
             var sum = x + y;
             for (var i = 0, length = rest.length; i < length; i++) {
@@ -102,8 +102,8 @@ if (isDemo0401Run) {
 
 var isDemo0402Run = false;
 if (isDemo0402Run) {
+    // #2. this
     (function demo0402() {
-        // 2. this
         var myObj = {
             birth: 1990,
             getAge: function (year) {
@@ -130,7 +130,7 @@ if (isDemo05Run) {
     (function demo06() {
         // g - global, i - ignore case
         var srcStr = 'JavaScript, VBScript, JScript and ECMAScript';
-//        var re = /[a-zA-Z]+cript/g;
+        // var re = /[a-zA-Z]+cript/g;
         var re = /[a-z]+cript/gi;
 
         while (true) {
@@ -159,6 +159,7 @@ if (isDemo06Run) {
 var isDemo07Run = false;
 if (isDemo07Run) {
     (function demo07() {
+        // 原类型
         var tmpStr = 'test';
         console.log('is String:');
         console.log(typeof tmpStr === 'string');
@@ -172,6 +173,7 @@ if (isDemo07Run) {
         console.log('is Boolean:');
         console.log(typeof tmpBool === 'boolean');
 
+        // 对象类型
         var tmpArr = ['a', 'b', 'c'];
         console.log('is Array:');
         console.log(typeof tmpArr === 'object'); // true
@@ -198,9 +200,8 @@ if (isDemo08Run) {
         var factorial = (function f(num) {
             if (num === 1) {
                 return 1;
-            } else {
-                return num * factorial(num - 1);
             }
+            return num * factorial(num - 1);
         });
         console.log('factorial:', factorial(5));
 
@@ -209,7 +210,7 @@ if (isDemo08Run) {
             var subFuncs = [];
             for (var i = 0; i < 10; i++) {
                 subFuncs[i] = (function () {
-                    return i;
+                    return i + 1;
                 })(i);
             }
             return subFuncs;
@@ -222,11 +223,10 @@ if (isDemo08Run) {
 }
 
 
-// demo 09, keyword "this"
+// demo 09, "this" and prototype chain
 var isDemo0901Run = false;
-if (isDemo0901Run) {
+if (isDemo0901Run) { // #1.1
     (function demo0901() {
-        // #1.1
         function Thing() {
         }
 
@@ -236,7 +236,7 @@ if (isDemo0901Run) {
         };
         Thing.prototype.setFoo = function (newFoo) {
             this.foo = newFoo; // this => instance
-//            this.__proto__.foo = newFoo;
+            // this.__proto__.foo = newFoo;
         };
 
         var thing1 = new Thing();
@@ -261,13 +261,11 @@ if (isDemo0901Run) {
 }
 
 var isDemo0902Run = false;
-if (isDemo0902Run) {
+if (isDemo0902Run) { // #1.2
     (function demo0902() {
-        // #1.2
         function Thing1() {
             this.foo = 'foo'
         }
-
         Thing1.prototype.foo = 'bar';
         Thing1.prototype.logFoo = function () {
             console.log(this.foo);
@@ -276,7 +274,6 @@ if (isDemo0902Run) {
         function Thing2() {
             this.foo = 'foobar';
         }
-
         Thing2.prototype = new Thing1();
 
         var thing = new Thing2();
@@ -292,12 +289,10 @@ if (isDemo0902Run) {
 }
 
 var isDemo0903Run = false;
-if (isDemo0903Run) {
+if (isDemo0903Run) { // #2
     (function demo0903() {
-        // #2
         function Thing() {
         }
-
         Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             var info = 'attempting to log this.foo:';
@@ -306,47 +301,40 @@ if (isDemo0903Run) {
                 // keyword "this" is not inherit from out_method
                 console.log(info, this.foo);
             }
-
             doIt();
         };
 
         var thing = new Thing();
-        thing.logFoo(); // logs "attempting to log this.foo: undefined"
+        thing.logFoo(); // output: "attempting to log this.foo: undefined"
     })();
 }
 
 var isDemo0904Run = false;
-if (isDemo0904Run) {
+if (isDemo0904Run) { // #2, fix
     (function demo0904() {
-        // #2, fix
         function Thing() {
         }
-
         Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             var info = 'attempting to log this.foo:';
-
             var self = this;
 
             function doIt() {
                 console.log(info, self.foo);
             }
-
             doIt();
         };
 
         var thing = new Thing();
-        thing.logFoo(); // logs "attempting to log this.foo: bar"
+        thing.logFoo(); // output: "attempting to log this.foo: bar"
     })();
 }
 
 var isDemo0905Run = false;
-if (isDemo0905Run) {
+if (isDemo0905Run) { // #3
     (function demo0905() {
-        // #3
         function Thing() {
         }
-
         Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             console.log(this.foo);
@@ -357,18 +345,16 @@ if (isDemo0905Run) {
         }
 
         var thing = new Thing();
-        thing.logFoo(); // logs "bar"
-        doIt(thing.logFoo); // logs undefined
+        thing.logFoo(); // output: "bar"
+        doIt(thing.logFoo); // output: undefined
     })();
 }
 
 var isDemo0906Run = false;
-if (isDemo0906Run) {
+if (isDemo0906Run) { // #3, fix
     (function demo0906() {
-        // #3, fix
         function Thing() {
         }
-
         Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             console.log(this.foo);
@@ -380,36 +366,33 @@ if (isDemo0906Run) {
 
         var thing = new Thing();
         thing.logFoo();
-        doIt(thing.logFoo.bind(thing)); // logs bar
+        doIt(thing.logFoo.bind(thing)); // output: bar
     })();
 }
 
 var isDemo0907Run = false;
-if (isDemo0907Run) {
+if (isDemo0907Run) { // #4
     (function demo0907() {
-        // #4
-        var tmpObj = {
-            foo: 'bar'
-        };
-
         function logFoo() {
             console.log(this.foo);
         }
 
+        var tmpObj = {
+            foo: 'bar'
+        };
         logFoo.bind(tmpObj)();
         logFoo.apply(tmpObj);
     })();
 }
 
 var isDemo0908Run = false;
-if (isDemo0908Run) {
+if (isDemo0908Run) { // #5
     (function demo0908() {
-        // #5
         var tmpObj = {
             foo: 'bar',
             deeper: {
                 logFoo: function () {
-                    console.log(this.foo);
+                    console.log(this.foo); // undefined
                 }
             }
         };
@@ -418,9 +401,8 @@ if (isDemo0908Run) {
 }
 
 var isDemo0909Run = false;
-if (isDemo0909Run) {
+if (isDemo0909Run) { // #5, fix
     (function demo0909() {
-        // #5, fix
         var tmpObj = {
             foo: 'bar',
             deeper: {
@@ -434,36 +416,33 @@ if (isDemo0909Run) {
 }
 
 var isDemo0910Run = false;
-if (isDemo0910Run) {
+if (isDemo0910Run) { // #6
     (function demo0910() {
-        // #6
         function Thing() {
             this.handleEvent();
         }
-
         Thing.prototype.handleEvent = function () {
             console.log('handle event.');
         };
 
-        var thing = new Thing(); // logs
+        var thing = new Thing(); // output: handle event.
         console.dir(thing);
     })();
 }
 
 var isDemo0911Run = false;
-if (isDemo0911Run) {
+if (isDemo0911Run) { // #7
     (function demo0911() {
-        // #7
         function Thing(type) {
             this.type = type;
         }
 
+        Thing.prototype.logThings = function (arrThings) {
+            // arrThings.forEach(this.log.bind(this));
+            arrThings.forEach(this.log, this); // bind context
+        };
         Thing.prototype.log = function (strThingValue) {
             console.log(`${this.type}: ${strThingValue}`);
-        };
-        Thing.prototype.logThings = function (arrThings) {
-//            arrThings.forEach(this.log.bind(this));
-            arrThings.forEach(this.log, this); // bind context
         };
 
         var thing = new Thing('fruit');
@@ -472,7 +451,7 @@ if (isDemo0911Run) {
 }
 
 
-// demo 10, OO inherit
+// demo 10, OO inherit (prototype chain)
 var isDemo10Run = false;
 if (isDemo10Run) {
     (function demo10() {
@@ -481,7 +460,6 @@ if (isDemo10Run) {
 
         function Sub() {
         }
-
         Sub.prototype = new Super();
 
         var sub = new Sub();
@@ -527,7 +505,7 @@ if (isDemo11Run) {
 }
 
 
-// demo 12, sync: callbacks, generator and promise
+// demo 12, sync: callbacks, generator and promise (refer js_demo_03.js)
 var timeDelay = function (waitTime, callback) {
     setTimeout(function () {
         callback('Pausing for ' + waitTime);
@@ -536,8 +514,8 @@ var timeDelay = function (waitTime, callback) {
 
 var isDemo1201Run = false;
 if (isDemo1201Run) {
+    // #1, sync by callbacks: ok
     (function demo1201() {
-        // #1, sync by callbacks: ok
         timeDelay(3000, function (message) {
             console.log(message);
             timeDelay(2000, function (message) {
@@ -552,8 +530,8 @@ if (isDemo1201Run) {
 
 var isDemo1202Run = false;
 if (isDemo1202Run) {
+    // #2, sync by generator, failed
     (function demo1202() {
-        // #2, sync by generator, failed
         function *Messages() {
             yield(timeDelay(3000, function (message) {
                 console.log(message);
@@ -574,8 +552,8 @@ if (isDemo1202Run) {
 
 var isDemo1203Run = false;
 if (isDemo1203Run) {
+    // #3, sync by promise: ok
     (function demo1203() {
-        // #3, sync by promise: ok
         var promiseTimeDelay = function (waitTime) {
             return new Promise(function (resolve, reject) {
                 setTimeout(function () {
@@ -595,7 +573,7 @@ if (isDemo1203Run) {
                 console.error('Error:', err);
             });
     })();
-    console.log('sync demo.');
+    console.log('sync promise demo.');
 }
 
 

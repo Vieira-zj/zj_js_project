@@ -311,7 +311,7 @@ if (isDemo1002Run) {
 var isDemo1003Run = false;
 if (isDemo1003Run) {
     (function demo1003() {
-        // #3: sync by generate
+        // #3: sync by generator
         // refer to 'co' example from NodeJsLesson08 -> app_co.js
         function timeDelay(waitTime) {
             return function (callback) {
