@@ -6,9 +6,8 @@ out/
 # local external modules
 node_modules/
 nodejs_lessons/*/node_modules/
-weather_mock_server/node_modules/
-weather_api_test/node_modules/
-web_socket_demo/node_modules/
+funtv_apps/weather_mock_server/node_modules/
+funtv_apps/weather_api_test/node_modules/
 
 # vue
 vue_demos/

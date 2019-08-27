@@ -4,7 +4,7 @@
  * Created by zhengjin on 2016/10/26.
  */
 
-// demo 01, prototype chain
+// demo 01, prototype chain: object attr -> prototype attr
 var isDemo01Run = false;
 if (isDemo01Run) {
     (function demo01() {
@@ -40,45 +40,42 @@ if (isDemo01Run) {
         console.log(Thing.prototype.foo + '\n');  // bar
 
         thing1.deleteFoo();
-        thing1.logFoo();
+        thing1.logFoo();  // bar
         console.log(Thing.prototype.foo + '\n');
     })();
 }
 
 
-// demo 02, prototype chain
+// demo 02, prototype chain: object attr -> prototype attr
 var isDemo02Run = false;
 if (isDemo02Run) {
     (function demo02() {
         function Thing() {
         }
-
-        Thing.prototype.foo = 'bar';  // prototype object
+        Thing.prototype.foo = 'bar';  // prototype attr
         Thing.prototype.logFoo = function () {
-            console.log(this.foo + '\n' + Thing.prototype.foo);
+            console.log('prototype attr (foo): ' + Thing.prototype.foo);
+            console.log('object attr (foo): ' + this.foo);
         };
 
         var thing = new Thing();
-        thing.foo = 'foo';  // object
+        thing.foo = 'foo';  // object attr
         thing.logFoo();
     })();
 }
 
 
-// demo 03, prototype chain
+// demo 03, prototype chain: inherit
 var isDemo03Run = false;
 if (isDemo03Run) {
     (function demo03() {
         function Thing1() {
         }
-
         Thing1.prototype.foo = 'bar';
 
         function Thing2() {
         }
-
-        Thing2.prototype = new Thing1();
-
+        Thing2.prototype = new Thing1();  // Thing2 inherit from Thing1
         Thing2.prototype.logFoo = function () {
             console.log(this.foo);
         };
@@ -90,13 +87,12 @@ if (isDemo03Run) {
 }
 
 
-// demo 04, context: bind
+// demo 04, "this" context by bind
 var isDemo04Run = false;
 if (isDemo04Run) {
     (function demo04() {
         function Thing() {
         }
-
         Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             console.log(this.foo);
@@ -113,17 +109,16 @@ if (isDemo04Run) {
 }
 
 
-// demo 05, context: bind, apply and call
+// demo 05, "this" context: bind, apply and call
 var isDemo05Run = false;
 if (isDemo05Run) {
     (function demo05() {
         function Thing() {
         }
-
         Thing.prototype.foo = 'bar';
 
         function logFoo(aStr) {
-            console.log(aStr, this.foo);
+            console.log('%s, foo:%s', aStr, this.foo);
         }
 
         var thing = new Thing();
@@ -134,18 +129,17 @@ if (isDemo05Run) {
 }
 
 
-// demo 06, context: with
+// demo 06, context by with
 var isDemo06Run = false;
 if (isDemo06Run) {
     (function demo06() {
         function Thing() {
         }
-
         Thing.prototype.foo = 'bar';
         Thing.prototype.logFoo = function () {
             with (this) {
                 console.log(foo);
-                foo = 'foo';
+                foo = 'foo';  // this.foo
             }
         };
 
@@ -164,12 +158,11 @@ if (isDemo07Run) {
         function Thing(type) {
             this.type = type;
         }
-
         Thing.prototype.log = function (aStr) {
-            console.log(this.type, aStr);
+            console.log('%s: %s', this.type, aStr);
         };
         Thing.prototype.logThings = function (arr) {
-//            arr.forEach(this.log);
+            // arr.forEach(this.log);
             arr.forEach(this.log, this);
         };
 
@@ -180,14 +173,12 @@ if (isDemo07Run) {
 
 
 // demo 08, generator
-// #1: function, return array
-var isDemo0801Run = false;
+// #1: function, return an array
+var isDemo0801Run = true;
 if (isDemo0801Run) {
     (function demo0801() {
         function fib(max) {
-            var t,
-                a = 0,
-                b = 1,
+            var t, a = 0, b = 1,
                 arr = [0, 1];
 
             while (arr.length < max) {
@@ -196,7 +187,6 @@ if (isDemo0801Run) {
                 b = t;
                 arr.push(t);
             }
-
             return arr;
         }
 
@@ -221,11 +211,10 @@ if (isDemo0802Run) {
                 b = t;
                 n++;
             }
-
             return a;
         }
 
-        console.log('Iterator 1:');
+        console.log('Iterator by next:');
         var fn = fib(10);
         while (true) {
             let tmpObj = fn.next();
@@ -235,7 +224,7 @@ if (isDemo0802Run) {
             console.log(tmpObj.value);
         }
 
-        console.log('Iterator 2:');
+        console.log('Iterator by for of:');
         for (let x of fib(10)) {
             console.log(x);
         }
@@ -243,7 +232,7 @@ if (isDemo0802Run) {
 }
 
 
-// #3: object, keep status via instance properties
+// #3: object, keep status by object properties
 var isDemo0803Run = false;
 if (isDemo0803Run) {
     (function demo0803() {
@@ -252,17 +241,17 @@ if (isDemo0803Run) {
             b: 1,
             n: 0,
             max: 10,  // to be set
+
             next: function () {
-                var r = this.a,
-                    t = this.a + this.b;
+                var r = this.a, t = this.a + this.b;
                 this.a = this.b;
                 this.b = t;
+
                 if (this.n < this.max) {
                     this.n++;
                     return r;
-                } else {
-                    return undefined;
                 }
+                return undefined;
             }
         };
 
@@ -382,7 +371,7 @@ if (isDemo10Run) {
 }
 
 
-// demo 11, inherit by using 'class'
+// demo 11, inherit by class
 var isDemo11Run = false;
 if (isDemo11Run) {
     (function demo11() {
@@ -462,7 +451,7 @@ if (isDemo15Run) {
         console.log(items.slice(3, 5));
 
         //#2, by length which is a RW property
-        items.length = 4;  // get 0-3 item
+        items.length = 4;  // get 0-3 items
         items.length = 11;  // expand to 11 items with ''
         console.log(items);
     })();
@@ -478,9 +467,8 @@ if (isDemo16Run) {
 
         // bad, delete is used for object property, but not array element
 //        delete items[3];
-        // good, remove element
+        // good, remove element "a"
         console.log('remove item:', items.splice(2, 1));
-
         console.log('length:', items.length);
         console.log(items);
     })();
@@ -519,12 +507,12 @@ if (isDemo18Run) {
         };
 
         var c1 = new MyClass('Jone', 21);
-
         var c2 = new MyClass('Jerry', 19);
 
         MyClass.staticSay();
+        // c1.staticSay(); // error
         c1.protoSay();
-//        c1.staticSay(); // error
+        c2.protoSay();
         c1.instanceSay();
         c2.instanceSay();
 
@@ -538,7 +526,7 @@ if (isDemo18Run) {
 var isDemo19Run = false;
 if (isDemo19Run) {
     (function () {
-        // #1
+        // #1, private var
         console.log('closure in object:');
         function Foo() {
             var myPrivate = 'init';
@@ -552,12 +540,12 @@ if (isDemo19Run) {
 
         var f = new Foo();
         console.log('private value:', f.getPrivate());
-        f.setPrivate('changed');
+        f.setPrivate('new');
         console.log('updated private value:', f.getPrivate());
     })();
 
     // #2
-    console.log('closure in function:');
+    console.log('\nclosure in function:');
     function addBase(base) {
         return function (x) {
             return base + x;
@@ -565,9 +553,10 @@ if (isDemo19Run) {
     }
 
     base2 = addBase(2);
-    console.log('output base2:', base2(4));
+    console.log('output base2(4):', base2(4));
+    console.log('output base2(6):', base2(6));
     base4 = addBase(4);
-    console.log('output base4:', base4(10));
+    console.log('output base4(10):', base4(10));
 }
 
 

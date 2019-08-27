@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -eu
 
 # check vue env
 node -v && npm -v
@@ -13,4 +13,4 @@ fi
 
 node ./js_demo/$1
 
-set +eux
+set +eu
