@@ -3,17 +3,17 @@
  */
 
 // demo 01, task execution order
-let isDemo01Run = false
-if (isDemo01Run) {
+function jsDemo01() {
     (function () {
+        // #1 main
         console.log('1')
 
-        // async task
+        // #3 async task
         setTimeout(function () {
             console.log('2')
         }, 0)
 
-        // async micro task
+        // #2 async micro task
         Promise.resolve().then(function () {
             console.log('3')
         }).then(function () {
@@ -24,9 +24,9 @@ if (isDemo01Run) {
     })()
 }
 
+
 // demo 02, object property
-let isDemo02Run = false
-if (isDemo02Run) {
+function jsDemo02() {
     (function () {
         let obj1 = {
             data: ['Jan', 'Feb', 'Mar']
@@ -49,11 +49,11 @@ if (isDemo02Run) {
     })()
 }
 
+
 // demo 03, instance access
-let isDemo03Run = false
-if (isDemo03Run) {
+function jsDemo03() {
     (function () {
-        inst = {
+        let inst = {
             count: 1,
             cal: {
                 increment(num) {
@@ -73,9 +73,9 @@ if (isDemo03Run) {
     })()
 }
 
+
 // demo 04, es6 operator ...
-let isDemo04Run = false
-if (isDemo04Run) {
+function jsDemo04() {
     (function () {
         // #1
         let myAdd = function (x, y, z) {
@@ -105,15 +105,12 @@ if (isDemo04Run) {
     })()
 }
 
+
 // demo 05, reuse object
-let isDemo05Run = false
-if (isDemo05Run) {
+function jsDemo05() {
     (function () {
         getDataByType = (dataObj) => {
-            if (typeof dataObj.data === 'function') {
-                return dataObj.data()
-            }
-            return dataObj.data
+            return (typeof dataObj.data === 'function') ? dataObj.data() : dataObj.data
         }
 
         myPrintData = (dataObj) => {
@@ -138,7 +135,7 @@ if (isDemo05Run) {
         myAddDataAndPrint(sharedDataObj)
         myPrintData(sharedDataObj)
 
-        console.log('non-shared object:')
+        console.log('\nnon-shared object:')
         nonSharedDataObj = {
             data() {
                 return {
@@ -153,9 +150,9 @@ if (isDemo05Run) {
     })()
 }
 
+
 // demo 06, Array.includes and Array.some
-let isDemo06Run = false
-if (isDemo06Run) {
+function jsDemo06() {
     (function () {
         let nameList = ['jim', 'henry', 'vieira', 'jin']
         console.log('name found:', nameList.includes('jin'))
@@ -177,23 +174,19 @@ if (isDemo06Run) {
     })()
 }
 
+
 // demo 07, class and object
-let isDemo07Run = false
-if (isDemo07Run) {
+function jsDemo07() {
     (function () {
         var myapp = {}
-
         myapp.Model = function () {
             var val = 0
-
             this.add = function (v) {
                 if (val < 100) val += v
             }
-
             this.sub = function (v) {
                 if (val > 0) val -= v
             }
-
             this.getVal = function () {
                 return val
             }
@@ -201,11 +194,14 @@ if (isDemo07Run) {
 
         model = new myapp.Model()
         model.add(10)
-        console.log('add results:', model.getVal())
+        console.log('add results:', model.getVal()) // 10
         model.sub(5)
-        console.log('sub results:', model.getVal())
+        console.log('sub results:', model.getVal()) // 5
     })()
 }
 
 
-console.log(__filename, 'DONE.')
+if (require.main === module) {
+    jsDemo07()
+    console.log(__filename, 'DONE.')
+}
