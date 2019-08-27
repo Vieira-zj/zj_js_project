@@ -63,7 +63,6 @@ var isDemo04Run = false;
 if (isDemo04Run) {
     (function demo04() {
         var tmpArr = ['Java', 'C++', 'Python'];
-
         tmpArr.forEach(function (ele) {
             console.log(ele);
         });
@@ -75,7 +74,7 @@ if (isDemo04Run) {
 }
 
 
-// demo 05, RegExp with option gm in replace()
+// demo 05, RegExp with option "gm" in replace()
 var isDemo05Run = false;
 if (isDemo05Run) {
     (function demo05() {
@@ -113,6 +112,7 @@ if (isDemo07Run) {
                 city: 'wuhan'
             }
         };
+        console.log(JSON.stringify(tmpJsonObj));
 
         var logCityId = function (tmpJsonObj) {
             if (tmpJsonObj.data) {
@@ -121,14 +121,12 @@ if (isDemo07Run) {
                 }
             }
         };
-
-        console.log(JSON.stringify(tmpJsonObj));
         logCityId(tmpJsonObj);
     })();
 }
 
 
-// demo 08, fn, => fn
+// demo 08, fn: => fn
 var isDemo08Run = false;
 if (isDemo08Run) {
     (function demo08() {
@@ -141,7 +139,6 @@ if (isDemo08Run) {
 
         var tmpArr = ['test1', 'test2', 'test3'];
         tmpArr.forEach(myPrintRef);
-
         tmpArr.forEach((ele, idx) => {
             console.log('position at: %s, value: %s', ele, idx);
         });
@@ -187,7 +184,7 @@ if (isDemo10Run) {
 }
 
 
-// demo 11, array, push/pop, shift/unshift
+// demo 11, list: push/pop, shift/unshift
 var isDemo11Run = false;
 if (isDemo11Run) {
     (function demo11() {
@@ -249,13 +246,13 @@ if (isDemo13Run) {
         console.log(p.maxAge);
         console.log(p.name);
 
-        console.log(p.__proto__ === Person.prototype);
-        console.log(Person.prototype.constructor === Person);
+        console.log(p.__proto__ === Person.prototype); // true
+        console.log(Person.prototype.constructor === Person); // true
     })();
 }
 
 
-// demo 14, prototype
+// demo 14, prototype chain
 var isDemo14Run = false;
 if (isDemo14Run) {
     (function demo14() {
@@ -315,7 +312,7 @@ if (isDemo14Run) {
 }
 
 
-// demo 15, OO inherit
+// demo 15, OO inherit (prototype chain)
 var isDemo15Run = false;
 if (isDemo15Run) {
     (function demo15() {
@@ -385,12 +382,13 @@ if (isDemo15Run) {
 }
 
 
-// demo 16, "this" in "=>function"
+// demo 16, "this" in =>fn
 var isDemo16Run = false;
 if (isDemo16Run) {
     (function demo16() {
         function Foo() {
             var that = this;
+
             this.arrow = () => {
                 console.log(this.name);
             };
@@ -414,20 +412,20 @@ if (isDemo16Run) {
 
         var arrow = f.arrow;
         var simulationArrow = f.simulationArrow;
-        var common = f.common;  // undefined
+        var common = f.common;
         var commonThat = f.commonThat;
         var commonBind = f.commonBind;
 
         arrow();
         simulationArrow();
-        common();
+        common();  // undefined
         commonThat();
         commonBind();
     })();
 }
 
 
-// demo 17, "this" in "=>function"
+// demo 17, "this" in =>fn
 var isDemo17Run = false;
 if (isDemo17Run) {
     (function demo17() {
@@ -436,12 +434,12 @@ if (isDemo17Run) {
             bar: function () {
                 console.log(this.foo);
             },
-//            arrow: () => {console.log(this.foo);}
+            // arrow: () => {console.log(this.foo);}
             arrow: () => console.log(this.foo)
         };
 
-        tmpObj.bar();
-        tmpObj.arrow();
+        tmpObj.bar(); // test
+        tmpObj.arrow(); // undefined
     })();
 }
 
@@ -497,14 +495,14 @@ if (isDemo18Run) {
 }
 
 
-// demo 19, arrow function
+// demo 19, arrow =>fn
 var isDemo19Run = false;
 if (isDemo19Run) {
     (function () {
         // #1, arguments from parent
         console.log('test arguments in arrow function:');
         function foo() {
-            return () => console.log('arg:', arguments[0]);
+            return () => console.log('arg:', arguments[0]); // 1
         }
 
         foo(1, 2)('a', 'b');
@@ -542,7 +540,7 @@ if (isDemo19Run) {
         console.log('in function sub domain:');
         b.arrow();
         b.simulationArrow();
-        b.common();
+        b.common(); // local
 
         var arrow = b.arrow;
         var simulationArrow = b.simulationArrow;
@@ -552,15 +550,15 @@ if (isDemo19Run) {
         arrow();
         simulationArrow();
         common(); // undefined
-        common.apply(b);
+        common.apply(b); // local
 
-        // #4, no domain in if block
+        // #4, no domain in "if" block
         console.log('\ntest access var defined in if block:');
         var myBool = true;
         if (myBool) {
             var ifVar = 'var_in_if';
         }
-        console.log('var in if block:', ifVar);
+        console.log('var in "if" block:', ifVar);
     })();
 }
 

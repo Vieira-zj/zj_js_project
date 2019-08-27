@@ -21,7 +21,7 @@ if (isDemo01Run) {
             }, timeOut * 1000);
         }
 
-        // resolve => then, reject => catch
+        // resolve() => then, reject() => catch
         new Promise(test).then(function (result) {
             console.log('pass：' + result);
         }).catch(function (reason) {
@@ -90,12 +90,12 @@ if (isDemo03Run) {
             setTimeout(() => resolve('P2'), 1000);
         });
 
-        // run p1 and p2, and exec then after both p1 and p2 done
+        // run p1 and p2, and exec "then" block after both p1 and p2 done
         Promise.all([p1, p2]).then(function (results) {
-            console.log(results);
+            console.log(results);  // [ 'P1', 'P2' ]
         });
 
-        // run p1 and p2, and exec then when p1 or p2 done
+        // run p1 and p2, and exec "then" block when p1 or p2 done
         Promise.race([p1, p2]).then(function (results) {
             console.log(results);
         });
@@ -115,9 +115,9 @@ if (isDemo04Run) {
         }
 
         var gen = Add(5);
-        console.log(gen.next());
-        console.log(gen.next());
-        console.log(gen.next());
+        console.log(gen.next()); // 6
+        console.log(gen.next()); // null
+        console.log(gen.next()); // 11
     })();
 
     (function demo0402() {
@@ -128,23 +128,43 @@ if (isDemo04Run) {
         }
 
         var gen = Add(5);
-        console.log(gen.next());
-        console.log(gen.next());
-        console.log(gen.next(7));  // pass value into generator
+        console.log(gen.next()); // 6
+        console.log(gen.next()); // null
+        console.log(gen.next(7)); // 12, pass value to generator
     })();
 }
 
 
-// demo 05, setTimeOut
+// demo 05, generator
 var isDemo05Run = false;
 if (isDemo05Run) {
-    (function demo0501() {
+    (function demo05() {
+        function* test(p) {
+            console.log(p); // 1
+            var a = yield p + 1;
+            console.log(a); // 3
+        }
+
+        var g = test(1);
+        var ret;
+        ret = g.next();
+        console.log(ret); // 2
+        ret = g.next(ret.value + 1);
+        console.log(ret);
+    })();
+}
+
+
+// demo 06, setTimeOut
+var isDemo06Run = false;
+if (isDemo06Run) {
+    (function demo0601() {
         setTimeout(function fnHello() {
             console.log('hello');
         }, 500);
     })();
 
-    (function demo0502() {
+    (function demo0602() {
         var fnHello = function () {
             console.log('hello');
         };
@@ -153,39 +173,19 @@ if (isDemo05Run) {
         }, 1000);
     })();
 
-    (function demo0503() {
+    (function demo0603() {
         var fnHello = function () {
             console.log('hello');
         };
         setTimeout(fnHello, 1500);
     })();
 
-    (function demo0504() {
+    (function demo0604() {
         // pass argument
         var fnHello = function (message) {
             console.log('hello', message);
         };
         setTimeout(fnHello, 2000, 'ZhengJin');
-    })();
-}
-
-
-// demo 06, generator
-var isDemo06Run = false;
-if (isDemo06Run) {
-    (function demo06() {
-        function* test(p) {
-            console.log(p);
-            var a = yield p + 1;
-            console.log(a);  // 3
-        }
-
-        var g = test(1);
-        var ret;
-        ret = g.next();
-        console.log(ret);
-        ret = g.next(ret.value + 1);
-        console.log(ret);
     })();
 }
 
@@ -197,7 +197,7 @@ if (isDemo07Run) {
 }
 
 
-// demo 08, fn list
+// demo 08, list of fns
 var isDemo08Run = false;
 if (isDemo08Run) {
     (function demo0801() {
@@ -345,16 +345,14 @@ if (isDemo1003Run) {
 }
 
 
-// demo 11, array elements distinct
+// demo 11, array numbers distinct
 var tmpDuplicatedArr = [1, 2, 3, 4, 5, 3, 2];
 
 var isDemo1101Run = false;
-if (isDemo1101Run) {
+if (isDemo1101Run) { // #1
     (function demo1101() {
-        // #1
-        var arrUnique01 = function (srcArr) {
+        var distinct01 = function (srcArr) {
             var targetArr = [];
-
             for (var idx = 0, length = srcArr.length; idx < length; idx++) {
                 if (targetArr.indexOf(srcArr[idx]) === -1) {
                     targetArr.push(srcArr[idx]);
@@ -363,22 +361,21 @@ if (isDemo1101Run) {
             return targetArr;
         };
 
-        console.log(arrUnique01(tmpDuplicatedArr));
+        console.log(distinct01(tmpDuplicatedArr));
     })();
 }
 
 var isDemo1102Run = false;
-if (isDemo1102Run) {
+if (isDemo1102Run) { // #2
     (function demo1102() {
-        // #2
-        var arrUnique02 = function (srcArr) {
+        var distinct02 = function (srcArr) {
             var targetArr = [];
             var tmpObj = {};
 
             // override for duplicated property
-//            for (var idx = 0, length = srcArr.length; idx < length; idx++) {
-//                tmpObj[srcArr[idx]] = null;
-//            }
+            // for (var idx = 0, length = srcArr.length; idx < length; idx++) {
+            //     tmpObj[srcArr[idx]] = null;
+            // }
             srcArr.map(item => tmpObj[item] = null);
 
             for (var key in tmpObj) {
@@ -389,17 +386,16 @@ if (isDemo1102Run) {
             return targetArr;
         };
 
-        arrUnique02(tmpDuplicatedArr).forEach(function (element) {
+        distinct02(tmpDuplicatedArr).forEach(function (element) {
             console.log('Element: ' + element);
         });
     })();
 }
 
 var isDemo1103Run = false;
-if (isDemo1103Run) {
+if (isDemo1103Run) { // #3
     (function demo1103() {
-        // #3
-        var arrUnique03 = function (srcArr) {
+        var distinct03 = function (srcArr) {
             var targetArr = [];
             var tmpObj = {};
             var tmpElement;
@@ -414,35 +410,31 @@ if (isDemo1103Run) {
             return targetArr;
         };
 
-        console.log(arrUnique03(tmpDuplicatedArr));
+        console.log(distinct03(tmpDuplicatedArr));
     })();
 }
 
 var isDemo1104Run = false;
-if (isDemo1104Run) {
+if (isDemo1104Run) { // #4
     (function demo1104() {
-        // #4
-        var arrUnique04 = function (srcArr) {
+        var distinct04 = function (srcArr) {
             var targetArr = [];
-
             srcArr.sort();
             for (var idx = 0, length = srcArr.length; idx < length; idx++) {
                 if (srcArr[idx] !== targetArr[targetArr.length - 1]) {
                     targetArr.push(srcArr[idx]);
                 }
             }
-
             return targetArr;
         };
 
-        console.log(arrUnique04(tmpDuplicatedArr));
+        console.log(distinct04(tmpDuplicatedArr));
     })();
 }
 
 var isDemo1105Run = false;
-if (isDemo1105Run) {
+if (isDemo1105Run) { // #5
     (function demo1105() {
-        // #5
         var tmpSet = new Set(tmpDuplicatedArr);
         tmpSet.forEach(element => console.log('Element:', element));
     })();
@@ -501,7 +493,7 @@ if (isDemo13Run) {
 
         // bad
         var gen2 = myGenerator(5);
-        console.log('iterator generator by for in:');
+        console.log('iterator generator by "for in":');
         for (let item in gen2) {
             if (gen2.hasOwnProperty(item)) {
                 console.log('item:', item);
@@ -509,8 +501,8 @@ if (isDemo13Run) {
         }
 
         // good
-        console.log('iterator generator by for of:');
-        for (let item of myGenerator(5)) {
+        console.log('iterator generator by "for of":');
+        for (let item of myGenerator(5)) { // iterator only once
             console.log('item:', item);
         }
     })();
