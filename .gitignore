@@ -1,17 +1,16 @@
+# mac files
+.DS_Store
+
 # IDEA files
 .idea/
 out/
 *.iml
 
-# local external modules
-node_modules/
-nodejs_lessons/*/node_modules/
-funtv_apps/weather_mock_server/node_modules/
-funtv_apps/weather_api_test/node_modules/
+# dependency modules
+*/node_modules/
 
 # vue
 vue_demos/
 #vue_lessons/*/build/
-vue_lessons/*/node_modules/
 
 #.gitignore

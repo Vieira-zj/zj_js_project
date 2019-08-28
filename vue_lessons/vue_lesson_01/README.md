@@ -1,6 +1,6 @@
 # vue_lesson_01
 
-> A Vue.js project
+> A Vue.js project.
 
 ## Build Setup
 
@@ -28,15 +28,21 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## Workflow
 
+Main
+
 ```text
 index.html => @/main.js => @/router/index.js => main page, @/pages/App.vue
+```
 
-http Get test => @/pages/VueDemo.vue
+Http Get
+
+```text
+@/pages/VueDemo.vue
 ```
 
 Router
 
 ```text
-@/router/index.js => @/pages/router_demo/*
+@/router/index.js => @/pages/router_demo/*.vue
 ```
 

@@ -1,6 +1,6 @@
 # vue_lessons
 
-> vue lessons from github
+> vue lessons from github.
 
 ## Build Setup
 
@@ -30,26 +30,31 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 #### Workflow
 
+Main
+
 ```text
 index.html, <div id="app">, <router-view/> => @/main.js, router => @/router/index.js => @/pages/App.vue
+```
 
-vue lessons => @/pages/App1.vue => @/components/lessons/*
+Vue basic
+
+```text
+@/pages/App1.vue => @/components/lessons/*.vue
 ```
 
 Vuex
 
 ```text
-vuex lessons 
-vue => @/pages/App2.vue => @/components/counter/*
+vue => @/pages/App2.vue => @/components/counter/*.vue
 vuex => @/main.js => @/vuex/store.js
 vuex => @/main.js => @/store/index.js => getters.js, mutations.js, action.js
-vuex => @/main.js => @/vuex/index.js => @/vuex/modules/*
+vuex => @/main.js => @/vuex/index.js => @/vuex/modules/*.js
 ```
 
 ChartJs
 
 ```text
-charts => @/pages/App4.vue => @/components/charts/*
+charts => @/pages/App4.vue => @/components/charts/*.js
 
 1) bar-reactive-chart
 BarReactiveChart.js => chart created, init chartData => chart mounted, set gradient, and render chartData => mixins, reactiveData => watch "chartData" updates
