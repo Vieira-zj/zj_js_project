@@ -14,18 +14,18 @@
         <button v-on:click="reverseMessage">反转消息</button>
         <p v-bind:title="tips">
           鼠标悬停几秒钟查看此处动态绑定的提示信息！
-        </p>        
+        </p>
       </div>
       <!-- 控制语句 -->
       <div>
-        <p v-if="seen">现在你看到我了</p>        
+        <p v-if="seen">现在你看到我了</p>
       </div>
       <div>
         <ol>
           <li v-for="todo in todos">
             {{ todo.text }}
           </li>
-        </ol>        
+        </ol>
       </div>
       <!-- 双向绑定 -->
       <div>
@@ -40,8 +40,7 @@
           <todo-item
             v-for="item in groceryList"
             v-bind:todo="item"
-            v-bind:key="item.id"
-          ></todo-item>
+            v-bind:key="item.id"></todo-item>
         </ol>
       </div>
     </div>
