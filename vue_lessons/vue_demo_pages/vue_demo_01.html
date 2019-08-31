@@ -32,7 +32,8 @@
         <p>
           {{ message2 }}
         </p>
-        <input v-model="message2">
+        <!-- 当"message2"为空时才会显示placeholder的值 -->
+        <input v-model="message2" placeholder="Please input">
       </div>
       <!-- vue组件 -->
       <div>

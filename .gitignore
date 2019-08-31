@@ -7,10 +7,4 @@ out/
 *.iml
 
 # dependency modules
-*/node_modules/
-
-# vue
-vue_demos/
-#vue_lessons/*/build/
-
-#.gitignore
+# node_modules/
