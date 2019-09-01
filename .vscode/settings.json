@@ -1,4 +1,3 @@
 {
-    "eslint.autoFixOnSave": true,
-    "vetur.validation.template": false,
+  "eslint.autoFixOnSave": true
 }

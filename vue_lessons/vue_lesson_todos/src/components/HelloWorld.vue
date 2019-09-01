@@ -6,13 +6,13 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      msg: "hello!"
-    };
+      msg: 'hello!'
+    }
   },
-  created() {
-    this.msg = "bye!";
+  created () {
+    this.msg = 'bye!'
   }
-};
+}
 </script>

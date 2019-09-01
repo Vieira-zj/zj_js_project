@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>vue demo: 自定义指令</title>
-    </head>
-    <body>
-        <div id="app">
-            <div>
-                <input v-focus v-model="message">
-                <p>{{ message }}</p>
-            </div>
-            <div>
-                <h3>Scroll down inside this section</h3>
-                <p v-pin:[direction]="200">I am pinned onto the page at 200px to
-                    the left.</p>
-            </div>
-        </div>
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script>
-        Vue.directive('focus', {
-            inserted: function (el) {
-                el.focus()
-            }
-        })
+  <head>
+    <meta charset="utf-8" />
+    <title>vue demo: 自定义指令</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <input v-focus v-model="message" />
+        <p>{{ message }}</p>
+      </div>
+      <div>
+        <h3>Scroll down inside this section</h3>
+        <p v-pin:[direction]="200">
+          I am pinned onto the page at 200px to the left.
+        </p>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    Vue.directive('focus', {
+      inserted: function(el) {
+        el.focus()
+      }
+    })
 
-        Vue.directive('pin', {
-            bind: function (el, binding, vnode) {
-                el.style.position = 'fixed'
-                var s = (binding.arg === 'left' ? 'left' : 'top')
-                el.style[s] = binding.value + 'px'
-            }
-        })
+    Vue.directive('pin', {
+      bind: function(el, binding, vnode) {
+        el.style.position = 'fixed'
+        var s = binding.arg === 'left' ? 'left' : 'top'
+        el.style[s] = binding.value + 'px'
+      }
+    })
 
-        new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!',
-                direction: 'left'
-            }
-        })
-    </script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+        direction: 'left'
+      }
+    })
+  </script>
 </html>

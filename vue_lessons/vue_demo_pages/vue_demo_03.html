@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>vue demo</title>
-    </head>
-    <body>
-        <!-- 监听子组件实例的事件 -->
-        <div id="blog-posts-events-demo">
-            <div v-bind:style="{ fontSize: postFontSize + 'em' }">
-                <blog-post
-                    v-for="post in posts"
-                    v-bind:key="post.id"
-                    v-bind:post="post"
-                    v-on:enlarge-text="postFontSize += 0.1"></blog-post>
-            </div>
-        </div>
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script>
-        Vue.component('blog-post', {
-            props: ['post'],
-            // 通过调用内建的 $emit 方法 并传入事件名称来触发一个事件
-            template: `
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue demo</title>
+  </head>
+  <body>
+    <!-- 监听子组件实例的事件 -->
+    <div id="blog-posts-events-demo">
+      <div v-bind:style="{ fontSize: postFontSize + 'em' }">
+        <blog-post
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+          v-on:enlarge-text="postFontSize += 0.1"
+        ></blog-post>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    Vue.component('blog-post', {
+      props: ['post'],
+      // 通过调用内建的 $emit 方法 并传入事件名称来触发一个事件
+      template: `
                 <div class="blog-post">
                 <h3>{{ post.title }}</h3>
                 <button v-on:click="$emit('enlarge-text')">Enlarge text</button>
                 <div v-html="post.content"></div>
                 </div>
             `
-        })
+    })
 
-        new Vue({
-            el: '#blog-posts-events-demo',
-            data: {
-                posts: [
-                    { id: 1, title: 'My journey with Vue', content: "content ..." },
-                    { id: 2, title: 'Blogging with Vue', content: "content ..." },
-                    { id: 3, title: 'Why Vue is so fun', content: "content ..." }
-                ],
-                postFontSize: 1
-            }
-        })
-    </script>
+    new Vue({
+      el: '#blog-posts-events-demo',
+      data: {
+        posts: [
+          { id: 1, title: 'My journey with Vue', content: 'content ...' },
+          { id: 2, title: 'Blogging with Vue', content: 'content ...' },
+          { id: 3, title: 'Why Vue is so fun', content: 'content ...' }
+        ],
+        postFontSize: 1
+      }
+    })
+  </script>
 </html>

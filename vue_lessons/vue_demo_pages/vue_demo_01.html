@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>vue demo</title>
   </head>
   <body>
@@ -33,7 +33,7 @@
           {{ message2 }}
         </p>
         <!-- 当"message2"为空时才会显示placeholder的值 -->
-        <input v-model="message2" placeholder="Please input">
+        <input v-model="message2" placeholder="Please input" />
       </div>
       <!-- vue组件 -->
       <div>
@@ -41,7 +41,8 @@
           <todo-item
             v-for="item in groceryList"
             v-bind:todo="item"
-            v-bind:key="item.id"></todo-item>
+            v-bind:key="item.id"
+          ></todo-item>
         </ol>
       </div>
     </div>
@@ -72,8 +73,11 @@
         ]
       },
       methods: {
-        reverseMessage: function () {
-          this.message = this.message.split('').reverse().join('')
+        reverseMessage: function() {
+          this.message = this.message
+            .split('')
+            .reverse()
+            .join('')
         }
       }
     })
