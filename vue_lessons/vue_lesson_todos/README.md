@@ -33,6 +33,24 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+### Unit test
+1. Add eslint and unit-jest plugins.
+```
+vue add eslint
+vue add @vue/unit-jest
+```
+
+> All Jest configs are defiend in jest.config.js, like "testMatch" option.
+
+2. Create a component "src/components/HelloWorld.vue".
+
+3. Create related unit test "tests/unit/HelloWorld.spec.js".
+
+4. Run unit test.
+```
+npm run test:unit
+```
+
 ### Fix load *.scss
 Failed to resolve loader: sass-loader
 ```
