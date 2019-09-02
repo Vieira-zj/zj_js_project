@@ -36,8 +36,4 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: $vue-blue;
 }
-
-h1 {
-  text-align: center;
-}
 </style>

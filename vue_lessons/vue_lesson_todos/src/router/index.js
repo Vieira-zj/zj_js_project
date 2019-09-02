@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Common from '@/views/Common.js'
 import Hello from '@/views/Hello.vue'
 import Todos from '@/views/Todos.vue'
-import NamedRouter from '@/views/NamedRouter.vue'
+import NamedView from '@/views/NamedView.vue'
 import PropsRouter from '@/views/PropsRouter.vue'
 
 Vue.use(VueRouter)
@@ -13,8 +14,8 @@ const routes = [
   { path: '/todos', component: Todos },
   // 嵌套命名视图
   {
-    path: '/router/named',
-    component: NamedRouter,
+    path: '/router/namedview',
+    component: NamedView,
     children: [
       {
         path: 'settings',

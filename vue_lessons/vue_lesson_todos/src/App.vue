@@ -1,11 +1,23 @@
 <template>
-  <div>
-    <h2>My Home</h2>
+  <div class="content">
+    <h1 style="text-align: center">My Home</h1>
     <div>
       <router-link to="/todos">Todos</router-link> |
-      <router-link to="/router/named">Nested Named View</router-link> |
+      <router-link to="/router/namedview">Nested Named View</router-link> |
       <router-link to="/router/props">Passing Props to Route Components</router-link>
-      <router-view />
     </div>
+    <router-view />
   </div>
 </template>
+
+<style>
+h2 {
+  text-align: center;
+}
+
+.content {
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+</style>

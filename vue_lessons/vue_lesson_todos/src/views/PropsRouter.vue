@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2>Route props</h2>
+      <h2>Router Props</h2>
       <router-link to="/router/props">home</router-link> |
       <router-link to="/router/props/hello/you">hello you</router-link> |
       <router-link to="/router/props/static">static</router-link> |
