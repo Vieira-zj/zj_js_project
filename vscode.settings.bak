@@ -1,4 +1,12 @@
 {
+    // vscode plugins
+    // Common: XML, HTML Snippets
+    // Shell: Bash Beautify
+    // GO: Go
+    // Python: Python, MagicPython
+    // JS: ESLint, JavaScript (ES6) code snippets, Prettier - Code formatter
+    // Vue: Vetur
+
     // vscode
     "editor.fontSize": 14,
     "editor.formatOnSave": true,
@@ -10,7 +18,7 @@
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     // python
     "python.pythonPath": "/usr/local/bin/python3",
-    "python.jediEnabled": false,
+    "python.jediEnabled": true,
     // js
     "eslint.autoFixOnSave": true,
     "eslint.validate": [
@@ -43,5 +51,5 @@
             "singleQuote": true,
             "semi": false,
         }
-    },
+    }
 }
