@@ -1,12 +1,22 @@
 <template>
   <div id="app-todos">
-    <h1>My Todo App!</h1>
-    <TodoList />
+    <div>
+      <h2>My Todo App!</h2>
+      <TodoList />
+    </div>
+    <div>
+      <h2>Route props</h2>
+      <router-link to="/">home</router-link> |
+      <router-link to="/hello/you">hello you</router-link> |
+      <router-link to="/static">static</router-link> |
+      <router-link to="/dynamic/1">dynamic</router-link>
+      <router-view foo="123"></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import TodoList from './components/TodoList.vue'
+import TodoList from '@/components/todos/TodoList.vue'
 
 export default {
   components: {
