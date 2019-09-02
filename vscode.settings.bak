@@ -9,6 +9,8 @@
 
     // vscode
     "editor.fontSize": 14,
+    // for js
+    // "editor.tabSize": 2,
     "editor.formatOnSave": true,
     "editor.suggestSelection": "first",
     // "editor.minimap.enabled": false,
