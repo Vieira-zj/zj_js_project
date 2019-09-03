@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <h1>unit-jest demo</h1>
-    <p>{{msg}}</p>
+    <!-- unit-jest demo -->
+    <h1 style="text-align: center">{{ msg }}</h1>
   </div>
 </template>
 

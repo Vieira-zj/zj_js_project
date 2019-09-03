@@ -5,6 +5,8 @@
 vue create vue_lesson_todos
 ```
 
+> Vue configs are defined in vue.config.js.
+
 ## Project setup
 ```
 npm install
@@ -20,7 +22,7 @@ cd vue_lesson_todos && npm run serve
 npm run build
 ```
 
-### Run your tests
+### Run your tests (See unit test below)
 ```
 npm run test
 ```
@@ -40,13 +42,13 @@ vue add eslint
 vue add @vue/unit-jest
 ```
 
-> All Jest configs are defiend in jest.config.js, like "testMatch" option.
+> Jest configs are defined in jest.config.js, like "testMatch" option.
 
-2. Create a component "src/components/HelloWorld.vue".
+1. Create a component "src/components/HelloWorld.vue".
 
-3. Create related unit test "tests/unit/HelloWorld.spec.js".
+2. Create related unit test "tests/unit/HelloWorld.spec.js".
 
-4. Run unit test.
+3. Run unit test.
 ```
 npm run test:unit
 ```

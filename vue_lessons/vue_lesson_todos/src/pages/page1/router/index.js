@@ -51,8 +51,10 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  // history mode and 404 error, refer:
+  // https://router.vuejs.org/guide/essentials/history-mode.html
+  // mode: 'history',
+  // base: process.env.BASE_URL,
   routes
 })
 
