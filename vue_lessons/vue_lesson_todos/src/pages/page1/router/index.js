@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Common from '@/views/Common.js'
-import Hello from '@/views/Hello.vue'
-import Todos from '@/views/Todos.vue'
-import NamedView from '@/views/NamedView.vue'
-import PropsRouter from '@/views/PropsRouter.vue'
+import Common from '@/views/page1/Common.js'
+import Hello from '@/views/page1/Hello.vue'
+import Todos from '@/views/page1/Todos.vue'
+import NamedView from '@/views/page1/NamedView.vue'
+import PropsRouter from '@/views/page1/PropsRouter.vue'
 
 Vue.use(VueRouter)
 
