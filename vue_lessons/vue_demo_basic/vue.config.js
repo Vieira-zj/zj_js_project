@@ -2,15 +2,15 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
   runtimeCompiler: true,
   pages: {
-    page1: {
-      entry: 'src/pages/page1/main.js',
+    hello: {
+      entry: 'src/pages/hello/main.js',
       template: 'public/base.html',
-      filename: 'page1.html'
+      filename: 'hello.html'
     },
-    page2: {
-      entry: 'src/pages/page2/main.js',
+    todos: {
+      entry: 'src/pages/todos/main.js',
       template: 'public/base.html',
-      filename: 'page2.html'
+      filename: 'todos.html'
     }
   }
 }

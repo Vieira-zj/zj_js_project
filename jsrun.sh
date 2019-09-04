@@ -5,7 +5,7 @@ set -eu
 node -v && npm -v && vue -V
 
 target=$1 #build,test
-project="${HOME}/Workspaces/zj_js_project/vue_lessons/vue_lesson_todos"
+project="${HOME}/Workspaces/zj_js_project/vue_lessons/vue_demo_basic"
 dist="${project}/dist"
 
 # run test

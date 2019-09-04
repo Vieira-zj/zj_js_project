@@ -2,7 +2,7 @@ import Vue from 'vue'
 import {
   shallowMount
 } from '@vue/test-utils'
-import HelloWorld from '@/pages/page2/App.vue'
+import HelloWorld from '@/pages/hello/App.vue'
 
 // run cmd: npm run test:unit
 describe('Testing HelloWorld.vue component', () => {

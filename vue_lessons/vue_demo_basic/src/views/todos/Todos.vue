@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import TodoList from '@/components/page1/todos/TodoList.vue'
+import TodoList from '@/components/todos/TodoList.vue'
 
 export default {
   components: {

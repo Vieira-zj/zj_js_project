@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="hello">Hello {{name}} {{ $attrs }}</p>
+    <p class="hello">Hello {{ name }} {{ $attrs }}</p>
   </div>
 </template>
 

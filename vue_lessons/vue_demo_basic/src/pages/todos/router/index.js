@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Common from '@/views/page1/Common.js'
-import Hello from '@/views/page1/Hello.vue'
-import Todos from '@/views/page1/Todos.vue'
-import NamedView from '@/views/page1/NamedView.vue'
-import PropsRouter from '@/views/page1/PropsRouter.vue'
+import Todos from '@/views/todos/Todos.vue'
+import Common from '@/views/todos/Common.js'
+import NamedView from '@/views/todos/NamedView.vue'
+import Props from '@/views/todos/PropsRouter.vue'
+import Hello from '@/views/todos/PropsHello.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  // pages
+  // vue组件
   { path: '/todos', component: Todos },
   // 嵌套命名视图
   {
@@ -40,7 +40,7 @@ const routes = [
   // 路由组件传参
   {
     path: '/router/props',
-    component: PropsRouter,
+    component: Props,
     children: [
       { path: '', component: Hello }, // No props, no nothing
       { path: 'hello/:name', component: Hello, props: true }, // Pass route.params to props
