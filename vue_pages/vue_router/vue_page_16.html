@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      /* global */
+      html,
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+          'Segoe UI Symbol';
+        color: #2c3e50;
+      }
+      #app {
+        padding: 0 20px;
+      }
+      ul {
+        line-height: 1.5em;
+        padding-left: 1.5em;
+      }
+      a {
+        color: #7f8c8d;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #4fc08d;
+      }
+      /* transition */
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.5s ease;
+      }
+      .fade-enter,
+      .fade-leave-active {
+        opacity: 0;
+      }
+      .child-view {
+        position: absolute;
+        transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+      }
+      .slide-left-enter,
+      .slide-right-leave-active {
+        opacity: 0;
+        -webkit-transform: translate(30px, 0);
+        transform: translate(30px, 0);
+      }
+      .slide-left-leave-active,
+      .slide-right-enter {
+        opacity: 0;
+        -webkit-transform: translate(-30px, 0);
+        transform: translate(-30px, 0);
+      }
+    </style>
+    <title>vue router demo - 过渡动效</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Transitions</h1>
+      <ul>
+        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/parent">/parent</router-link></li>
+        <li><router-link to="/parent/foo">/parent/foo</router-link></li>
+        <li><router-link to="/parent/bar">/parent/bar</router-link></li>
+      </ul>
+      <!-- 渐入渐出效果 -->
+      <transition name="fade" mode="out-in">
+        <router-view class="view"></router-view>
+      </transition>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script>
+    const Home = {
+      template: `
+        <div class="home">
+          <h2>Home</h2>
+          <p>hello</p>
+        </div>
+      `
+    }
+
+    const Parent = {
+      data() {
+        return {
+          transitionName: 'slide-left'
+        }
+      },
+      beforeRouteUpdate(to, from, next) {
+        const toDepth = to.path.split('/').length
+        const fromDepth = from.path.split('/').length
+        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+        next()
+      },
+      // 左右移动效果
+      template: `
+        <div class="parent">
+          <h2>Parent</h2>
+          <transition :name="transitionName">
+            <router-view class="child-view"></router-view>
+          </transition>
+        </div>
+      `
+    }
+
+    const Default = { template: '<div class="default">default</div>' }
+    const Foo = { template: '<div class="foo">foo</div>' }
+    const Bar = { template: '<div class="bar">bar</div>' }
+
+    const router = new VueRouter({
+      routes: [
+        { path: '/', component: Home },
+        {
+          path: '/parent',
+          component: Parent,
+          children: [
+            { path: '', component: Default },
+            { path: 'foo', component: Foo },
+            { path: 'bar', component: Bar }
+          ]
+        }
+      ]
+    })
+
+    new Vue({ router }).$mount('#app')
+  </script>
+</html>
