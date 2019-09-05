@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue ajax demo - axios post</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Post Test - axios</h1>
+      <button v-on:click="getData">Get Data</button>
+      <p v-if="error">
+        We're sorry, we're not able to retrieve this information at the moment,
+        please try back later
+      </p>
+      <p v-if="loading">Loading...</p>
+      <p v-for="item in respdata.server_list" v-if="respdata">
+        <span>server ip: {{ item.server_ip }}</span>
+        <br />
+        <span>server name: {{ item.server_name }}</span>
+      </p>
+    </div>
+  </body>
+  <script src="file:///Users/zhengjin/Downloads/libs/js/vue.js"></script>
+  <script src="file:///Users/zhengjin/Downloads/libs/js/axios.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          loading: false,
+          error: false,
+          respdata: 'null',
+          postdata: {
+            server_list: [
+              { server_name: 'svr_a_002', server_ip: '127.0.1.2' },
+              { server_name: 'svr_a_013', server_ip: '127.0.1.13' }
+            ],
+            server_group_id: 'svr_grp_001'
+          }
+        }
+      },
+      methods: {
+        getData() {
+          this.loading = true
+          // if CORS issue, add allow-origin:* header in nginx or mockserver.
+          axios
+            .post(
+              'http://mockserver.test.com:8081/demo/3',
+              JSON.stringify(this.postdata)
+            )
+            .then(resp => {
+              console.log(resp.data)
+              this.respdata = JSON.parse(resp.data.split('\n')[0]).data
+            })
+            .catch(err => (this.error = true))
+            .finally(() => (this.loading = false))
+        }
+      }
+    })
+  </script>
+</html>

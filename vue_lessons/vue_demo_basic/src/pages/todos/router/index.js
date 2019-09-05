@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Todos from '@/views/todos/Todos.vue'
 import Common from '@/views/todos/Common.js'
+import Todos from '@/views/todos/Todos.vue'
 import NamedView from '@/views/todos/NamedView.vue'
 import Props from '@/views/todos/PropsRouter.vue'
 import Hello from '@/views/todos/PropsHello.vue'
