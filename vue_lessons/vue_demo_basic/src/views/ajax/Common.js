@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
+// axios Functions
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded;charset=UTF-8'
@@ -33,7 +34,7 @@ function sendGet (url, params) {
   })
 }
 
-// 模拟请求时间, 默认500ms
+// 模拟请求wait_time, 默认500ms
 function sendGetTest (url, params, wait = 500) {
   return new Promise((resolve, reject) => {
     axios.get(url, { params: params })
@@ -66,9 +67,6 @@ function sendPost (url, params) {
 
 // Components
 const Home = { template: '<h2>Ajax Home</h2>' }
-
-// Functions
-
 
 export default {
   sendGet,

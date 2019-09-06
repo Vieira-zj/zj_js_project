@@ -26,7 +26,7 @@ if [[ ${target} == "build" ]]; then
     if [ -d ${tmpdir} ]; then
         rm -rf ${tmpdir}
     fi
-    cp -r ${dist} /tmp/
+    # cp -r ${dist} /tmp/
     echo "vue build done."
 fi
 

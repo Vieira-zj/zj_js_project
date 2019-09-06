@@ -17,13 +17,9 @@ npm install
 cd {vue_project}; npm run serve
 ```
 
-### For multiple pages vue project, compiles and hot-reloads
+Regarding multi-pages vue project, sub-page access by:
 ```
-cd {vue_project}/src/pages/ajax; npm run serve
-```
-
-page access:
-```
+http://localhost:8081/todos#/
 http://localhost:8081/ajax#/
 ```
 

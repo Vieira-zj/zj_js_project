@@ -8,11 +8,13 @@ module.exports = {
       template: 'public/base.html',
       filename: 'hello.html'
     },
+    // page: nested components and route
     todos: {
       entry: 'src/pages/todos/main.js',
       template: 'public/base.html',
       filename: 'todos.html'
     },
+    // page: fetch data by axios post
     ajax: {
       entry: 'src/pages/ajax/main.js',
       template: 'public/base.html',
