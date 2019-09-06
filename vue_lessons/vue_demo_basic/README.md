@@ -14,7 +14,17 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-cd vue_lesson_todos && npm run serve
+cd {vue_project}; npm run serve
+```
+
+### For multiple pages vue project, compiles and hot-reloads
+```
+cd {vue_project}/src/pages/ajax; npm run serve
+```
+
+page access:
+```
+http://localhost:8081/ajax#/
 ```
 
 ### Compiles and minifies for production (Create a production build.)
