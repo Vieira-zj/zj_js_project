@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app"
+       class="content">
     <!-- unit-jest demo -->
-    <h1 style="text-align: center">{{ msg }}</h1>
+    <h1>{{ msg }}</h1>
   </div>
 </template>
 
@@ -17,3 +18,5 @@ export default {
   }
 }
 </script>
+
+<style src="@/css/content.css"></style>

@@ -11,10 +11,6 @@
 </template>
 
 <style>
-h2 {
-  text-align: center;
-}
-
 .content {
   max-width: 500px;
   margin: 0 auto;

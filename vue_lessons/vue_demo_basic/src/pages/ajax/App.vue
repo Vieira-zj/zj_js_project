@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app"
+       class="content">
     <h1>Data Fetching</h1>
     <router-link to="/">Home</router-link><br>
     <router-link to="/postbefore/1">Post Before 1</router-link> |
@@ -11,3 +12,7 @@
     <router-view class="view"></router-view>
   </div>
 </template>
+
+<style>
+@import '../../css/content.css';
+</style>

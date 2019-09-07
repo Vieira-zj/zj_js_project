@@ -59,9 +59,10 @@ vue add @vue/unit-jest
 npm run test:unit
 ```
 
-### Fix load *.scss
+### Fix import *.css or *.scss in vue.
 Failed to resolve loader: sass-loader
 ```
+npm i --save-dev css-loader
 npm i --save-dev sass-loader
 ```
 
