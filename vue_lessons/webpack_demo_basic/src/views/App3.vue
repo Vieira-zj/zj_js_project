@@ -10,6 +10,7 @@
             <ul>
               <li v-for="item in items"
                   v-bind:key="item.name">
+                <!-- display href page in iframe "showHere" -->
                 <a v-bind:href="item.link"
                    target="showHere"
                    v-on:click="showIframe">{{ item.name }}</a>

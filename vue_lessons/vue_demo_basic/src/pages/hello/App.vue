@@ -19,4 +19,4 @@ export default {
 }
 </script>
 
-<style src="@/css/content.css"></style>
+<style src="@/css/content.css" scoped></style>

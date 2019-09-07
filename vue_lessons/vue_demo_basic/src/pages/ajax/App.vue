@@ -13,6 +13,6 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 @import '../../css/content.css';
 </style>

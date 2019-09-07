@@ -7,18 +7,17 @@
       <router-link to="/app1/3">lesson-03</router-link> |
       <router-link to="/app1/4">lesson-04</router-link>
       <br>
-      <router-link to="/app1/5">lesson-05,</router-link>
-      <router-link to="/app1/6">lesson-06,</router-link>
-      <router-link to="/app1/7">lesson-07,</router-link>
+      <router-link to="/app1/5">lesson-05</router-link> |
+      <router-link to="/app1/6">lesson-06</router-link> |
+      <router-link to="/app1/7">lesson-07</router-link> |
       <router-link to="/app1/8">lesson-08</router-link>
       <br>
-      <router-link to="/app1/10?key=value&amp;k=v">router args test</router-link>
+      <router-link to="/app1/10?k1=v1&amp;k2=v2">router args test</router-link>
       <br>
     </nav>
-    <div id="test"
-         v-if="routerQuerys() !== 'null'">
-      <p>router params: {{ routerParams() }}</p>
-      <p>router query: {{ routerQuerys() }}</p>
+    <div v-if="Boolean($route.query)">
+      <p>Router parameters: {{ formatParams($route.params) }}</p>
+      <p>Router query: {{ formatParams($route.query) }}</p>
     </div>
     <div class="lessons">
       <component v-bind:is="currentLesson"></component>
@@ -62,19 +61,11 @@ export default {
     }
   },
   methods: {
-    routerParams: function () {
-      var p = this.$route.params
-      if (JSON.stringify(p) === '{}') {
+    formatParams: function (params) {
+      if (JSON.stringify(params) === '{}') {
         return 'null'
       }
-      return p
-    },
-    routerQuerys: function () {
-      let q = this.$route.query
-      if (JSON.stringify(q) === '{}') {
-        return 'null'
-      }
-      return q
+      return params
     },
     navTop: function () {
       // common function in base.js
@@ -85,12 +76,23 @@ export default {
 </script>
 
 <style scoped>
+h1,
+h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+
 .lessons {
   height: 1200px;
-}
-#trailer {
-  position: fixed;
-  left: 50px;
-  top: 150px;
 }
 </style>

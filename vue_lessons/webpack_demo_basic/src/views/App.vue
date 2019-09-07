@@ -7,10 +7,10 @@
       <nav>
         <ul>
           <li>
-            <router-link to="/app1">App1 vue lessons</router-link><br>
+            <router-link to="/app1">App1 vue lessons</router-link>
           </li>
           <li>
-            <router-link to="/app2">App2 vuex lessons</router-link><br>
+            <router-link to="/app2">App2 vuex lessons</router-link>
           </li>
           <li>
             <router-link to="/app3">App3 iframe</router-link>

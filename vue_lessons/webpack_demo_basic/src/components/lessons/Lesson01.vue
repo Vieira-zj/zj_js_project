@@ -1,55 +1,68 @@
 <template>
-<div id="lesson-01">
-  <h1>Lesson 01, hello world</h1>
-  <div id="example-01" v-if="seen1">
-    <h2>Example 01, bind text</h2>
-    <p>{{ message1 }}</p>
+  <div id="lesson-01">
+    <h1>Lesson 01, Hello World</h1>
+    <div id="example-01"
+         v-if="seen1">
+      <h2>Example 01, bind text</h2>
+      <p>{{ message1 }}</p>
+    </div>
+    <div id="example-02"
+         v-if="seen2">
+      <h2>Example 02, bind attribute</h2>
+      <span v-bind:title="message2">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+    </div>
+    <div id="example-03"
+         v-if="seen3">
+      <h2>Example 03, v-for loop</h2>
+      <ol>
+        <li v-for="todo in todos"
+            v-bind:key="todo.index">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+    <div id="example-04"
+         v-if="seen4">
+      <h2>Example 04, bind method</h2>
+      <p>{{ message4 }}</p>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <div id="example-05"
+         v-if="seen5">
+      <h2>Example 05, two-way bind</h2>
+      <label for="input">Input:</label>
+      <input id="input"
+             type="text"
+             v-model="message5">
+      <p>Characters: {{ message5.length }}</p>
+      <p>Text: {{ message5 }}</p>
+    </div>
+    <div id="example-06"
+         v-if="seen6">
+      <h2>Example 06, custom component</h2>
+      <ul>
+        <todo-item v-for="item in groceryList"
+                   v-bind:todo="item"
+                   v-bind:key="item.key">
+        </todo-item>
+      </ul>
+    </div>
+    <div id="example-ex-07"
+         v-if="seen7">
+      <h2>Example 07, methods vs. computed</h2>
+      <p>Reverse Message (no-cached): {{ reverseMsg1() }}</p>
+      <p>Reverse Message (cached): {{ reverseMsg2 }}</p>
+    </div>
+    <div id="example-ex-08"
+         v-if="seen8">
+      <h2>Example 08, update data</h2>
+      <button v-on:click="plusCount">Add 1</button>
+      <button v-on:click="minusCount">Minus 1</button>
+      <p>Count: {{ count }}</p>
+    </div>
   </div>
-  <div id="example-02" v-if="seen2">
-    <h2>Example 02, bind attribute</h2>
-    <span v-bind:title="message2">
-      Hover your mouse over me for a few seconds to see my dynamically bound title!
-    </span>
-  </div>
-  <div id="example-03" v-if="seen3">
-    <h2>Example 03, v-for loop</h2>
-    <ol>
-      <li v-for="todo in todos" v-bind:key="todo.index">
-        {{ todo.text }}
-      </li>
-    </ol>
-  </div>
-  <div id="example-04" v-if="seen4">
-    <h2>Example 04, bind method</h2>
-    <p>{{ message4 }}</p>
-    <button v-on:click="reverseMessage">Reverse Message</button>
-  </div>
-  <div id="example-05" v-if="seen5">
-    <h2>Example 05, two-way bind</h2>
-    <label for="input">Input:</label>
-    <input id="input" type="text" v-model="message5">
-    <p>Characters: {{ message5.length }}</p>
-    <p>Text: {{ message5 }}</p>
-  </div>
-  <div id="example-06" v-if="seen6">
-    <h2>Example 06, custom component</h2>
-    <ul>
-      <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.key">
-      </todo-item>
-    </ul>
-  </div>
-  <div id="example-ex-07" v-if="seen7">
-    <h2>Example 07, methods vs. computed</h2>
-    <p>Reverse Message (no-cached): {{ reverseMsg1() }}</p>
-    <p>Reverse Message (cached): {{ reverseMsg2 }}</p>
-  </div>
-  <div id="example-ex-08" v-if="seen8">
-    <h2>Example 08, update data</h2>
-    <button v-on:click="plusCount">Add 1</button>
-    <button v-on:click="minusCount">Minus 1</button>
-    <p>Count: {{ count }}</p>
-  </div>
-</div>
 </template>
 
 <script>
@@ -80,7 +93,7 @@ export default {
         { id: 2, text: 'Whatever else' }
       ],
       seen7: true,
-      seen8: false,
+      seen8: true,
       count: 0
     }
   },
@@ -111,20 +124,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

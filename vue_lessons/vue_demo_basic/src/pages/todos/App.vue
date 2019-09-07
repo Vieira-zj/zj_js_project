@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .content {
   max-width: 500px;
   margin: 0 auto;
