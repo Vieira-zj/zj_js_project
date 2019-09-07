@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>vue demo</title>
+    <title>vue demo - 实例</title>
   </head>
   <body>
     <!-- built files will be auto injected -->
@@ -19,6 +19,7 @@
       <!-- 控制语句 -->
       <div>
         <p v-if="seen">现在你看到我了</p>
+        <p v-else>看到其他什么</p>
       </div>
       <div>
         <ol>
@@ -29,11 +30,9 @@
       </div>
       <!-- 双向绑定 -->
       <div>
-        <p>
-          {{ message2 }}
-        </p>
-        <!-- 当"message2"为空时才会显示placeholder的值 -->
-        <input v-model="message2" placeholder="Please input" />
+        <p>{{ text }}</p>
+        <!-- 当"text"为空时才会显示placeholder的值 -->
+        <input v-model="text" placeholder="Please input" />
       </div>
       <!-- vue组件 -->
       <div>
@@ -58,9 +57,9 @@
       el: '#app',
       data: {
         message: 'Hello Vue!',
-        message2: 'Your input',
+        text: '',
         tips: '页面加载于 ' + new Date().toLocaleString(),
-        seen: true,
+        seen: false,
         todos: [
           { text: '学习 JavaScript' },
           { text: '学习 Vue' },

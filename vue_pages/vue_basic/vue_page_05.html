@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>vue demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue demo - 在组件上使用 v-for</title>
   </head>
   <body>
     <div id="todo-list-example">
@@ -30,33 +31,33 @@
   <script>
     Vue.component('todo-item', {
       props: ['title'],
-      template:
-        '\
-                <li>\
-                    {{ title }}\
-                    <button v-on:click="$emit(\'remove\')">Remove</button>\
-                </li>\
-            '
+      template: `
+        <li>
+          {{ title }}
+          <button v-on:click="$emit('remove')">Remove</button>
+        </li>
+      `
     })
 
+    let nextTodoId = 1
     new Vue({
       el: '#todo-list-example',
       data: {
         newTodoText: '',
         todos: [
-          { id: 1, title: 'Do the dishes' },
-          { id: 2, title: 'Take out the trash' },
-          { id: 3, title: 'Mow the lawn' }
+          { id: nextTodoId++, title: 'Do the dishes' },
+          { id: nextTodoId++, title: 'Take out the trash' },
+          { id: nextTodoId++, title: 'Mow the lawn' }
         ]
       },
       methods: {
         addNewTodo: function() {
-          if (this.newTodoText.length == 0) {
+          if (!Boolean(this.newTodoText)) {
             alert('todo text is empty!')
             return
           }
           this.todos.push({
-            id: this.todos.length + 1,
+            id: this.nextTodoId++,
             title: this.newTodoText
           })
           this.newTodoText = ''

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>vue ajax demo - axios post</title>
+    <!-- if CORS issue, add Access-Control-Allow-* headers in nginx or mockserver. -->
   </head>
   <body>
     <div id="app">
@@ -11,13 +12,13 @@
       <button v-on:click="getData">Get Data</button>
       <p v-if="error">
         We're sorry, we're not able to retrieve this information at the moment,
-        please try back later
+        please try back later.
       </p>
       <p v-if="loading">Loading...</p>
-      <p v-for="item in respdata.server_list" v-if="respdata">
-        <span>server ip: {{ item.server_ip }}</span>
+      <p v-for="server in serverList" v-if="hasData">
+        <span>server ip: {{ server.server_ip }}</span>
         <br />
-        <span>server name: {{ item.server_name }}</span>
+        <span>server name: {{ server.server_name }}</span>
       </p>
     </div>
   </body>
@@ -26,35 +27,42 @@
   <script>
     new Vue({
       el: '#app',
-      data() {
-        return {
-          loading: false,
-          error: false,
-          respdata: 'null',
-          postdata: {
+      data: {
+        loading: false,
+        error: false,
+        serverList: null
+      },
+      computed: {
+        hasData() {
+          return Boolean(this.serverList)
+        }
+      },
+      methods: {
+        getData() {
+          let postdata = {
             server_list: [
               { server_name: 'svr_a_002', server_ip: '127.0.1.2' },
               { server_name: 'svr_a_013', server_ip: '127.0.1.13' }
             ],
             server_group_id: 'svr_grp_001'
           }
-        }
-      },
-      methods: {
-        getData() {
+          let vm = this
+
           this.loading = true
-          // if CORS issue, add allow-origin:* header in nginx or mockserver.
           axios
             .post(
-              'http://mockserver.test.com:8081/demo/3',
-              JSON.stringify(this.postdata)
+              'http://mockserver.test.com:17891/demo/3',
+              JSON.stringify(postdata)
             )
             .then(resp => {
-              console.log(resp.data)
-              this.respdata = JSON.parse(resp.data.split('\n')[0]).data
+              let data = JSON.parse(resp.data.split('\n')[0]).data
+              vm.serverList = data.server_list
             })
-            .catch(err => (this.error = true))
-            .finally(() => (this.loading = false))
+            .catch(err => {
+              console.error('Error: ' + err.toString())
+              vm.error = true
+            })
+            .finally(() => (vm.loading = false))
         }
       }
     })

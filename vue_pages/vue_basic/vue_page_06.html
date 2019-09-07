@@ -2,10 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>vue demo: 自定义指令</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <style>
+      .scroll {
+        height: 1200px;
+      }
+    </style>
+    <title>vue demo - 自定义指令</title>
   </head>
   <body>
-    <div id="app">
+    <div id="app" class="scroll">
       <div>
         <input v-focus v-model="message" />
         <p>{{ message }}</p>
@@ -13,7 +19,7 @@
       <div>
         <h3>Scroll down inside this section</h3>
         <p v-pin:[direction]="200">
-          I am pinned onto the page at 200px to the left.
+          I am pinned onto the page at 200px to the {{ direction }}.
         </p>
       </div>
     </div>
@@ -29,7 +35,7 @@
     Vue.directive('pin', {
       bind: function(el, binding, vnode) {
         el.style.position = 'fixed'
-        var s = binding.arg === 'left' ? 'left' : 'top'
+        let s = binding.arg === 'left' ? 'left' : 'top'
         el.style[s] = binding.value + 'px'
       }
     })
