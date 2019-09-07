@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import App from '@/pages/App'
-import App1 from '@/pages/App1'
-import App2 from '@/pages/App2'
-import App3 from '@/pages/App3'
-import App4 from '@/pages/App4'
-import App5 from '@/pages/App5'
+import App from '@/views/App'
+import App1 from '@/views/App1'
+import App2 from '@/views/App2'
+import App3 from '@/views/App3'
+import App4 from '@/views/App4'
+import App5 from '@/views/App5'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    { path: '/', component: App },
+    { path: '/index', component: App },
     { path: '/app1', component: App1 },
     { path: '/app1/:lessonId', component: App1 },
     { path: '/app2/', component: App2 },

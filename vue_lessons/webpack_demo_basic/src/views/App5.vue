@@ -3,15 +3,20 @@
     <div>
       <!-- vue-chartjs => http://vue-chartjs.org/#/ -->
       <h1>Reactive ChartJs Lessons</h1>
-      <div id="barchart" class="chart" v-if="seenReactiveBar">
+      <div id="barchart"
+           class="chart"
+           v-if="seenReactiveBar">
         <h2>Bar Reactive Chart Test</h2>
         <bar-reactive></bar-reactive>
       </div>
-      <div id="linechart" class="chart" v-if="seenReactiveLine">
+      <div id="linechart"
+           class="chart"
+           v-if="seenReactiveLine">
         <h2>Line Reactive Chart Test</h2>
         <!-- error: use tag line-reactive-chart? -->
         <!-- TODO: get canvas context -->
-        <line-reactive :chart-data="datacollection" :options="chartOptions"></line-reactive>
+        <line-reactive :chart-data="datacollection"
+                       :options="chartOptions"></line-reactive>
       </div>
       <div id="trailer">
         <button @click="fillData()">Randomize</button><br>
@@ -121,24 +126,16 @@ export default {
 </script>
 
 <style scoped>
-#app5 {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 .chart {
   background: #212733;
   border-radius: 15px;
   box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
-  margin:  25px 0;
+  margin: 25px 0;
 }
 .chart h2 {
   margin-top: 0;
   padding: 15px 0;
-  color:  rgba(255, 0,0, 0.5);
+  color: rgba(255, 0, 0, 0.5);
   border-bottom: 1px solid #323d54;
 }
 </style>

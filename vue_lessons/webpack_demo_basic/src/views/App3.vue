@@ -4,17 +4,25 @@
     <table>
       <tr>
         <td>
-          <div v-if="goBackState" v-on:click="goBack">GoBack</div>
+          <div v-if="goBackState"
+               v-on:click="goBack">GoBack</div>
           <div v-else>
             <ul>
-              <li v-for="item in items" v-bind:key="item.name">
-                <a v-bind:href="item.link" target="showHere" v-on:click="showIframe">{{ item.name }}</a>
+              <li v-for="item in items"
+                  v-bind:key="item.name">
+                <a v-bind:href="item.link"
+                   target="showHere"
+                   v-on:click="showIframe">{{ item.name }}</a>
               </li>
             </ul>
           </div>
         </td>
         <td id="td-show-iframe">
-          <iframe v-show="iframeState" id="show-iframe" frameborder=0 name="showHere" scrolling="auto"></iframe>
+          <iframe v-show="iframeState"
+                  id="show-iframe"
+                  frameborder=0
+                  name="showHere"
+                  scrolling="auto"></iframe>
         </td>
       </tr>
     </table>
@@ -64,22 +72,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#app3 {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  /* display: inline-block; */
-  margin: 0 10px;
-}
-</style>

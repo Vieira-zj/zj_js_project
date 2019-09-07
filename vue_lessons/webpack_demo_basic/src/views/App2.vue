@@ -20,7 +20,7 @@
       <counter-03></counter-03>
     </div>
     <div id="trailer">
-    <button @click="goTop($)">Go Top</button>
+      <button @click="goTop($)">Go Top</button>
     </div>
   </div>
 </template>
@@ -56,14 +56,6 @@ export default {
 </script>
 
 <style scoped>
-#app2 {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 #count {
   background: black;
   color: white;
