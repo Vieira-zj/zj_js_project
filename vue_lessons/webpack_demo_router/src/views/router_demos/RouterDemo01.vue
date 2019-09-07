@@ -5,15 +5,18 @@
       <p>ID: {{ routerId }}</p>
       <p>ID stat: <span>{{ statMsg }}</span></p>
       <p>Navigation: {{ navMsg }}</p>
-      <router-view/>
+      <router-view />
     </div>
     <div>
       <label for="routeid">Input route ID:</label>
-      <input id="routeid" type="text" v-model.lazy="routerId" v-on:keyup.enter="navByRouteId"><br>
+      <input id="routeid"
+             type="text"
+             v-model.lazy="routerId"
+             v-on:keyup.enter="navByRouteId"><br>
       <button @click="navByRouteId">Submit</button>
     </div>
     <div id="trailer">
-      <a v-on:click="goRouterHome">Router Home</a>
+      <button v-on:click="goRouterHome">Router Home</button>
     </div>
   </div>
 </template>
@@ -53,28 +56,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
