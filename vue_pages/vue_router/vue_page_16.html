@@ -55,16 +55,16 @@
   </head>
   <body>
     <div id="app">
-      <h1>Transitions</h1>
+      <h1>Router with Transitions</h1>
       <ul>
-        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/">/home</router-link></li>
         <li><router-link to="/parent">/parent</router-link></li>
         <li><router-link to="/parent/foo">/parent/foo</router-link></li>
         <li><router-link to="/parent/bar">/parent/bar</router-link></li>
       </ul>
       <!-- 渐入渐出效果 -->
       <transition name="fade" mode="out-in">
-        <router-view class="view"></router-view>
+        <router-view />
       </transition>
     </div>
   </body>
@@ -92,11 +92,11 @@
         this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
         next()
       },
-      // 左右移动效果
+      // 左右滑动效果
       template: `
         <div class="parent">
           <h2>Parent</h2>
-          <transition :name="transitionName">
+          <transition v-bind:name="transitionName">
             <router-view class="child-view"></router-view>
           </transition>
         </div>

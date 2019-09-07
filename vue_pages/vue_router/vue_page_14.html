@@ -50,7 +50,7 @@
       `
     }
 
-    // main router view 视图组件
+    // router view 视图组件
     const UserSettings = {
       template: `
         <div class="us">
@@ -65,29 +65,13 @@
 
     // nested router view 嵌套的视图组件
     const UserEmailsSubscriptions = {
-      template: `
-        <div>
-          <h3>Email Subscriptions</h3>
-        </div>
-      `
+      template: '<div><h3>Email Subscriptions</h3></div>'
     }
-
-    // nested router view 嵌套的视图组件
     const UserProfile = {
-      template: `
-        <div>
-          <h3>Edit your profile</h3>
-        </div>
-      `
+      template: '<div><h3>Edit your profile</h3></div>'
     }
-
-    // nested router view 嵌套的视图组件
     const UserProfilePreview = {
-      template: `
-        <div>
-          <h3>Preview of your profile</h3>
-        </div>
-      `
+      template: '<div><h3>Preview of your profile</h3></div>'
     }
 
     const router = new VueRouter({
@@ -114,10 +98,6 @@
 
     // default opened url
     router.push('/settings/emails')
-
-    new Vue({
-      router,
-      el: '#app'
-    })
+    new Vue({ router }).$mount('#app')
   </script>
 </html>

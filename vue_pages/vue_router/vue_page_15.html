@@ -8,12 +8,12 @@
     <div id="app">
       <h1>Route props</h1>
       <ul>
-        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/">/home</router-link></li>
         <li><router-link to="/hello/you">/hello/you</router-link></li>
         <li><router-link to="/static">/static</router-link></li>
         <li><router-link to="/dynamic/1">/dynamic/1</router-link></li>
       </ul>
-      <router-view class="view" foo="123"></router-view>
+      <router-view foo="123"></router-view>
     </div>
   </body>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
