@@ -10,7 +10,7 @@
       <!-- giving the post container a unique key triggers transitions 
       when the post id changes. -->
       <div v-if="post"
-           class="content"
+           class="resp_content"
            :key="post.id">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
@@ -63,7 +63,7 @@ export default {
 .error {
   color: red;
 }
-.content {
+.resp_content {
   transition: all 0.35s ease;
   position: absolute;
 }
