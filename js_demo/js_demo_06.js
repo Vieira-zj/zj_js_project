@@ -5,7 +5,7 @@
 // demo 01, callback in setTimeout()
 var isDemo01Run = false;
 if (isDemo01Run) {
-    (function demo01() {
+    (function demo01 () {
         var logDelay1 = function (input) {
             setTimeout(function (text) {
                 console.log('text:', text);
@@ -37,7 +37,7 @@ if (isDemo01Run) {
 // demo 02, check object property exist
 var isDemo02Run = false;
 if (isDemo02Run) {
-    (function demo02() {
+    (function demo02 () {
         // match: null, undefined, false, '' and 0
         var isPropertyExist1 = function (tmpProperty) {
             return Boolean(tmpProperty);
@@ -93,12 +93,12 @@ if (isDemo0401Run) {
     (function () {
         var stack = [];
 
-        function fn1() {
+        function fn1 () {
             console.log('fn1 invoked.');
         }
         stack.push(fn1);
 
-        function fn2() {
+        function fn2 () {
             console.log('fn2 invoked.');
         }
         stack.push(fn2, function () {
@@ -117,7 +117,7 @@ if (isDemo0402Run) {
         var stack = [];
         var index = 0;
 
-        function next() {
+        function next () {
             if (index > (stack.length - 1)) {
                 console.log('End of stack.');
                 return;
@@ -130,14 +130,14 @@ if (isDemo0402Run) {
             }
         }
 
-        function fn1() {
+        function fn1 () {
             console.log('fn1 invoked.');
             next();
         }
         stack.push(fn1);
 
-        function fn2() {
-            setTimeout(function fn2Timeout() {
+        function fn2 () {
+            setTimeout(function fn2Timeout () {
                 console.log('fn2Timeout invoked.');
                 next();
             }, 1000);
@@ -156,7 +156,7 @@ if (isDemo0402Run) {
 var isDemo05Run = false;
 if (isDemo05Run) {
     (function () {
-        function Product(value, price) {
+        function Product (value, price) {
             var name = value; // private
             this.price = price;
             this.setName = function (value) {
@@ -184,11 +184,11 @@ if (isDemo06Run) {
     var module = (function () {
         var N = 5;  // as private var
 
-        function print(x) {  // as private method
+        function print (x) {  // as private method
             console.log('The result is:', x);
         }
 
-        function add(a) {  // as public method
+        function add (a) {  // as public method
             var x = a + N;
             print(x);
         }
@@ -246,7 +246,7 @@ if (isDemo0702Run) {
 // "fn.length": args when function is defined
 var isDemo08Run = false;
 if (isDemo08Run) {
-    function argTest(arg1, arg2) {  // define with 2 args
+    function argTest (arg1, arg2) {  // define with 2 args
         console.log('outer args:', arguments);
         console.log('arg1=%s, arg2=%s', arg1, arg2);
 
@@ -298,7 +298,7 @@ if (isDemo11Run) {
         // #2
         var tmpObj1 = {
             name: 'kong',
-            age: 18, 
+            age: 18,
             func: function () {
             }
         };
@@ -320,6 +320,7 @@ if (isDemo11Run) {
                 enumerable: false
             }
         });
+        // only print properties with enumerable=true
         console.log('\nfn Object.defineProperties():\n', JSON.stringify(tmpObj2, null, '  '));
     })();
 }
@@ -335,10 +336,9 @@ if (isDemo1101Run) {
 
     // prototype chain and hasOwnProperty()
     (function () {
-        function SuperType() {
+        function SuperType () {
             this.type = 'super type';
         }
-
         SuperType.prototype.toString = function () {
             console.log('type:', this.type);
         };
@@ -346,7 +346,7 @@ if (isDemo1101Run) {
             console.log('hello, world');
         };
 
-        function SubType() {
+        function SubType () {
             this.type = 'sub type';
         }
         SubType.prototype = new SuperType();
@@ -361,32 +361,11 @@ if (isDemo1101Run) {
 }
 
 
-// demo 12, Object.assign()
-var isDemo12Run = false;
-if (isDemo12Run) {
-    (function () {
-        var id = Symbol('id');
-        var tmpObj1 = {firstName: 'zheng', lastName: 'jin', [id]: 'WH'};
-        Object.defineProperty(tmpObj1, 'age', {
-            value: 30,
-            enumerable: false
-        });
-
-        var copy = Object.assign({}, tmpObj1);
-        console.log('Object copy:\n', JSON.stringify(copy, null, '  '));
-
-        var tmpObj2 = {score: 91, skills: ['Java', 'Python', 'JS']};
-        var merge = Object.assign({}, tmpObj1, tmpObj2);
-        console.log('\nObject merge:\n', JSON.stringify(merge, null, '  '));
-    })();
-}
-
-
-// demo 13, enumerable property, only be defined by Object.defineProperty()
+// demo 12, enumerable property, only be defined by Object.defineProperty()
 var isDemo13Run = false;
 if (isDemo13Run) {
     (function () {
-        function Person() {
+        function Person () {
             this.name = 'zhengjin';
         }
 
@@ -396,7 +375,7 @@ if (isDemo13Run) {
         };
 
         var p = new Person();
-        Object.defineProperty(p, 'sex', {value: 'male', enumerable: false});
+        Object.defineProperty(p, 'sex', { value: 'male', enumerable: false });
         console.log(`person sex: ${p.sex}`);
         console.log('name property enumerable:', p.propertyIsEnumerable('name'));
         console.log('sex property enumerable:', p.propertyIsEnumerable('sex'));
@@ -413,7 +392,7 @@ if (isDemo13Run) {
 }
 
 
-// demo 14, Symbol
+// demo 13, Symbol
 var isDemo14Run = false;
 if (isDemo14Run) {
     (function () {
@@ -429,12 +408,10 @@ if (isDemo14Run) {
             [id1]: 'WH'
         };
         person[id2] = 'SH';
-
-        // get symbol
         console.log('\nPerson name:', person['name']);
         console.log(`Person ids: id1=${person[id1]}, id2=${person[id2]}`);
 
-        // iterator on symbol key
+        // symbol key 不可枚举
         console.log('\nGet person properties:');
         for (var key in person) {
             if (person.hasOwnProperty(key)) {
@@ -442,6 +419,27 @@ if (isDemo14Run) {
             }
         }
         console.log('Get person keys:', Object.keys(person));
+    })();
+}
+
+
+// demo 14, Object.assign()
+var isDemo12Run = false;
+if (isDemo12Run) {
+    (function () {
+        var id = Symbol('id');
+        var tmpObj1 = { firstName: 'zheng', lastName: 'jin', [id]: 'WH' };
+        Object.defineProperty(tmpObj1, 'age', {
+            value: 30,
+            enumerable: false
+        });
+
+        var copy = Object.assign({}, tmpObj1);
+        console.log('Object copy:\n', JSON.stringify(copy, null, '  '));
+
+        var tmpObj2 = { score: 91, skills: ['Java', 'Python', 'JS'] };
+        var merge = Object.assign({}, tmpObj1, tmpObj2);
+        console.log('\nObject merge:\n', JSON.stringify(merge, null, '  '));
     })();
 }
 
@@ -455,7 +453,7 @@ if (isDemo15Run) {
         const tmpObj = {
             title, // title: title
             desc: 'create object shorthand',
-            myPrint() { // myPrint: function() {...}
+            myPrint () { // myPrint: function() {...}
                 console.log(title, this.desc);
             }
         };
@@ -484,13 +482,13 @@ if (isDemo16Run) {
     (function () {
         obj = {
             id: 'test id',
-            retFn1: function() {
+            retFn1: function () {
                 return 'ret string from retFn1';
             },
             retFn2: () => {
                 return 'ret string from retFn2';
             },
-            'retFn3' (){
+            'retFn3' () {
                 return 'ret string from retFn3';
             },
         };
