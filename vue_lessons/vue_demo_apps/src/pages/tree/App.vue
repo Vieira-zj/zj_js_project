@@ -1,5 +1,6 @@
 <template>
   <div id="demo">
+    <h1>Tree - 组件递归使用</h1>
     <p>(You can double click on an item to turn it into a folder.)</p>
     <ul>
       <tree-item class="item"

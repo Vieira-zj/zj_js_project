@@ -1,6 +1,6 @@
 <template>
   <div id="demo">
-    <h1>Serach and Grid</h1>
+    <h1>Grid - 可复用网格组件</h1>
     <form id="search">
       Search <input name="query"
              v-model="searchQuery">
