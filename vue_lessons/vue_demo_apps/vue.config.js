@@ -6,6 +6,11 @@ module.exports = {
       entry: 'src/pages/github/main.js',
       template: 'public/index.html',
       filename: 'github.html'
+    },
+    grid: {
+      entry: 'src/pages/grid/main.js',
+      template: 'public/index.html',
+      filename: 'grid.html'
     }
   }
 }
