@@ -11,6 +11,11 @@ module.exports = {
       entry: 'src/pages/grid/main.js',
       template: 'public/index.html',
       filename: 'grid.html'
+    },
+    tree: {
+      entry: 'src/pages/tree/main.js',
+      template: 'public/index.html',
+      filename: 'tree.html'
     }
   }
 }
