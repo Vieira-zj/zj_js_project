@@ -85,6 +85,7 @@ let app = new Vue({
       if (!value) {
         return
       }
+      // struct "todo" item
       this.todos.push({
         id: todoStorage.uid++,
         title: value,
