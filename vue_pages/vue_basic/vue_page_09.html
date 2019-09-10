@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue demo - 停止冒泡</title>
+  </head>
+  <body>
+    <div id="app">
+      <section>
+        <h1>Bubble Event</h1>
+        <div id="parent" @click="clickHandler1">
+          <button @click="clickHandler2($event, false)">Click me</button>
+        </div>
+      </section>
+      <!-- vue v-on绑定的事件默认为冒泡阶段事件 -->
+      <section>
+        <h1>Cancel Bubble</h1>
+        <div @click="clickHandler1">
+          <button @click="clickHandler2($event, true)">Click me</button>
+        </div>
+      </section>
+      <section>
+        <h1>Vue Stop Bubble</h1>
+        <div @click="clickHandler1">
+          <button @click.stop="clickHandler2($event, false)">Click me</button>
+        </div>
+      </section>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      methods: {
+        clickHandler1(evt) {
+          console.log(`handler1: ${evt.type} event for ${evt.target}`)
+        },
+        clickHandler2(evt, isCancel) {
+          evt.cancelBubble = isCancel
+          console.log(`handler2: ${evt.type} event for ${evt.target}`)
+        }
+      },
+      mounted: function() {
+        // 添加一个捕获阶段事件
+        let p = document.getElementById('parent')
+        p.addEventListener('click', this.clickHandler1, true)
+      }
+    }).$mount('#app')
+  </script>
+</html>
