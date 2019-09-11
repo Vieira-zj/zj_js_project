@@ -21,6 +21,11 @@ module.exports = {
       entry: 'src/pages/modal/main.js',
       template: 'public/index.html',
       filename: 'modal.html'
+    },
+    polygraph: {
+      entry: 'src/pages/polygraph/main.js',
+      template: 'public/index.html',
+      filename: 'polygraph.html'
     }
   }
 }
