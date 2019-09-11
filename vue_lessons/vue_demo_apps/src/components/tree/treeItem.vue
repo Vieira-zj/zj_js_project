@@ -60,3 +60,19 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.item {
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 1em;
+  line-height: 1.5em;
+  list-style-type: dot;
+}
+</style>

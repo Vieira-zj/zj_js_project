@@ -16,6 +16,11 @@ module.exports = {
       entry: 'src/pages/tree/main.js',
       template: 'public/index.html',
       filename: 'tree.html'
+    },
+    modal: {
+      entry: 'src/pages/modal/main.js',
+      template: 'public/index.html',
+      filename: 'modal.html'
     }
   }
 }

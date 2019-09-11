@@ -15,35 +15,7 @@
 <script>
 import Vue from 'vue'
 import treeItem from '@/components/tree/treeItem.vue'
-
-let treeData = {
-  name: 'My Tree',
-  children: [
-    { name: 'hello' },
-    { name: 'wat' },
-    {
-      name: 'child folder',
-      children: [
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        },
-        { name: 'hello' },
-        { name: 'wat' },
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        }
-      ]
-    }
-  ]
-}
+import treeData from './treeData.js'
 
 export default {
   components: {
@@ -68,20 +40,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+// Node: if style is defined as "scoped",
+// the css will not be applied to included component "treeitem".
 body {
   font-family: Menlo, Consolas, monospace;
   color: #444;
-}
-.item {
-  cursor: pointer;
-}
-.bold {
-  font-weight: bold;
-}
-ul {
-  padding-left: 1em;
-  line-height: 1.5em;
-  list-style-type: dot;
 }
 </style>
