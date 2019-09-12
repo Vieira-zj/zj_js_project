@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h1>模式组件</h1>
+    <h1>Vue App - 模式组件</h1>
     <p>组件，prop 传递，内容插入 (content insertion)，过渡 (transitions)</p>
     <button id="show-modal"
             @click="showModal = true">Show Modal</button>

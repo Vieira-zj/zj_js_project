@@ -1,5 +1,6 @@
 <template>
   <div id="demo">
+    <h1>Vue App - SVG 图表</h1>
     <svg width="200"
          height="200">
       <polygraph :stats="stats"></polygraph>
