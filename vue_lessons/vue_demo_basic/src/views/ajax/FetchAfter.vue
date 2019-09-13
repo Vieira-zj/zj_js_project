@@ -39,6 +39,7 @@ export default {
     // 如果路由有变化, 会再次执行该方法
     // $route: 'fetchData'
     $route: function (old, newRoute) {
+      // eslint-disable-next-line
       console.log(`navigate from ${old.path} to ${newRoute.path}.`)
       this.fetchData()
     }

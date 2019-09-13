@@ -29,6 +29,7 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
+    // eslint-disable-next-line
     console.log("hook: before-route-enter")
     common.func.sendGet(url, { file: `post${to.params.id}.json` })
       .then(resp => {
@@ -41,6 +42,7 @@ export default {
   },
   // 路由改变前, 组件就已经渲染完了, 逻辑稍稍不同
   beforeRouteUpdate (to, from, next) {
+    // eslint-disable-next-line
     console.log("hook: before-route-update")
     this.post = null
     common.func.sendGet(url, { file: `post${to.params.id}.json` })
