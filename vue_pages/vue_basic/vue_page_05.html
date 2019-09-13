@@ -8,12 +8,13 @@
   <body>
     <div id="todo-list-example">
       <h2>Todos</h2>
+      <!-- prevent default -->
       <form v-on:submit.prevent="addNewTodo">
         <label for="new-todo">Add a todo</label>
         <input
-          v-model="newTodoText"
           id="new-todo"
           placeholder="E.g. Feed the cat"
+          v-model="newTodoText"
         />
         <button>Add</button>
       </form>
@@ -27,17 +28,19 @@
         ></li>
       </ul>
     </div>
+    <!-- components template -->
+    <template id="todo-item-template">
+      <li>
+        {{ title }}
+        <button v-on:click="$emit('remove')">Remove</button>
+      </li>
+    </template>
   </body>
   <script src="../modules/vue.js"></script>
   <script>
     Vue.component('todo-item', {
       props: ['title'],
-      template: `
-        <li>
-          {{ title }}
-          <button v-on:click="$emit('remove')">Remove</button>
-        </li>
-      `
+      template: '#todo-item-template'
     })
 
     let nextTodoId = 1

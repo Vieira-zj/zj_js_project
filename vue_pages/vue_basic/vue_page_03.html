@@ -6,7 +6,7 @@
     <title>vue demo - 监听子组件事件</title>
   </head>
   <body>
-    <!-- 使用 v-bind 来动态传递 prop -->
+    <!-- 使用 v-bind 来动态传递 props -->
     <!-- 监听子组件实例的 enlarge-text 事件 -->
     <div id="blog-posts-events-demo">
       <div v-bind:style="{ fontSize: postFontSize + 'em' }">
@@ -18,19 +18,21 @@
         ></blog-post>
       </div>
     </div>
+    <!-- components template -->
+    <template id="blog-post-template">
+      <div class="blog-post">
+        <h3>{{ post.title }}</h3>
+        <button v-on:click="$emit('enlarge-text')">Enlarge text</button>
+        <div v-html="post.content"></div>
+      </div>
+    </template>
   </body>
   <script src="../modules/vue.js"></script>
   <script>
     Vue.component('blog-post', {
       props: ['post'],
       // 通过调用内建的 $emit 方法 并传入事件名称来触发一个事件
-      template: `
-        <div class="blog-post">
-          <h3>{{ post.title }}</h3>
-          <button v-on:click="$emit('enlarge-text')">Enlarge text</button>
-          <div v-html="post.content"></div>
-        </div>
-      `
+      template: '#blog-post-template'
     })
 
     new Vue({

@@ -25,7 +25,7 @@
         padding: 10px;
       }
     </style>
-    <title>vue demo - 动态组件</title>
+    <title>vue demo - 动态组件（页签）</title>
   </head>
   <body>
     <div id="dynamic-component-demo">
@@ -37,7 +37,7 @@
       >
         {{ tab }}
       </button>
-      <!-- 组件会在 `currentTabComponent` 改变时改变 -->
+      <!-- 组件会在 currentTabComponent 改变时改变 -->
       <component v-bind:is="currentTabComponent" class="tab"></component>
     </div>
   </body>

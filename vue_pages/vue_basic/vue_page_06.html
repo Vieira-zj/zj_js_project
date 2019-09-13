@@ -18,6 +18,11 @@
       </div>
       <div>
         <h3>Scroll down inside this section</h3>
+        <input type="radio" value="left" id="dir-left" v-model="direction" />
+        <label for="dir-left">left</label>
+        <input type="radio" value="top" id="dir-top" v-model="direction" />
+        <label for="dir-top">top</label>
+        <!-- v-pin direction is not a bind value -->
         <p v-pin:[direction]="200">
           I am pinned onto the page at 200px to the {{ direction }}.
         </p>
