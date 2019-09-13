@@ -19,6 +19,12 @@ module.exports = {
       entry: 'src/pages/ajax/main.js',
       template: 'public/base.html',
       filename: 'ajax.html'
+    },
+    // page: vue scroller by hash
+    scroller: {
+      entry: 'src/pages/scroller/main.js',
+      template: 'public/base.html',
+      filename: 'scroller.html'
     }
   },
   // axios域代理, 解决axios跨域问题
