@@ -22,6 +22,7 @@
 <script>
 import common from './Common'
 
+let url = 'http://mockserver.test.com:17891/mocktest/one/2'
 export default {
   data () {
     return {
@@ -36,14 +37,17 @@ export default {
   },
   watch: {
     // 如果路由有变化, 会再次执行该方法
-    '$route': 'fetchData'
+    // $route: 'fetchData'
+    $route: function (old, newRoute) {
+      console.log(`navigate from ${old.path} to ${newRoute.path}.`)
+      this.fetchData()
+    }
   },
   methods: {
     fetchData () {
       this.error = this.post = null
       this.loading = true
-      common.sendGetTest('http://mockserver.test.com:8081/mocktest/one/2',
-        { file: `post${this.$route.params.id}.json` }, 700)
+      common.func.sendGetTest(url, { file: `post${this.$route.params.id}.json` }, 700)
         .then(resp => {
           this.post = JSON.parse('{' + resp.data.split('{')[1])
         })
@@ -60,17 +64,22 @@ export default {
   top: 10px;
   right: 10px;
 }
+
 .error {
   color: red;
 }
+
 .resp_content {
   transition: all 0.35s ease;
   position: absolute;
+  left: 350px;
 }
+
 .slide-enter {
   opacity: 0;
   transform: translate(30px, 0);
 }
+
 .slide-leave-active {
   opacity: 0;
   transform: translate(-30px, 0);

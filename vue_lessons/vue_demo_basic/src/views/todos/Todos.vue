@@ -1,10 +1,7 @@
 <template>
   <div id="app-todos">
-    <div>
-      <h2>My Todo App!</h2>
-      <TodoList />
-    </div>
-    <router-view></router-view>
+    <h2>My Todo App!</h2>
+    <TodoList />
   </div>
 </template>
 

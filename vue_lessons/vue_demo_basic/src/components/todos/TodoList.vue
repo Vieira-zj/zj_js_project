@@ -42,7 +42,7 @@ export default {
           id: nextTodoId++,
           text: trimmedText
         })
-        this.trimmedText = ""
+        this.newTodoText = ""
       } else {
         alert("new todo is empty!")
       }

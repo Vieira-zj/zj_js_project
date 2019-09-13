@@ -7,7 +7,7 @@ import FetchBefore from '@/views/ajax/FetchBefore.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Common.Home },
+  { path: '/', component: Common.elements.home },
   { path: '/postbefore/:id', component: FetchBefore },
   { path: '/postafter/:id', component: FetchAfter }
 ]

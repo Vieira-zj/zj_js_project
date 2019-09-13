@@ -29,33 +29,23 @@ const UserSettings = {
 }
 
 const UserEmailsSubscriptions = {
-  template: `
-<div>
-  <p>Email Subscriptions</p>
-</div>
-  `
+  template: '<div><p>Email Subscriptions</p></div>'
 }
-
 const UserProfile = {
-  template: `
-<div>
-  <p>Edit your profile</p>
-</div>
-  `
+  template: '<div><p>Edit your profile</p></div>'
 }
-
 const UserProfilePreview = {
-  template: `
-<div>
-  <p>Preview of your profile</p>
-</div>
-  `
+  template: '<div><p>Preview of your profile</p></div>'
 }
 
 export default {
-  dynamicPropsFn,
-  UserSettings,
-  UserEmailsSubscriptions,
-  UserProfile,
-  UserProfilePreview
+  func: {
+    dynamicPropsFn
+  },
+  elements: {
+    UserSettings,
+    UserEmailsSubscriptions,
+    UserProfile,
+    UserProfilePreview
+  }
 }

@@ -14,27 +14,8 @@
         <router-view />
       </div>
     </div>
-    <!-- scroll by native js -->
-    <div class="nav_top_bottom">
-      <button @click="scrollHandle('#header')">Top</button><br>
-      <button @click="scrollHandle('#footer')">Bottom</button>
-    </div>
   </div>
 </template>
-
-<script>
-export default {
-  methods: {
-    scrollHandle (id) {
-      let offset = document.querySelector(id).offsetTop
-      window.scrollTo({
-        top: offset,
-        behavior: 'smooth'
-      })
-    }
-  }
-}
-</script>
 
 <style src="@/css/content.css" scoped></style>
 
@@ -46,17 +27,14 @@ export default {
 
 #nav {
   grid-area: nav;
-  border: 20px;
+  padding: 20px;
+  border: 30px;
+  border-right: 1px solid #ccc;
+  background-color: snow;
 }
 
 #main {
   grid-area: main;
   padding: 20px;
-}
-
-.nav_top_bottom {
-  position: fixed;
-  top: 300px;
-  right: 20px;
 }
 </style>

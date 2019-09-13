@@ -69,8 +69,12 @@ function sendPost (url, params) {
 const Home = { template: '<h2>Ajax Home</h2>' }
 
 export default {
-  sendGet,
-  sendGetTest,
-  sendPost,
-  Home
+  func: {
+    sendGet,
+    sendGetTest,
+    sendPost,
+  },
+  elements: {
+    home: Home
+  }
 }

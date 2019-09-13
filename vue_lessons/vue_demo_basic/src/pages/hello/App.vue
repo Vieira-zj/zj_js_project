@@ -1,7 +1,7 @@
 <template>
+  <!-- unit-jest demo -->
   <div id="app"
        class="content">
-    <!-- unit-jest demo -->
     <h1>{{ msg }}</h1>
   </div>
 </template>
@@ -10,11 +10,11 @@
 export default {
   data () {
     return {
-      msg: 'hello!'
+      msg: 'hello!' // #1
     }
   },
   created () {
-    this.msg = 'bye!'
+    this.msg = 'bye!' // #2
   }
 }
 </script>

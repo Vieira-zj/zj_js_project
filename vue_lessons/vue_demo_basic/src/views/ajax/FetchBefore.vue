@@ -20,6 +20,7 @@
 <script>
 import common from './Common'
 
+let url = 'http://mockserver.test.com:17891/mocktest/one/2'
 export default {
   data () {
     return {
@@ -28,8 +29,8 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    common.sendGet('http://mockserver.test.com:8081/mocktest/one/2',
-      { file: `post${to.params.id}.json` })
+    console.log("hook: before-route-enter")
+    common.func.sendGet(url, { file: `post${to.params.id}.json` })
       .then(resp => {
         let data = JSON.parse('{' + resp.data.split('{')[1])
         next(vm => vm.setData(null, data))
@@ -40,9 +41,9 @@ export default {
   },
   // 路由改变前, 组件就已经渲染完了, 逻辑稍稍不同
   beforeRouteUpdate (to, from, next) {
+    console.log("hook: before-route-update")
     this.post = null
-    common.sendGet('http://mockserver.test.com:8081/mocktest/one/2',
-      { file: `post${to.params.id}.json` })
+    common.func.sendGet(url, { file: `post${to.params.id}.json` })
       .then(resp => {
         let data = JSON.parse('{' + resp.data.split('{')[1])
         this.setData(null, data)
@@ -69,15 +70,18 @@ export default {
 .error {
   color: red;
 }
+
 .resp_content {
   transition: all 0.35s ease;
   position: absolute;
   left: 350px;
 }
+
 .slide-enter {
   opacity: 0;
   transform: translate(30px, 0);
 }
+
 .slide-leave-active {
   opacity: 0;
   transform: translate(-30px, 0);

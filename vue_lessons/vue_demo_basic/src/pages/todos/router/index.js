@@ -10,7 +10,7 @@ import Hello from '@/views/todos/PropsHello.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  // vue组件
+  // vue嵌套组件
   { path: '/todos', component: Todos },
   // 嵌套命名视图
   {
@@ -20,17 +20,17 @@ const routes = [
       {
         path: 'settings',
         // You could also have named views at tho top
-        component: Common.UserSettings,
+        component: Common.elements.UserSettings,
         children: [
           {
             path: 'emails',
-            component: Common.UserEmailsSubscriptions
+            component: Common.elements.UserEmailsSubscriptions
           },
           {
             path: 'profile',
             components: {
-              default: Common.UserProfile,
-              helper: Common.UserProfilePreview
+              default: Common.elements.UserProfile,
+              helper: Common.elements.UserProfilePreview
             }
           }
         ]
@@ -45,7 +45,7 @@ const routes = [
       { path: '', component: Hello }, // No props, no nothing
       { path: 'hello/:name', component: Hello, props: true }, // Pass route.params to props
       { path: 'static', component: Hello, props: { name: 'world' } }, // static values
-      { path: 'dynamic/:years', component: Hello, props: Common.dynamicPropsFn } // custom logic
+      { path: 'dynamic/:years', component: Hello, props: Common.func.dynamicPropsFn } // custom logic
     ]
   },
 ]
