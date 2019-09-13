@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <style type="text/css">
-      /* grid with nav and content */
+      /* content by grid */
       .us {
         display: grid;
         grid-template-columns: auto 1fr;
@@ -36,18 +36,20 @@
       <h1>Nested Named Views</h1>
       <router-view></router-view>
     </div>
+    <!-- templates -->
+    <template id="settings-nav-template">
+      <div class="us__nav">
+        <router-link to="/settings/emails">emails</router-link><br />
+        <router-link to="/settings/profile">profile</router-link>
+      </div>
+    </template>
   </body>
   <script src="../modules/vue.js"></script>
   <script src="../modules/vue-router.js"></script>
   <script>
     // component 常规组件
     const UserSettingsNav = {
-      template: `
-        <div class="us__nav">
-          <router-link to="/settings/emails">emails</router-link><br>
-          <router-link to="/settings/profile">profile</router-link>
-        </div>
-      `
+      template: '#settings-nav-template'
     }
 
     // router view 视图组件
@@ -59,11 +61,11 @@
           <router-view class ="us__content"/>
           <router-view name="helper" class="us__content us__content--helper"/>
         </div>
-      `,
+      `, // cannot be defined as <template>?
       components: { UserSettingsNav }
     }
 
-    // nested router view 嵌套的视图组件
+    // nested router view 嵌套视图组件
     const UserEmailsSubscriptions = {
       template: '<div><h3>Email Subscriptions</h3></div>'
     }

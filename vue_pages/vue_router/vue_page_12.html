@@ -6,26 +6,26 @@
   </head>
   <body>
     <div id="app">
+      <h1>Nested Router</h1>
       <p>
-        <router-link to="/user/foo">UserHome</router-link>
-        <router-link to="/user/foo/profile">UserProfile</router-link>
+        <router-link to="/user/foo">UserHome</router-link> |
+        <router-link to="/user/foo/profile">UserProfile</router-link> |
         <router-link to="/user/foo/posts">UserPosts</router-link>
       </p>
       <router-view/>
     </div>
+    <!-- templates -->
+    <template id="user-template">
+      <div class="user">
+        <h2>User {{ $route.params.id }}</h2>
+        <router-view></router-view>
+      </div>
+    </template>
   </body>
   <script src="../modules/vue.js"></script>
   <script src="../modules/vue-router.js"></script>
   <script>
-    const User = {
-      template: `
-        <div class="user">
-          <h2>User {{ $route.params.id }}</h2>
-          <router-view></router-view>
-        </div>
-      `
-    }
-
+    const User = { template: '#user-template' }
     const UserHome = { template: '<div>Home</div>' }
     const UserProfile = { template: '<div>Profile</div>' }
     const UserPosts = { template: '<div>Posts</div>' }

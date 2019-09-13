@@ -6,15 +6,23 @@
   </head>
   <body>
     <div id="app">
-      <h1>Route props</h1>
+      <h1>Router Props</h1>
       <ul>
-        <li><router-link to="/">/home</router-link></li>
+        <li><router-link to="/">home</router-link></li>
         <li><router-link to="/hello/you">/hello/you</router-link></li>
         <li><router-link to="/static">/static</router-link></li>
         <li><router-link to="/dynamic/1">/dynamic/1</router-link></li>
       </ul>
       <router-view foo="123"></router-view>
     </div>
+    <!-- templates -->
+    <template id="hello-template">
+      <template>
+        <div>
+          <h2 class="hello">Hello {{ name }} {{ $attrs }}</h2>
+        </div>
+      </template>
+    </template>
   </body>
   <script src="../modules/vue.js"></script>
   <script src="../modules/vue-router.js"></script>
@@ -27,13 +35,7 @@
     }
 
     const Hello = {
-      template: `
-        <template>
-          <div>
-            <h2 class="hello">Hello {{ name }} {{ $attrs }}</h2>
-          </div>
-        </template>
-      `,
+      template: '#hello-template',
       props: {
         name: {
           type: String,
