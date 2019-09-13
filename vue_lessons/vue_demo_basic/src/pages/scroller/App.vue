@@ -26,8 +26,9 @@
 export default {
   methods: {
     scrollHandle (id) {
+      let offset = document.querySelector(id).offsetTop
       window.scrollTo({
-        top: document.querySelector(id).offsetTop,
+        top: offset,
         behavior: 'smooth'
       })
     }

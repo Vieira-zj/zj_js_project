@@ -3,95 +3,48 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./app_style.css" />
-    <style>
-      [v-cloak] {
-        display: none;
+    <link rel="stylesheet" type="text/css" href="../../css/select2.min.css" />
+    <style type="text/css">
+      html,
+      body {
+        font: 13px/18px sans-serif;
+      }
+      select {
+        min-width: 300px;
       }
     </style>
-    <title>vue 实例 - TodoMVC</title>
+    <title>vue 实例 - 内嵌组件</title>
   </head>
   <body>
-    <section class="todoapp">
-      <header class="header">
-        <h1>todos</h1>
-        <input
-          class="new-todo"
-          autofocus
-          autocomplete="off"
-          placeholder="What needs to be done?"
-          v-model="newTodo"
-          @keyup.enter="addTodo"
-        />
-      </header>
-      <section class="main" v-show="todos.length" v-cloak>
-        <input
-          id="toggle-all"
-          class="toggle-all"
-          type="checkbox"
-          v-model="allDone"
-        />
-        <label for="toggle-all"></label>
-        <ul class="todo-list">
-          <li
-            v-for="todo in filteredTodos"
-            class="todo"
-            :key="todo.id"
-            :class="{ completed: todo.completed, editing: todo == editedTodo }"
-          >
-            <div class="view">
-              <input class="toggle" type="checkbox" v-model="todo.completed" />
-              <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-              <button class="destroy" @click="removeTodo(todo)"></button>
-            </div>
-            <input
-              class="edit"
-              type="text"
-              v-model="todo.title"
-              v-todo-focus="todo == editedTodo"
-              @blur="doneEdit(todo)"
-              @keyup.enter="doneEdit(todo)"
-              @keyup.esc="cancelEdit(todo)"
-            />
-          </li>
-        </ul>
-      </section>
-      <footer class="footer" v-show="todos.length" v-cloak>
-        <span class="todo-count">
-          <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
-        </span>
-        <ul class="filters">
-          <li>
-            <a href="#/all" :class="{ selected: visibility == 'all' }">All</a>
-          </li>
-          <li>
-            <a href="#/active" :class="{ selected: visibility == 'active' }"
-              >Active
-            </a>
-          </li>
-          <li>
-            <a
-              href="#/completed"
-              :class="{ selected: visibility == 'completed' }"
-              >Completed
-            </a>
-          </li>
-        </ul>
-        <button
-          class="clear-completed"
-          @click="removeCompleted"
-          v-show="todos.length > remaining"
-        >
-          Clear completed
-        </button>
-      </footer>
-    </section>
-    <footer class="info">
-      <p>Double-click to edit a todo</p>
-      <p>Written by <a href="http://evanyou.me">Evan You</a></p>
-      <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-    </footer>
+    <h3>整合了第三方 jQuery 插件 (select2) 把它内嵌在一个常用组件中。</h3>
+    <div id="el"></div>
+    <!-- using string template here to work around HTML <option> placement restriction -->
+    <script type="text/x-template" id="demo-template">
+      <div>
+        <p>Selected: {{ selected }}</p>
+        <select2 :options="options" v-model="selected">
+          <option disabled value="0">Select one</option>
+        </select2>
+      </div>
+    </script>
+    <script type="text/x-template" id="select2-template">
+      <select>
+        <slot></slot>
+      </select>
+    </script>
   </body>
-  <script src="../../modules/vue.js"></script>
-  <script src="./app_vue.js"></script>
+  <script type="text/javascript" src="../../modules/jquery.js"></script>
+  <script type="text/javascript" src="../../modules/select2.js"></script>
+  <script type="text/javascript" src="../../modules/vue.js"></script>
+  <script src="./select2.js"></script>
+  <script>
+    var vm = new Vue({
+      el: '#el',
+      template: '#demo-template',
+      data: {
+        selected: 2,
+        options: [{ id: 1, text: 'Hello' }, { id: 2, text: 'World' }]
+      }
+    })
+  </script>
 </html>

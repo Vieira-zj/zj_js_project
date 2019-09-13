@@ -18,12 +18,16 @@ const routes = [
 const router = new VueRouter({
   routes,
   // only trigger when router change
-  scrollBehavior: function (to) {
+  scrollBehavior: function (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
     if (to.hash) {
       return {
         selector: to.hash
       }
     }
+    return false
   }
 })
 
