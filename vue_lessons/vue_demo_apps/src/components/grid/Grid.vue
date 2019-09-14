@@ -45,6 +45,7 @@ export default {
       let filterKey = this.filterKey && this.filterKey.toLowerCase()
       let order = this.sortOrders[sortKey] || 1
       let heroes = this.heroes
+
       if (filterKey) {
         heroes = heroes.filter(function (row) {
           return Object.keys(row).some(function (key) {

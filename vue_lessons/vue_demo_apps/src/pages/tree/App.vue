@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     makeFolder: function (item) {
+      // add a "children" property to "item" with value []
       Vue.set(item, 'children', [])
       this.addItem(item)
     },

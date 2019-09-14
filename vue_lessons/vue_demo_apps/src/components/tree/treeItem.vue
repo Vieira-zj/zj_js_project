@@ -8,6 +8,7 @@
     </div>
     <ul v-if="isFolder"
         v-show="isOpen">
+      <!-- for "make-folder" and "add-item", why $event here? -->
       <tree-item class="item"
                  v-for="(child, index) in item.children"
                  :key="index"
@@ -25,12 +26,12 @@ import treeItem from './treeItem.vue'
 
 export default {
   name: "treeItem",
+  components: {
+    treeItem
+  },
   props: {
     // data: name,children status: isFolder,isOpen
     item: Object
-  },
-  components: {
-    treeItem
   },
   data: function () {
     return {
@@ -39,8 +40,7 @@ export default {
   },
   computed: {
     isFolder: function () {
-      return this.item.children &&
-        this.item.children.length
+      return this.item.children && this.item.children.length
     }
   },
   methods: {

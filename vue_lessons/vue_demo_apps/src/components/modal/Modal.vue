@@ -17,9 +17,7 @@
             <slot name="footer">
               default footer
               <button class="modal-default-button"
-                      @click="$emit('close')">
-                OK
-              </button>
+                      @click="$emit('close')">OK</button>
             </slot>
           </div>
         </div>
@@ -29,6 +27,7 @@
 </template>
 
 <style lang="scss">
+// 浮层效果
 .modal-mask {
   position: fixed;
   z-index: 9998;

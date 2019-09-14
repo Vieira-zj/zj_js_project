@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// Note: if style is defined "scoped", the css will not apply to component "modal".
+// Note: if style is defined as "scoped", the css will not apply to component "modal".
 h1 {
   text-align: center;
 }

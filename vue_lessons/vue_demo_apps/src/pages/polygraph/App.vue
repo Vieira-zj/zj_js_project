@@ -19,6 +19,7 @@
     </div>
     <form id="add">
       <input name="newlabel"
+             placeholder="new label"
              v-model="newLabel">
       <button @click="add">Add a Stat</button>
     </form>
@@ -37,8 +38,7 @@ let stats = [
   { label: 'B', value: 100 },
   { label: 'C', value: 100 },
   { label: 'D', value: 100 },
-  { label: 'E', value: 100 },
-  { label: 'F', value: 100 }
+  { label: 'E', value: 100 }
 ]
 
 export default {
@@ -59,6 +59,7 @@ export default {
         label: this.newLabel,
         value: 100
       })
+      this.newLabel = ''
     },
     remove: function (stat) {
       if (this.stats.length > 3) {
@@ -101,6 +102,6 @@ label {
 #raw {
   position: absolute;
   top: 0;
-  left: 300px;
+  left: 350px;
 }
 </style>
