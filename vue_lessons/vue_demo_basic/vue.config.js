@@ -25,6 +25,12 @@ module.exports = {
       entry: 'src/pages/scroller/main.js',
       template: 'public/base.html',
       filename: 'scroller.html'
+    },
+    // page: vuex counter
+    counter: {
+      entry: 'src/pages/counter/main.js',
+      template: 'public/base.html',
+      filename: 'counter.html'
     }
   },
   // axios域代理, 解决axios跨域问题
