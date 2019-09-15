@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import App from '@/views/App'
+import Home from '@/views/Home'
 import HelloWorld from '@/views/HelloWorld'
 import VueDemo from '@/views/VueDemo'
 
@@ -86,7 +86,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: App
+      component: Home
     },
     // redirect views
     { path: '/home', redirect: '/' },

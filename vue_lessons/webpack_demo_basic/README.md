@@ -1,6 +1,6 @@
-# vue_lessons
+# Vue Basic Project (webpack)
 
-> vue lessons from github.
+Vue project includes Vue and Chart demos.
 
 ## Build Setup
 
@@ -33,35 +33,37 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 Main
 
 ```text
-index.html, <div id="app">, <router-view/> => @/main.js, router => @/router/index.js => @/pages/App.vue
+index.html => @/main.js (App.vue, router) => @/router/index.js => @/views/Home.vue
 ```
 
 Vue basic
 
 ```text
-@/pages/App1.vue => @/components/lessons/*.vue
+@/views/View1.vue => @/components/lessons/*.vue
 ```
 
 Vuex
 
 ```text
-vue => @/pages/App2.vue => @/components/counter/*.vue
-vuex => @/main.js => @/vuex/store.js
-vuex => @/main.js => @/store/index.js => getters.js, mutations.js, action.js
-vuex => @/main.js => @/vuex/index.js => @/vuex/modules/*.js
+vue => @/views/View2.vue => @/components/counter/*.vue
+vuex => @/main.js => @/store/demo01/index.js
+vuex => @/main.js => @/store/demo02/index.js => getters.js, mutations.js, action.js
+vuex => @/main.js => @/store/demo03/index.js => ./modules/*.js
 ```
 
 ChartJs
 
 ```text
-charts => @/pages/App4.vue => @/components/charts/*.js
+charts => @/views/View4.vue => @/components/charts/*.js
 
-1) bar-reactive-chart
+1. bar-reactive-chart
+
 BarReactiveChart.js => chart created, init chartData => chart mounted, set gradient, and render chartData => mixins, reactiveData => watch "chartData" updates
 
-2) line-reactive-chart
-App5.vue => page created
+2. line-reactive-chart
+
+View5.vue => page created
 LineReactiveChart.js => chart created => chart mounted, render chartData => mixins, reactiveProp => watch props "chartData" updates
-App5.vue => page mounted, fill dataCollection, and set gradient => on button click, re-fill dataCollection
+View5.vue => page mounted, fill dataCollection, and set gradient => on button click, re-fill dataCollection
 ```
 
