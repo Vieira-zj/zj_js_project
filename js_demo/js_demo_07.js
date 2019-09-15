@@ -200,7 +200,46 @@ function jsDemo07 () {
   })()
 }
 
+// demo 08, object deep copy
+function jsDemo08 () {
+  (function () {
+    let list = ['js', 'css', 'html']
+    let copiedList = [...list, 'jquery', 'vue']
+    console.log('list == newList:', list === copiedList)
+    console.log('new list:', copiedList)
+
+    let person = {
+      name: 'Henry',
+      age: 21,
+      location: 'SH'
+    }
+    let copied = { ...person, role: 'tester' }
+    console.log('\nperson == copied:', person === copied)
+    console.log('copied object:', JSON.stringify(copied, null, '  '))
+  })()
+}
+
+// demo 09, argument with default
+function jsDemo09 () {
+  (function () {
+    let updateTodo = function (todo, { text = todo.text, done = todo.done }) {
+      todo.text = text
+      todo.done = done
+      return todo
+    }
+
+    let todo = {
+      text: 'Java',
+      done: false
+    }
+    console.log('#1 todo:', JSON.stringify(updateTodo(todo, {})))
+    console.log('#2 todo:', JSON.stringify(updateTodo(todo, { done: true })))
+    console.log('#3 todo:', JSON.stringify(updateTodo(todo, { text: 'Python', done: false })))
+  })()
+}
+
+
 if (require.main === module) {
-  jsDemo07()
+  jsDemo08()
   console.log(__filename, 'DONE.')
 }

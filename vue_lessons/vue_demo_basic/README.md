@@ -1,6 +1,6 @@
-# Vue Demo Basic
+# Vue Basic Project
 
-Project includes Vue, Vue Router and Vuex basic demos.
+Vue project includes Vue, Vue Router and Vuex basic demos.
 
 ## Create project
 ```
