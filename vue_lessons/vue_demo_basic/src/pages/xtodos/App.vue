@@ -94,7 +94,7 @@ export default {
     }
   },
   filters: {
-    pluralize: (n, w) => n === 1 ? w : (w + 's'),
+    pluralize: (n, w) => n === 1 ? w : (w + 's'), // 2 input arguments
     capitalize: s => s.charAt(0).toUpperCase() + s.slice(1)
   }
 }

@@ -1,14 +1,15 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import App from './App'
 import router from './router'
 
-import store from './vuex/store'
-// import store from './store'
-// import store from './vuex'
+import store from './store/demo01'
+// import store from './store/demo02'
+// import store from './store/demo03'
 
 // custom funcs
-import base from './base'
+import base from './scripts/base'
 // js libs
 import $ from 'jquery'
 import axios from 'axios'
@@ -31,5 +32,6 @@ new Vue({
   },
   updated: function () {
     console.info('hook: virtual DOM re-render and patch.')
-  }
+  },
+  render: h => h(App)
 })

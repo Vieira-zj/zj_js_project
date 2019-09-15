@@ -42,7 +42,7 @@ module.exports = {
     shoppingcart: {
       entry: 'src/pages/shop/main.js',
       template: 'public/index.html',
-      filename: 'shoppingcart.html'
+      filename: 'shopping_cart.html'
     }
   },
   // axios域代理, 解决axios跨域问题
