@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Counter from './Counter.vue'
-import store from '@/store/counter/store.js'
+import store from '@/store/counter'
 
 new Vue({
   el: '#app',
