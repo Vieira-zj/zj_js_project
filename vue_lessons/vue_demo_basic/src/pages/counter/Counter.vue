@@ -24,3 +24,13 @@ export default {
   ])
 }
 </script>
+
+<style src="@/css/global.css">
+/* Note: if scoped for import css, it will NOT take effect! */
+</style>
+
+<style scoped>
+h1 {
+  text-align: center;
+}
+</style>

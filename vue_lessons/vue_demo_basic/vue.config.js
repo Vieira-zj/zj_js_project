@@ -31,6 +31,12 @@ module.exports = {
       entry: 'src/pages/counter/main.js',
       template: 'public/base.html',
       filename: 'counter.html'
+    },
+    // page: vuex shopping cart
+    shoppingcart: {
+      entry: 'src/pages/shop/main.js',
+      template: 'public/base.html',
+      filename: 'shoppingcart.html'
     }
   },
   // axios域代理, 解决axios跨域问题
