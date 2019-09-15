@@ -7,13 +7,8 @@ const state = {
   count: 0
 }
 
-const mutations = {
-  increment (state) {
-    state.count++
-  },
-  decrement (state) {
-    state.count--
-  }
+const getters = {
+  evenOrOdd: state => state.count % 2 == 0 ? 'even' : 'odd'
 }
 
 const actions = {
@@ -34,8 +29,13 @@ const actions = {
   }
 }
 
-const getters = {
-  evenOrOdd: state => state.count % 2 == 0 ? 'even' : 'odd'
+const mutations = {
+  increment (state) {
+    state.count++
+  },
+  decrement (state) {
+    state.count--
+  }
 }
 
 const store = new Vuex.Store({

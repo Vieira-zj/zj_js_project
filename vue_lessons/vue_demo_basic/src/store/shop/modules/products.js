@@ -6,6 +6,7 @@ const state = {
 
 const getters = {}
 
+// invoke shop async api, then use action
 const actions = {
   getAllProducts ({ commit }) {
     shop.getProducts(products => {

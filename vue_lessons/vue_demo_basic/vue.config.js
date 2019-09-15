@@ -32,6 +32,12 @@ module.exports = {
       template: 'public/index.html',
       filename: 'counter.html'
     },
+    // page: vuex todos
+    xtodos: {
+      entry: 'src/pages/xtodos/main.js',
+      template: 'public/index.html',
+      filename: 'vuex_todos.html'
+    },
     // page: vuex shopping cart
     shoppingcart: {
       entry: 'src/pages/shop/main.js',

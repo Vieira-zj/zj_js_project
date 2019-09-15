@@ -1,4 +1,6 @@
-# vue_demo_apps
+# Vue Demo Apps
+
+Project includes Vue App demos.
 
 ## Project setup
 ```

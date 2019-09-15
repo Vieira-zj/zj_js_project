@@ -23,6 +23,7 @@ const getters = {
   }
 }
 
+// invoke shop async api, then use action
 const actions = {
   checkout: ({ commit, state }, products) => {
     const savedCartItems = [...state.items]

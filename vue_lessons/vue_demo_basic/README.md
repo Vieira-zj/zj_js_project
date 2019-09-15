@@ -1,4 +1,6 @@
-# vue_lesson_todos
+# Vue Demo Basic
+
+Project includes Vue, Vue Router and Vuex basic demos.
 
 ## Create project
 ```
