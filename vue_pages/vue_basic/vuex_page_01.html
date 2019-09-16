@@ -7,11 +7,16 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
   </head>
   <body>
-    <div id="app">
+    <div id="app" class="content">
+      <h1>Vuex Demo - Counter</h1>
       <p>Count: {{ count }}</p>
       <p>
         <button @click="increment">+</button>
         <button @click="decrement">-</button>
+      </p>
+      <p>
+        <button @click="incrAsync">incr+ async</button><br />
+        <button @click="decrAsync">decr- async</button>
       </p>
     </div>
   </body>
@@ -25,6 +30,21 @@
       mutations: {
         increment: state => state.count++,
         decrement: state => state.count--
+      },
+      actions: {
+        incrementAsync({ commit }) {
+          setTimeout(() => {
+            commit('increment')
+          }, 1000)
+        },
+        decrementAsync({ commit }) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              commit('decrement')
+              resolve()
+            }, 1000)
+          })
+        }
       }
     })
 
@@ -41,6 +61,17 @@
         },
         decrement() {
           store.commit('decrement')
+        },
+        incrAsync() {
+          // async: first log, then increment +1
+          store.dispatch('incrementAsync')
+          console.log('increment async done.')
+        },
+        decrAsync() {
+          // sync: first decrement -1, then log
+          store.dispatch('decrementAsync').then(() => {
+            console.log('decrement async done.')
+          })
         }
       }
     })
