@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue cookbook - 表单校验</title>
+    <style>
+      input,
+      select {
+        margin-left: 10px;
+      }
+      .content {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        color: #2c3e50;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>例子 - 自定义校验</h1>
+    <form
+      id="app"
+      class="content"
+      action="https://vuejs.org/"
+      method="POST"
+      @submit="checkForm"
+    >
+      <p v-if="errors.length" class="error">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="(error,index) in errors" :key="index" style="color: red">{{ error }}</li>
+        </ul>
+      </p>
+      <p>
+        <label for="name">Name</label>
+        <input id="name" v-model="name" type="text" name="name" />
+      </p>
+      <p>
+        <label for="age">Age</label>
+        <input id="age" v-model="age" type="number" name="age" min="0" />
+      </p>
+      <p>
+        <label for="movie">Favorite Movie</label>
+        <select name="movie" id="movie" v-modle="movie">
+          <option>Star Wars</option>
+          <option>Vanilla Sky</option>
+          <option>Atomic Blonde</option>
+        </select>
+      </p>
+      <p>
+        <input type="submit" value="Submit" />
+      </p>
+    </form>
+    <script src="../modules/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          errors: [],
+          name: null,
+          age: null,
+          movie: null
+        },
+        methods: {
+          checkForm: function(e) {
+            this.errors = []
+
+            if (!Boolean(this.name)) {
+              this.errors.push('Name required!')
+            }
+            if (!Boolean(this.age)) {
+              this.errors.push('Age required!')
+            }
+
+            if (this.errors.length === 0) {
+              return true
+            }
+            e.preventDefault()
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

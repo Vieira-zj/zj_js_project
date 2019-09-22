@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue cookbook - 表单校验</title>
+    <style>
+      input {
+        margin-left: 10px;
+        width: 50px;
+      }
+      input[type='submit'] {
+        width: 100px;
+      }
+      .content {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        color: #2c3e50;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="content">
+      <h1>例子 - 自定义校验</h1>
+      <form
+        id="app"
+        @submit="checkForm"
+        action="https://vuejs.org/"
+        method="post"
+        novalidate="true"
+      >
+        <p v-if="errors.length" class="error">
+          <b>Please correct the following error(s):</b>
+          <ul>
+            <li v-for="(error,index) in errors" :key="index" style="color: red">{{ error }}</li>
+          </ul>
+        </p>
+        <p>
+          Given a budget of 100 dollars, indicate how much you would spend on
+          the following features for the next generation Star Destroyer. Your
+          total must sum up to 100.
+        </p>
+        <p>
+          <input v-model.number="weapons" type="number" name="weapons" />
+          Weapons <br />
+          <input v-model.number="shields" type="number" name="shields" />
+          Shields <br />
+          <input v-model.number="coffee" type="number" name="coffee" />
+          Coffee <br />
+          <input v-model.number="ac" type="number" name="ac" />
+          Air Conditioning <br />
+          <input
+            v-model.number="mousedroids"
+            type="number"
+            name="mousedroids"
+          />
+          Mouse Droids <br />
+        </p>
+        <p>Current Total: {{ total }}</p>
+        <p>
+          <input type="submit" value="Submit" />
+        </p>
+      </form>
+    </div>
+    <script src="../modules/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          errors: [],
+          weapons: 0,
+          shields: 0,
+          coffee: 0,
+          ac: 0,
+          mousedroids: 0
+        },
+        computed: {
+          // 必须解析，因为 Vue 会将空值转换为字符串
+          total: function() {
+            return (
+              Number(this.weapons) +
+              Number(this.shields) +
+              Number(this.coffee) +
+              Number(this.ac + this.mousedroids)
+            )
+          }
+        },
+        methods: {
+          checkForm: function(e) {
+            this.errors = []
+
+            if (this.total != 100) {
+              this.errors.push('Total must be 100!')
+            }
+            if (!this.errors.length) {
+              return true
+            }
+            e.preventDefault()
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
