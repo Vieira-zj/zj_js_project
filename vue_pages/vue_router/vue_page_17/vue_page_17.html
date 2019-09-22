@@ -2,19 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="./style_17.css" />
     <title>vue router demo - 滚动行为</title>
+    <link rel="stylesheet" type="text/css" href="./style_17.css" />
   </head>
   <body>
     <div id="app">
       <h1>Router Scroll Behavior</h1>
       <ul>
         <li><router-link to="/">home</router-link></li>
-        <li><router-link to="/foo">/foo</router-link></li>
-        <li><router-link to="/bar">/bar</router-link></li>
-        <li><router-link to="/bar#anchor">/bar#anchor</router-link></li>
-        <li><router-link to="/bar#anchor2">/bar#anchor2</router-link></li>
-        <li><router-link to="/bar#1number">/bar#1number</router-link></li>
+        <li v-for="(path,index) in paths" :key="index">
+            <router-link :to="path">{{ path }}</router-link>
+        </li>
       </ul>
       <transition name="fade" mode="out-in" @after-leave="afterLeave">
         <router-view class="view"/>
@@ -50,6 +48,11 @@
 
     new Vue({
       router,
+      data () {
+        return {
+          paths: ['/foo', '/bar', '/bar#anchor', '/bar#anchor2', '/bar#1number']
+        }
+      },
       methods: {
         afterLeave() {
           this.$root.$emit('triggerScroll')

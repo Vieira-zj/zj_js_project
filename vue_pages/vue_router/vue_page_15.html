@@ -3,15 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <title>vue router demo - 路由组件传参</title>
+    <style>
+      .content {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        color: #2c3e50;
+      }
+    </style>
   </head>
   <body>
-    <div id="app">
+    <div id="app" class="content">
       <h1>Router Props</h1>
       <ul>
         <li><router-link to="/">home</router-link></li>
-        <li><router-link to="/hello/you">/hello/you</router-link></li>
-        <li><router-link to="/static">/static</router-link></li>
-        <li><router-link to="/dynamic/1">/dynamic/1</router-link></li>
+        <li
+          v-for="(path,index) in ['/hello/you', '/static', '/dynamic/1']"
+          :key="index"
+        >
+          <router-link :to="path">{{ path }}</router-link>
+        </li>
       </ul>
       <router-view foo="123"></router-view>
     </div>

@@ -2,17 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="./style_16.css" />
     <title>vue router demo - 过渡动效</title>
+    <link rel="stylesheet" type="text/css" href="./style_16.css" />
   </head>
   <body>
     <div id="app">
       <h1>Router with Transitions</h1>
       <ul>
         <li><router-link to="/">home</router-link></li>
-        <li><router-link to="/parent">/parent</router-link></li>
-        <li><router-link to="/parent/foo">/parent/foo</router-link></li>
-        <li><router-link to="/parent/bar">/parent/bar</router-link></li>
+        <li v-for="(path,index) in ['/parent','/parent/foo','/parent/bar']" :key="index">
+          <router-link :to="path">{{ path }}</router-link>
+        </li>
       </ul>
       <!-- 渐入渐出效果 -->
       <transition name="fade" mode="out-in">
@@ -36,8 +36,8 @@
       </div>
     </template>
   </body>
-  <script src="../modules/vue.js"></script>
-  <script src="../modules/vue-router.js"></script>
+  <script src="../../modules/vue.js"></script>
+  <script src="../../modules/vue-router.js"></script>
   <script>
     const Home = { template: '#home-template' }
 
