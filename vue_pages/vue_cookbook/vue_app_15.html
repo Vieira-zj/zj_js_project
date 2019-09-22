@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue cookbook - 客户端存储</title>
+    <style>
+      .content {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        color: #2c3e50;
+      }
+      .cat {
+        width: 100px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="content">
+      <h3>例子 - localstorage 持久化复杂数据</h3>
+      <div v-for="(cat,idx) in cats" :key="idx">
+        <p>
+          <span class="cat">{{ cat }}</span>
+          <button @click="removeCat(idx)">X</button>
+        </p>
+      </div>
+      <p>
+        <input
+          v-model="newCat"
+          placeholder="Add a new cat"
+          v-on:keyup.enter="addCat"
+        />
+        <button @click="addCat">Add Cat</button>
+      </p>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        cats: [],
+        newCat: null
+      },
+      mounted() {
+        if (localStorage.getItem('cats')) {
+          try {
+            this.cats = JSON.parse(localStorage.getItem('cats'))
+          } catch (err) {
+            console.error(err)
+            localStorage.removeItem('cats')
+          }
+        }
+      },
+      methods: {
+        removeCat(idx) {
+          this.cats.splice(idx, 1)
+          this.saveCats()
+        },
+        addCat() {
+          if (!Boolean(this.newCat)) {
+            return
+          }
+          this.cats.push(this.newCat)
+          this.saveCats()
+          this.newCat = ''
+        },
+        saveCats() {
+          const parsed = JSON.stringify(this.cats)
+          localStorage.setItem('cats', parsed)
+        }
+      }
+    })
+  </script>
+</html>

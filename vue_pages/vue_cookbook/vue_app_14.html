@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue cookbook - 客户端存储</title>
+    <style>
+      .content {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        color: #2c3e50;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="content">
+      <h3>例子 - localstorage 持久化简单数据</h3>
+      <p>
+        My name is <input v-model="name" /> and I am
+        <input v-model="age" /> years old.
+      </p>
+      <button @click="persist">Save</button>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        name: '',
+        age: 0
+      },
+      mounted() {
+        if (localStorage.name) {
+          this.name = localStorage.name
+        }
+        if (localStorage.age) {
+          this.age = localStorage.age
+        }
+      },
+      methods: {
+        persist() {
+          localStorage.name = this.name
+          localStorage.age = this.age
+          console.log('now pretend I did more stuff...')
+        }
+      }
+    })
+  </script>
+</html>
