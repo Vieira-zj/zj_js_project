@@ -5,7 +5,7 @@
 // demo 01, date
 var isDemo01Run = false;
 if (isDemo01Run) {
-    (function demo01() {
+    (function demo01 () {
         var myDate = new Date();
         console.log('cur date: %d-%d-%d', myDate.getFullYear(), myDate.getMonth() + 1, myDate.getDate());
         console.log('cur date:', [myDate.getFullYear(), myDate.getMonth() + 1, myDate.getDate()].join('-'));
@@ -19,7 +19,7 @@ if (isDemo01Run) {
 // demo 02, type convert
 var isDemo02Run = false;
 if (isDemo02Run) {
-    (function demo02() {
+    (function demo02 () {
         var tmpInt1 = 5;
         var tmpStr1 = String(tmpInt1);
         console.log(typeof tmpStr1);
@@ -37,7 +37,7 @@ if (isDemo02Run) {
 // demo 03, RegExp
 var isDemo03Run = false;
 if (isDemo03Run) {
-    (function demo03() {
+    (function demo03 () {
         var tmpStr11 = '-2';
         var tmpStr12 = '-2℃';
         var re1 = /-?[0-9]+/;
@@ -61,7 +61,7 @@ if (isDemo03Run) {
 // demo 04, foreach
 var isDemo04Run = false;
 if (isDemo04Run) {
-    (function demo04() {
+    (function demo04 () {
         var tmpArr = ['Java', 'C++', 'Python'];
         tmpArr.forEach(function (ele) {
             console.log(ele);
@@ -77,7 +77,7 @@ if (isDemo04Run) {
 // demo 05, RegExp with option "gm" in replace()
 var isDemo05Run = false;
 if (isDemo05Run) {
-    (function demo05() {
+    (function demo05 () {
         var tmpStr = '2016/12/29';
         console.log(tmpStr.replace(new RegExp('/', 'gm'), '-'));
     })();
@@ -87,7 +87,7 @@ if (isDemo05Run) {
 //demo 06, json
 var isDemo06Run = false;
 if (isDemo06Run) {
-    (function demo06() {
+    (function demo06 () {
         var tmpJsonObj = {
             data: {
                 cityId: '0001',
@@ -105,7 +105,7 @@ if (isDemo06Run) {
 // demo 07, json
 var isDemo07Run = false;
 if (isDemo07Run) {
-    (function demo07() {
+    (function demo07 () {
         var tmpJsonObj = {
             data: {
                 cityId: '0001',
@@ -129,8 +129,8 @@ if (isDemo07Run) {
 // demo 08, fn: => fn
 var isDemo08Run = false;
 if (isDemo08Run) {
-    (function demo08() {
-        function myPrint(text) {
+    (function demo08 () {
+        function myPrint (text) {
             console.log('Value: ' + text);
         }
 
@@ -149,7 +149,7 @@ if (isDemo08Run) {
 // demo 09, random time
 var isDemo09Run = false;
 if (isDemo09Run) {
-    (function demo09() {
+    (function demo09 () {
         var getRandom = function (range) {
             var tmpRandom = Math.round(Math.random() * range);
             if (tmpRandom === 10) {
@@ -167,7 +167,7 @@ if (isDemo09Run) {
 // demo 10, return from callback
 var isDemo10Run = false;
 if (isDemo10Run) {
-    (function demo10() {
+    (function demo10 () {
         var myCallback = function (myFlag) {
             setTimeout(function () {
                 if (!myFlag) {
@@ -187,7 +187,7 @@ if (isDemo10Run) {
 // demo 11, list: push/pop, shift/unshift
 var isDemo11Run = false;
 if (isDemo11Run) {
-    (function demo11() {
+    (function demo11 () {
         // from bottom
         var tmpArrPush = [];
         tmpArrPush.push('a');
@@ -214,7 +214,7 @@ if (isDemo11Run) {
 // demo 12, functional program
 var isDemo12Run = false;
 if (isDemo12Run) {
-    (function demo12() {
+    (function demo12 () {
         const isKitten = cat => cat.months < 7;
         const getName = cat => cat.name;
         const getKittenNames = cats => cats.filter(isKitten).map(getName);
@@ -234,7 +234,7 @@ if (isDemo12Run) {
 // demo 13, prototype object
 var isDemo13Run = false;
 if (isDemo13Run) {
-    (function demo13() {
+    (function demo13 () {
         // fn_object.prototype and instance.__proto__ point to prototype_object
         var Person = function () {
         };
@@ -255,7 +255,7 @@ if (isDemo13Run) {
 // demo 14, prototype chain
 var isDemo14Run = false;
 if (isDemo14Run) {
-    (function demo14() {
+    (function demo14 () {
         var MyObj = function () {
         };
         var o = new MyObj();
@@ -315,8 +315,8 @@ if (isDemo14Run) {
 // demo 15, OO inherit (prototype chain)
 var isDemo15Run = false;
 if (isDemo15Run) {
-    (function demo15() {
-        function SuperType() {
+    (function demo15 () {
+        function SuperType () {
             this.property = 'super';
             this.colors = ['red', 'green', 'blue'];
         }
@@ -325,7 +325,7 @@ if (isDemo15Run) {
             return this.property;
         };
 
-        function SubType() {
+        function SubType () {
             this.subProperty = 'sub';
         }
 
@@ -385,8 +385,8 @@ if (isDemo15Run) {
 // demo 16, "this" in =>fn
 var isDemo16Run = false;
 if (isDemo16Run) {
-    (function demo16() {
-        function Foo() {
+    (function demo16 () {
+        function Foo () {
             var that = this;
 
             this.arrow = () => {
@@ -428,7 +428,7 @@ if (isDemo16Run) {
 // demo 17, "this" in =>fn
 var isDemo17Run = false;
 if (isDemo17Run) {
-    (function demo17() {
+    (function demo17 () {
         var tmpObj = {
             foo: 'test',
             bar: function () {
@@ -501,7 +501,7 @@ if (isDemo19Run) {
     (function () {
         // #1, arguments from parent
         console.log('test arguments in arrow function:');
-        function foo() {
+        function foo () {
             return () => console.log('arg:', arguments[0]); // 1
         }
 
@@ -521,7 +521,7 @@ if (isDemo19Run) {
 
         // #3, construct create a sub domain
         console.log('\ntest arrow func in construct:');
-        function Bar() {
+        function Bar () {
             var that = this;
             this.arrow = () => {
                 console.log(this.name);

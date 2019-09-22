@@ -238,8 +238,56 @@ function jsDemo09 () {
   })()
 }
 
+// demo 10, this with func
+function jsDemo10 () {
+  function Person (name) {
+    this.name = name
+    this.printName01 = function () {
+      console.log('printName01:', this.name)
+    }
+  }
+
+  Person.prototype.printName02 = function () {
+    console.log('printName02:', this.name)
+  }
+
+  let p = new Person('Bar')
+  p.printName03 = function () {
+    console.log('printName03:', this.name)
+  }
+
+  p.printName01() // Bar
+  p.printName02() // Bar
+  p.printName03() // Bar
+}
+
+
+// demo 11, this with => func
+function jsDemo11 () {
+  function Student (name) {
+    this.name = name
+    this.printName01 = () => {
+      console.log('printName01:', this.name)
+    }
+  }
+
+  Student.prototype.printName02 = () => {
+    console.log('printName02:', this.name)
+  }
+
+  let s = new Student('Foo')
+  s.printName03 = () => {
+    console.log('printName03:', this.name)
+  }
+
+  // 箭头函数，this隐式地绑定其父级作用域
+  s.printName01() // Foo
+  s.printName02() // undefined
+  s.printName03() // undefined
+}
+
 
 if (require.main === module) {
-  jsDemo08()
+  jsDemo11()
   console.log(__filename, 'DONE.')
 }
