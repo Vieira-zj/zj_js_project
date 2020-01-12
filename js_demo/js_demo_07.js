@@ -26,6 +26,7 @@ function jsDemo01 () {
   })()
 }
 
+
 // demo 02, object property
 function jsDemo02 () {
   (function () {
@@ -50,6 +51,7 @@ function jsDemo02 () {
   })()
 }
 
+
 // demo 03, instance access
 function jsDemo03 () {
   (function () {
@@ -72,6 +74,7 @@ function jsDemo03 () {
     console.log('count:', inst.count)
   })()
 }
+
 
 // demo 04, es6 operator ...
 function jsDemo04 () {
@@ -103,6 +106,7 @@ function jsDemo04 () {
     // console.log('results:', JSON.stringify(tmpObj))
   })()
 }
+
 
 // demo 05, reuse object
 function jsDemo05 () {
@@ -148,6 +152,7 @@ function jsDemo05 () {
   })()
 }
 
+
 // demo 06, Array.includes and Array.some
 function jsDemo06 () {
   (function () {
@@ -175,6 +180,7 @@ function jsDemo06 () {
   })()
 }
 
+
 // demo 07, class and object
 function jsDemo07 () {
   (function () {
@@ -200,6 +206,7 @@ function jsDemo07 () {
   })()
 }
 
+
 // demo 08, object deep copy
 function jsDemo08 () {
   (function () {
@@ -219,6 +226,7 @@ function jsDemo08 () {
   })()
 }
 
+
 // demo 09, argument with default
 function jsDemo09 () {
   (function () {
@@ -237,6 +245,7 @@ function jsDemo09 () {
     console.log('#3 todo:', JSON.stringify(updateTodo(todo, { text: 'Python', done: false })))
   })()
 }
+
 
 // demo 10, this with func
 function jsDemo10 () {
@@ -287,7 +296,24 @@ function jsDemo11 () {
 }
 
 
+// demo 12, map and filter
+function jsDemo12 () {
+  (function () {
+    let all = ['text', 'img', 'other']
+    let state = {
+      text: 'txt',
+      img: 'image',
+    }
+
+    all.map(key => state[key])
+      // .filter(value => Boolean(value))
+      .filter(Boolean)
+      .map(val => console.log('value:', val))
+  })()
+}
+
+
 if (require.main === module) {
-  jsDemo11()
+  jsDemo12()
   console.log(__filename, 'DONE.')
 }

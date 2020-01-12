@@ -1,8 +1,11 @@
 {
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 
-  "eslint.autoFixOnSave": true,
+  // "eslint.autoFixOnSave": true,
   "eslint.validate": ["javascript", "vue"],
   "prettier.singleQuote": true,
   "prettier.semi": false,
