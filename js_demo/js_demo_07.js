@@ -430,7 +430,49 @@ MyPromise.prototype.then = function (resolveCallback, rejectCallback) {
 }
 
 
+// demo 14, instance, class and prototype method
+function Animal (name) {
+  this.name = name || 'Animal'
+
+  // 实例方法
+  this.sleep = function () {
+    console.log(this.name + ' is sleepping')
+  }
+}
+
+// 类方法
+Animal.eat = function (food) {
+  console.log('eat ' + food)
+}
+
+// 原型方法
+Animal.prototype.play = function (play) {
+  console.log(this.name + ' is playing ' + play)
+}
+
+function jsDemo14 () {
+  Animal.eat('apple')
+  console.log('name:', Animal.name)
+  // 不可以调用原型方法
+  // Animal.play('warter')
+  // 不可以调用实例方法
+  // Animal.sleep()
+
+  let a1 = new Animal('cat')
+  a1.sleep()
+  a1.play('water')
+  // 不可以调用类方法
+  // a1.eat('apply')
+
+  let a2 = new Animal('dog')
+  a2.sleep()
+  a2.play('ball')
+
+  console.log('\na1.sleep === a2.sleep:', a1.sleep === a2.sleep)
+  console.log('a1.play === a2.play:', a1.play === a2.play)
+}
+
 if (require.main === module) {
-  jsDemo13()
+  jsDemo14()
   console.log(__filename, 'DONE.')
 }
