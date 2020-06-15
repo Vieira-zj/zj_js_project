@@ -313,7 +313,124 @@ function jsDemo12 () {
 }
 
 
+// demo 13, custom promise
+function jsDemo13 () {
+  // sync invoke
+  new MyPromise((resolve, reject) => {
+    resolve('sync test')
+  }).then((data) => {
+    console.log('resolve:', data)
+  }, (data) => {
+    console.log('reject:', data)
+  })
+
+  // async invoke
+  new MyPromise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('async test')
+    }, 1000)
+  }).then((data) => {
+    console.log('resolve:', data)
+  }, (data) => {
+    console.log('reject:', data)
+  })
+
+  // chained invoke
+  new MyPromise((resolve, reject) => {
+    resolve('init')
+  }).then(data => {
+    console.log(data)
+    return data + ':chained'
+  }).then(data => {
+    console.log(data)
+  })
+}
+
+function MyPromise (exector) {
+  let _this = this
+  this.status = 'pending'
+  this.value = undefined
+  this.resolveCbs = []
+  this.rejectCbs = []
+
+  try {
+    exector(resolve, reject)
+  } catch (e) {
+    reject(e)
+  }
+
+  function resolve (value) {
+    if (_this.status === 'pending') {
+      _this.status = 'fulfilled'
+      _this.value = value
+      _this.resolveCbs.forEach(cbFn => {
+        cbFn(_this.value)
+        _this.resolveCbs.shift()
+      })
+    }
+  }
+
+  function reject (value) {
+    if (_this.status === 'pending') {
+      _this.status = 'rejected'
+      _this.value = value
+      _this.rejectCbs.forEach(cbFn => {
+        cbFn(_this.value)
+        _this.rejectCbs.shift()
+      })
+    }
+  }
+}
+
+MyPromise.prototype.then = function (resolveCallback, rejectCallback) {
+  let _this = this
+  if (this.status === 'fulfilled') {
+    return new MyPromise((resolve, reject) => {
+      let result = resolveCallback(_this.value)
+      if (result instanceof MyPromise) {
+        result.then(resolve, reject)
+      } else {
+        resolve(result)
+      }
+    })
+  }
+
+  if (this.status === 'rejected') {
+    return new MyPromise((resolve, reject) => {
+      let result = rejectCallback(_this.value)
+      if (result instanceof MyPromise) {
+        result.then(resolve, reject)
+      } else {
+        reject(result)
+      }
+    })
+  }
+
+  if (this.status === 'pending') {
+    return new MyPromise((resolve, reject) => {
+      _this.resolveCbs.push(function () {
+        let result = resolveCallback(_this.value)
+        if (result instanceof Promise) {
+          result.then(resolve, reject)
+        } else {
+          resolve(result)
+        }
+      })
+
+      _this.rejectCbs.push(function () {
+        let result = rejectCallback(_this.value)
+        if (result instanceof MyPromise) {
+          result.then(resolve, reject)
+        } else {
+          reject(result)
+        }
+      })
+    })
+  }
+}
+
+
 if (require.main === module) {
-  jsDemo12()
+  jsDemo13()
   console.log(__filename, 'DONE.')
 }
