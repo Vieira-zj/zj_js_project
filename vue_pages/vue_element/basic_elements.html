@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- https://element.eleme.cn/#/zh-CN -->
     <meta charset="UTF-8" />
     <title>Basic Elements</title>
     <!-- import CSS -->
     <link rel="stylesheet" href="../css/element.css" />
     <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+      button {
+        border-radius: 4px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      }
+
       .el-col {
         border-radius: 4px;
       }
@@ -26,7 +36,7 @@
   </head>
   <body>
     <div id="app">
-      <div id="layout">
+      <div id="ele-layout">
         <el-row :gutter="10">
           <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"
             ><div class="grid-content bg-purple"></div
@@ -42,6 +52,81 @@
           ></el-col>
         </el-row>
       </div>
+      <hr />
+      <div id="ele-icon">
+        <el-row>
+          <i class="el-icon-edit"></i>
+          <i class="el-icon-share"></i>
+          <i class="el-icon-delete"></i>
+          <el-button type="primary" icon="el-icon-search">搜索</el-button>
+        </el-row>
+      </div>
+      <hr />
+      <div id="ele-button">
+        <el-row>
+          <el-button>默认按钮</el-button>
+          <el-button type="primary">主要按钮</el-button>
+          <el-button type="success">成功按钮</el-button>
+          <el-button type="info">信息按钮</el-button>
+          <el-button type="warning">警告按钮</el-button>
+          <el-button type="danger">危险按钮</el-button>
+        </el-row>
+        <hr />
+        <el-row>
+          <el-button plain>朴素按钮</el-button>
+          <el-button type="primary" plain>主要按钮</el-button>
+          <el-button type="success" plain>成功按钮</el-button>
+          <el-button type="info" plain>信息按钮</el-button>
+          <el-button type="warning" plain>警告按钮</el-button>
+          <el-button type="danger" plain>危险按钮</el-button>
+        </el-row>
+        <hr />
+        <el-row>
+          <el-button round>圆角按钮</el-button>
+          <el-button type="primary" round>主要按钮</el-button>
+          <el-button type="success" round>成功按钮</el-button>
+          <el-button type="info" round>信息按钮</el-button>
+          <el-button type="warning" round>警告按钮</el-button>
+          <el-button type="danger" round>危险按钮</el-button>
+        </el-row>
+        <hr />
+        <el-row>
+          <el-button icon="el-icon-search" circle></el-button>
+          <el-button type="primary" icon="el-icon-edit" circle></el-button>
+          <el-button type="success" icon="el-icon-check" circle></el-button>
+          <el-button type="info" icon="el-icon-message" circle></el-button>
+          <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+          <el-button type="danger" icon="el-icon-delete" circle></el-button>
+        </el-row>
+        <hr />
+        <el-row>
+          <el-button type="text">文字按钮</el-button>
+          <el-button type="text" disabled>文字按钮</el-button>
+        </el-row>
+        <hr />
+        <el-row>
+          <el-button id="load" @click="changeLoadingState">测试</el-button>
+          <el-button type="primary" :loading="isLoading">加载中</el-button>
+        </el-row>
+      </div>
+      <hr />
+      <div id="ele-link">
+        <el-row>
+          <el-link :underline="false">无下划线</el-link>
+          <el-link>有下划线</el-link>
+        </el-row>
+        <hr />
+        <el-row>
+          <el-link href="https://element.eleme.io" target="_blank">
+            默认链接
+          </el-link>
+          <el-link type="primary">主要链接</el-link>
+          <el-link type="success">成功链接</el-link>
+          <el-link type="warning">警告链接</el-link>
+          <el-link type="danger">危险链接</el-link>
+          <el-link type="info">信息链接</el-link>
+        </el-row>
+      </div>
     </div>
   </body>
   <!-- import Vue before Element -->
@@ -51,6 +136,14 @@
   <script>
     new Vue({
       el: '#app',
+      data() {
+        return { isLoading: false }
+      },
+      methods: {
+        changeLoadingState() {
+          this.isLoading = !this.isLoading
+        },
+      },
     })
   </script>
 </html>

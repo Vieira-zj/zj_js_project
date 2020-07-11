@@ -6,10 +6,22 @@
     <title>Element hello world</title>
     <!-- import CSS -->
     <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+      #hello {
+        border-radius: 30px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <el-button @click="visible = true">Button</el-button>
+      <el-button id="hello" @click="visible = true">
+        Button
+      </el-button>
       <el-dialog :visible.sync="visible" title="Hello world">
         <p>Try Element</p>
       </el-dialog>
