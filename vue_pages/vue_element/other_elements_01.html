@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- https://element.eleme.cn/#/zh-CN -->
+    <meta charset="UTF-8" />
+    <title>Other Elements</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+      .box {
+        width: 400px;
+      }
+      .top {
+        text-align: center;
+      }
+      .left {
+        float: left;
+        width: 60px;
+      }
+      .right {
+        float: right;
+        width: 60px;
+      }
+      .bottom {
+        clear: both;
+        text-align: center;
+      }
+      .item {
+        margin: 4px;
+      }
+      .left .el-tooltip__popper,
+      .right .el-tooltip__popper {
+        padding: 8px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="other-dialog">
+        <el-button type="text" @click="dialogVisible = true">
+          点击打开 Dialog
+        </el-button>
+        <el-dialog
+          title="提示"
+          :visible.sync="dialogVisible"
+          width="30%"
+          :before-close="handleClose"
+        >
+          <span>这是一段信息</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false">
+              确 定
+            </el-button>
+          </span>
+        </el-dialog>
+      </div>
+      <hr />
+      <div id="other-tooltip" class="box">
+        <!-- top -->
+        <div class="top">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Top Left 提示文字"
+            placement="top-start"
+          >
+            <el-button>上左</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Top Center 提示文字"
+            placement="top"
+          >
+            <el-button>上边</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Top Right 提示文字"
+            placement="top-end"
+          >
+            <el-button>上右</el-button>
+          </el-tooltip>
+        </div>
+        <!-- left -->
+        <div class="left">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Left Top 提示文字"
+            placement="left-start"
+          >
+            <el-button style="margin-left: 10px;">左上</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Left Center 提示文字"
+            placement="left"
+          >
+            <el-button>左边</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Left Bottom 提示文字"
+            placement="left-end"
+          >
+            <el-button>左下</el-button>
+          </el-tooltip>
+        </div>
+        <!-- right -->
+        <div class="right">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Right Top 提示文字"
+            placement="right-start"
+          >
+            <el-button style="margin-left: 10px;">右上</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Right Center 提示文字"
+            placement="right"
+          >
+            <el-button>右边</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Right Bottom 提示文字"
+            placement="right-end"
+          >
+            <el-button>右下</el-button>
+          </el-tooltip>
+        </div>
+        <!-- bottom -->
+        <div class="bottom">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Bottom Left 提示文字"
+            placement="bottom-start"
+          >
+            <el-button>下左</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Bottom Center 提示文字"
+            placement="bottom"
+          >
+            <el-button>下边</el-button>
+          </el-tooltip>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="Bottom Right 提示文字"
+            placement="bottom-end"
+          >
+            <el-button>下右</el-button>
+          </el-tooltip>
+        </div>
+      </div>
+      <hr />
+      <div id="other_popover">
+        <el-popover
+          placement="top-start"
+          title="标题"
+          width="200"
+          trigger="hover"
+          content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
+        >
+          <el-button slot="reference">hover 激活</el-button>
+        </el-popover>
+        <el-popover
+          placement="bottom"
+          title="标题"
+          width="200"
+          trigger="click"
+          content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
+        >
+          <el-button slot="reference">click 激活</el-button>
+        </el-popover>
+      </div>
+      <hr />
+      <div id="other-popconfirm">
+        <el-popconfirm title="这是一段内容,确定删除吗？">
+          <el-button slot="reference">删除</el-button>
+        </el-popconfirm>
+      </div>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="../modules/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="../modules/element.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          dialogVisible: false,
+        }
+      },
+      methods: {
+        handleClose(done) {
+          this.$confirm('确认关闭？')
+            .then((_) => {
+              done()
+            })
+            .catch((_) => {})
+        },
+      },
+    })
+  </script>
+</html>
