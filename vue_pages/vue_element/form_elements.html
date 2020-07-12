@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- https://element.eleme.cn/#/zh-CN -->
+    <meta charset="UTF-8" />
+    <title>Form Elements</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+      .el-select .el-input {
+        width: 130px;
+      }
+      .input-with-select .el-input-group__prepend {
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="form-radio">
+        <template>
+          <el-radio v-model="radio1" label="1" border>备选项1</el-radio>
+          <el-radio v-model="radio1" label="2" border>备选项2</el-radio>
+        </template>
+        <p>Radio Checked: {{ radio1 }}</p>
+      </div>
+      <hr />
+      <div id="form-radio-group">
+        <template>
+          <el-radio-group v-model="radio2">
+            <el-radio :label="3">备选项1</el-radio>
+            <el-radio :label="6">备选项2</el-radio>
+            <el-radio :label="9">备选项3</el-radio>
+          </el-radio-group>
+          <p>Radio Group Checked: {{ radio2 }}</p>
+        </template>
+      </div>
+      <hr />
+      <div id="form-button">
+        <template>
+          <el-radio-group v-model="radio3">
+            <el-radio-button label="上海"></el-radio-button>
+            <el-radio-button label="北京"></el-radio-button>
+            <el-radio-button label="广州"></el-radio-button>
+            <el-radio-button label="深圳"></el-radio-button>
+          </el-radio-group>
+        </template>
+      </div>
+      <hr />
+      <div id="form-input">
+        <el-input placeholder="请输入内容" v-model="input" clearable></el-input>
+        <p>Input Text: {{ input }}</p>
+        <hr />
+        <el-input
+          type="textarea"
+          :row="2"
+          placeholder="请输入内容"
+          v-model="textarea"
+        ></el-input>
+        <p>Input Multi-Text: {{ textarea }}</p>
+      </div>
+      <hr />
+      <div id="form-complex-input" style="margin-top: 15px;">
+        <el-input
+          placeholder="请输入内容"
+          v-model="input2"
+          class="input-with-select"
+        >
+          <el-select v-model="select" slot="prepend" placeholder="请选择">
+            <el-option label="餐厅名" value="Name"></el-option>
+            <el-option label="订单号" value="OrderID"></el-option>
+            <el-option label="用户电话" value="PhoneNumber"></el-option>
+          </el-select>
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>
+        <p>Input Info: {{ select }} + {{ input2 }}</p>
+      </div>
+      <hr />
+      <div id="form-switch">
+        <el-switch
+          style="display: block;"
+          v-model="value"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+          active-text="按月付费"
+          inactive-text="按年付费"
+        >
+        </el-switch>
+      </div>
+      <hr />
+      <div id="form-slider" class="block">
+        <span class="demonstration">自定义初始值</span>
+        <el-slider
+          v-model="value2"
+          :format-tooltip="formatTooltip"
+          show-input
+        ></el-slider>
+      </div>
+      <hr />
+      <div id="form-datetime" class="block">
+        <span class="demonstration">设置默认时间</span>
+        <el-date-picker
+          v-model="curDt"
+          type="datetime"
+          placeholder="选择日期时间"
+          default-time="12:00:00"
+        >
+        </el-date-picker>
+        <p>Select DateTime: {{ curDt }}</p>
+      </div>
+      <hr />
+      <div id="form-upload">
+        <el-upload
+          class="upload-demo"
+          drag
+          action="https://jsonplaceholder.typicode.com/posts/"
+          multiple
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          <div class="el-upload__tip" slot="tip">
+            只能上传jpg/png文件，且不超过500kb
+          </div>
+        </el-upload>
+      </div>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="../modules/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="../modules/element.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          radio1: '1',
+          radio2: 3,
+          radio3: '上海',
+          input: '',
+          input2: '',
+          textarea: '',
+          select: '',
+          value: true,
+          value2: 50,
+          curDt: '',
+        }
+      },
+      methods: {
+        formatTooltip(val) {
+          return val / 100
+        },
+      },
+    })
+  </script>
+</html>
