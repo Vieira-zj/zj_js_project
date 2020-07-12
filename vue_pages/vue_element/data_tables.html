@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- https://element.eleme.cn/#/zh-CN -->
+    <meta charset="UTF-8" />
+    <title>Data Tables</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="data-table1">
+        <el-table
+          :data="tableData"
+          stripe
+          style="width: 100%;"
+          :default-sort="{prop: 'date', order: 'descending'}"
+        >
+          <el-table-column prop="date" label="日期" width="180" sortable>
+          </el-table-column>
+          <el-table-column prop="name" label="姓名" width="180" sortable>
+          </el-table-column>
+          <el-table-column
+            prop="address"
+            label="地址"
+            sortable
+          ></el-table-column>
+        </el-table>
+      </div>
+      <hr />
+      <div id="data-table2">
+        <el-table :data="filterDara()" style="width: 100%;">
+          <el-table-column label="Date" prop="date"></el-table-column>
+          <el-table-column label="Name" prop="name"></el-table-column>
+          <el-table-column align="right">
+            <template slot="header" slot-scope="scope">
+              <el-input
+                v-model="search"
+                size="mini"
+                placeholder="输入关键字搜索"
+              />
+            </template>
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.$index, scope.row)"
+                >Edit
+              </el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)"
+                >Delete
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="../modules/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="../modules/element.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          tableData: [
+            {
+              date: '2016-05-02',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄',
+            },
+            {
+              date: '2016-05-04',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1517 弄',
+            },
+            {
+              date: '2016-05-01',
+              name: '王大虎',
+              address: '上海市普陀区金沙江路 1519 弄',
+            },
+            {
+              date: '2016-05-03',
+              name: '王大虎',
+              address: '上海市普陀区金沙江路 1516 弄',
+            },
+          ],
+          search: '',
+        }
+      },
+      methods: {
+        formatter(row, column) {
+          return row.address
+        },
+        filterDara() {
+          return this.tableData.filter(
+            (data) =>
+              !this.search ||
+              data.name.toLowerCase().includes(this.search.toLowerCase())
+          )
+        },
+        handleEdit(index, row) {
+          console.log('edit:', index, row)
+        },
+        handleDelete(index, row) {
+          console.log('delete:', index, row)
+        },
+      },
+    })
+  </script>
+</html>

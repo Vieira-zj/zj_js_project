@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- https://element.eleme.cn/#/zh-CN -->
+    <meta charset="UTF-8" />
+    <title>Data Elements</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+      .el-progress-bar {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="data-tag">
+        <el-tag v-for="tag in tags" :key="tag.name" closable :type="tag.type">
+          {{tag.name}}
+        </el-tag>
+      </div>
+      <hr />
+      <div id="data-process-bar">
+        <el-progress
+          :text-inside="true"
+          :stroke-width="26"
+          :percentage="70"
+        ></el-progress>
+        <el-progress
+          :text-inside="true"
+          :stroke-width="24"
+          :percentage="100"
+          status="success"
+        ></el-progress>
+        <el-progress
+          :text-inside="true"
+          :stroke-width="22"
+          :percentage="80"
+          status="warning"
+        ></el-progress>
+        <el-progress
+          :text-inside="true"
+          :stroke-width="20"
+          :percentage="50"
+          status="exception"
+        ></el-progress>
+      </div>
+      <hr />
+      <div id="data-circle-bar">
+        <el-progress type="circle" :percentage="0"></el-progress>
+        <el-progress type="circle" :percentage="25"></el-progress>
+        <el-progress
+          type="circle"
+          :percentage="100"
+          status="success"
+        ></el-progress>
+        <el-progress
+          type="circle"
+          :percentage="70"
+          status="warning"
+        ></el-progress>
+        <el-progress
+          type="circle"
+          :percentage="50"
+          status="exception"
+        ></el-progress>
+      </div>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="../modules/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="../modules/element.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          tags: [
+            { name: '标签一', type: '' },
+            { name: '标签二', type: 'success' },
+            { name: '标签三', type: 'info' },
+            { name: '标签四', type: 'warning' },
+            { name: '标签五', type: 'danger' },
+          ],
+        }
+      },
+    })
+  </script>
+</html>
