@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- https://element.eleme.cn/#/zh-CN -->
+    <meta charset="UTF-8" />
+    <title>Notice Elements</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="notice-message">
+        <el-button type="primary" :plain="true" @click="open1">消息</el-button>
+        <el-button type="success" :plain="true" @click="open2">成功</el-button>
+        <el-button type="warning" :plain="true" @click="open3">警告</el-button>
+        <el-button type="danger" :plain="true" @click="open4">错误</el-button>
+      </div>
+      <hr />
+      <div id="message-box1">
+        <el-button type="text" @click="open5">点击打开 Message Box</el-button>
+      </div>
+      <hr />
+      <div id="message-box2">
+        <el-button type="text" @click="open6">点击打开 Message Box</el-button>
+      </div>
+      <hr />
+      <div id="notification">
+        <el-button type="success" plain @click="open11">成功</el-button>
+        <el-button type="warning" plain @click="open12">警告</el-button>
+        <el-button type="primary" plain @click="open13">消息</el-button>
+        <el-button type="danger" plain @click="open14">错误</el-button>
+      </div>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="../modules/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="../modules/element.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      methods: {
+        // message
+        open1() {
+          this.$message({
+            showClose: true,
+            message: '这是一条消息提示',
+          })
+        },
+        open2() {
+          this.$message({
+            showClose: true,
+            message: '恭喜你，这是一条成功消息',
+            type: 'success',
+          })
+        },
+        open3() {
+          this.$message({
+            showClose: true,
+            message: '警告，这是一条警告消息',
+            type: 'warning',
+          })
+        },
+        open4() {
+          this.$message({
+            showClose: true,
+            message: '错误，这是一条错误消息',
+            type: 'error',
+          })
+        },
+        // alert, confirm
+        open5() {
+          this.$alert('这是一段内容', '标题名称', {
+            confirmButtonText: '确定',
+            callback: (action) => {
+              this.$message({
+                type: 'info',
+                message: `action: ${action}`,
+              })
+            },
+          })
+        },
+        open6() {
+          this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+          })
+            .then(() => {
+              this.$message({
+                type: 'success',
+                message: '删除成功!',
+              })
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消删除',
+              })
+            })
+        },
+        // notify
+        open11() {
+          this.$notify({
+            title: '成功',
+            message: '这是一条成功的提示消息',
+            type: 'success',
+          })
+        },
+        open12() {
+          this.$notify({
+            title: '警告',
+            message: '这是一条警告的提示消息',
+            type: 'warning',
+          })
+        },
+        open13() {
+          this.$notify.info({
+            title: '消息',
+            message: '这是一条消息的提示消息',
+          })
+        },
+        open14() {
+          this.$notify.error({
+            title: '错误',
+            message: '这是一条错误的提示消息',
+          })
+        },
+      },
+    })
+  </script>
+</html>
