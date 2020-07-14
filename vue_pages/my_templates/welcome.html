@@ -5,15 +5,90 @@
     <title>Welcome Page Demo</title>
     <link rel="stylesheet" href="../css/element.css" />
     <style>
-      body {
+      .base {
         font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
           'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+        color: gray;
+      }
+      .el-aside-color {
+        color: rgb(238, 241, 246);
+        background-color: rgb(4, 1, 49);
+      }
+      .icons-right {
+        margin-right: 15px;
+      }
+      .plain-text {
+        font-size: 14px;
+        font-weight: 500;
+        vertical-align: middle;
       }
     </style>
   </head>
   <body>
-    <div id="app">
-      <!-- TODO: -->
+    <div id="app" class="base">
+      <el-container style="height: 1080px; border: 1px solid #eee;">
+        <el-aside class="el-aside-color" style="text-align: center;">
+          <div style="margin-top: 30px; margin-bottom: 30px;">
+            <span style="font-size: x-large;">Welcome</span>
+            <i class="el-icon-platform-eleme"></i>
+          </div>
+          <el-menu
+            default-active="1"
+            class="el-menu-vertical-demo el-aside-color"
+            style="border: none;"
+          >
+            <el-menu-item index="1">
+              <i class="el-icon-star-off"></i>
+              <span>欢迎</span>
+            </el-menu-item>
+          </el-menu>
+        </el-aside>
+        <el-container>
+          <el-header style="line-height: 60px; border-bottom: 1px solid #eee;">
+            <div style="float: left;">
+              <i class="el-icon-menu" style="margin-left: 15px;"></i>
+            </div>
+            <div style="float: right;">
+              <i class="el-icon-search icons-right"></i>
+              <el-dropdown>
+                <i class="el-icon-setting icons-right"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>查看</el-dropdown-item>
+                  <el-dropdown-item>修改</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <i class="el-icon-user icons-right"></i>
+            </div>
+          </el-header>
+          <el-main>
+            <div>
+              <el-breadcrumb separator="/">
+                <el-breadcrumb-item>首页</el-breadcrumb-item>
+                <el-breadcrumb-item>欢迎</el-breadcrumb-item>
+              </el-breadcrumb>
+              <h2>欢迎</h2>
+            </div>
+            <div class="block">
+              <el-card>
+                <el-alert title="已发布，欢迎使用！" type="success"></el-alert>
+                <h4>更新 Github 模板</h4>
+                <p class="base">郑进 提交于 2018/4/12 20:46</p>
+              </el-card>
+              <div style="margin-top: 10px; margin-left: 30%;">
+                <span class="plain-text">
+                  Want to add more pages? Please refer to
+                </span>
+                <el-link
+                  type="primary"
+                  href="https://element.eleme.io"
+                  target="_blank"
+                  >use block.
+                </el-link>
+              </div>
+            </div>
+          </el-main>
+        </el-container>
+      </el-container>
     </div>
   </body>
   <!-- import Vue before Element -->
