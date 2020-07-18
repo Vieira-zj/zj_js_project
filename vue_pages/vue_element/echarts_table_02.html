@@ -11,7 +11,7 @@
         font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
           'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
       }
-      .right-links-space {
+      .links-right-space {
         margin-right: 20px;
       }
     </style>
@@ -39,15 +39,15 @@
             </el-date-picker>
           </div>
           <div style="float: right; margin-top: 20px;">
-            <el-link type="info" class="right-links-space">今日</el-link>
-            <el-link type="info" class="right-links-space">本周</el-link>
-            <el-link type="info" class="right-links-space">本月</el-link>
-            <el-link type="info" class="right-links-space">本年</el-link>
+            <el-link type="info" class="links-right-space">今日</el-link>
+            <el-link type="info" class="links-right-space">本周</el-link>
+            <el-link type="info" class="links-right-space">本月</el-link>
+            <el-link type="info" class="links-right-space">本年</el-link>
           </div>
         </el-row>
         <el-divider></el-divider>
-        <!-- chart -->
         <el-row>
+          <!-- chart -->
           <div
             id="main"
             v-loading="loading"

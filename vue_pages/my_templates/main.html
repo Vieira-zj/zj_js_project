@@ -10,55 +10,60 @@
           'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
         color: gray;
       }
-      .el-aside-color {
+      .left-nav-color {
         color: rgb(238, 241, 246);
         background-color: rgb(4, 1, 49);
       }
-      .header-icons-right {
+      .left-nav-title {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      .header-right-icons {
         margin-right: 15px;
       }
-      .mid-cards {
-        float: left;
-        margin-right: 20px;
+      .main-top-cards {
         color: gray;
         font-size: small;
-        width: 330px;
-        height: 200px;
+        width: 335px;
+        height: 230px;
+        float: left;
+        margin-right: 20px;
       }
-      .card-main-text {
+      .card-text {
         color: black;
         font-size: 40px;
         margin-top: 20px;
         margin-bottom: 20px;
         margin-left: 0px;
       }
-      .span-right-space {
+      .spans-right-space {
         margin-right: 10px;
+      }
+      .link-right-space {
+        margin-right: 20px;
       }
     </style>
   </head>
   <body>
     <div id="app" class="base">
-      <el-container style="height: 1080px; border: 1px solid #eee;">
-        <!-- nav -->
-        <el-aside class="el-aside-color">
-          <div
-            style="margin-top: 30px; margin-bottom: 30px; text-align: center;"
-          >
+      <el-container style="height: 1080px;">
+        <!-- left nav -->
+        <el-aside class="left-nav-color">
+          <div class="left-nav-title">
             <span style="font-size: x-large;">Design Pro</span>
             <i class="el-icon-platform-eleme"></i>
           </div>
           <el-menu
             default-active="1-1"
-            class="el-menu-vertical-demo el-aside-color"
+            class="left-nav-color"
             style="border: none;"
             text-color="rgb(189, 191, 194)"
             background-color="rgb(4, 1, 49)"
           >
             <el-submenu index="1">
               <template slot="title">
-                <i class="el-icon-data-board"></i>
-                <span>Dashboard</span>
+                <span><i class="el-icon-data-board"></i>Dashboard</span>
               </template>
               <el-menu-item index="1-1">分析页</el-menu-item>
               <el-menu-item index="1-2">监控页</el-menu-item>
@@ -66,8 +71,7 @@
             </el-submenu>
             <el-submenu index="2">
               <template slot="title">
-                <i class="el-icon-user"></i>
-                <span>账户</span>
+                <span><i class="el-icon-user"></i>账户</span>
               </template>
               <el-menu-item index="2-1">个人信息</el-menu-item>
               <el-menu-item index="2-2">设置</el-menu-item>
@@ -79,53 +83,53 @@
         </el-aside>
         <!-- main container -->
         <el-container>
-          <el-header style="line-height: 60px; border-bottom: 1px solid #eee;">
+          <el-header style="line-height: 60px;">
             <div style="float: left;">
               <i class="el-icon-menu" style="margin-left: 15px;"></i>
             </div>
             <div style="float: right;">
-              <i class="el-icon-search header-icons-right"></i>
-              <span class="header-icons-right">
+              <i class="el-icon-search header-right-icons"></i>
+              <span class="header-right-icons">
                 <i class="el-icon-bell"></i>
                 <el-badge :value="3" :max="99" class="item"></el-badge>
               </span>
-              <i class="el-icon-user header-icons-right"></i>
+              <i class="el-icon-user header-right-icons"></i>
             </div>
           </el-header>
-          <el-main>
-            <div>
-              <!-- 1-1 card -->
-              <el-card class="mid-cards">
+          <el-main style="background-color: #eee;">
+            <el-row>
+              <!-- sub card 1-1 -->
+              <el-card class="main-top-cards">
                 <el-row>
                   <div style="float: left;">总销售额</div>
                   <div style="float: right;"><i class="el-icon-view"></i></div>
                 </el-row>
                 <el-row>
-                  <p class="card-main-text">¥ 126,560</p>
+                  <p class="card-text">¥ 126,560</p>
                 </el-row>
                 <el-row>
                   <div style="float: left;">
-                    <span class="span-right-space">周同比</span>12%
+                    <span class="spans-right-space">周同比</span>12%
                     <i class="el-icon-caret-top" style="color: red;"></i>
                   </div>
                   <div style="float: right;">
-                    <span class="span-right-space">日环比</span>11%
+                    <span class="spans-right-space">日环比</span>11%
                     <i class="el-icon-caret-bottom" style="color: green;"></i>
                   </div>
                 </el-row>
-                <hr style="margin-top: 18px;" />
+                <hr style="margin-top: 40px;" />
                 <el-row>
-                  <span class="span-right-space">日均销售额</span>¥ 12,432
+                  <span class="spans-right-space">日均销售额</span>¥ 12,432
                 </el-row>
               </el-card>
-              <!-- 1-2 card -->
-              <el-card class="mid-cards">
+              <!-- sub card 1-2 -->
+              <el-card class="main-top-cards">
                 <el-row>
                   <div style="float: left;">运营活动效果</div>
                   <div style="float: right;"><i class="el-icon-view"></i></div>
                 </el-row>
                 <el-row>
-                  <p class="card-main-text">78%</p>
+                  <p class="card-text">78%</p>
                 </el-row>
                 <el-row>
                   <el-progress
@@ -134,7 +138,7 @@
                     :percentage="78"
                   ></el-progress>
                 </el-row>
-                <hr style="margin-top: 21px;" />
+                <hr style="margin-top: 43px;" />
                 <el-row>
                   <div style="float: left;">
                     <span class="span-right-space">周同比</span>12%
@@ -146,17 +150,72 @@
                   </div>
                 </el-row>
               </el-card>
-              <!-- 1-3 card -->
-              <el-card class="mid-cards">
+              <!-- sub card 1-3 -->
+              <el-card class="main-top-cards">
                 <el-row>
                   <div style="float: left;">访问量</div>
                   <div style="float: right;"><i class="el-icon-view"></i></div>
                 </el-row>
                 <el-row>
-                  <p class="card-main-text">TODO:</p>
+                  <div id="main-sub" style="width: 280px; height: 180px;"></div>
                 </el-row>
               </el-card>
-            </div>
+            </el-row>
+            <!-- main card -->
+            <el-row style="width: 1051px; margin-top: 10px;">
+              <el-card>
+                <!-- header -->
+                <el-row>
+                  <div style="float: left; margin-top: 20px;">
+                    <el-link
+                      type="primary"
+                      style="font-size: 16px; margin-right: 40px;"
+                      >销售额
+                    </el-link>
+                    <el-link type="primary" style="font-size: 16px;"
+                      >访问量
+                    </el-link>
+                  </div>
+                  <div style="float: right;" class="block">
+                    <el-date-picker
+                      v-model="datetime"
+                      type="datetimerange"
+                      start-placeholder="开始日期"
+                      end-placeholder="结束日期"
+                      :default-time="['12:00:00']"
+                    >
+                    </el-date-picker>
+                  </div>
+                  <div style="float: right; margin-top: 20px;">
+                    <el-link type="info" class="link-right-space">今日</el-link>
+                    <el-link type="info" class="link-right-space">本周</el-link>
+                    <el-link type="info" class="link-right-space">本月</el-link>
+                    <el-link type="info" class="link-right-space">本年</el-link>
+                  </div>
+                </el-row>
+                <el-divider></el-divider>
+                <el-row>
+                  <!-- main chart -->
+                  <div
+                    id="main"
+                    style="width: 700px; height: 500px; float: left;"
+                  ></div>
+                  <!-- right order list -->
+                  <div style="float: left;">
+                    <p>门店销售排名</p>
+                    <el-table :data="tableData" :show-header="false" stripe>
+                      <el-table-column type="index"></el-table-column>
+                      <el-table-column prop="name" label="门店" width="150">
+                      </el-table-column>
+                      <el-table-column
+                        prop="count"
+                        label="销售额"
+                      ></el-table-column>
+                    </el-table>
+                  </div>
+                </el-row>
+              </el-card>
+            </el-row>
           </el-main>
         </el-container>
       </el-container>
@@ -164,9 +223,101 @@
   </body>
   <script src="../modules/vue.js"></script>
   <script src="../modules/element.js"></script>
+  <script src="../modules/echarts.min.js"></script>
   <script>
+    let getMonths = function (num) {
+      arr = []
+      for (let i = 1; i <= num; i++) {
+        arr.push(`${i}月`)
+      }
+      return arr
+    }
+
+    let getMonthlyData = function (num) {
+      arr = Array(num)
+        .fill(1)
+        .map((x) => x * Math.floor(Math.random() * 1000))
+      return arr
+    }
+
+    let getTableData = function (num) {
+      let dict = []
+      for (let i = 0; i < num; i++) {
+        dict.push({
+          name: `工专路 ${i} 号店`,
+          count: '323,234',
+        })
+      }
+      return dict
+    }
+
     new Vue({
       el: '#app',
+      data() {
+        return {
+          chartSub: {},
+          optionSub: {
+            title: {},
+            tooltip: {},
+            legend: {},
+            xAxis: {
+              data: getMonths(8),
+              show: false,
+            },
+            yAxis: {
+              show: false,
+            },
+            series: [
+              {
+                type: 'bar',
+                data: getMonthlyData(8),
+                barWidth: 15,
+                itemStyle: {
+                  normal: {
+                    color: '#409EFF',
+                  },
+                },
+              },
+            ],
+          },
+          chart: {},
+          option: {
+            title: {
+              text: '销量额趋势',
+            },
+            tooltip: {},
+            legend: {
+              data: ['销量'],
+            },
+            xAxis: {
+              data: getMonths(12),
+            },
+            yAxis: {},
+            series: [
+              {
+                name: '销量',
+                type: 'bar',
+                data: getMonthlyData(12),
+                barWidth: 25,
+                itemStyle: {
+                  normal: {
+                    color: '#409EFF',
+                  },
+                },
+              },
+            ],
+          },
+          tableData: getTableData(7),
+          datetime: '',
+        }
+      },
+      mounted() {
+        this.chartSub = echarts.init(document.getElementById('main-sub'))
+        this.chartSub.setOption(this.optionSub)
+
+        this.chart = echarts.init(document.getElementById('main'))
+        this.chart.setOption(this.option)
+      },
     })
   </script>
 </html>
