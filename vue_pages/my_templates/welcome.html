@@ -14,7 +14,7 @@
         color: rgb(238, 241, 246);
         background-color: rgb(4, 1, 49);
       }
-      .icons-right {
+      .header-icons-right {
         margin-right: 15px;
       }
       .plain-text {
@@ -27,6 +27,7 @@
   <body>
     <div id="app" class="base">
       <el-container style="height: 1080px; border: 1px solid #eee;">
+        <!-- nav -->
         <el-aside class="el-aside-color" style="text-align: center;">
           <div style="margin-top: 30px; margin-bottom: 30px;">
             <span style="font-size: x-large;">Welcome</span>
@@ -38,26 +39,26 @@
             style="border: none;"
           >
             <el-menu-item index="1">
-              <i class="el-icon-star-off"></i>
-              <span>欢迎</span>
+              <span><i class="el-icon-star-off"></i>欢迎</span>
             </el-menu-item>
           </el-menu>
         </el-aside>
+        <!-- main container -->
         <el-container>
           <el-header style="line-height: 60px; border-bottom: 1px solid #eee;">
             <div style="float: left;">
               <i class="el-icon-menu" style="margin-left: 15px;"></i>
             </div>
             <div style="float: right;">
-              <i class="el-icon-search icons-right"></i>
+              <i class="el-icon-search header-icons-right"></i>
               <el-dropdown>
-                <i class="el-icon-setting icons-right"></i>
+                <i class="el-icon-setting header-icons-right"></i>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>查看</el-dropdown-item>
                   <el-dropdown-item>修改</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
-              <i class="el-icon-user icons-right"></i>
+              <i class="el-icon-user header-icons-right"></i>
             </div>
           </el-header>
           <el-main>
@@ -91,9 +92,7 @@
       </el-container>
     </div>
   </body>
-  <!-- import Vue before Element -->
   <script src="../modules/vue.js"></script>
-  <!-- import JavaScript -->
   <script src="../modules/element.js"></script>
   <script>
     new Vue({
