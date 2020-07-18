@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- https://echarts.apache.org/zh/tutorial.html -->
+    <meta charset="UTF-8" />
+    <title>Echarts table demo</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+      .right-links-space {
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Echarts 例子</h1>
+      <el-card shadow="always">
+        <!-- header -->
+        <el-row>
+          <div style="float: left; margin-top: 20px;">
+            <el-link type="primary" style="font-size: 16px; margin-right: 40px;"
+              >销售额</el-link
+            >
+            <el-link type="primary" style="font-size: 16px;">访问量</el-link>
+          </div>
+          <div style="float: right;" class="block">
+            <el-date-picker
+              v-model="datetime"
+              type="datetimerange"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              :default-time="['12:00:00']"
+            >
+            </el-date-picker>
+          </div>
+          <div style="float: right; margin-top: 20px;">
+            <el-link type="info" class="right-links-space">今日</el-link>
+            <el-link type="info" class="right-links-space">本周</el-link>
+            <el-link type="info" class="right-links-space">本月</el-link>
+            <el-link type="info" class="right-links-space">本年</el-link>
+          </div>
+        </el-row>
+        <el-divider></el-divider>
+        <!-- chart -->
+        <el-row>
+          <div
+            id="main"
+            v-loading="loading"
+            style="width: 1000px; height: 500px; float: left;"
+          ></div>
+          <!-- order -->
+          <div style="float: left;">
+            <p>门店销售排名</p>
+            <el-table :data="tableData" :show-header="false" stripe>
+              <el-table-column type="index"></el-table-column>
+              <el-table-column prop="name" label="门店" width="150">
+              </el-table-column>
+              <el-table-column prop="count" label="销售额"></el-table-column>
+            </el-table>
+          </div>
+        </el-row>
+        <el-row>
+          <el-button type="primary" @click="refreshData">更新</el-button>
+        </el-row>
+      </el-card>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="../modules/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="../modules/element.js"></script>
+  <script src="../modules/echarts.min.js"></script>
+  <script>
+    const size = 12
+
+    let xAxisData = function () {
+      let arr = []
+      for (let i = 1; i <= size; i++) {
+        arr.push(i + '月')
+      }
+      return arr
+    }
+
+    let getRandomData = function () {
+      let arr = Array(size)
+        .fill(1)
+        .map((x) => x * Math.floor(Math.random() * 1000))
+      return arr
+    }
+
+    let getTableData = function () {
+      let dict = []
+      for (let i = 0; i < 7; i++) {
+        dict.push({
+          name: `工专路 ${i} 号店`,
+          count: '323,234',
+        })
+      }
+      return dict
+    }
+
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          myChart: {},
+          option: {
+            title: {
+              text: '销量额趋势',
+            },
+            tooltip: {},
+            legend: {
+              data: ['销量'],
+            },
+            xAxis: {
+              data: xAxisData(),
+            },
+            yAxis: {},
+            series: [
+              {
+                name: '销量',
+                type: 'bar',
+                data: getRandomData(),
+                barWidth: 30,
+                itemStyle: {
+                  normal: {
+                    color: '#409EFF',
+                  },
+                },
+              },
+            ],
+          },
+          loading: false,
+          tableData: getTableData(),
+          datetime: '',
+        }
+      },
+      mounted() {
+        this.myChart = echarts.init(document.getElementById('main'))
+        this.myChart.setOption(this.option)
+      },
+      methods: {
+        refreshData() {
+          console.log('refresh data')
+          this.loading = true
+          let option = this.myChart.getOption()
+          option.series[0].data = getRandomData()
+          setTimeout(() => {
+            this.myChart.setOption(option)
+            this.loading = false
+          }, 1000)
+        },
+      },
+    })
+  </script>
+</html>
