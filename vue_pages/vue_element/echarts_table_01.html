@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- https://echarts.apache.org/zh/tutorial.html -->
+    <meta charset="UTF-8" />
+    <title>Echarts table demo</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Echarts 入门示例</h1>
+      <el-divider></el-divider>
+      <el-button type="primary" @click="refreshData">更新图表</el-button>
+      <el-divider></el-divider>
+      <div id="main" style="width: 600px; height: 400px;"></div>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="../modules/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="../modules/element.js"></script>
+  <script src="../modules/echarts.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          myChart: {},
+          option: {
+            title: {
+              text: 'ECharts 入门示例',
+            },
+            tooltip: {},
+            legend: {
+              data: ['销量'],
+            },
+            xAxis: {
+              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+            },
+            yAxis: {},
+            series: [
+              {
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20],
+              },
+            ],
+          },
+        }
+      },
+      mounted() {
+        this.myChart = echarts.init(document.getElementById('main'))
+        this.myChart.setOption(this.option)
+      },
+      methods: {
+        refreshData() {
+          let option = this.myChart.getOption()
+          let data = Array(6)
+            .fill(1)
+            .map((x) => x * Math.floor(Math.random() * 100))
+          option.series[0].data = data
+          this.myChart.setOption(option)
+        },
+      },
+    })
+  </script>
+</html>
