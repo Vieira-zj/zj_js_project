@@ -17,8 +17,16 @@
     <div id="app">
       <h1>Echarts 入门示例</h1>
       <el-divider></el-divider>
-      <div id="main" style="width: 600px; height: 400px;"></div>
-      <el-button type="primary" @click="refreshData">更新图表</el-button>
+      <el-row>
+        <div id="main1" style="width: 600px; height: 400px;"></div>
+        <el-button type="primary" @click="refreshData">更新图表</el-button>
+      </el-row>
+      <el-divider></el-divider>
+      <el-row>
+        <el-card shadow="always" style="width: 600px; height: 400px;">
+          <div id="main2" style="width: 500px; height: 300px;"></div>
+        </el-card>
+      </el-row>
     </div>
   </body>
   <!-- import Vue before Element -->
@@ -31,8 +39,8 @@
       el: '#app',
       data() {
         return {
-          myChart: {},
-          option: {
+          myChart1: {},
+          option1: {
             title: {
               text: 'ECharts 入门示例',
             },
@@ -52,20 +60,49 @@
               },
             ],
           },
+          myChart2: {},
+          option2: {
+            title: {},
+            tooltip: {},
+            legend: {},
+            xAxis: {
+              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+              show: false,
+            },
+            yAxis: {
+              show: false,
+            },
+            series: [
+              {
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20],
+                barWidth: 40,
+                itemStyle: {
+                  normal: {
+                    color: '#409EFF',
+                  },
+                },
+              },
+            ],
+          },
         }
       },
       mounted() {
-        this.myChart = echarts.init(document.getElementById('main'))
-        this.myChart.setOption(this.option)
+        this.myChart1 = echarts.init(document.getElementById('main1'))
+        this.myChart1.setOption(this.option1)
+
+        this.myChart2 = echarts.init(document.getElementById('main2'))
+        this.myChart2.setOption(this.option2)
       },
       methods: {
         refreshData() {
-          let option = this.myChart.getOption()
+          let option = this.myChart1.getOption()
           let data = Array(6)
             .fill(1)
             .map((x) => x * Math.floor(Math.random() * 100))
           option.series[0].data = data
-          this.myChart.setOption(option)
+          this.myChart1.setOption(option)
         },
       },
     })
