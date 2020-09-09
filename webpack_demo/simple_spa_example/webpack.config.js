@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const history = require('connect-history-api-fallback')
@@ -5,6 +6,7 @@ const convert = require('koa-connect')
 
 const url = require('url')
 const config = require('./config/' + (process.env.npm_config_config || 'default'))
+const pkgInfo = require('./package.json')
 
 // 使用 WEBPACK_SERVE 环境变量检测当前是否是在 webpack-server 启动的开发环境中
 const dev = Boolean(process.env.WEBPACK_SERVE)
@@ -26,6 +28,13 @@ module.exports = {
 
   // 配置页面入口 js 文件
   entry: './src/index.js',
+
+  // 路径别名
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src')
+    }
+  },
 
   // 配置打包输出相关
   output: {
@@ -144,6 +153,12 @@ module.exports = {
       https://github.com/jantimon/html-webpack-plugin/issues/870
       */
       chunksSortMode: 'none'
+    }),
+
+    // 设置环境变量
+    new webpack.DefinePlugin({
+      DEBUG: dev,
+      VERSION: JSON.stringify(pkgInfo.version)
     })
   ]
 }

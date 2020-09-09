@@ -36,11 +36,21 @@
     "env": {
       "browser": true,
       "node": true
+    },
+    "rules": {
+      "no-console": "off",
+      "no-undef": "warn"
     }
   },
   "babel": {
     "presets": [
-      "env"
+      [
+        "env",
+        {
+          "loose": true,
+          "modules": false
+        }
+      ]
     ]
   }
 }
