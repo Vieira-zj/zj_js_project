@@ -81,7 +81,15 @@ module.exports = {
         import htmlString from './template.html';
         template.html 的文件内容会被转成一个 js 字符串，合并到 js 文件里。
         */
-        use: 'html-loader'
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              root: resolve(__dirname, 'src'),
+              attrs: ['img:src', 'link:href']
+            }
+          }
+        ]
       },
 
       {
@@ -137,7 +145,7 @@ module.exports = {
     html-webpack-plugin 用来打包入口 html 文件
     entry 配置的入口是 js 文件，webpack 以 js 文件为入口，遇到 import, 用配置的 loader 加载引入文件
     但作为浏览器打开的入口 html, 是引用入口 js 的文件，它在整个编译过程的外面，
-    所以，我们需要 html-webpack-plugin 来打包作为入口的 html 文件
+    所以，我们需要 html-webpack-plugin 来打包作为入口的 html 文件。
     */
     new HtmlWebpackPlugin({
       /*
@@ -165,7 +173,7 @@ module.exports = {
 
 /*
 配置开发时用的服务器，让你可以用 http://127.0.0.1:8080/ 这样的 url 打开页面来调试
-并且带有热更新的功能，打代码时保存一下文件，浏览器会自动刷新。比 nginx 方便很多
+并且带有热更新的功能，打代码时保存一下文件，浏览器会自动刷新。比 nginx 方便很多。
 如果是修改 css, 甚至不需要刷新页面，直接生效。这让像弹框这种需要点击交互后才会出来的东西调试起来方便很多。
 因为 webpack-cli 无法正确识别 serve 选项，使用 webpack-cli 执行打包时会报错。
 因此我们在这里判断一下，仅当使用 webpack-serve 时插入 serve 选项。

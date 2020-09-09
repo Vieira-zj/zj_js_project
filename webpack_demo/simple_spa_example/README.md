@@ -1,6 +1,8 @@
 # Webpack4 Simple Example
 
-> refer to: <https://github.com/fenivana/webpack-and-spa-guide/blob/master/examples/simple>
+> refer to: <https://github.com/wallstreetcn/webpack-and-spa-guide>
+> 
+> github: <https://github.com/fenivana/webpack-and-spa-guide/blob/master/examples/simple>
 
 ## build project
 

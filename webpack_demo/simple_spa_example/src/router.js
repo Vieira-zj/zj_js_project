@@ -7,7 +7,7 @@ const routes = {
 }
 
 class Router {
-  start() {
+  start () {
     // 点击浏览器后退 / 前进按钮时会触发 window.onpopstate 事件，我们在这时切换到相应页面
     window.addEventListener('popstate', () => {
       this.load(location.pathname)
@@ -18,13 +18,13 @@ class Router {
   }
 
   // 前往 path, 变更地址栏 URL, 并加载相应页面
-  go(path) {
+  go (path) {
     history.pushState({}, '', path)
     this.load(path)
   }
 
   // 加载 path 路径的页面
-  load(path) {
+  load (path) {
     if (path === '/') {
       path = '/foo'
     }
