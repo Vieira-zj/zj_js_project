@@ -1,4 +1,4 @@
-# Webpack4 Simple Example
+# Webpack4 Simple SPA Example
 
 > refer to: <https://github.com/wallstreetcn/webpack-and-spa-guide>
 > 

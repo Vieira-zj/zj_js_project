@@ -4,3 +4,8 @@ dist/
 npm-debug.log*
 .DS_Store
 .idea
+
+# 把 config 目录排除掉，但是保留生产环境和 dev 默认配置文件
+config/*
+!config/default.js
+!config/dev.js
