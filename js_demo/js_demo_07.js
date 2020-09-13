@@ -177,6 +177,10 @@ function jsDemo06 () {
       'user with age 15 found:',
       userList.some(user => user.age === '15')
     )
+
+    let data1 = ['admin', 'tester', 'guest', 'dev']
+    let data2 = ['guest', 'root']
+    console.log('mix:', data1.some(role => data2.indexOf(role) >= 0))
   })()
 }
 
@@ -220,9 +224,13 @@ function jsDemo08 () {
       age: 21,
       location: 'SH'
     }
-    let copied = { ...person, role: 'tester' }
-    console.log('\nperson == copied:', person === copied)
-    console.log('copied object:', JSON.stringify(copied, null, '  '))
+    let copiedTest = { ...person, role: 'tester' }
+    console.log('\nperson == copied:', person === copiedTest)
+    console.log('copied object:', JSON.stringify(copiedTest, null, '  '))
+
+    let copiedDev = Object.assign({ role: 'dev' }, person)
+    console.log('\nperson == copied:', person === copiedDev)
+    console.log('copied object:', JSON.stringify(copiedDev, null, '  '))
   })()
 }
 
@@ -299,10 +307,10 @@ function jsDemo11 () {
 // demo 12, map and filter
 function jsDemo12 () {
   (function () {
-    let all = ['text', 'img', 'other']
+    let all = ['text', 'image', 'other']
     let state = {
       text: 'txt',
-      img: 'image',
+      image: 'jpg',
     }
 
     all.map(key => state[key])
@@ -468,11 +476,114 @@ function jsDemo14 () {
   a2.sleep()
   a2.play('ball')
 
-  console.log('\na1.sleep === a2.sleep:', a1.sleep === a2.sleep)
-  console.log('a1.play === a2.play:', a1.play === a2.play)
+  console.log('\na1.sleep === a2.sleep:', a1.sleep === a2.sleep) // false
+  console.log('a1.play === a2.play:', a1.play === a2.play) // true
 }
 
+
+// demo15, promise
+function jsDemo1501 () {
+  // Promise同步执行, promise.then异步执行
+  (function () {
+    new Promise((resolve, _) => {
+      console.log('first')
+      resolve()
+      console.log('second')
+    }).then(() => {
+      console.log('third')
+    })
+    console.log('fourth')
+  });
+
+  // promise状态: pending, fulfilled, reject
+  (function () {
+    const prom = new Promise((res, _) => {
+      setTimeout(() => { res('success') }, 1000)
+    })
+    const prom2 = prom.then(() => {
+      throw new Error('mock error')
+    }).catch((err) => {
+      console.error(err)
+    })
+
+    // pending
+    console.log('prom', prom)
+    console.log('prom2', prom2)
+
+    setTimeout(() => {
+      console.log('prom', prom)
+      console.log('prom2', prom2)
+    }, 2000)
+  });
+}
+
+
+function jsDemo1502 () {
+  (function () {
+    let val = 0
+    new Promise((res, rej) => {
+      val > 0 ? res('pass') : rej('fail')
+    }).then(data => {
+      console.log('then:', data)
+    }, err => {
+      console.error('reject:', err) // handle fail
+    }).catch(err => {
+      console.error('catch:', err)
+    })
+  });
+
+  (function () {
+    let val = 0
+    new Promise((res, rej) => {
+      val > 0 ? res('pass') : rej('fail')
+    }).then(data => {
+      console.log('then:', data)
+    }).catch(err => {
+      console.error('catch:', err) // handle fail
+    })
+  });
+
+  (function () {
+    let val = 0
+    new Promise((res, rej) => {
+      val > 0 ? res('pass') : rej('mock error')
+    }).then(data => {
+      console.log('then:', data)
+    }, err => {
+      console.log('reject:', err) // handle fail
+      throw new Error(err)
+    }).catch(err => {
+      console.error('catch:', err) // handle error
+    })
+  });
+
+  // 同步执行多个异步方法
+  (function () {
+    new Promise((resolve, _) => {
+      setTimeout(() => {
+        console.log('1st')
+        resolve('2nd')
+      }, 1000)
+    }).then(data => {
+      // should return a promise
+      return new Promise((resolve, _) => {
+        setTimeout(() => {
+          console.log(data)
+          resolve('3rd')
+        }, 1000)
+      })
+    }).then(data => {
+      setTimeout(() => {
+        console.log(data)
+      }, 1000)
+    }).catch(err => {
+      console.error(err)
+    })
+  })();
+}
+
+
 if (require.main === module) {
-  jsDemo14()
+  jsDemo1502()
   console.log(__filename, 'DONE.')
 }
