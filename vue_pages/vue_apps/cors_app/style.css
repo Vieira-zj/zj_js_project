@@ -1,0 +1,17 @@
+#app {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  color: #606266;
+}
+
+#request-form {
+  position: relative;
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 60px 35px 0;
+}
+
+.header-input {
+  width: 40%;
+}

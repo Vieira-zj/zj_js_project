@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>api-test</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../css/element.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <el-form
+        id="request-form"
+        ref="reqForm"
+        :model="requestForm"
+        :rules="validRules"
+        label-width="80px"
+      >
+        <h1 style="text-align: center">API Test</h1>
+        <!-- URL -->
+        <!-- for validate, "prop" should be matched with v-model bind field name -->
+        <el-form-item label="Url:" prop="requrl">
+          <el-input
+            name="requrl"
+            type="text"
+            v-model="requestForm.requrl"
+            @keyup.enter.native="onSend"
+          ></el-input>
+        </el-form-item>
+        <!-- Method -->
+        <el-form-item label="Method:">
+          <el-select v-model="requestForm.method">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <!-- Headers -->
+        <el-form-item label="Headers:">
+          <div
+            v-for="item in requestForm.headers"
+            :key="item.key"
+            :value="item.value"
+            style="margin-bottom: 5px"
+          >
+            <span>
+              <el-autocomplete
+                type="text"
+                class="header-input inline-input"
+                v-model="item.name"
+                :fetch-suggestions="headerNameSearch"
+              ></el-autocomplete>
+              :
+              <el-autocomplete
+                type="text"
+                class="header-input inline-input"
+                v-model="item.value"
+                :fetch-suggestions="headerValueSearch"
+              ></el-autocomplete>
+              <i class="el-icon-circle-plus-outline" @click="onAddHeader"></i>
+              <i
+                class="el-icon-remove-outline"
+                v-show="requestForm.headers.length > 1"
+                @click="onRemoveHeader(item.key)"
+              ></i>
+            </span>
+          </div>
+        </el-form-item>
+        <!-- Body -->
+        <el-form-item
+          label="Body:"
+          v-show="this.requestForm.method === METHOD_POST"
+        >
+          <el-input
+            type="textarea"
+            v-model="requestForm.body"
+            :autosize="true"
+          ></el-input>
+        </el-form-item>
+        <!-- Test and Clear Button -->
+        <el-form-item>
+          <el-button type="primary" @click="onSend">Test</el-button>
+          <el-button @click="onClear">Clear</el-button>
+        </el-form-item>
+        <!-- Response -->
+        <el-form-item label="Response:">
+          <el-input
+            type="textarea"
+            v-model="results"
+            :autosize="true"
+          ></el-input>
+        </el-form-item>
+        <!-- Format -->
+        <el-form-item>
+          <el-tooltip content="Format Json String" placement="bottom">
+            <el-button @click="onFormat">Format</el-button>
+          </el-tooltip>
+        </el-form-item>
+      </el-form>
+    </div>
+  </body>
+  <script src="../../modules/vue.js"></script>
+  <script src="../../modules/element.js"></script>
+  <script src="../../modules/axios.min.js"></script>
+  <script src="./utils.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        let validateUrl = (rule, value, callback) => {
+          if (!Boolean(value)) {
+            callback(new Error('Url cannot be empty'))
+          } else if (!value.startsWith('http')) {
+            callback(new Error('Please enter the correct url'))
+          } else {
+            callback()
+          }
+        }
+
+        return {
+          requestForm: {
+            requrl: URL,
+            method: METHOD_GET,
+            headers: [{ key: 0, name: '', value: '' }],
+            body: '',
+          },
+          validRules: {
+            requrl: [
+              {
+                required: true,
+                trigger: 'blur',
+                validator: validateUrl,
+              },
+            ],
+          },
+          options: [
+            { value: METHOD_GET, label: 'Get' },
+            { value: METHOD_POST, label: 'Post' },
+          ],
+          results: '',
+        }
+      },
+      created() {
+        console.log('Env:', TEST_ENV)
+      },
+      methods: {
+        // add or remove header
+        onAddHeader() {
+          let headers = this.requestForm.headers
+          headers.push({ key: headers.length, name: '', value: '' })
+        },
+        onRemoveHeader(key) {
+          this.requestForm.headers.splice(key, 1)
+        },
+        // header auto complete
+        headerNameSearch(queryString, cb) {
+          let suggestions = [{ value: 'Content-Type' }, { value: 'X-Test' }]
+          let results = queryString
+            ? suggestions.filter(this.createFilter(queryString))
+            : suggestions
+          cb(results)
+        },
+        headerValueSearch(queryString, cb) {
+          let suggestions = [
+            { value: 'application/json; charset=utf-8' },
+            { value: 'text/plain; charset=utf-8' },
+          ]
+          let results = queryString
+            ? suggestions.filter(this.createFilter(queryString))
+            : suggestions
+          cb(results)
+        },
+        createFilter(queryString) {
+          return (suggestion) => {
+            return (
+              suggestion.value
+                .toLowerCase()
+                .indexOf(queryString.toLowerCase()) === 0
+            )
+          }
+        },
+        // send request
+        onSend() {
+          this.$refs.reqForm.validate((valid) => {
+            if (!valid) {
+              errorHandler(this, new Error('Invalid submit data'))
+              return false
+            }
+
+            let vm = this
+            axios({
+              method: vm.requestForm.method,
+              url: vm.requestForm.requrl,
+              headers: createHeaders(vm.requestForm.headers),
+              data: vm.requestForm.body,
+              // origin is "null"
+            })
+              .then((resp) => {
+                let contentType = resp.headers['content-type']
+                let retData = resp.data
+                vm.results = isContentTypeJson(contentType)
+                  ? JSON.stringify(retData)
+                  : retData
+              })
+              .catch((err) => {
+                errorHandler(vm, err)
+              })
+          })
+        },
+        onClear() {
+          this.requestForm.requrl = ''
+          this.requestForm.method = METHOD_GET
+          this.requestForm.headers = [{ key: 0, name: '', value: '' }]
+          this.requestForm.body = ''
+        },
+        onFormat() {
+          let obj = JSON.parse(this.results)
+          let formatted = JSON.stringify(obj, null, 2)
+          this.results = formatted
+        },
+      },
+    })
+  </script>
+</html>
