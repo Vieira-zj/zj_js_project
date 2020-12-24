@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'test') {
     {
       // specify some options for NYC instrumentation here
       extension: ['.js', '.vue'],
+      exclude: ['**/Coverage*.vue'],
     },
   ])
 }

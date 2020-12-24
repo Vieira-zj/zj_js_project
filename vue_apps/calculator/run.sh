@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-function deploy_coverage_dist {
+function deploy_cover_dist_to_nginx {
   nginx -t
   if [[ $? -ne 0 ]]; then
     echo 'nginx check failed.'
@@ -16,5 +16,5 @@ function start_coverage_server {
   COVERAGE=true node server.js &
 }
 
-deploy_coverage_dist
+deploy_cover_dist_to_nginx
 echo 'Done'

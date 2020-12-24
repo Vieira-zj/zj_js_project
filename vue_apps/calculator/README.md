@@ -1,34 +1,6 @@
 # App - Calculator
 
-## Project setup
-
-```sh
-npm install
-```
-
-Compiles and hot-reloads for development:
-
-```sh
-npm run serve
-```
-
-Compiles and minifies for production:
-
-```sh
-npm run build
-```
-
-Lints and fixes files:
-
-```sh
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-------
+> A Vue demo, collect code coverage for manual e2e test.
 
 ## Plugin: istanbul
 
@@ -36,79 +8,82 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 > Refer: <https://github.com/istanbuljs/babel-plugin-istanbul>
 
-Install:
+1. Install:
 
 ```sh
 npm install --save-dev babel-plugin-istanbul
 ```
 
-Dependency:
+2. Edit `babel.config.js` to add plugin `babel-plugin-istanbul`, and config.
 
-```text
-"babel-plugin-istanbul": "^6.0.0"
-```
-
-Edit `babel.config.js` to add plugin `babel-plugin-istanbul`.
-
-Run calculator app with instrumented code:
+3. Run calculator app with instrumented code.
 
 ```sh
 npm run serve-test
 ```
 
-Open app, and check var `window.__coverage__` in chrome console to see coverage is enabled.
+4. Open web, and check var `window.__coverage__` in chrome console to see coverage data.
 
 ------
 
 ## Plugin: istanbul-middleware
 
-Refer: <https://github.com/gotwarlost/istanbul-middleware>
+> Refer: <https://github.com/gotwarlost/istanbul-middleware>
 
 Install:
 
 ```sh
 npm i istanbul-middleware --save-dev
 npm i nyc --save-dev
+
+# check
+npx nyc --version
 ```
 
 ### Server-side code coverage
 
-Add `server.js`.
+1. Add `server.js`.
 
-Start cover server.
+2. Start coverage server at `:8081`.
 
 ```sh
 # start app
 COVERAGE=true node server.js
+
 # check coverage api
 curl -v http://localhost:8081/coverage/
-
-# copy coverage json from console by "JSON.stringify(window.__coverage__)"
-# save to file tmp.json
-curl -v -XPOST http://localhost:8081/coverage/client -H "Content-type:application/json" -d @tmp.json
-# download coverage data
-curl -v http://localhost:8081/coverage/download --output cover.zip
 ```
+
+3. Copy coverage data from console by `JSON.stringify(window.__coverage__)`, and save to file `tmp.json`.
+
+4. Upload and download coverage data.
+
+```sh
+# upload
+curl -v -XPOST http://localhost:8081/coverage/client -H "Content-type:application/json" -d @tmp.json
+# {"ok":true}
+
+# download
+curl -v http://localhost:8081/coverage/download --output cover.zip
+# extract
+unzip cover.zip -d cover
+```
+
+5. Open code coverage report from `cover/lcov-report/index.html`.
 
 ------
 
-## E2E Test With Coverage
+## E2E Test with Coverage
 
-### Build nginx env
+### Build nginx proxy
 
-Install:
-
-```sh
-brew install nginx
-```
-
-Start:
+1. Start:
 
 ```sh
 nginx
 ```
 
-Config:
+2. Update config, add proxy for code coverage server.
 
 `/usr/local/etc/nginx/nginx.conf`
 
@@ -125,6 +100,7 @@ http {
         server localhost:8081;
     }
 
+    # update listen port
     server {
         listen       9090;
         server_name  localhost;
@@ -136,34 +112,36 @@ http {
 }
 ```
 
-Test and restart:
+3. Test and restart nginx.
 
 ```sh
 nginx -t
 nginx -s reload
 ```
 
-### Get coverage data
+4. Open `http://localhost:9090` to check ngnix.
+
+### E2E Test and Coverage
 
 > Pre condition: make sure coverage server is started at `:8081`.
 
-Build instrumented package, and deploy to nginx.
+1. Build instrumented package, and deploy to nginx.
 
 ```sh
 npm run build-test
 cp -r dist/* /usr/local/var/www
 ```
 
-Open `http://localhost:9090`.
+2. Open `http://localhost:9090` and run manual test of calculator.
 
-Run manual test of calculator and upload coverage.
+3. Upload coverage to server.
 
-Download coverage data and extract.
+4. Download coverage data and extract.
 
 ```sh
-curl -v http://localhost:9090/coverage/download --output cover.zip
+rm -r cover*; curl -v http://localhost:9090/coverage/download --output cover.zip
 unzip cover.zip -d cover
 ```
 
-Open code coverage report `cover/lcov-report/index.html`.
+5. Open code coverage report from `cover/lcov-report/index.html`.
 
