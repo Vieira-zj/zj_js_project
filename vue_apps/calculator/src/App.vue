@@ -31,7 +31,7 @@ export default {
 
       axios({
         method: 'POST',
-        url: 'http://localhost:8081/coverage/client',
+        url: 'http://localhost:9090/coverage/client',
         data: window.__coverage__,
         headers: {
           'Content-type': 'application/json',

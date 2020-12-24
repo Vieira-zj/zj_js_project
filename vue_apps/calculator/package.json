@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "NODE_ENV=test vue-cli-service serve"
+    "serve-test": "NODE_ENV=test vue-cli-service serve",
+    "build-test": "NODE_ENV=test vue-cli-service build",
+    "instrument": "npx nyc instrument --compact=false dist instrumented"
   },
   "dependencies": {
     "axios": "^0.21.1",
