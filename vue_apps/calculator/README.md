@@ -145,3 +145,9 @@ unzip cover.zip -d cover
 
 5. Open code coverage report from `cover/lcov-report/index.html`.
 
+![img](docs/images/cover_report01.png)
+
+![img](docs/images/cover_report02.png)
+
+![img](docs/images/cover_report03.png)
+
