@@ -514,7 +514,7 @@ function jsDemo1501 () {
       console.log('prom', prom)
       console.log('prom2', prom2)
     }, 2000)
-  });
+  })();
 }
 
 

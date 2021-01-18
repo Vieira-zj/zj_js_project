@@ -44,7 +44,41 @@ function jsDemo01 () {
 }
 
 
+// demo02, object attribute
+function jsDemo02 () {
+  routers = [{
+    path: '/index',
+  },
+  {
+    path: '/home',
+    meta: {
+      title: 'home',
+      isShow: true,
+    }
+  },
+  {
+    path: '/page1',
+    meta: {
+      title: 'page1',
+    }
+  },
+  {
+    path: '/page2',
+    meta: {
+      title: 'page2',
+      isShow: false
+    }
+  },
+  ]
+
+  // for page1 object, property 'isShow' is undefined which not equal false
+  matched = routers.filter(item => item.meta && item.meta.title && item.meta.isShow !== false)
+  console.log('routers:')
+  matched.forEach(item => console.log(`title=${item.meta.title}, isShow=${item.meta.isShow}`))
+}
+
+
 if (require.main === module) {
-  jsDemo01()
+  jsDemo02()
   console.log(__filename, 'DONE.')
 }
