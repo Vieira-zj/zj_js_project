@@ -78,7 +78,33 @@ function jsDemo02 () {
 }
 
 
+// demo03, map
+function jsDemo03 () {
+  (function () {
+    let values = [1, 2, 3]
+    res = values.map(val => {
+      return {
+        val: val + 1
+      }
+    })
+    console.log(res)
+
+    obj = {
+      key: 'key1',
+      val: 'value1',
+      desc: 'desc1',
+    }
+    let { key, val } = obj
+    new_obj = {
+      key,
+      val,
+    }
+    console.log(new_obj)
+  })()
+}
+
+
 if (require.main === module) {
-  jsDemo02()
+  jsDemo03()
   console.log(__filename, 'DONE.')
 }
