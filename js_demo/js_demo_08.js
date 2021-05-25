@@ -104,7 +104,44 @@ function jsDemo03 () {
 }
 
 
+// demo04, async and await
+function jsDemo04 () {
+  function sleep (ms) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(`sleep for ${ms} ms`)
+      }, ms)
+    })
+  }
+
+  // await 只能放在 async 函数内部使用，不能放在普通函数里面，否则会报错
+  async function asyncFunc () {
+    const tag = 'asyncFunction total executing:'
+    console.time(tag)
+    const sleep1 = await sleep(1000)
+    console.log('sleep1: ' + sleep1)
+
+    const [sleep2, sleep3, sleep4] = await Promise.all([sleep(2000), sleep(1000), sleep(1500)])
+    console.log('sleep2: ' + sleep2)
+    console.log('sleep3: ' + sleep3)
+    console.log('sleep4: ' + sleep4)
+
+    const sleepRace = await Promise.race([sleep(3000), sleep(1000), sleep(1500)])
+    console.log('sleep race: ' + sleepRace)
+    console.timeEnd(tag)
+    return 'asyncFunction done.'
+  }
+
+  asyncFunc().then(data => {
+    console.log(data)
+  }).catch(err => {
+    console.error(err)
+  })
+  console.log('after asyncFunction code executing...') // 立即执行
+}
+
+
 if (require.main === module) {
-  jsDemo03()
+  jsDemo04()
   console.log(__filename, 'DONE.')
 }
