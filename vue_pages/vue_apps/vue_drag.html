@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue drag demo</title>
+  </head>
+  <style>
+    #app {
+      position: relative;
+      top: 10px;
+      left: 10px;
+      width: 200px;
+      height: 200px;
+      background: #666;
+    }
+  </style>
+  <body>
+    <div id="app" @mousedown="move">{{positionX}} {{positionY}}</div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          positionX: 0,
+          positionY: 0,
+        }
+      },
+      methods: {
+        move(e) {
+          let odiv = e.target
+          // 鼠标相对元素的位置
+          let disX = e.clientX - odiv.offsetLeft
+          let disY = e.clientY - odiv.offsetTop
+
+          let vm = this
+          document.onmousemove = (e) => {
+            // 用鼠标的位置减去鼠标相对元素的位置, 得到元素的位置
+            let left = e.clientX - disX
+            let top = e.clientY - disY
+            // 绑定元素位置到positionX和positionY
+            vm.positionX = top
+            vm.positionY = left
+            // 移动当前元素
+            odiv.style.left = left + 'px'
+            odiv.style.top = top + 'px'
+          }
+
+          document.onmouseup = (e) => {
+            document.onmousemove = null
+            document.onmouseup = null
+          }
+        },
+      },
+    })
+  </script>
+</html>
