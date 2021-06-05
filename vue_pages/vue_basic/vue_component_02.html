@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue组件 - 传递一个对象</title>
+  </head>
+  <body>
+    <div id="app">
+      <sub-form :data="user"></sub-form>
+      <p>name={{ user.name }}, age={{ user.age }}</p>
+    </div>
+    <template id="subform">
+      <div>
+        <p>Form</p>
+        <hr />
+        <label for="name">UserName</label>
+        <input v-model="data.name" id="name" />
+        <label for="age">UserAge</label>
+        <input v-model="data.age" id="age" />
+      </div>
+    </template>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    Vue.component('sub-form', {
+      template: '#subform',
+      props: {
+        data: Object,
+      },
+    })
+
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          user: {
+            name: 'bar',
+            age: 31,
+          },
+        }
+      },
+    })
+  </script>
+</html>
