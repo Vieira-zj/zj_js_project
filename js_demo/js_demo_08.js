@@ -141,7 +141,15 @@ function jsDemo04 () {
 }
 
 
+// demo05, title for string
+function jsDemo05 () {
+  let str = 'hello'
+  str = str.toLowerCase()
+  res = str.slice(0, 1).toUpperCase() + str.slice(1)
+  console.log('title string:', res)
+}
+
 if (require.main === module) {
-  jsDemo04()
+  jsDemo05()
   console.log(__filename, 'DONE.')
 }
