@@ -3,7 +3,7 @@
   <head>
     <!-- https://element.eleme.cn/#/zh-CN -->
     <meta charset="UTF-8" />
-    <title>Element hello world</title>
+    <title>element hello world</title>
     <!-- import CSS -->
     <link rel="stylesheet" href="../css/element.css" />
     <style>
@@ -19,12 +19,35 @@
   </head>
   <body>
     <div id="app">
-      <el-button id="hello" @click="visible = true">
-        Button
-      </el-button>
-      <el-dialog :visible.sync="visible" title="Hello world">
-        <p>Try Element</p>
-      </el-dialog>
+      <h1>Element Hello World</h1>
+      <!-- hello world -->
+      <div style="margin-bottom: 10px">
+        <el-button id="hello" @click="showDialog"> Button </el-button>
+        <el-dialog :visible.sync="visible" title="Hello world">
+          <p>Try Element</p>
+        </el-dialog>
+      </div>
+      <hr />
+
+      <!-- data refresh => 新的结果被旧的结果覆盖 -->
+      <div>
+        <el-select
+          v-model="selectedValue"
+          placeholder="请选择"
+          style="margin-bottom: 10px"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <div>
+          <el-tag v-loading="isLoading">{{ showValue }}</el-tag>
+        </div>
+      </div>
     </div>
   </body>
   <!-- import Vue before Element -->
@@ -35,7 +58,45 @@
     new Vue({
       el: '#app',
       data: function () {
-        return { visible: false }
+        return {
+          visible: false,
+          options: [
+            { value: 'foo', label: 'Foo' },
+            { value: 'itslongname', label: 'Long' },
+          ],
+          selectedValue: '',
+          isLoading: false,
+          showValue: 'none',
+        }
+      },
+      watch: {
+        selectedValue(newVal, oldVal) {
+          if (!newVal) {
+            return
+          }
+          this.isLoading = true
+          this.mockRequest(newVal)
+            .then((resp) => {
+              this.showValue = resp
+            })
+            .finally(() => {
+              setTimeout(() => {
+                this.isLoading = false
+              }, 500)
+            })
+        },
+      },
+      methods: {
+        showDialog() {
+          this.visible = true
+        },
+        mockRequest(val) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve('hello ' + val)
+            }, val.length * 1000)
+          })
+        },
       },
     })
   </script>
