@@ -17,6 +17,7 @@
   <body>
     <div id="app">
       <h1>Websocket Demo</h1>
+      <!-- backend: {go_project}/demo.hello/apps/websocket -->
       <div>
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="消息">
@@ -110,6 +111,16 @@
           }
         },
         onLoad() {
+          this.loadData(() => {
+            console.log('laod data done')
+          })
+        },
+        onSync() {
+          this.loadData(() => {
+            this.socketJobs.send('sync')
+          })
+        },
+        loadData(cb) {
           let vm = this
           vm.loading = true
           axios
@@ -127,6 +138,7 @@
                 return row
               })
               vm.tableData = tData
+              cb()
             })
             .catch((err) => {
               console.error(err)
@@ -136,9 +148,6 @@
                 vm.loading = false
               }, 500)
             })
-        },
-        onSync() {
-          this.socketJobs.send('sync')
         },
         getElTagType(text) {
           if (text == 'done') {
