@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>websocket demo</title>
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.5s;
+      }
+      .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Websocket Demo</h1>
+      <div>
+        <el-form ref="form" :model="form" label-width="80px">
+          <el-form-item label="消息">
+            <el-input v-model="form.input" style="width: 180px"></el-input>
+            <el-button type="primary" @click="onSend" style="margin-left: 20px"
+              >Send</el-button
+            >
+          </el-form-item>
+          <el-form-item>
+            <pre>{{ form.output }}</pre>
+          </el-form-item>
+        </el-form>
+      </div>
+      <hr />
+      <div>
+        <el-button type="primary" @click="onLoad">Load</el-button>
+        <el-button type="primary" @click="onSync" style="margin-left: 20px"
+          >Sync</el-button
+        >
+        <el-table :data="tableData" style="width: 600px" v-loading="loading">
+          <el-table-column prop="id" label="id" width="150"> </el-table-column>
+          <el-table-column prop="title" label="title"></el-table-column>
+          <el-table-column label="status" width="180">
+            <template slot-scope="scope">
+              <transition name="fade">
+                <el-tag
+                  v-if="scope.row.show"
+                  :type="getElTagType(scope.row.status)"
+                  >{{ scope.row.status }}</el-tag
+                >
+              </transition>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script src="../modules/element.js"></script>
+  <script src="../modules/axios.min.js"></script>
+  <script type="module">
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          socketEcho: null,
+          socketJobsDelta: null,
+          form: {
+            input: '',
+            output: '',
+          },
+          loading: false,
+          tableData: null,
+        }
+      },
+      mounted() {
+        this.socketEcho = new WebSocket('ws://localhost:8080/ws/echo')
+        this.socketJobs = new WebSocket('ws://localhost:8080/ws/jobs/delta')
+
+        let vm = this
+        this.socketEcho.onopen = function () {
+          vm.form.output = 'Status: Connected\n'
+        }
+        this.socketEcho.onmessage = function (e) {
+          vm.form.output += 'Server: ' + e.data + '\n'
+        }
+
+        this.socketJobs.onopen = () => {
+          console.log('job results delta socket connected')
+        }
+        this.socketJobs.onmessage = (e) => {
+          console.log('get job:', e.data)
+          for (let row of this.tableData) {
+            let newRow = JSON.parse(e.data)
+            if (row.id === newRow.id) {
+              row.show = false
+              row.status = newRow.status
+              setTimeout(() => {
+                row.show = true
+              }, 200)
+              break
+            }
+          }
+        }
+      },
+      methods: {
+        onSend() {
+          if (this.form.input) {
+            this.socketEcho.send(this.form.input)
+            this.form.input = ''
+          }
+        },
+        onLoad() {
+          let vm = this
+          vm.loading = true
+          axios
+            .get('http://localhost:8080/mock/jobs')
+            .then((resp) => {
+              let retData = resp.data
+              if (retData.code !== 0) {
+                vm.$message.error(
+                  'load job results failed, error code: ' + retData.code
+                )
+                return
+              }
+              let tData = retData.results.map((row) => {
+                row.show = true
+                return row
+              })
+              vm.tableData = tData
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+            .finally(() => {
+              setTimeout(() => {
+                vm.loading = false
+              }, 500)
+            })
+        },
+        onSync() {
+          this.socketJobs.send('sync')
+        },
+        getElTagType(text) {
+          if (text == 'done') {
+            return 'success'
+          } else if (text == 'notstart') {
+            return 'info'
+          } else {
+            return ''
+          }
+        },
+      },
+    })
+  </script>
+</html>
