@@ -75,7 +75,7 @@
       },
       mounted() {
         this.socketEcho = new WebSocket('ws://localhost:8080/ws/echo')
-        this.socketJobs = new WebSocket('ws://localhost:8080/ws/jobs/delta')
+        this.socketJobs = new WebSocket('ws://localhost:8080/ws/jobs/sync')
 
         let vm = this
         this.socketEcho.onopen = function () {
@@ -90,14 +90,15 @@
         }
         this.socketJobs.onmessage = (e) => {
           console.log('get job:', e.data)
+          if (!this.tableData) {
+            return
+          }
           for (let row of this.tableData) {
             let newRow = JSON.parse(e.data)
             if (row.id === newRow.id) {
               row.show = false
               row.status = newRow.status
-              setTimeout(() => {
-                row.show = true
-              }, 200)
+              row.show = true
               break
             }
           }
@@ -117,7 +118,7 @@
         },
         onSync() {
           this.loadData(() => {
-            this.socketJobs.send('sync')
+            this.socketJobs.send('start sync')
           })
         },
         loadData(cb) {
