@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>table rowspan demo</title>
+    <link rel="stylesheet" href="../css/element.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Table RowSpan Demo</h1>
+      <el-button
+        type="primary"
+        size="small"
+        plain
+        :loading="loading"
+        @click="onLoad"
+        >Load</el-button
+      >
+      <el-button type="primary" size="small" plain @click="onClearFilter"
+        >Reset Filter</el-button
+      >
+      <el-table
+        ref="usersTable"
+        border
+        stripe
+        :data="table.data"
+        v-loading="loading"
+        :span-method="rowSpanByRole"
+        style="width: 750px; margin-top: 20px"
+      >
+        <el-table-column type="index" width="50"> </el-table-column>
+        <el-table-column prop="id" label="ID" width="100"></el-table-column>
+        <el-table-column
+          prop="role"
+          label="Role"
+          column-key="role"
+          width="100"
+          :filters="table.roleFilterData"
+          :filter-method="roleFilterHandler"
+        ></el-table-column>
+        <el-table-column prop="name" label="Name" width="200"></el-table-column>
+        <el-table-column prop="skills" label="Skills" width="300">
+          <template v-slot="{ row }">
+            <ul>
+              <li v-for="(skill, idx) in row.skills" :key="idx">{{ skill }}</li>
+            </ul>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script src="../modules/element.js"></script>
+  <script src="../modules/axios.min.js"></script>
+  <script>
+    // desc: 1. col分组；2. col筛选
+    // backend: {go_project}/demo.hello/echoserver
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          loading: false,
+          table: {
+            data: [],
+            roleFilterData: [],
+          },
+        }
+      },
+      methods: {
+        onLoad() {
+          let vm = this
+          // 加载数据前，清除上一次的筛选数据及设置
+          vm.loadSetup()
+          vm.loading = true
+          axios
+            .get('http://localhost:8081/data/rowspan')
+            .then((resp) => {
+              let retData = resp.data
+              if (retData.code !== 0) {
+                vm.$message.error(
+                  'load results failed, error code: ' + retData.code
+                )
+                return
+              }
+              vm.table.data = retData.data
+              // 构建筛选数据
+              let roles = new Set()
+              retData.data.forEach((element) => {
+                roles.add(element.role)
+              })
+              roles.forEach((item) => {
+                vm.table.roleFilterData.push({ text: item, value: item })
+              })
+            })
+            .catch((err) => {
+              vm.$message.error('net error: ' + err)
+            })
+            .finally(() => {
+              setTimeout(() => {
+                vm.loading = false
+              }, 500)
+            })
+        },
+        rowSpanByRole({ row, column, rowIndex, columnIndex }) {
+          // index start from 0
+          if (columnIndex === 2 || columnIndex === 4) {
+            return {
+              rowspan: row.rowspan,
+              colspan: row.colspan,
+            }
+          }
+        },
+        roleFilterHandler(value, row, column) {
+          const property = column['property']
+          return row[property] === value
+        },
+        loadSetup() {
+          this.onClearFilter()
+          if (this.table.roleFilterData.length > 0) {
+            this.table.roleFilterData = []
+          }
+        },
+        onClearFilter() {
+          // clear filter by column-key
+          this.$refs.usersTable.clearFilter('role')
+        },
+      },
+    })
+  </script>
+</html>
