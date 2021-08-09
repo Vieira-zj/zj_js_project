@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>DatePicker Elements</title>
+    <link rel="stylesheet" href="../css/element.css" />
+    <style>
+      #app {
+        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+          'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>DatePicker Demos</h1>
+      <!-- 选择日 -->
+      <div>
+        <span style="margin-right: 20px">选择日</span>
+        <el-date-picker
+          v-model="curDate1"
+          type="date"
+          format="yyyy 年 MM 月 dd 日"
+          value-format="yyyy-MM-dd"
+          placeholder="选择日期"
+          :picker-options="pickerOptions"
+        >
+        </el-date-picker>
+        <el-button
+          type="primary"
+          @click="onSelectDate"
+          style="margin-left: 20px"
+          >Select Date</el-button
+        >
+      </div>
+      <!-- 选择周 -->
+      <div style="margin-top: 20px">
+        <span style="margin-right: 20px">选择周</span>
+        <el-date-picker
+          v-model="curDate2"
+          type="week"
+          format="yyyy 第 WW 周"
+          placeholder="选择周"
+          :picker-options="pickerOptions"
+        >
+        </el-date-picker>
+        <el-button
+          type="primary"
+          @click="onSelectWeek"
+          style="margin-left: 20px"
+          >Select Week</el-button
+        >
+      </div>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script src="../modules/element.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          pickerOptions: {
+            disabledDate(time) {
+              return time.getTime() > Date.now()
+            },
+          },
+          curDate1: '',
+          curDate2: '',
+        }
+      },
+      methods: {
+        onSelectDate() {
+          console.log('select date:', this.curDate1)
+        },
+        onSelectWeek() {
+          console.log('select week:', this.getWeekNumber(this.curDate2))
+        },
+        formatDate(now) {
+          now = new Date(now)
+          let arr = new Array(3)
+          arr[0] = now.getFullYear()
+          arr[1] = now.getMonth() + 1
+          arr[2] = now.getDate()
+          return arr.join('-')
+        },
+        getWeekNumber(d) {
+          d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
+          d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7))
+          var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1))
+          var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7)
+          return [d.getUTCFullYear(), weekNo]
+        },
+      },
+    })
+  </script>
+</html>
