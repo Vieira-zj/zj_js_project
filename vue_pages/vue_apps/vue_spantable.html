@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+  <!-- desc: 1. col分组；2. col筛选 -->
+  <!-- backend: {go_project}/demo.hello/echoserver -->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -54,8 +56,6 @@
   <script src="../modules/element.js"></script>
   <script src="../modules/axios.min.js"></script>
   <script>
-    // desc: 1. col分组；2. col筛选
-    // backend: {go_project}/demo.hello/echoserver
     let app = new Vue({
       el: '#app',
       data() {
@@ -83,6 +83,7 @@
                 )
                 return
               }
+              // console.log(JSON.stringify(retData.data))
               vm.table.data = retData.data
               // 构建筛选数据
               let roles = new Set()
@@ -103,7 +104,7 @@
             })
         },
         rowSpanByRole({ row, column, rowIndex, columnIndex }) {
-          // index start from 0
+          // set which cols to be merged. note index start from 0
           if (columnIndex === 2 || columnIndex === 4) {
             return {
               rowspan: row.rowspan,
