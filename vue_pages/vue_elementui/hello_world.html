@@ -22,7 +22,8 @@
       <h1>Element Hello World</h1>
       <!-- hello world -->
       <div style="margin-bottom: 10px">
-        <el-button id="hello" @click="showDialog"> Button </el-button>
+        <!-- when button is in "loading", it's un-clickable -->
+        <el-button id="hello" @click="showDialog" :loading="isLoading"> Button </el-button>
         <el-dialog :visible.sync="visible" title="Hello world">
           <p>Try Element</p>
         </el-dialog>
@@ -88,6 +89,7 @@
       },
       methods: {
         showDialog() {
+          console.log('button clicked')
           this.visible = true
         },
         mockRequest(val) {
