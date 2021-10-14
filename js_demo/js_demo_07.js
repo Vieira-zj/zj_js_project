@@ -211,7 +211,7 @@ function jsDemo07 () {
 }
 
 
-// demo 08, object deep copy
+// demo 08, object deep copy: 1) Object.assign(); 2) JSON.stringify()/parse()
 function jsDemo08 () {
   (function () {
     let list = ['js', 'css', 'html']
@@ -226,10 +226,14 @@ function jsDemo08 () {
     }
     let copiedTest = { ...person, role: 'tester' }
     console.log('\nperson == copied:', person === copiedTest)
+    person.age = 22
+    console.log('src person:', JSON.stringify(person, null, '  '))
     console.log('copied object:', JSON.stringify(copiedTest, null, '  '))
 
     let copiedDev = Object.assign({ role: 'dev' }, person)
     console.log('\nperson == copied:', person === copiedDev)
+    person.age = 23
+    console.log('src person:', JSON.stringify(person, null, '  '))
     console.log('copied object:', JSON.stringify(copiedDev, null, '  '))
   })()
 }
@@ -584,6 +588,6 @@ function jsDemo1502 () {
 
 
 if (require.main === module) {
-  jsDemo1502()
+  jsDemo08()
   console.log(__filename, 'DONE.')
 }
