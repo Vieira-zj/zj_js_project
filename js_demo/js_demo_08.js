@@ -178,7 +178,20 @@ function jsDemo06 () {
 }
 
 
+// demo07, 解构赋值 + 变量重命名
+function jsDemo07 () {
+  let srcObj = {
+    name: 'foo',
+    age: '21',
+    skill: ['java', 'python'],
+  }
+
+  let { name: userName, skill: devSkill } = srcObj
+  console.log(`user name: ${userName}\ndevelop skill: ${devSkill}`)
+}
+
+
 if (require.main === module) {
-  jsDemo06()
+  jsDemo07()
   console.log(__filename, 'DONE.')
 }
