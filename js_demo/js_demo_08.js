@@ -152,28 +152,30 @@ function jsDemo05 () {
 
 // demo06, debounce 防抖函数
 function jsDemo06 () {
-  debounce = (func) => {
+  debounce = (func, interval) => {
     let timer = null
-    return (val) => {
+    return (...values) => {
       if (timer) {
         clearTimeout(timer)
       }
       timer = setTimeout(() => {
-        func(val)
-      }, 1000)
+        func(...values)
+      }, interval)
     }
   }
 
-  myFunc = function (val) {
-    console.log('value:', val)
+  myAddFunc = function (a, b) {
+    console.log(`${a} + ${b} = ${a + b}`)
   }
-  myWarpFunc = debounce(myFunc)
+  myWarpFunc = debounce((a, b) => {
+    myAddFunc(a, b)
+  }, 1000)
 
   for (let i = 0; i < 3; i++) {
     setTimeout(() => {
-      console.log('invoke myFunc')
-      myWarpFunc(i)
-    }, i * 500);
+      console.log('invoke myWarpFunc')
+      myWarpFunc(i, i + 1)
+    }, i * 500)
   }
 }
 
@@ -192,6 +194,6 @@ function jsDemo07 () {
 
 
 if (require.main === module) {
-  jsDemo07()
+  jsDemo06()
   console.log(__filename, 'DONE.')
 }
