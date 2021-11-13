@@ -15,30 +15,93 @@
         border-radius: 30px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       }
+      .div-bottom {
+        margin-bottom: 20px;
+      }
     </style>
   </head>
+
   <body>
     <div id="app">
       <h1>Element Hello World</h1>
-      <!-- hello world -->
-      <div style="margin-bottom: 10px">
-        <!-- when button is in "loading", it's un-clickable -->
-        <el-button id="hello" @click="showDialog" :loading="isLoading"> Button </el-button>
-        <el-dialog :visible.sync="visible" title="Hello world">
+      <!-- 输入框 空或者无有效值时，默认选中第一个值 -->
+      <!-- 场景：git branch/tag 输入框 -->
+      <div class="div-bottom">
+        <h5>单选输入框（默认值）</h5>
+        <el-autocomplete
+          v-model="autoComplete.state"
+          v-loading="autoComplete.loading"
+          :fetch-suggestions="onQuerySearch"
+          :placeholder="autoComplete.placeHolder"
+          clearable
+          highlight-first-item
+          @focus="onAutoCompFocus"
+          @blur="onAutoCompBlur"
+          @select="onAutoCompSelect"
+          @clear="onAutoCompClear"
+          style="width: 300px"
+        ></el-autocomplete>
+        <el-button
+          type="primary"
+          size="mini"
+          icon="el-icon-refresh-left"
+          @click="onRefreshClick"
+          :loading="autoComplete.loading"
+          circle
+          style="margin-left: 5px"
+        ></el-button>
+      </div>
+      <hr />
+
+      <div class="div-bottom">
+        <h5>多选输入框（多选、过滤、清除）</h5>
+        <el-select
+          v-model="multiSelect.values"
+          multiple
+          filterable
+          clearable
+          default-first-option
+          placeholder="请选择文章标签"
+          @change="onMultiSelectChange"
+          style="width: 300px"
+        >
+          <el-option
+            v-for="item in multiSelect.options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </div>
+      <hr />
+
+      <div class="div-bottom">
+        <h5>Button Loading</h5>
+        <!-- button: when button is in "loading", it's un-clickable -->
+        <el-button
+          id="hello"
+          @click="onClickShowDialog"
+          :loading="dataRefresh.loading"
+        >
+          Show Dialog
+        </el-button>
+        <!-- visible.sync: dialog visible 状态同步更新到数据 dataRefresh.visible -->
+        <el-dialog :visible.sync="dataRefresh.visible" title="Hello world">
           <p>Try Element</p>
         </el-dialog>
       </div>
       <hr />
 
-      <!-- data refresh => 新的结果被旧的结果覆盖 -->
-      <div>
+      <div class="div-bottom">
+        <h5>数据刷新</h5>
         <el-select
-          v-model="selectedValue"
+          v-model="dataRefresh.selectedOption"
           placeholder="请选择"
           style="margin-bottom: 10px"
         >
           <el-option
-            v-for="item in options"
+            v-for="item in dataRefresh.options"
             :key="item.value"
             :label="item.label"
             :value="item.value"
@@ -46,11 +109,19 @@
           </el-option>
         </el-select>
         <div>
-          <el-tag v-loading="isLoading">{{ showValue }}</el-tag>
+          <!-- 数据刷新 注意：新的结果被旧的结果覆盖 -->
+          <el-tag
+            v-loading="dataRefresh.loading"
+            element-loading-spinner="el-icon-loading"
+          >
+            {{ dataRefresh.showValue }}
+          </el-tag>
         </div>
       </div>
+      <hr />
     </div>
   </body>
+
   <!-- import Vue before Element -->
   <script src="../modules/vue.js"></script>
   <!-- import JavaScript -->
@@ -60,37 +131,144 @@
       el: '#app',
       data: function () {
         return {
-          visible: false,
-          options: [
-            { value: 'foo', label: 'Foo' },
-            { value: 'itslongname', label: 'Long' },
-          ],
-          selectedValue: '',
-          isLoading: false,
-          showValue: 'none',
+          autoComplete: {
+            restaurants: [],
+            state: '',
+            placeHolder: '',
+            loading: false,
+          },
+          multiSelect: {
+            options: [
+              { value: 'HTML', label: 'HTML' },
+              { value: 'CSS', label: 'CSS' },
+              { value: 'JavaScript', label: 'JavaScript' },
+              { value: 'Java', label: 'Java' },
+              { value: 'Python', label: 'Python' },
+            ],
+            values: [],
+          },
+          dataRefresh: {
+            options: [
+              { value: 'foo', label: 'Foo' },
+              { value: 'itslongname', label: 'Long' },
+            ],
+            selectedOption: '',
+            visible: false,
+            loading: false,
+            showValue: 'none',
+          },
         }
       },
       watch: {
-        selectedValue(newVal, oldVal) {
-          if (!newVal) {
-            return
-          }
-          this.isLoading = true
-          this.mockRequest(newVal)
-            .then((resp) => {
-              this.showValue = resp
-            })
-            .finally(() => {
-              setTimeout(() => {
-                this.isLoading = false
-              }, 500)
-            })
+        'dataRefresh.selectedOption': {
+          handler(newVal, oldVal) {
+            if (!newVal) {
+              return
+            }
+            this.dataRefresh.loading = true
+            this.mockRequest(newVal)
+              .then((resp) => {
+                this.dataRefresh.showValue = resp
+              })
+              .finally(() => {
+                setTimeout(() => {
+                  this.dataRefresh.loading = false
+                }, 500)
+              })
+          },
         },
+        'dataRefresh.visible': {
+          handler(newVal, oldVal) {
+            console.log('dialog visible change to:', newVal)
+          },
+        },
+        deep: true,
+      },
+      mounted() {
+        this.autoComplete.restaurants = this.mockLoadAll()
+        this.autoComplete.state = this.autoComplete.restaurants[0].value
       },
       methods: {
-        showDialog() {
-          console.log('button clicked')
-          this.visible = true
+        getLatestRestaurant() {
+          return this.autoComplete.restaurants
+            ? this.autoComplete.restaurants[0].value
+            : ''
+        },
+        onAutoCompFocus() {
+          let latest_value = this.getLatestRestaurant()
+          if (this.autoComplete.state === latest_value) {
+            this.autoComplete.state = ''
+            this.autoComplete.placeHolder = latest_value
+          }
+        },
+        onAutoCompBlur() {
+          for (let item of this.autoComplete.restaurants) {
+            if (this.autoComplete.state === item.value) {
+              return
+            }
+          }
+          this.autoComplete.state = this.getLatestRestaurant()
+        },
+        onAutoCompClear() {
+          this.autoComplete.placeHolder = this.getLatestRestaurant()
+        },
+        onAutoCompSelect(item) {
+          console.log('auto complete selectd:', item.value)
+        },
+        onQuerySearch(queryString, cb) {
+          if (queryString === this.getLatestRestaurant()) {
+            queryString = ''
+          }
+          let restaurants = this.autoComplete.restaurants
+          let results = queryString
+            ? restaurants.filter((state) => {
+                return (
+                  state.value
+                    .toLowerCase()
+                    .indexOf(queryString.toLowerCase()) === 0
+                )
+              })
+            : restaurants
+          cb(results)
+        },
+        onRefreshClick() {
+          this.autoComplete.loading = true
+          setTimeout(() => {
+            this.autoComplete.restaurants = this.mockLoadAll()
+            this.autoComplete.state = this.getLatestRestaurant()
+            this.autoComplete.placeHolder = ''
+            this.autoComplete.loading = false
+          }, 3000 * Math.random())
+        },
+        onMultiSelectChange(values) {
+          if (values) {
+            console.log('change to options:', JSON.stringify(values))
+          }
+        },
+        onClickShowDialog() {
+          console.log('show dialog')
+          this.dataRefresh.visible = true
+        },
+        mockLoadAll() {
+          return [
+            {
+              value: 'Hot honey 首尔炸鸡（仙霞路）',
+              address: '上海市长宁区淞虹路661号',
+            },
+            {
+              value: 'Monica摩托主题咖啡店',
+              address: '嘉定区江桥镇曹安公路2409号1F，2383弄62号1F',
+            },
+            {
+              value: 'NONO JUICE  鲜榨果汁',
+              address: '上海市长宁区天山西路119号',
+            },
+            { value: 'CoCo都可(北新泾店）', address: '上海市长宁区仙霞西路' },
+            {
+              value: 'Merci Paul cafe',
+              address: '上海市普陀区光复西路丹巴路28弄6号楼819',
+            },
+          ]
         },
         mockRequest(val) {
           return new Promise((resolve) => {
