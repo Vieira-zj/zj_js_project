@@ -193,7 +193,26 @@ function jsDemo07 () {
 }
 
 
+// demo08, sync sleep
+function jsDemo08 () {
+  let mySleep = (sleep) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, sleep)
+    })
+  }
+
+  let run = async function () {
+    for (let i = 0; i < 50; i++) {
+      await mySleep(30)
+      console.log(i)
+    }
+  }
+  run()
+}
+
 if (require.main === module) {
-  jsDemo06()
+  jsDemo08()
   console.log(__filename, 'DONE.')
 }
