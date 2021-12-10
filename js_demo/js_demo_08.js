@@ -212,7 +212,26 @@ function jsDemo08 () {
   run()
 }
 
+
+// demo09, version list sort
+function jsDemo09 () {
+  let vers = ['2021.10.v2', '2021.10.v3', '2021.10.v1', '2021.11.v2', '2021.11.v1']
+  vers.sort(function (a, b) {
+    let aitems = a.split('.')
+    let bitems = b.split('.')
+    if (aitems[0] !== bitems[0]) {
+      return aitems[0] - bitems[0]
+    }
+    if (aitems[1] !== bitems[1]) {
+      return aitems[1] - bitems[1]
+    }
+    return aitems[2].charAt(1) - bitems[2].charAt(1)
+  })
+  console.log(vers)
+}
+
+
 if (require.main === module) {
-  jsDemo08()
+  jsDemo09()
   console.log(__filename, 'DONE.')
 }
