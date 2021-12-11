@@ -194,15 +194,15 @@ function jsDemo07 () {
 
 
 // demo08, sync sleep
-function jsDemo08 () {
-  let mySleep = (sleep) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve()
-      }, sleep)
-    })
-  }
+function mySleep (sleep) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, sleep)
+  })
+}
 
+function jsDemo08 () {
   let run = async function () {
     for (let i = 0; i < 50; i++) {
       await mySleep(30)
@@ -213,8 +213,20 @@ function jsDemo08 () {
 }
 
 
-// demo09, version list sort
+// demo09, async and non-async func
 function jsDemo09 () {
+  let run = async function () {
+    console.log('#1 running')
+    await mySleep(2000)
+    console.log('#3 finish')
+  }
+  run()
+  console.log('#2 done')
+}
+
+
+// demo10, version list sort
+function jsDemo10 () {
   let vers = ['2021.10.v2', '2021.10.v3', '2021.10.v1', '2021.11.v2', '2021.11.v1']
   vers.sort(function (a, b) {
     let aitems = a.split('.')
