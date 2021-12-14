@@ -243,7 +243,46 @@ function jsDemo10 () {
 }
 
 
+// demo11, datetime and timestamp
+function jsDemo11 () {
+  // datetime to timestamp
+  let dt = '2021-10-06T15:00:06.539207Z'
+  const items = dt.split('T')
+  let dateItem = items[0]
+  let timeItem = items[1].split('.')
+  let dateItems = dateItem.split('-')
+  let timeItems = timeItem[0].split(':')
+
+  let date = new Date(dateItems[0], parseInt(dateItems[1], 10) - 1, dateItems[2], parseInt(timeItems[0]) + 8, timeItems[1], timeItems[2])
+  console.log(date)
+  console.log(date.getTime())
+
+  // timestamp to datetime
+  let ts = 1633532406000
+  date = new Date(ts)
+  console.log(date.getHours())
+  console.log(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`)
+}
+
+
+// demo12, get dates between start and end date
+function jsDemo12 () {
+  let dateEqual = function (start, end) {
+    return start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth() && start.getDate() === end.getDate()
+  }
+
+  let start = [2021, 12, 16]
+  let startDt = new Date(start[0], start[1] - 1, start[2])
+  let end = [2022, 1, 7]
+  let endDt = new Date(end[0], end[1] - 1, end[2])
+  while (!dateEqual(startDt, endDt)) {
+    startDt.setDate(startDt.getDate() + 1)
+    console.log(startDt.getFullYear(), startDt.getMonth() + 1, startDt.getDate())
+  }
+}
+
+
 if (require.main === module) {
-  jsDemo09()
+  jsDemo12()
   console.log(__filename, 'DONE.')
 }
