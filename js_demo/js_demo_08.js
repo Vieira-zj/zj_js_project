@@ -277,7 +277,7 @@ function jsDemo12 () {
   let endDt = new Date(end[0], end[1] - 1, end[2])
   while (!dateEqual(startDt, endDt)) {
     startDt.setDate(startDt.getDate() + 1)
-    console.log(startDt.getFullYear(), startDt.getMonth() + 1, startDt.getDate())
+    console.log(`${startDt.getFullYear()}-${startDt.getMonth() + 1}-${startDt.getDate()}`)
   }
 }
 

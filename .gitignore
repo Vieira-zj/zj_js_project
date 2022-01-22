@@ -8,3 +8,5 @@ out/
 
 # dependency modules
 # node_modules/
+
+ts_demo/*.js
