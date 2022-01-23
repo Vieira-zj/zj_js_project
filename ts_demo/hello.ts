@@ -1,14 +1,16 @@
-/*
-https://www.tutorialspoint.com/typescript/index.htm
-*/
+/**
+ * Refer:
+ * https://www.tutorialspoint.com/typescript/index.htm
+ */
 
 var message: string = 'Hello World'
 console.log(message)
 
-/*
-基本类型
-string, number, boolean, undefined, null, any, never, void
-*/
+/**
+ * 基本类型
+ *
+ * string, number, boolean, undefined, null, any, never, void
+ */
 
 // void 表示类型为 undefined 或 null
 // 例子：void 用于表示函数没有返回值，只是执行某些操作
@@ -29,10 +31,11 @@ let dyn: any = 'dyn_var'
 dyn = true
 console.log(dyn)
 
-/*
-引用类型
-除了 JS 中的数组类型、对象类型，还扩展了枚举类型，元祖类型。
-*/
+/**
+ * 引用类型
+ *
+ * 除了 JS 中的数组类型、对象类型，还扩展了枚举类型，元祖类型。
+ */
 
 // 数组泛型
 let arr: Array<string> = ['one', 'two', 'three']
@@ -74,10 +77,11 @@ console.log(animal)
 let animalName = Animal[4]
 console.log(animalName)
 
-/*
-类型断言
-断言发生在两种类型存在联系的情况，它并不是将一种类型转换成另一种类型。
-*/
+/**
+ * 类型断言
+ *
+ * 断言发生在两种类型存在联系的情况，它并不是将一种类型转换成另一种类型。
+ */
 
 let str: any = 'test'
 let strLen = (str as string).length
@@ -88,9 +92,10 @@ let foo: string | number = 'typescript'
 let answer: string = foo as string
 console.log(answer)
 
-/*
-接口
-*/
+/**
+ * 接口
+ *
+ */
 
 // 匿名接口
 function getName(o: { name: string }): string {
@@ -205,16 +210,21 @@ class Cube extends Rect implements iRect {
 let cube: Cube = new Cube(2, 3, 4)
 console.log('results:', cube.getCube())
 
-/*
-类
-修饰符 protected 和 private 类似，区别在于使用 protected 修饰的成员，在派生类可以访问。
-修饰符 readonly 将属性设置为只读。
-*/
+/**
+ * 类
+ *
+ * 修饰符 protected 和 private 类似，区别在于使用 protected 修饰的成员，在派生类可以访问。
+ * 修饰符 readonly 将属性设置为只读。
+ */
 
 // 类的成员修饰符默认是 public, 也可以显式声明
 class A {
   public a: string
   private b: string
+  constructor(a: string, b: string) {
+    this.a = a
+    this.b = b
+  }
   getB(): string {
     return this.b
   }
@@ -278,9 +288,10 @@ console.log(name1.fullName)
 name1.fullName = 'bar foo'
 console.log(name1.fullName)
 
-/*
-函数
-*/
+/**
+ * 函数
+ *
+ */
 
 // 类型推断
 // 省略左侧类型描述
@@ -336,9 +347,10 @@ function foo4(a: any): any {
 console.log(foo4(1))
 console.log(foo4(true))
 
-/*
-泛型 类型变量
-*/
+/**
+ * 泛型 类型变量
+ *
+ */
 
 // 泛型函数
 function foo5<T>(a: T): T {
@@ -362,10 +374,10 @@ class Rect4<T> {
     this.x = x
     this.y = y
   }
-  getRect: () => T
+  getRect!: () => T
 }
 
-let rect4 = new Rect4(2, 3)
+let rect4 = new Rect4<number>(2, 3)
 rect4.getRect = function () {
   return this.x * this.y
 }
