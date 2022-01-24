@@ -7,7 +7,7 @@ Refer:
 
 ## Build Project
 
-Build a vue3 project with below options enabled:
+1. Build a vue3 project with below options enabled.
 
 - typescript
 - router
@@ -34,6 +34,8 @@ Vue CLI v4.5.15
 $ cd vue3_demo_basic
 $ npm run serve
 ```
+
+2. Edit `tsconfig.json` and `vue.config.js`.
 
 ## Cli
 

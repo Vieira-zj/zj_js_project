@@ -1,6 +1,10 @@
 #!/bin/bash
 set -eu
 
+function init() {
+  tsc --init
+}
+
 function get_file_name() {
   fullname=${1}
   end=${#fullname}-3
@@ -8,16 +12,20 @@ function get_file_name() {
   echo ${name}
 }
 
-function run_single_ts() {
+function run_ts_file() {
   name=$(get_file_name $1)
   tsc ${name}.ts -t esnext --experimentalDecorators && node ${name}.js
 }
 
 function run_ts() {
   name=$(get_file_name $1)
-  tsc
-  node ${name}.js
+  tsc && node ${name}.js
 }
 
-# run_single_ts $1
+# Compile and package multiple ts files to one js file for namespaces.
+function compile_package() {
+  # Note: must compile in order: ts_demo_01.ts -> hello.ts
+  tsc -t esnext --experimentalDecorators --module amd --outDir ./dist --outFile ./dist/page.js --rootDir . ts_demo_01.ts hello.ts
+}
+
 run_ts $1

@@ -113,6 +113,7 @@ function getStudentName(s: Student): string {
 }
 
 let s: Student = { name: 'Foo' }
+console.log(JSON.stringify(s, null, 2))
 console.log(getStudentName(s))
 
 // 只读属性
@@ -382,3 +383,20 @@ rect4.getRect = function () {
   return this.x * this.y
 }
 console.log(rect4.getRect())
+
+/**
+ * namespace 命名空间
+ *
+ */
+
+let skip = true
+if (!skip) {
+  class Page {
+    constructor() {
+      console.log('this is page')
+      new Content.Header()
+      new Content.Text()
+    }
+  }
+  new Page()
+}
