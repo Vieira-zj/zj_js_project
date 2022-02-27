@@ -2,16 +2,24 @@
  * Created by zhengjin on 2021/10/24.
  */
 
-
-/**
- * Browser Utils
- */
+// 
+// Browser Utils
+// 
 
 // 回到顶部
 const goToTop = () => window.scrollTo(0, 0)
 
+// 滚动到顶部
+const scrollToTop = (element) =>
+  element.scrollIntoView({ behavior: "smooth", block: "start" })
+
+// 滚动到底部
+const scrollToBottom = (element) =>
+  element.scrollIntoView({ behavior: "smooth", block: "end" })
+
 // 获取浏览器Cookie的值
-const getCookie = (name) => `; ${document.cookie}`.split(`; ${name}=`).pop().split(';').shift()
+const getCookie = (name) =>
+  `; ${document.cookie}`.split(`; ${name}=`).pop().split(';').shift()
 
 // 复制到剪贴板
 const copyToClipboard = (text) => navigator.clipboard.writeText(text)
@@ -34,10 +42,9 @@ const getParameters = (URL) => {
 
 // Object.fromEntries(new URLSearchParams(window.location.search))
 
-
-/**
- * Common Utils
- */
+// 
+// Common Utils
+// 
 
 // 求数字的平均值
 const average = (...args) => args.reduce((a, b) => a + b) / args.length
@@ -58,10 +65,12 @@ const arrIsNotEmpty = (arr) => Array.isArray(arr) && arr.length > 0
 const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random())
 
 // 颜色RGB转十六进制
-const rgbToHex = (r, g, b) => '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+const rgbToHex = (r, g, b) =>
+  '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 
 // 生成随机十六进制颜色
-const randomHex = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0')}`
+const randomHex = () =>
+  `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0')}`
 
 // 对象复制
 const deepCopy = (obj) => {
@@ -82,10 +91,9 @@ const debounce = (func, interval) => {
   }
 }
 
-
-/**
- * Datetime Utils
- */
+// 
+// Datetime Utils
+// 
 
 // 检查日期是否合法
 const isDateValid = (val) => !Number.isNaN(new Date(val).valueOf())
