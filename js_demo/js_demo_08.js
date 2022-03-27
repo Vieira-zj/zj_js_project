@@ -282,7 +282,82 @@ function jsDemo12 () {
 }
 
 
+// demo13, undefined (初始化值), null (空)
+function jsDemo13 () {
+  console.log('undefined cases:')
+  let myVar
+  console.log(myVar)
+
+  const obj = {}
+  console.log(obj.unknownProp)
+
+  function myFunc () {
+    return
+  }
+  console.log(myFunc())
+
+  function myPrint (x) {
+    console.log(x)
+  }
+  myPrint()
+
+  // 参数默认值
+  console.log()
+  function myPrint2 (arg = 'abc') {
+    console.log(arg)
+  }
+  myPrint2()
+  myPrint2(undefined)
+  myPrint2(null)
+  myPrint2('hello')
+
+  // 解构的默认值
+  console.log()
+  const [a = 'a', b = 'b'] = ['c']
+  console.log(a, b)
+  const [x = 'x', y = 'y'] = [undefined, 'z']
+  console.log(x, y)
+
+  const { prop: c = 'c' } = {}
+  console.log(c)
+  const { prop: d = 'd' } = { prop: undefined }
+  console.log(d)
+
+  // nullish 合并算子 ??
+  console.log()
+  console.log(undefined ?? 'default')
+  console.log(null ?? 'default')
+  console.log(0 ?? 'default')
+  console.log(123 ?? 'default')
+  console.log(' ' ?? 'default')
+  console.log('abc' ?? 'default')
+
+  console.log()
+  function setName (obj) {
+    obj.name = obj.name ?? '(Unnamed)'
+    return obj
+  }
+  console.log(setName({ name: undefined }))
+  console.log(setName({ name: null }))
+  console.log(setName({ name: 'bar' }))
+}
+
+
+// demo14, undefined (初始化值), null (空)
+function jsDemo14 () {
+  console.log('null cases:')
+  // 原型链
+  console.log(Object.getPrototypeOf(Object.prototype))
+
+  // JSON数据格式只支持null, 不支持undefined
+  console.log(JSON.stringify({ 'a': undefined, 'b': null }))
+
+  // 正则表达式，匹配失败
+  console.log(/a/.exec('x'))
+}
+
+
 if (require.main === module) {
-  jsDemo12()
+  jsDemo14()
   console.log(__filename, 'DONE.')
 }

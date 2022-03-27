@@ -448,7 +448,7 @@ if (isDemo12Run) {
 var isDemo15Run = false;
 if (isDemo15Run) {
     (function () {
-        // #1, object shorthand
+        // #1. object shorthand
         let title = 'test:';
         const tmpObj = {
             title, // title: title
@@ -459,7 +459,7 @@ if (isDemo15Run) {
         };
         tmpObj.myPrint();
 
-        // #2, de-construct
+        // #2. de-construct (解构)
         let tmpObj1 = {
             top: 0,
             bottom: 1080,
@@ -469,7 +469,7 @@ if (isDemo15Run) {
         const { right, bottom } = tmpObj1;
         console.log(`\nscreen size: ${right} * ${bottom}`);
 
-        // #3, array copy
+        // #3. array copy
         let tmpArr = ['java', 'python', 'javascript', 'c++'];
         let copyArr = [...tmpArr];
         console.log('\narray copy: ' + copyArr.join(', '));
