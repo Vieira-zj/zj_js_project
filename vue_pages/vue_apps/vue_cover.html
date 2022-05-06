@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>coverage portal demo</title>
+    <style>
+      .el-table .tb-header {
+        color: #534d4d;
+        background: #f2f3f1;
+      }
+    </style>
+    <link rel="stylesheet" href="../css/element.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h3 style="text-align: center">Code Coverage Portal Demo</h3>
+      <!-- coverage table -->
+      <div style="margin-top: 30px">
+        <el-table
+          border
+          :header-cell-class-name="getHeaderCellClassName"
+          :data="tableData"
+          style="width: 85%; margin: auto"
+        >
+          <el-table-column
+            prop="index"
+            label="Index"
+            width="60"
+            align="center"
+          ></el-table-column>
+
+          <el-table-column
+            prop="srv_name"
+            label="Service Name"
+            width="400"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-tag>{{scope.row.srv_name}}</el-tag>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            prop="addrs"
+            label="IP Address"
+            width="350"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-tag
+                v-for="(addr, index) in scope.row.addrs"
+                v-bind:key="index"
+                type="info"
+                style="margin-right: 5px"
+                >{{addr}}</el-tag
+              >
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            prop="status"
+            label="Status"
+            width="100"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-tag type="success">{{scope.row.status}}</el-tag>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            prop="cover"
+            label="Code Coverage"
+            width="350"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-progress
+                :text-inside="true"
+                :stroke-width="26"
+                :percentage="scope.row.cover"
+                :status="getProgressBarType(scope.row.cover)"
+              ></el-progress>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            fixed="right"
+            label="Operations"
+            width="350"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-tooltip content="Refresh" placement="top">
+                <el-button
+                  plain
+                  type="primary"
+                  size="small"
+                  icon="el-icon-refresh"
+                  @click="onRefresh"
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip content="Force refresh" placement="top">
+                <el-button
+                  plain
+                  type="danger"
+                  size="small"
+                  icon="el-icon-refresh"
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip content="Clear coverage" placement="top">
+                <el-button
+                  plain
+                  type="warning"
+                  size="small"
+                  icon="el-icon-remove-outline"
+                ></el-button>
+              </el-tooltip>
+              <el-dropdown style="margin-left: 10px">
+                <el-button plain type="primary" size="small">
+                  Report<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-button>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item @click.native="onFuncReport"
+                    >Func Report</el-dropdown-item
+                  >
+                  <el-dropdown-item>Html Report</el-dropdown-item>
+                  <el-dropdown-item>History</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+      <!-- todo: func cover report dialog -->
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script src="../modules/element.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          tableData: [
+            {
+              index: 1,
+              srv_name: 'staging_th_apa_goc_echoserver_v1_master_518e0a570c',
+              addrs: ['http://127.0.0.1:49970', 'http://127.0.0.1:51007'],
+              status: 'online',
+              cover: '41.21',
+            },
+            {
+              index: 2,
+              srv_name: 'staging_th_apa_goc_echoserver_v2_master_518e0a570c',
+              addrs: ['http://127.0.0.1:51025'],
+              status: 'online',
+              cover: '23.08',
+            },
+            {
+              index: 3,
+              srv_name: 'staging_th_apa_goc_echoserver_v3_master_518e0a570c',
+              addrs: ['http://127.0.0.1:51029'],
+              status: 'online',
+              cover: '68.17',
+            },
+          ],
+        }
+      },
+      mounted() {
+        console.log('mock onMounted')
+      },
+      methods: {
+        getHeaderCellClassName({ row, column, rowIndex, columnIndex }) {
+          return 'tb-header'
+        },
+        getProgressBarType(percentage) {
+          if (parseFloat(percentage) < 30.0) {
+            return 'exception'
+          } else if (parseFloat(percentage) < 60.0) {
+            return 'warning'
+          } else {
+            return 'success'
+          }
+        },
+        onRefresh() {
+          console.log('mock onRefresh')
+        },
+        onFuncReport() {
+          console.log('mock onFuncReport')
+        },
+      },
+    })
+  </script>
+</html>
