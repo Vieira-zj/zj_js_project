@@ -10,7 +10,7 @@
         background: #f2f3f1;
       }
     </style>
-    <link rel="stylesheet" href="../css/element.css" />
+    <link rel="stylesheet" href="../../css/element.css" />
   </head>
   <body>
     <div id="app">
@@ -65,7 +65,9 @@
             align="center"
           >
             <template slot-scope="scope">
-              <el-tag type="success">{{scope.row.status}}</el-tag>
+              <el-tag :type="getSrvStatusTagType(scope.row.status)"
+                >{{scope.row.status}}</el-tag
+              >
             </template>
           </el-table-column>
 
@@ -125,8 +127,12 @@
                   <el-dropdown-item @click.native="onFuncReport"
                     >Func Report</el-dropdown-item
                   >
-                  <el-dropdown-item>Html Report</el-dropdown-item>
-                  <el-dropdown-item>History</el-dropdown-item>
+                  <el-dropdown-item @click.native="onHtmlReport"
+                    >Html Report</el-dropdown-item
+                  >
+                  <el-dropdown-item @click.native="onHistoryReport"
+                    >History</el-dropdown-item
+                  >
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
@@ -134,16 +140,74 @@
         </el-table>
       </div>
 
-      <!-- todo: func cover report dialog -->
+      <!-- func cover report dialog -->
+      <el-dialog
+        title="Function Cover Report"
+        :center="true"
+        :visible.sync="isFuncReportDialogVisible"
+      >
+        <el-table :data="funcReportTableData" style="width: 85%; margin: auto">
+          <el-table-column
+            property="position"
+            label="Position"
+            width="400"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-tag type="info">{{scope.row.position}}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column
+            property="func"
+            label="Function"
+            width="200"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-tag type="info">{{scope.row.func}}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column
+            property="cover"
+            label="Coverage"
+            width="100"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-tag :type="getCoverTagType(scope.row.cover)"
+                >{{scope.row.cover}}</el-tag
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-dialog>
+
+      <!-- html cover report dialog -->
+      <el-dialog
+        title="Html Cover Report"
+        width="80%"
+        :center="true"
+        :visible.sync="isHtmlReportDialogVisible"
+      >
+        <iframe
+          name="Html Cover Report"
+          src="coverage_results.html"
+          width="1375px"
+          height="700px"
+          frameborder="no"
+        ></iframe>
+      </el-dialog>
     </div>
   </body>
-  <script src="../modules/vue.js"></script>
-  <script src="../modules/element.js"></script>
+  <script src="../../modules/vue.js"></script>
+  <script src="../../modules/element.js"></script>
   <script>
     let app = new Vue({
       el: '#app',
       data() {
         return {
+          isFuncReportDialogVisible: false,
+          isHtmlReportDialogVisible: false,
           tableData: [
             {
               index: 1,
@@ -163,8 +227,30 @@
               index: 3,
               srv_name: 'staging_th_apa_goc_echoserver_v3_master_518e0a570c',
               addrs: ['http://127.0.0.1:51029'],
-              status: 'online',
+              status: 'offline',
               cover: '68.17',
+            },
+          ],
+          funcReportTableData: [
+            {
+              position: 'demo.hello/echoserver/handlers/cover.go:11',
+              func: 'CoverHandler',
+              cover: '100.0%',
+            },
+            {
+              position: 'demo.hello/echoserver/handlers/cover.go:17',
+              func: 'getCondition',
+              cover: '0.0%',
+            },
+            {
+              position: 'demo.hello/echoserver/handlers/ping.go:13',
+              func: 'IndexHandler',
+              cover: '100.0%',
+            },
+            {
+              position: 'demo.hello/echoserver/handlers/users.go:17',
+              func: 'getUsers',
+              cover: '33.3%',
             },
           ],
         }
@@ -185,11 +271,31 @@
             return 'success'
           }
         },
+        getSrvStatusTagType(status) {
+          return status.toLowerCase() == 'online' ? 'success' : 'danger'
+        },
+        getCoverTagType(percentage) {
+          let percent = parseFloat(percentage.replace('%', ''))
+          if (percent < 30.0) {
+            return 'danger'
+          } else if (percent < 60.0) {
+            return 'warning'
+          } else {
+            return 'success'
+          }
+        },
+        // event handler
         onRefresh() {
           console.log('mock onRefresh')
         },
         onFuncReport() {
-          console.log('mock onFuncReport')
+          this.isFuncReportDialogVisible = true
+        },
+        onHtmlReport() {
+          this.isHtmlReportDialogVisible = true
+        },
+        onHistoryReport() {
+          console.log('mock onHistoryReport')
         },
       },
     })
