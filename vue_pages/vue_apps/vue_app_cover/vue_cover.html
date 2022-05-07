@@ -7,20 +7,62 @@
     <style>
       .el-table .tb-header {
         color: #534d4d;
-        background: #f2f3f1;
+        background: #dcdfe6;
       }
     </style>
     <link rel="stylesheet" href="../../css/element.css" />
   </head>
   <body>
     <div id="app">
-      <h3 style="text-align: center">Code Coverage Portal Demo</h3>
+      <h3 style="text-align: center; color: #606266">
+        Code Coverage Portal Demo
+      </h3>
+      <el-divider></el-divider>
+
+      <!-- search form -->
+      <div
+        style="
+          width: 85%;
+          margin: auto;
+          border: 1px solid #dcdfe6;
+          border-radius: 4px;
+        "
+      >
+        <el-form ref="form" :model="form" style="margin-top: 20px">
+          <el-row>
+            <el-col :span="5">
+              <el-form-item label="Service Name" label-width="130px">
+                <el-input v-model="form.appName"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label="Env" label-width="50px">
+                <el-input v-model="form.env"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-form-item label="Region" label-width="80px">
+                <el-input v-model="form.region"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="3">
+              <el-button
+                type="primary"
+                style="margin-left: 20px"
+                @click="onSearch"
+                >Search</el-button
+              >
+            </el-col>
+          </el-row>
+        </el-form>
+      </div>
+
       <!-- coverage table -->
-      <div style="margin-top: 30px">
+      <div style="margin-top: 20px">
         <el-table
           border
           :header-cell-class-name="getHeaderCellClassName"
-          :data="tableData"
+          :data="getSrvMetaData()"
           style="width: 85%; margin: auto"
         >
           <el-table-column
@@ -30,40 +72,46 @@
             align="center"
           ></el-table-column>
 
-          <el-table-column
-            prop="srv_name"
-            label="Service Name"
-            width="400"
-            align="center"
-          >
+          <el-table-column label="Service Name" width="200" align="center">
             <template slot-scope="scope">
-              <el-tag>{{scope.row.srv_name}}</el-tag>
+              <el-tag>{{scope.row.appName}}</el-tag>
             </template>
           </el-table-column>
 
-          <el-table-column
-            prop="addrs"
-            label="IP Address"
-            width="350"
-            align="center"
-          >
+          <el-table-column label="Env" width="100" align="center">
             <template slot-scope="scope">
-              <el-tag
-                v-for="(addr, index) in scope.row.addrs"
-                v-bind:key="index"
-                type="info"
-                style="margin-right: 5px"
-                >{{addr}}</el-tag
+              <el-tag type="info">{{scope.row.env}}</el-tag>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="Region" width="80" align="center">
+            <template slot-scope="scope">
+              <el-tag type="info">{{scope.row.region}}</el-tag>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="Branch/Commit" width="200" align="center">
+            <template slot-scope="scope">
+              <el-tag type="info"
+                >{{scope.row.branch}}/{{scope.row.commit}}</el-tag
               >
             </template>
           </el-table-column>
 
-          <el-table-column
-            prop="status"
-            label="Status"
-            width="100"
-            align="center"
-          >
+          <el-table-column label="IP Address" width="170" align="center">
+            <template slot-scope="scope">
+              <div
+                v-for="(addr, index) in scope.row.addrs"
+                v-bind:key="index"
+                type="info"
+                style="margin-top: 5px"
+              >
+                <el-tag>{{addr}}</el-tag><br />
+              </div>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="Status" width="100" align="center">
             <template slot-scope="scope">
               <el-tag :type="getSrvStatusTagType(scope.row.status)"
                 >{{scope.row.status}}</el-tag
@@ -71,12 +119,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column
-            prop="cover"
-            label="Code Coverage"
-            width="350"
-            align="center"
-          >
+          <el-table-column label="Code Coverage" width="350" align="center">
             <template slot-scope="scope">
               <el-progress
                 :text-inside="true"
@@ -146,7 +189,10 @@
         :center="true"
         :visible.sync="isFuncReportDialogVisible"
       >
-        <el-table :data="funcReportTableData" style="width: 85%; margin: auto">
+        <el-table
+          :data="funcReportTableData"
+          style="width: 85%; height: 700px; margin: auto"
+        >
           <el-table-column
             property="position"
             label="Position"
@@ -208,6 +254,11 @@
         return {
           isFuncReportDialogVisible: false,
           isHtmlReportDialogVisible: false,
+          form: {
+            appName: '',
+            env: '',
+            region: '',
+          },
           tableData: [
             {
               index: 1,
@@ -259,6 +310,29 @@
         console.log('mock onMounted')
       },
       methods: {
+        getSrvMetaData() {
+          let retObj = []
+          for (let item of this.tableData) {
+            let srvMeta = this.formatSrvName(item['srv_name'])
+            retObj.push({ ...item, ...srvMeta })
+          }
+          return retObj
+        },
+        formatSrvName(srvName) {
+          let srvItems = srvName.split('_')
+          let retObj = {
+            env: srvItems[0],
+            region: srvItems[1],
+            branch: srvItems[srvItems.length - 2],
+            commit: srvItems[srvItems.length - 1],
+          }
+          let appItems = []
+          for (let i = 2; i < srvItems.length - 2; i++) {
+            appItems.push(srvItems[i])
+          }
+          retObj.appName = appItems.join('_')
+          return retObj
+        },
         getHeaderCellClassName({ row, column, rowIndex, columnIndex }) {
           return 'tb-header'
         },
@@ -285,6 +359,9 @@
           }
         },
         // event handler
+        onSearch() {
+          console.log('mock onSearch')
+        },
         onRefresh() {
           console.log('mock onRefresh')
         },
