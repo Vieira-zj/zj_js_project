@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>coverage portal demo</title>
+    <title>cover portal demo</title>
     <style>
       .el-table .tb-header {
         color: #534d4d;
@@ -58,12 +58,17 @@
       </div>
 
       <!-- coverage table -->
-      <div style="margin-top: 20px">
+      <div style="width: 85%; margin: auto; margin-top: 20px">
+        <el-button
+          type="primary"
+          style="margin-bottom: 10px; float: right"
+          @click="onReload"
+          >Reload</el-button
+        >
         <el-table
           border
           :header-cell-class-name="getHeaderCellClassName"
           :data="getSrvMetaData()"
-          style="width: 85%; margin: auto"
         >
           <el-table-column
             prop="index"
@@ -129,6 +134,13 @@
               ></el-progress>
             </template>
           </el-table-column>
+
+          <el-table-column
+            prop="updated_at"
+            label="Updated At"
+            width="200"
+            align="center"
+          ></el-table-column>
 
           <el-table-column
             fixed="right"
@@ -266,6 +278,7 @@
               addrs: ['http://127.0.0.1:49970', 'http://127.0.0.1:51007'],
               status: 'online',
               cover: '41.21',
+              updated_at: '2022-05-29 10:43:21',
             },
             {
               index: 2,
@@ -273,6 +286,7 @@
               addrs: ['http://127.0.0.1:51025'],
               status: 'online',
               cover: '23.08',
+              updated_at: '2022-05-29 12:09:58',
             },
             {
               index: 3,
@@ -280,6 +294,7 @@
               addrs: ['http://127.0.0.1:51029'],
               status: 'offline',
               cover: '68.17',
+              updated_at: '2022-05-29 17:48:07',
             },
           ],
           funcReportTableData: [
@@ -361,6 +376,9 @@
         // event handler
         onSearch() {
           console.log('mock onSearch')
+        },
+        onReload() {
+          console.log('mock reload')
         },
         onRefresh() {
           console.log('mock onRefresh')
