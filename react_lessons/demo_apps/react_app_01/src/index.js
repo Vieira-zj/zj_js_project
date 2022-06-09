@@ -12,6 +12,7 @@ const author = {
 }
 const date = 'Oct 2, 2020'
 
+/* 
 const header = (
   <header>
     <div className='header-wrapper'>
@@ -23,6 +24,22 @@ const header = (
     </div>
   </header>
 )
+*/
+// Header Component
+const Header = () => {
+  return (
+    <header>
+      <div className='header-wrapper'>
+        <h1>{welcome}</h1>
+        <h2>{title}</h2>
+        <h3>{subtitle}</h3>
+        <p>Instructor: {author.firstName} {author.lastName}</p>
+        <small>{date}</small>
+      </div>
+    </header>
+
+  )
+}
 
 // JSX element, main
 const numOne = 3
@@ -34,7 +51,7 @@ const result = (
   </p>
 )
 
-const yearBorn = 1820
+const yearBorn = 1982
 const currentYear = new Date().getFullYear()
 const age = currentYear - yearBorn
 const personAge = (
@@ -44,16 +61,36 @@ const personAge = (
   </p>
 )
 
+/*
 const techs = ['HTML', 'CSS', 'JavaScript']
 const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>)
+*/
+// TechList Component
+const TechList = () => {
+  const techs = ['HTML', 'CSS', 'JavaScript']
+  const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>)
+  return techsFormatted
+}
 
 // import media objects
+/*
 const user = (
   <div>
-    <img src={meCharton} alt='me charton' />
+    <img src={meCharton} id='me_pic' alt='me charton' />
   </div>
 )
+*/
+// User Card Component
+const UserCard = () => {
+  return (
+    <div>
+      <img src={meCharton} id='me_pic' alt='me charton' />
+      <h4>{author.firstName} {author.lastName}</h4>
+    </div>
+  )
+}
 
+/*
 const main = (
   <main>
     <div className='main-wrapper'>
@@ -71,10 +108,34 @@ const main = (
     </div>
   </main>
 )
+*/
+// Main Component
+const Main = () => {
+  return (
+    <main>
+      <div className='main-wrapper'>
+        <p>
+          Prerequisite to get started{' '}
+          <strong>
+            <em>react.js</em>
+          </strong>
+        :
+      </p>
+        <ul>
+          <TechList />
+        </ul>
+        {result}
+        {personAge}
+        <UserCard />
+      </div>
+    </main>
+  )
+}
 
 // JSX element, footer
 const copyRight = 'Copyright 2020'
 
+/* 
 const footer = (
   <footer>
     <div className='footer-wrapper'>
@@ -82,8 +143,20 @@ const footer = (
     </div>
   </footer>
 )
+*/
+// Footer Component
+const Footer = () => {
+  return (
+    <footer>
+      <div className='footer-wrapper'>
+        <p>{copyRight}</p>
+      </div>
+    </footer>
+  )
+}
 
 // JSX element, app, a container or a parent
+/*
 const app = (
   <div className='app'>
     {header}
@@ -91,7 +164,18 @@ const app = (
     {footer}
   </div>
 )
+*/
+// The App, or the parent or the container component
+const App = () => {
+  return (
+    <div className='app'>
+      <Header />
+      <Main />
+      <Footer />
+    </div>
+  )
+}
 
 const rootElement = document.getElementById('root')
 
-ReactDOM.render(app, rootElement)
+ReactDOM.render(<App />, rootElement)
