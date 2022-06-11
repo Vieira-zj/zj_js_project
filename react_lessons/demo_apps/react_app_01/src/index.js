@@ -84,7 +84,7 @@ const user = (
 const UserCard = () => {
   return (
     <div>
-      <img src={meCharton} id='me_pic' alt='me charton' />
+      <img src={meCharton} id='me-pic' alt='me charton' />
       <h4>{author.firstName} {author.lastName}</h4>
     </div>
   )
@@ -177,5 +177,4 @@ const App = () => {
 }
 
 const rootElement = document.getElementById('root')
-
 ReactDOM.render(<App />, rootElement)
