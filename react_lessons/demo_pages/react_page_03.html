@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>30 Days Of React Challenge: Components and Props</title>
+    <style>
+      .header-wrapper,
+      .main-wrapper,
+      .footer-wrapper {
+        width: 85%;
+        margin: auto;
+      }
+
+      .header-wrapper,
+      .main-wrapper {
+        padding: 10px;
+        margin: 2px auto;
+      }
+
+      footer {
+        width: 100%;
+        height: 60px;
+        /* Height of the footer */
+        background: #6cf;
+      }
+
+      .footer-wrapper {
+        font-weight: 400;
+        text-align: center;
+        line-height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Fuction to show month date year
+      const showDate = (time) => {
+        const months = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+        ]
+        const month = months[time.getMonth()].slice(0, 3)
+        const year = time.getFullYear()
+        const date = time.getDate()
+        return ` ${month} ${date}, ${year}`
+      }
+
+      // Header Component
+      const Header = ({
+        data: {
+          welcome,
+          title,
+          subtitle,
+          author: { firstName, lastName },
+          date,
+        },
+      }) => {
+        return (
+          <header>
+            <div className="header-wrapper">
+              <h1>{welcome}</h1>
+              <h2>{title}</h2>
+              <h3>{subtitle}</h3>
+              <p>
+                {firstName} {lastName}
+              </p>
+              <small>{showDate(date)}</small>
+            </div>
+          </header>
+        )
+      }
+
+      // TechList Component
+      const TechList = ({ techs }) => {
+        const techList = techs.map((tech) => <li key={tech}>{tech}</li>)
+        return techList
+      }
+
+      // User Card Component
+      const UserCard = ({ user: { firstName, lastName } }) => {
+        return (
+          <div className="user-card">
+            <h2>
+              {firstName}
+              {lastName}
+            </h2>
+          </div>
+        )
+      }
+
+      // A button component
+      const Button = ({ text, onClick, style }) => {
+        return (
+          <button style={style} onClick={onClick}>
+            {text}
+          </button>
+        )
+      }
+
+      // CSS styles in JavaScript Object
+      const buttonStyles = {
+        backgroundColor: '#61dbfb',
+        padding: 10,
+        border: 'none',
+        borderRadius: 5,
+        margin: 3,
+        cursor: 'pointer',
+        fontSize: 18,
+        color: 'white',
+      }
+
+      // Main Component
+      const Main = ({ user, techs, greetPeople, handleTime }) => {
+        return (
+          <main>
+            <div className="main-wrapper">
+              <p>Prerequisite to get started react.js:</p>
+              <ul>
+                <TechList techs={techs} />
+              </ul>
+              <UserCard user={user} />
+              <Button
+                text="Greet People"
+                onClick={greetPeople}
+                style={buttonStyles}
+              />
+              <Button
+                text="Show Time"
+                onClick={handleTime}
+                style={buttonStyles}
+              />
+            </div>
+          </main>
+        )
+      }
+
+      // Footer Component
+      const Footer = ({ copyRight }) => {
+        return (
+          <footer>
+            <div className="footer-wrapper">
+              <p>Copyright {copyRight.getFullYear()}</p>
+            </div>
+          </footer>
+        )
+      }
+
+      // The App, or the parent or the container component
+      const App = () => {
+        const data = {
+          welcome: 'Welcome to 30 Days Of React',
+          title: 'Getting Started React',
+          subtitle: 'JavaScript Library',
+          author: {
+            firstName: 'Asabeneh',
+            lastName: 'Yetayeh',
+          },
+          date: new Date(),
+        }
+        const date = new Date()
+        const techs = ['HTML', 'CSS', 'JavaScript']
+        const user = { ...data.author }
+
+        const handleTime = () => {
+          alert(showDate(new Date()))
+        }
+        const greetPeople = () => {
+          alert('Welcome to 30 Days Of React Challenge, 2020')
+        }
+
+        return (
+          <div className="app">
+            <Header data={data} />
+            <Main
+              user={user}
+              techs={techs}
+              handleTime={handleTime}
+              greetPeople={greetPeople}
+            />
+            <Footer copyRight={date} />
+          </div>
+        )
+      }
+
+      const rootElement = document.querySelector('.root')
+      ReactDOM.render(<App />, rootElement)
+    </script>
+  </body>
+</html>
