@@ -357,7 +357,28 @@ function jsDemo14 () {
 }
 
 
+// demo15, put kv for object
+function jsDemo15 () {
+  putkv = (obj, k, v) => {
+    return { ...obj, [k]: v }
+  }
+
+  let obj = {
+    name: 'foo',
+    age: 31,
+    gender: 'male',
+  }
+  console.log(JSON.stringify(obj, null, 2))
+
+  const k = 'name'
+  obj[k] = 'bar'
+
+  obj = putkv(obj, 'age', 35)
+  obj = putkv(obj, 'skill', 'java,js')
+  console.log(JSON.stringify(obj, null, 2))
+}
+
 if (require.main === module) {
-  jsDemo14()
+  jsDemo15()
   console.log(__filename, 'DONE.')
 }
