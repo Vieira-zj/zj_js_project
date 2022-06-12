@@ -1,16 +1,6 @@
 import React from 'react'
 import { Welcome, Login, Button, Message, TechList } from './Fragments'
-
-const buttonStyles = {
-  backgroundColor: '#61dbfb',
-  padding: 10,
-  border: 'none',
-  borderRadius: 5,
-  cursor: 'pointer',
-  fontSize: 22,
-  color: 'white',
-  margin: '0 auto',
-}
+import buttonStyles from '../styles/button-styles'
 
 class Main extends React.Component {
   render () {

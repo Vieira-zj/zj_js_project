@@ -1,0 +1,13 @@
+// CSS styles in JavaScript Object
+const buttonStyles = {
+  backgroundColor: '#61dbfb',
+  padding: 10,
+  border: 'none',
+  borderRadius: 5,
+  cursor: 'pointer',
+  fontSize: 22,
+  color: 'white',
+  margin: '0 auto',
+}
+
+export default buttonStyles

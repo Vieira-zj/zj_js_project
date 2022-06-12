@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
+import { showDate } from './utils/common'
 
 class App extends React.Component {
   state = {
@@ -15,30 +16,8 @@ class App extends React.Component {
     })
   }
 
-  showDate = (time) => {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ]
-
-    const month = months[time.getMonth()].slice(0, 3)
-    const year = time.getFullYear()
-    const date = time.getDate()
-    return `${month} ${date}, ${year}`
-  }
-
   handleTime = () => {
-    let message = this.showDate(new Date())
+    let message = showDate(new Date())
     this.setState({ message })
   }
 
