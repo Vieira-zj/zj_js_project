@@ -1,8 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import meCharton from './images/me_charton.png';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import meCharton from './images/me_charton.png'
 
-// JSX element, header
 const welcome = 'Welcome to 30 Days Of React'
 const title = 'Getting Started React'
 const subtitle = 'JavaScript Library'
@@ -12,6 +11,7 @@ const author = {
 }
 const date = 'Oct 2, 2020'
 
+// JSX element, header
 /* 
 const header = (
   <header>
@@ -41,7 +41,6 @@ const Header = () => {
   )
 }
 
-// JSX element, main
 const numOne = 3
 const numTwo = 2
 
@@ -90,6 +89,7 @@ const UserCard = () => {
   )
 }
 
+// JSX element, main
 /*
 const main = (
   <main>
@@ -132,9 +132,9 @@ const Main = () => {
   )
 }
 
-// JSX element, footer
 const copyRight = 'Copyright 2020'
 
+// JSX element, footer
 /* 
 const footer = (
   <footer>

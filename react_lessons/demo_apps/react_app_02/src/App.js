@@ -41,9 +41,7 @@ class App extends React.Component {
 
     return (
       <div className='app'>
-        {this.state.backgroundColor}
         <Header data={data} />
-
         <Main
           techs={techs}
           handleTime={this.handleTime}
@@ -52,7 +50,6 @@ class App extends React.Component {
           handleLogin={this.handleLogin}
           message={this.state.message}
         />
-
         <Footer date={new Date()} />
       </div>
     )

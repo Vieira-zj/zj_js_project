@@ -87,18 +87,6 @@
           const { name, value } = e.target
           this.setState({ touched: { ...this.state.touched, [name]: true } })
         }
-        validate = () => {
-          const errors = {
-            firstName: '',
-          }
-          if (
-            (this.state.touched.firstName && this.state.firstName.length < 3) ||
-            (this.state.touched.firstName && this.state.firstName.length > 12)
-          ) {
-            errors.firstName = 'First name must be between 2 and 13'
-          }
-          return errors
-        }
         handleSubmit = (e) => {
           e.preventDefault()
           const {
@@ -142,6 +130,19 @@
           console.log(JSON.stringify(data, null, 2))
         }
 
+        validate = () => {
+          const errors = {
+            firstName: '',
+          }
+          if (
+            (this.state.touched.firstName && this.state.firstName.length < 3) ||
+            (this.state.touched.firstName && this.state.firstName.length > 12)
+          ) {
+            errors.firstName = 'First name must be between 2 and 13'
+          }
+          return errors
+        }
+
         render() {
           const { firstName } = this.validate()
           return (
@@ -173,6 +174,7 @@
                       placeholder="Last Name"
                     />
                   </div>
+
                   <div className="form-group">
                     <label htmlFor="email">Email </label>
                     <input
@@ -184,7 +186,6 @@
                     />
                   </div>
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="tel">Telephone </label>
                   <input
@@ -195,7 +196,6 @@
                     placeholder="Tel"
                   />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="dateOfBirth">Date of birth </label>
                   <input
