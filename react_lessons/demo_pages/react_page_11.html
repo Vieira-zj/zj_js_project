@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>30 Days Of React Challenge</title>
+    <title>30 Days Of React Challenge: Hooks useState and useEffect</title>
   </head>
   <body>
     <div class="root"></div>
@@ -17,7 +17,90 @@
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-      // TODO:
+      const Country = ({ country: { name, flag, population } }) => {
+        return (
+          <div className="country">
+            <div className="country_flag">
+              <img src={flag} alt={name} />
+            </div>
+            <h3 className="country_name">{name.toUpperCase()}</h3>
+            <div class="country_text">
+              <p>
+                <span>Population: </span>
+                {population}
+              </p>
+            </div>
+          </div>
+        )
+      }
+
+      const App = () => {
+        // demo: hook useState()
+        const [count, setCount] = React.useState(0)
+        const addOne = () => {
+          setCount(count + 1)
+        }
+        const minusOne = () => {
+          setCount(count - 1)
+        }
+
+        const url =
+          'https://www.smithsstationah.com/imagebank/eVetSites/Feline/01.jpg'
+        const [image, setImage] = React.useState(url)
+        const changeAnimal = () => {
+          const dogURL =
+            'https://static.onecms.io/wp-content/uploads/sites/12/2015/04/dogs-pembroke-welsh-corgi-400x400.jpg'
+          const catURL =
+            'https://www.smithsstationah.com/imagebank/eVetSites/Feline/01.jpg'
+          setImage(image === catURL ? dogURL : catURL)
+        }
+
+        // demo: hook useEffect()
+        const [data, setData] = React.useState([])
+        React.useEffect(() => {
+          fetchData()
+        }, [])
+
+        const fetchData = async () => {
+          console.log('fetch country data')
+          const url = 'https://restcountries.eu/rest/v2/all'
+          try {
+            const resp = await fetch(url)
+            const data = await resp.json()
+            setData(data)
+          } catch (err) {
+            console.error(err)
+          }
+        }
+
+        return (
+          <div className="App">
+            <div>
+              <h1>{count} </h1>
+              <button onClick={addOne}>Add One</button> |{' '}
+              <button onClick={minusOne}>Minus One</button>
+            </div>
+            <div>
+              <img src={image} alt="animal" />
+              <br />
+              <button onClick={changeAnimal} className="btn btn-add">
+                Change
+              </button>
+            </div>
+            <h1>Fetching Data Using Hook</h1>
+            <h1>Calling API</h1>
+            <div>
+              <p>There are {data.length} countries in the api.</p>
+              <div className="countries-wrapper">
+                {data.map((country) => (
+                  <Country country={country} />
+                ))}
+              </div>
+            </div>
+          </div>
+        )
+      }
+
       const rootElement = document.querySelector('.root')
       ReactDOM.render(<App />, rootElement)
     </script>

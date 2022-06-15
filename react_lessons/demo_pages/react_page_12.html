@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>30 Days Of React Challenge: Hooks useRef</title>
+  </head>
+  <body>
+    <div class="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const App = (props) => {
+        const refInput = React.useRef(null)
+        const onClick = () => {
+          const value = refInput.current.value
+          if (value.length > 0) {
+            console.log('input:', value)
+          }
+          refInput.current.focus()
+        }
+
+        const refHeader = React.useRef(null)
+        const onGetText = () => {
+          const content = refHeader.current.textContent
+          console.log(content)
+        }
+        const onStyleText = () => {
+          refHeader.current.style.backgroundColor = '#61dbfb'
+          refHeader.current.style.padding = '50px'
+          refHeader.current.style.textAlign = 'center'
+        }
+
+        return (
+          <div className="App">
+            <div>
+              <h1>How to use data from uncontrolled input using useRef</h1>
+              <input type="text" ref={refInput} />
+              <br />
+              <button onClick={onClick}>Get Input Data</button>
+            </div>
+            <div>
+              <h1 ref={refHeader}>How to getting content from the DOM tree</h1>
+              <button onClick={onGetText}>Getting Content</button>
+              <br />
+              <button onClick={onStyleText}>Style it</button>
+            </div>
+          </div>
+        )
+      }
+
+      const rootElement = document.querySelector('.root')
+      ReactDOM.render(<App />, rootElement)
+    </script>
+  </body>
+</html>

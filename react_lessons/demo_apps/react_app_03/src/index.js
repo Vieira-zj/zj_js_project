@@ -9,6 +9,8 @@ import {
   Prompt,
 } from 'react-router-dom'
 
+/* Use react v16, and react-router-dom v5. */
+
 // Home component
 const Home = () => <h1>Welcome Home</h1>
 // About component
