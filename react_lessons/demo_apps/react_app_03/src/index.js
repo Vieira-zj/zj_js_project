@@ -9,7 +9,7 @@ import {
   Prompt,
 } from 'react-router-dom'
 
-/* Use react v16, and react-router-dom v5. */
+/* Dep version: react v16, and react-router-dom v5. */
 
 // Home component
 const Home = () => <h1>Welcome Home</h1>
@@ -99,7 +99,7 @@ const challenges = [
   {
     name: '30 Data Analysis',
     description:
-      '30 Days of Data Analysis challenge  is a step by step guide to learn about data, data visualization and data analysis in 30 days.',
+      '30 Days of Data Analysis challenge is a step by step guide to learn about data, data visualization and data analysis in 30 days.',
     status: 'coming',
     days: 30,
     level: 'Beginners to Advanced',
@@ -174,12 +174,13 @@ const Challenges = (props) => {
         ))}
       </ul>
       <Switch>
-        {/* sub route "/challenges", default */}
+        {/* default sub route "/challenges" */}
         <Route
           exact
           path={'/challenges'}
           component={() => <h1>Choose any of the challenges</h1>}
         />
+        {/* dyn register a sub route base on var "path" and "challenge" */}
         <Route
           path={path}
           component={() => <Challenge challenge={challenge} />}
@@ -217,6 +218,7 @@ const Welcome = ({ handleLogin, isLoggedIn }) => {
 }
 
 const NotFound = () => <h1>The page your looking for not found</h1>
+
 const Navbar = ({ username }) => (
   <ul>
     <li>
@@ -260,6 +262,7 @@ class App extends Component {
           <Switch>
             <Route path='/about' component={About} />
             <Route path='/contact' component={Contact} />
+            {/* route with param */}
             <Route
               path='/user/:username'
               component={(props) => (
