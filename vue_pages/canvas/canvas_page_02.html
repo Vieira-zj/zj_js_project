@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Canvas Demo</h1>
+      <canvas id="canvas" width="350" height="350"></canvas>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      methods: {
+        data() {
+          return {
+            ctx: undefined,
+          }
+        },
+        drawRect() {
+          this.ctx.fillRect(25, 25, 100, 100) // 绘制一个填充的矩形
+          this.ctx.clearRect(45, 45, 60, 60) // 清除指定矩形区域，让清除部分完全透明
+          this.ctx.strokeRect(50, 50, 50, 50) // 绘制一个矩形的边框
+        },
+        moveToSample() {
+          // 绘制笑脸
+          //  moveTo() 设置起点，如果想看到连续的线，需要移除调用的 moveTo()
+          this.ctx.beginPath()
+          this.ctx.arc(75, 75, 50, 0, Math.PI * 2, true)
+          this.ctx.moveTo(110, 75)
+          this.ctx.arc(75, 75, 35, 0, Math.PI, false) // 口 (顺时针)
+          this.ctx.moveTo(65, 65)
+          this.ctx.arc(60, 65, 5, 0, Math.PI * 2, true) // 左眼
+          this.ctx.moveTo(95, 65)
+          this.ctx.arc(90, 65, 5, 0, Math.PI * 2, true) // 右眼
+          this.ctx.stroke()
+        },
+        lineToSample() {
+          // 绘制填充三角形
+          this.ctx.beginPath()
+          this.ctx.moveTo(25, 25)
+          this.ctx.lineTo(105, 25)
+          this.ctx.lineTo(25, 105)
+          this.ctx.fill() // 使用填充（fill）时，路径自动闭合
+
+          // 绘制描边三角形
+          this.ctx.beginPath()
+          this.ctx.moveTo(125, 125)
+          this.ctx.lineTo(125, 45)
+          this.ctx.lineTo(45, 125)
+          this.ctx.closePath()
+          this.ctx.stroke() // 描边（stroke）则不会闭合路径，添加 closePath()
+        },
+        arcSample() {
+          // arc(x, y, radius, startAngle, endAngle, anticlockwise)
+          // TODO:
+        },
+      },
+      mounted() {
+        console.log('mounted')
+        var canvas = document.getElementById('canvas')
+        this.ctx = canvas.getContext('2d')
+        // this.drawRect()
+        // this.drawPath()
+        // this.moveToSample()
+        this.lineToSample()
+      },
+    })
+  </script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Canvas Demo</h1>
+      <canvas id="canvas" width="150" height="150"></canvas>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {}
+      },
+      methods: {
+        draw() {
+          var canvas = document.getElementById('canvas')
+          if (!canvas.getContext) {
+            console.error('unsupport canvas')
+            return
+          }
+          var ctx = canvas.getContext('2d')
+          ctx.fillStyle = 'rgb(200,0,0)'
+          ctx.fillRect(10, 10, 55, 50)
+          ctx.fillStyle = 'rgba(0,0,200,0.5)'
+          ctx.fillRect(30, 30, 55, 50)
+        },
+      },
+      mounted() {
+        console.log('mounted')
+        this.draw()
+      },
+    })
+  </script>
+</html>
