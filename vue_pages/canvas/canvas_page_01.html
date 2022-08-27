@@ -20,12 +20,12 @@
       },
       methods: {
         draw() {
-          var canvas = document.getElementById('canvas')
+          let canvas = document.getElementById('canvas')
           if (!canvas.getContext) {
             console.error('unsupport canvas')
             return
           }
-          var ctx = canvas.getContext('2d')
+          let ctx = canvas.getContext('2d')
           ctx.fillStyle = 'rgb(200,0,0)'
           ctx.fillRect(10, 10, 55, 50)
           ctx.fillStyle = 'rgba(0,0,200,0.5)'

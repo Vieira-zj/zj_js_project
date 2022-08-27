@@ -15,12 +15,12 @@
   <script>
     new Vue({
       el: '#app',
+      data() {
+        return {
+          ctx: undefined,
+        }
+      },
       methods: {
-        data() {
-          return {
-            ctx: undefined,
-          }
-        },
         drawRect() {
           this.ctx.fillRect(25, 25, 100, 100) // 绘制一个填充的矩形
           this.ctx.clearRect(45, 45, 60, 60) // 清除指定矩形区域，让清除部分完全透明
@@ -57,17 +57,75 @@
         },
         arcSample() {
           // arc(x, y, radius, startAngle, endAngle, anticlockwise)
-          // TODO:
+          // x,y 圆心坐标；radius 半径；startAngle,endAngle 开始以及结束的弧度；anticlockwise 方向（默认为顺时针）
+          for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 3; j++) {
+              this.ctx.beginPath()
+              let x = 25 + j * 50 // x 坐标值
+              let y = 25 + i * 50 // y 坐标值
+              let radius = 20 // 圆弧半径
+              let startAngle = 0 // 开始点
+              let endAngle = Math.PI + (Math.PI * j) / 2 // 结束点
+              let anticlockwise = i % 2 == 0 ? false : true // 顺时针或逆时针
+              this.ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise)
+              if (i > 1) {
+                this.ctx.fill()
+              } else {
+                this.ctx.stroke()
+              }
+            }
+          }
+        },
+        curveSample01() {
+          // quadraticCurveTo(cp1x, cp1y, x, y)
+          // cp1x,cp1y 为一个控制点，x,y 为结束点
+          this.ctx.beginPath()
+          this.ctx.moveTo(75, 25)
+          this.ctx.quadraticCurveTo(25, 25, 25, 62.5)
+          this.ctx.quadraticCurveTo(25, 100, 50, 100)
+          this.ctx.quadraticCurveTo(50, 120, 30, 125)
+          this.ctx.quadraticCurveTo(60, 120, 65, 100)
+          this.ctx.quadraticCurveTo(125, 100, 125, 62.5)
+          this.ctx.quadraticCurveTo(125, 25, 75, 25)
+          this.ctx.stroke()
+        },
+        curveSample02() {
+          // bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+          // cp1x,cp1y 为控制点一，cp2x,cp2y 为控制点二，x,y 为结束点
+          this.ctx.beginPath()
+          this.ctx.moveTo(75, 40)
+          this.ctx.bezierCurveTo(75, 37, 70, 25, 50, 25)
+          this.ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5)
+          this.ctx.bezierCurveTo(20, 80, 40, 102, 75, 120)
+          this.ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5)
+          this.ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25)
+          this.ctx.bezierCurveTo(85, 25, 75, 37, 75, 40)
+          this.ctx.fill()
+        },
+        path2DSample() {
+          let rectangle = new Path2D()
+          rectangle.rect(10, 10, 50, 50)
+
+          let circle = new Path2D()
+          circle.moveTo(125, 35)
+          circle.arc(100, 35, 25, 0, 2 * Math.PI)
+
+          this.ctx.stroke(rectangle)
+          this.ctx.fill(circle)
         },
       },
       mounted() {
         console.log('mounted')
-        var canvas = document.getElementById('canvas')
+        let canvas = document.getElementById('canvas')
         this.ctx = canvas.getContext('2d')
         // this.drawRect()
         // this.drawPath()
         // this.moveToSample()
-        this.lineToSample()
+        // this.lineToSample()
+        // this.arcSample()
+        // this.curveSample01()
+        // this.curveSample02()
+        this.path2DSample()
       },
     })
   </script>

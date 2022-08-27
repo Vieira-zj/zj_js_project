@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Canvas Demo</h1>
+      <canvas id="canvas" width="350" height="350"></canvas>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          ctx: undefined,
+        }
+      },
+      methods: {
+        draw() {
+          this.roundedRect(12, 12, 150, 150, 15)
+          this.roundedRect(19, 19, 150, 150, 9)
+          this.roundedRect(53, 53, 49, 33, 10)
+          this.roundedRect(53, 119, 49, 16, 6)
+          this.roundedRect(135, 53, 49, 33, 10)
+          this.roundedRect(135, 119, 25, 49, 10)
+
+          this.ctx.beginPath()
+          this.ctx.arc(37, 37, 13, Math.PI / 7, -Math.PI / 7, false)
+          this.ctx.lineTo(31, 37)
+          this.ctx.fill()
+
+          for (var i = 0; i < 8; i++) {
+            this.ctx.fillRect(51 + i * 16, 35, 4, 4)
+          }
+          for (i = 0; i < 6; i++) {
+            this.ctx.fillRect(115, 51 + i * 16, 4, 4)
+          }
+          for (i = 0; i < 8; i++) {
+            this.ctx.fillRect(51 + i * 16, 99, 4, 4)
+          }
+
+          this.ctx.beginPath()
+          this.ctx.moveTo(83, 116)
+          this.ctx.lineTo(83, 102)
+          this.ctx.bezierCurveTo(83, 94, 89, 88, 97, 88)
+          this.ctx.bezierCurveTo(105, 88, 111, 94, 111, 102)
+          this.ctx.lineTo(111, 116)
+          this.ctx.lineTo(106.333, 111.333)
+          this.ctx.lineTo(101.666, 116)
+          this.ctx.lineTo(97, 111.333)
+          this.ctx.lineTo(92.333, 116)
+          this.ctx.lineTo(87.666, 111.333)
+          this.ctx.lineTo(83, 116)
+          this.ctx.fill()
+
+          this.ctx.fillStyle = 'white'
+          this.ctx.beginPath()
+          this.ctx.moveTo(91, 96)
+          this.ctx.bezierCurveTo(88, 96, 87, 99, 87, 101)
+          this.ctx.bezierCurveTo(87, 103, 88, 106, 91, 106)
+          this.ctx.bezierCurveTo(94, 106, 95, 103, 95, 101)
+          this.ctx.bezierCurveTo(95, 99, 94, 96, 91, 96)
+          this.ctx.moveTo(103, 96)
+          this.ctx.bezierCurveTo(100, 96, 99, 99, 99, 101)
+          this.ctx.bezierCurveTo(99, 103, 100, 106, 103, 106)
+          this.ctx.bezierCurveTo(106, 106, 107, 103, 107, 101)
+          this.ctx.bezierCurveTo(107, 99, 106, 96, 103, 96)
+          this.ctx.fill()
+
+          this.ctx.fillStyle = 'black'
+          this.ctx.beginPath()
+          this.ctx.arc(101, 102, 2, 0, Math.PI * 2, true)
+          this.ctx.fill()
+
+          this.ctx.beginPath()
+          this.ctx.arc(89, 102, 2, 0, Math.PI * 2, true)
+          this.ctx.fill()
+        },
+        roundedRect(x, y, width, height, radius) {
+          // 绘制圆角矩形
+          this.ctx.beginPath()
+          this.ctx.moveTo(x, y + radius)
+          this.ctx.lineTo(x, y + height - radius)
+          this.ctx.quadraticCurveTo(x, y + height, x + radius, y + height)
+          this.ctx.lineTo(x + width - radius, y + height)
+          this.ctx.quadraticCurveTo(
+            x + width,
+            y + height,
+            x + width,
+            y + height - radius
+          )
+          this.ctx.lineTo(x + width, y + radius)
+          this.ctx.quadraticCurveTo(x + width, y, x + width - radius, y)
+          this.ctx.lineTo(x + radius, y)
+          this.ctx.quadraticCurveTo(x, y, x, y + radius)
+          this.ctx.stroke()
+        },
+      },
+      mounted() {
+        console.log('mounted')
+        let canvas = document.getElementById('canvas')
+        this.ctx = canvas.getContext('2d')
+        this.draw()
+      },
+    })
+  </script>
+</html>
