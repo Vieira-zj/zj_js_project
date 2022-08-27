@@ -21,6 +21,7 @@
         }
       },
       methods: {
+        /* 样式 */
         fillStyleSample() {
           for (let i = 0; i < 6; i++) {
             for (var j = 0; j < 6; j++) {
@@ -56,7 +57,9 @@
             }
           }
         },
+        /* 透明度 */
         transparencyByAlphaSample() {
+          // 背景
           this.ctx.fillStyle = '#FD0'
           this.ctx.fillRect(0, 0, 75, 75)
           this.ctx.fillStyle = '#6C0'
@@ -67,7 +70,7 @@
           this.ctx.fillRect(75, 75, 75, 75)
           this.ctx.fillStyle = '#FFF'
 
-          // 设置透明度值
+          // 设置透明度值 0.0（完全透明）到 1.0
           this.ctx.globalAlpha = 0.2
           // 画半透明圆
           for (let i = 0; i < 7; i++) {
@@ -77,11 +80,27 @@
           }
         },
         transparencyByRgbaSample() {
-          // TODO:
+          // 背景
+          this.ctx.fillStyle = 'rgb(255,221,0)'
+          this.ctx.fillRect(0, 0, 150, 37.5)
+          this.ctx.fillStyle = 'rgb(102,204,0)'
+          this.ctx.fillRect(0, 37.5, 150, 37.5)
+          this.ctx.fillStyle = 'rgb(0,153,255)'
+          this.ctx.fillRect(0, 75, 150, 37.5)
+          this.ctx.fillStyle = 'rgb(255,51,0)'
+          this.ctx.fillRect(0, 112.5, 150, 37.5)
+
+          // 画半透明矩形
+          for (let i = 0; i < 10; i++) {
+            this.ctx.fillStyle = 'rgba(255,255,255,' + (i + 1) / 10 + ')'
+            for (let j = 0; j < 4; j++) {
+              this.ctx.fillRect(5 + i * 14, 5 + j * 37.5, 14, 27.5)
+            }
+          }
         },
       },
       mounted() {
-        console.log('mounted')
+        console.log('init canvas')
         let canvas = document.getElementById('canvas')
         this.ctx = canvas.getContext('2d')
         // this.fillStyleSample()

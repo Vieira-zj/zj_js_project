@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Canvas Demo</h1>
+      <canvas id="canvas" width="350" height="350"></canvas>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          canvas: undefined,
+          ctx: undefined,
+          offset: 0,
+        }
+      },
+      methods: {
+        lineWidthSample() {
+          for (let i = 0; i < 10; i++) {
+            this.ctx.lineWidth = 1 + i
+            this.ctx.beginPath()
+            this.ctx.moveTo(5 + i * 14, 5)
+            this.ctx.lineTo(5 + i * 14, 140)
+            this.ctx.stroke()
+          }
+        },
+        lineCapSample() {
+          this.ctx.strokeStyle = '#09f'
+          this.ctx.beginPath()
+          this.ctx.moveTo(10, 10)
+          this.ctx.lineTo(140, 10)
+          this.ctx.moveTo(10, 140)
+          this.ctx.lineTo(140, 140)
+          this.ctx.stroke()
+
+          // 线段端点显示
+          let lineCap = ['butt', 'round', 'square']
+          this.ctx.strokeStyle = 'black'
+          for (let i = 0; i < lineCap.length; i++) {
+            this.ctx.lineWidth = 15
+            this.ctx.lineCap = lineCap[i]
+            this.ctx.beginPath()
+            this.ctx.moveTo(25 + i * 50, 10)
+            this.ctx.lineTo(25 + i * 50, 140)
+            this.ctx.stroke()
+          }
+        },
+        lineJoinSample() {
+          let lineJoin = ['round', 'bevel', 'miter']
+          this.ctx.lineWidth = 10
+          for (let i = 0; i < lineJoin.length; i++) {
+            this.ctx.lineJoin = lineJoin[i]
+            this.ctx.beginPath()
+            this.ctx.moveTo(-5, 5 + i * 40)
+            this.ctx.lineTo(35, 45 + i * 40)
+            this.ctx.lineTo(75, 5 + i * 40)
+            this.ctx.lineTo(115, 45 + i * 40)
+            this.ctx.lineTo(155, 5 + i * 40)
+            this.ctx.stroke()
+          }
+        },
+        lineDashSample() {
+          // 虚线
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+          this.ctx.setLineDash([4, 2]) // 指定线段与间隙的交替
+          this.ctx.lineDashOffset = -this.offset
+          this.ctx.strokeRect(10, 10, 100, 100)
+        },
+        draw() {
+          this.offset++
+          if (this.offset > 16) {
+            this.offset = 0
+          }
+          this.lineDashSample()
+          setTimeout(this.draw, 30) // 动画效果
+        },
+      },
+      mounted() {
+        console.log('init canvas')
+        this.canvas = document.getElementById('canvas')
+        this.ctx = this.canvas.getContext('2d')
+        // this.lineWidthSample()
+        // this.lineCapSample()
+        // this.lineJoinSample()
+        this.draw()
+      },
+    })
+  </script>
+</html>
