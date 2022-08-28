@@ -83,7 +83,24 @@
         },
         /* 图案样式 */
         patternSample() {
-          // TODO:
+          // createPattern(image, type)
+          // type: repeat, repeat-x, repeat-y, no-repeat
+          let img = new Image()
+          img.src = './static/img01.jpeg'
+          img.onload = () => {
+            // 创建图案
+            let ptrn = this.ctx.createPattern(img, 'repeat')
+            this.ctx.fillStyle = ptrn
+            this.ctx.fillRect(0, 0, 150, 150)
+          }
+        },
+        /* 填充规则 */
+        fillSample() {
+          // nonzero (默认), evenodd
+          this.ctx.beginPath()
+          this.ctx.arc(50, 50, 30, 0, Math.PI * 2, true)
+          this.ctx.arc(50, 50, 15, 0, Math.PI * 2, true)
+          this.ctx.fill('evenodd')
         },
       },
       mounted() {
@@ -92,7 +109,9 @@
         this.ctx = canvas.getContext('2d')
         // this.linearGradientSample()
         // this.radialGradientSample()
-        this.patternSample()
+        // this.patternSample()
+        // this.shadowsSample()
+        this.fillSample()
       },
     })
   </script>

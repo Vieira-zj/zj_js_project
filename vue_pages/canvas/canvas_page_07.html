@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Canvas Demo</h1>
+      <canvas id="canvas" width="350" height="150"></canvas>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {}
+      },
+      methods: {
+        fillTextSample(ctx) {
+          // fillText(text, x, y [, maxWidth])
+          ctx.font = '48px serif'
+          ctx.fillText('Hello world', 10, 50)
+        },
+        strokeTextSample(ctx) {
+          // strokeText(text, x, y [, maxWidth]) 绘制文本边框
+          ctx.font = '48px serif'
+          ctx.strokeText('Hello world', 10, 50)
+        },
+        TextStyleSample(ctx) {
+          // font 默认的字体是 10px sans-serif.
+          // textAlign 文本对齐选项。包括 start, end, left, right or center. 默认值是 start.
+          // textBaseline 基线对齐选项。包括 top, hanging, middle, alphabetic, ideographic, bottom. 默认值是 alphabetic.
+          // direction 文本方向。包括 ltr, rtl, inherit. 默认值是 inherit.
+          ctx.font = '48px serif'
+          ctx.textBaseline = 'middle'
+          ctx.strokeText('Hello world', 0, 100)
+        },
+        /* 阴影 */
+        shadowsSample(ctx) {
+          // shadowOffsetX, shadowOffsetY: 设定阴影在 X 和 Y 轴的延伸距离。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0
+          ctx.shadowOffsetX = 2
+          ctx.shadowOffsetY = 2
+          // shadowBlur: 设定阴影的模糊程度。默认为 0
+          ctx.shadowBlur = 2
+          // shadowColor: 设定阴影颜色效果，默认是全透明的黑色
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+
+          ctx.font = '20px Times New Roman'
+          ctx.fillStyle = 'Black'
+          ctx.fillText('Sample String', 5, 30)
+        },
+        /* 预测文本宽度 */
+        measureTextSample(ctx) {
+          let text = ctx.measureText('foo')
+          console.log(text.width)
+        },
+      },
+      mounted() {
+        console.log('init canvas')
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+        // this.fillTextSample(ctx)
+        // this.strokeTextSample(ctx)
+        this.shadowsSample(ctx)
+        // this.TextStyleSample(ctx)
+        this.measureTextSample(ctx)
+      },
+    })
+  </script>
+</html>

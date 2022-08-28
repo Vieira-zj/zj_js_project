@@ -32,6 +32,7 @@
             this.ctx.stroke()
           }
         },
+        /* 线段端点显示 */
         lineCapSample() {
           this.ctx.strokeStyle = '#09f'
           this.ctx.beginPath()
@@ -41,7 +42,6 @@
           this.ctx.lineTo(140, 140)
           this.ctx.stroke()
 
-          // 线段端点显示
           let lineCap = ['butt', 'round', 'square']
           this.ctx.strokeStyle = 'black'
           for (let i = 0; i < lineCap.length; i++) {
@@ -67,8 +67,8 @@
             this.ctx.stroke()
           }
         },
+        /* 虚线 */
         lineDashSample() {
-          // 虚线
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
           this.ctx.setLineDash([4, 2]) // 指定线段与间隙的交替
           this.ctx.lineDashOffset = -this.offset

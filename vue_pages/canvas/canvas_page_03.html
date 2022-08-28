@@ -81,8 +81,8 @@
           this.ctx.arc(89, 102, 2, 0, Math.PI * 2, true)
           this.ctx.fill()
         },
+        /* 绘制圆角矩形 */
         roundedRect(x, y, width, height, radius) {
-          // 绘制圆角矩形
           this.ctx.beginPath()
           this.ctx.moveTo(x, y + radius)
           this.ctx.lineTo(x, y + height - radius)
