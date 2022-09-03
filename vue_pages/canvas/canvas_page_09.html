@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Canvas Demo</h1>
+      <canvas id="canvas" width="350" height="350"></canvas>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {}
+      },
+      methods: {
+        saveAndRestoreSample(ctx) {
+          // save 保存 canvas 状态（当前画布所有样式和变形）
+          ctx.fillRect(0, 0, 150, 150)
+          ctx.save()
+
+          ctx.fillStyle = '#09F'
+          ctx.fillRect(15, 15, 120, 120)
+          ctx.save()
+
+          ctx.fillStyle = '#FFF'
+          ctx.globalAlpha = 0.5
+          ctx.fillRect(30, 30, 90, 90)
+
+          // restore 恢复 canvas 状态
+          ctx.restore()
+          ctx.fillRect(45, 45, 60, 60)
+
+          ctx.restore() // 恢复到默认颜色配置
+          ctx.fillRect(60, 60, 30, 30)
+        },
+        translateSample(ctx) {
+          // translate(x, y) 移动 canvas
+          for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+              ctx.save() // 要先有一个 save 保存点再执行 restore
+              ctx.fillStyle = `rgb(${51 * i},${255 - 51 * i},255`
+              ctx.translate(10 + j * 50, 10 + i * 50)
+              ctx.fillRect(0, 0, 25, 25)
+              ctx.restore()
+            }
+          }
+        },
+        rotateSample(ctx) {
+          // rotate(angle) 以原点为中心旋转 canvas
+          ctx.translate(75, 75)
+          for (let i = 1; i < 6; i++) {
+            // loop through rings (from inside to out)
+            ctx.save()
+            ctx.fillStyle = `rgb(${51 * i},${255 - 51 * i},255`
+            for (let j = 0; j < i * 6; j++) {
+              // draw individual dots
+              ctx.rotate((Math.PI * 2) / (i * 6))
+              ctx.beginPath()
+              ctx.arc(0, i * 12.5, 5, 0, Math.PI * 2, true)
+              ctx.fill()
+            }
+            ctx.restore()
+          }
+          // ctx.strokeRect(0, 0, 75, 75)
+        },
+        scaleSample(ctx) {
+          // scale(x, y)
+          // x 为水平缩放因子，y 为垂直缩放因子，如果比 1 小，会缩小图形，如果比 1 大，会放大图形。默认值为 1
+          ctx.save()
+          ctx.scale(10, 3)
+          ctx.fillRect(1, 10, 10, 10)
+          ctx.restore()
+
+          // mirror horizontally
+          ctx.scale(-1, 1)
+          ctx.font = '48px serif'
+          ctx.fillText('MDN', -135, 120)
+        },
+        transformSample(ctx) {
+          // transform(a, b, c, d, e, f)
+          let sin = Math.sin(Math.PI / 6)
+          let cos = Math.cos(Math.PI / 6)
+          ctx.translate(100, 100)
+          let c = 0
+          for (let i = 0; i <= 12; i++) {
+            c = Math.floor((255 / 12) * i)
+            ctx.fillStyle = `rgb(${c},${c},${c})`
+            ctx.fillRect(0, 0, 100, 10)
+            ctx.transform(cos, sin, -sin, cos, 0, 0)
+          }
+
+          ctx.setTransform(-1, 0, 0, 1, 100, 100)
+          ctx.fillStyle = 'rgba(255, 128, 255, 0.5)'
+          ctx.fillRect(0, 50, 100, 100)
+        },
+      },
+      mounted() {
+        console.log('init canvas')
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+        // this.saveAndRestoreSample(ctx)
+        // this.translateSample(ctx)
+        // this.rotateSample(ctx)
+        // this.scaleSample(ctx)
+        this.transformSample(ctx)
+      },
+    })
+  </script>
+</html>

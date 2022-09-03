@@ -42,57 +42,49 @@
           this.ctx.fillRect(10, 10, 130, 130)
           this.ctx.strokeRect(50, 50, 50, 50)
         },
-        radialGradientSample() {
+        radialGradientSample(ctx) {
           // createRadialGradient(x1, y1, r1, x2, y2, r2)
           // 小圆 x1,y1 原点，r1 半径 => 大圆 x2,y2 原点，r2 半径
-          let radgrad = this.ctx.createRadialGradient(45, 45, 10, 52, 50, 30)
+          let radgrad = ctx.createRadialGradient(45, 45, 10, 52, 50, 30)
           radgrad.addColorStop(0, '#A7D30C')
           radgrad.addColorStop(0.9, '#019F62')
           radgrad.addColorStop(1, 'rgba(1,159,98,0)')
 
-          let radgrad2 = this.ctx.createRadialGradient(
-            105,
-            105,
-            20,
-            112,
-            120,
-            50
-          )
+          let radgrad2 = ctx.createRadialGradient(105, 105, 20, 112, 120, 50)
           radgrad2.addColorStop(0, '#FF5F98')
           radgrad2.addColorStop(0.75, '#FF0188')
           radgrad2.addColorStop(1, 'rgba(255,1,136,0)')
 
-          let radgrad3 = this.ctx.createRadialGradient(95, 15, 15, 102, 20, 40)
+          let radgrad3 = ctx.createRadialGradient(95, 15, 15, 102, 20, 40)
           radgrad3.addColorStop(0, '#00C9FF')
           radgrad3.addColorStop(0.8, '#00B5E2')
           radgrad3.addColorStop(1, 'rgba(0,201,255,0)')
 
-          let radgrad4 = this.ctx.createRadialGradient(0, 150, 50, 0, 140, 90)
+          let radgrad4 = ctx.createRadialGradient(0, 150, 50, 0, 140, 90)
           radgrad4.addColorStop(0, '#F4F201')
           radgrad4.addColorStop(0.8, '#E4C700')
           radgrad4.addColorStop(1, 'rgba(228,199,0,0)')
 
-          this.ctx.fillStyle = radgrad4
-          this.ctx.fillRect(0, 0, 150, 150)
-          this.ctx.fillStyle = radgrad3
-          this.ctx.fillRect(0, 0, 150, 150)
-          this.ctx.fillStyle = radgrad2
-          this.ctx.fillRect(0, 0, 150, 150)
-          this.ctx.fillStyle = radgrad
-          this.ctx.fillRect(0, 0, 150, 150)
+          ctx.fillStyle = radgrad4
+          ctx.fillRect(0, 0, 150, 150)
+          ctx.fillStyle = radgrad3
+          ctx.fillRect(0, 0, 150, 150)
+          ctx.fillStyle = radgrad2
+          ctx.fillRect(0, 0, 150, 150)
+          ctx.fillStyle = radgrad
+          ctx.fillRect(0, 0, 150, 150)
         },
         /* 图案样式 */
         patternSample() {
           // createPattern(image, type)
           // type: repeat, repeat-x, repeat-y, no-repeat
           let img = new Image()
-          img.src = './static/img01.jpeg'
           img.onload = () => {
-            // 创建图案
-            let ptrn = this.ctx.createPattern(img, 'repeat')
+            let ptrn = this.ctx.createPattern(img, 'repeat') // 创建图案
             this.ctx.fillStyle = ptrn
             this.ctx.fillRect(0, 0, 150, 150)
           }
+          img.src = './static/img01.jpeg'
         },
         /* 填充规则 */
         fillSample() {
@@ -108,10 +100,10 @@
         let canvas = document.getElementById('canvas')
         this.ctx = canvas.getContext('2d')
         // this.linearGradientSample()
-        // this.radialGradientSample()
+        this.radialGradientSample(this.ctx)
         // this.patternSample()
         // this.shadowsSample()
-        this.fillSample()
+        // this.fillSample()
       },
     })
   </script>
