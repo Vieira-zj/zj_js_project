@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Canvas Demo: Color Pick</h1>
+      <canvas
+        id="canvas"
+        width="1300"
+        height="450"
+        @click="onClick"
+        @mousemove="onMouseMove"
+      ></canvas>
+      <div>
+        <span>Hovered Color</span>
+        <span id="hovered-color"></span>
+      </div>
+      <div>
+        <span>Selected Color</span>
+        <span id="selected-color"></span>
+      </div>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          canvas: undefined,
+          ctx: undefined,
+        }
+      },
+      methods: {
+        draw() {
+          let img = new Image()
+          img.onload = () => {
+            this.ctx.drawImage(img, 0, 0)
+            img.style.display = 'none'
+          }
+          img.crossOrigin = 'anonymous'
+          // img.src = './static/img01.jpeg'
+          img.src =
+            'https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naIOJRwXOYdcA3zuj7wB5tpNTBugDoXp8ZMXibcMERXiagmK1SgTQcEBDcQHmg5AVbB2kXczcFFvpr0Q/640'
+        },
+        pick(event, destination) {
+          let x = event.layerX - this.canvas.offsetLeft
+          let y = event.layerY - this.canvas.offsetTop
+          let pixel = this.ctx.getImageData(x, y, 1, 1) // 获取指定坐标位置的像素
+          let data = pixel.data
+          let rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${
+            data[3] / 255
+          })`
+          destination.style.background = rgba
+          destination.textContent = rgba
+          return rgba
+        },
+        onMouseMove(event) {
+          let hoveredColor = document.getElementById('hovered-color')
+          this.pick(event, hoveredColor)
+        },
+        onClick(event) {
+          let selectedColor = document.getElementById('selected-color')
+          this.pick(event, selectedColor)
+        },
+      },
+      mounted() {
+        console.log('init canvas')
+        this.canvas = document.getElementById('canvas')
+        this.ctx = this.canvas.getContext('2d')
+        this.draw()
+      },
+    })
+  </script>
+</html>

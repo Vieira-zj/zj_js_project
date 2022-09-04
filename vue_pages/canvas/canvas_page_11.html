@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>canvas demo</title>
+  </head>
+  <body>
+    <h1>Canvas Demo: Invert Image</h1>
+    <div id="app">
+      <canvas id="canvas" width="1300" height="450"></canvas>
+      <div>
+        <button @click="original">Reset</button>
+        <button @click="onInvert">Invert</button>
+        <button @click="onGrayscale">Grayscale</button>
+        <button @click="onSave">Save</button>
+      </div>
+      <img :src="imgDataUrl" :v-show="imgDataUrl.length" />
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          canvas: undefined,
+          ctx: undefined,
+          img: undefined,
+          imgDataUrl: '',
+        }
+      },
+      methods: {
+        draw() {
+          let img = new Image()
+          img.onload = () => {
+            this.img = img
+            this.original()
+          }
+          img.crossOrigin = 'anonymous'
+          img.src =
+            'https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naIOJRwXOYdcA3zuj7wB5tpNTBugDoXp8ZMXibcMERXiagmK1SgTQcEBDcQHmg5AVbB2kXczcFFvpr0Q/640'
+        },
+        original() {
+          this.ctx.drawImage(this.img, 0, 0)
+        },
+        onInvert() {
+          this.original()
+          let width = this.canvas.width
+          let height = this.canvas.height
+          const imageData = this.ctx.getImageData(0, 0, width, height)
+          const data = imageData.data
+          for (let i = 0; i < data.length; i += 4) {
+            data[i] = 255 - data[i] // red
+            data[i + 1] = 255 - data[i + 1] // green
+            data[i + 2] = 255 - data[i + 2] // blue
+          }
+          this.ctx.putImageData(imageData, 0, 0) // 写入 image data
+        },
+        onGrayscale() {
+          this.original()
+          let width = this.canvas.width
+          let height = this.canvas.height
+          const imageData = this.ctx.getImageData(0, 0, width, height)
+          const data = imageData.data
+          for (let i = 0; i < data.length; i += 4) {
+            let avg = (data[i] + data[i + 1] + data[i + 2]) / 3
+            data[i] = avg // red
+            data[i + 1] = avg // green
+            data[i + 2] = avg // blue
+          }
+          this.ctx.putImageData(imageData, 0, 0)
+        },
+        onSave() {
+          console.log('save imgage as base64 data')
+          this.imgDataUrl = this.canvas.toDataURL('image/png')
+          // let quality = 1
+          // this.imgDataUrl = this.canvas.toDataURL('image/jpeg', quality) // quality: 0 - 1
+        },
+      },
+      mounted() {
+        console.log('init canvas')
+        this.canvas = document.getElementById('canvas')
+        this.ctx = this.canvas.getContext('2d')
+        this.draw()
+      },
+    })
+  </script>
+</html>
