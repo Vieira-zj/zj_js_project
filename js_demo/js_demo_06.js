@@ -476,6 +476,7 @@ if (isDemo15Run) {
     })();
 }
 
+
 // demo 16, fn in object
 var isDemo16Run = false;
 if (isDemo16Run) {

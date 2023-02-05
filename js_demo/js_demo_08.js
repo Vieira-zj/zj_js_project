@@ -78,7 +78,7 @@ function jsDemo02 () {
 }
 
 
-// demo03, map
+// demo03, map()
 function jsDemo03 () {
   (function () {
     let values = [1, 2, 3]
@@ -349,7 +349,7 @@ function jsDemo14 () {
   // 原型链
   console.log(Object.getPrototypeOf(Object.prototype))
 
-  // JSON数据格式只支持null, 不支持undefined
+  // JSON 数据格式只支持 null, 不支持 undefined
   console.log(JSON.stringify({ 'a': undefined, 'b': null }))
 
   // 正则表达式，匹配失败
@@ -359,7 +359,7 @@ function jsDemo14 () {
 
 // demo15, put kv for object
 function jsDemo15 () {
-  putkv = (obj, k, v) => {
+  let putkv = (obj, k, v) => {
     return { ...obj, [k]: v }
   }
 
@@ -378,7 +378,99 @@ function jsDemo15 () {
   console.log(JSON.stringify(obj, null, 2))
 }
 
+
+// demo16, map and array
+function jsDemo16 () {
+  // init map
+  // map 接受任何类型的键，object 键必须是字符串或符号（Symbol）
+  let obj = { 'a': 'a' }
+  let fn = () => 'key'
+  // 使用数组语法一次初始化多个值
+  let map = new Map([[123, true], [true, 123], [obj, 'object'], [fn, 'function']])
+
+  console.log(map.keys())
+  console.log(map.get(obj))
+  console.log(map.get(fn))
+  // 对象和函数是按引用存储的，所以 {'a':'a'} 和 obj 是不同的对象
+  console.log(map.get({ 'a': 'a' })) // undefined
+  console.log()
+
+  // init array
+  map = new Map([[1, 'one'], [2, 'two']])
+  let arr = Array.from(map)
+  console.log(arr)
+
+  let newArr = [...map]
+  console.log(newArr)
+}
+
+
+// demo17, map and object
+function jsDemo17 () {
+  // map
+  map = new Map()
+  map.set(0, 'zero').set(1, 'one')
+  for (const key of map.keys()) {
+    console.log(key)
+  }
+  for (const [key, value] of map) {
+    console.log(`key: ${key}, value: ${value}`)
+  }
+  map.forEach((value, key) => {
+    console.log(`key: ${key}, value: ${value}`)
+  })
+
+  console.log(map.size)
+  console.log()
+
+  // object
+  obj = { 0: 'zero', 1: 'one' }
+  for (let key in obj) {
+    console.log(`key: ${key}, value: ${obj[key]}`)
+  }
+  Object.entries(obj).forEach(item => {
+    console.log(`key: ${item[0]}, value: ${item[1]}`)
+  })
+
+  console.log(Object.keys(obj).length)
+}
+
+
+// demo18, distinct for array
+function jsDemo18 () {
+  const books = [
+    { id: 1, title: 'How To Win Friends And Influence People', author: 'Dale Carnegie' },
+    { id: 1, title: 'How To Win Friends And Influence People', author: 'Dale Carnegie' },
+    { id: 2, title: 'The Alchemist', author: 'Paulo Coelho' },
+  ]
+
+  let map = new Map(books.map(item => [item.id, item]))
+  let uniqueBooks = [...map.values()]
+  console.log(uniqueBooks)
+}
+
+
+// demo19, reduce()
+function jsDemo19 () {
+  const shoppintCart = [
+    { price: 10, amount: 1 },
+    { price: 15, amount: 3 },
+    { price: 20, amount: 2 },
+  ]
+  let result = shoppintCart.reduce(
+    (accumulator, currentItem) => {
+      return {
+        totalItems: accumulator.totalItems + currentItem.amount,
+        totalPrice: accumulator.totalPrice + currentItem.price,
+      }
+    },
+    { totalItems: 0, totalPrice: 0 }
+  )
+  console.log(result)
+}
+
+
 if (require.main === module) {
-  jsDemo15()
+  jsDemo18()
   console.log(__filename, 'DONE.')
 }
