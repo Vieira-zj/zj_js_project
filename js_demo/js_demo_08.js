@@ -470,7 +470,38 @@ function jsDemo19 () {
 }
 
 
+// demo20, iterator
+function jsDemo20 () {
+  // js 中都是引用传递
+  const products = [
+    { price: 10, amount: 1 },
+    { price: 15, amount: 3 },
+    { price: 20, amount: 2 },
+  ]
+
+  for (let p of products) {
+    if (p.price === 15) {
+      p = { price: 16, amount: 6 } // no effect
+    } else {
+      p.amount += 1
+    }
+  }
+  products.forEach(item => console.log(item))
+  console.log()
+
+  for (let i = 0; i < products.length; i++) {
+    p = products[i]
+    if (p.price === 15) {
+      products[i] = { price: 29, amount: 9 } // take effect
+    } else {
+      p.amount += 1
+    }
+  }
+  products.forEach(item => console.log(item))
+}
+
+
 if (require.main === module) {
-  jsDemo18()
+  jsDemo20()
   console.log(__filename, 'DONE.')
 }
