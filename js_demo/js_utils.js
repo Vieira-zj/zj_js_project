@@ -104,6 +104,27 @@ const dayOfYear = (date) => Math.floor((date - new Date(date.getFullYear(), 0, 0
 // 计算2个日期之间相差多少天
 const dayDiff = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86400000)
 
+// convert timestamp to date
+const timestampToDate = (ts) => {
+  if (!ts) {
+    return 'null'
+  }
+  let date = new Date(ts)
+  let year = date.getFullYear()
+  let month = formatDateItem(date.getMonth() + 1)
+  let day = formatDateItem(date.getDate())
+  let hours = formatDateItem(date.getHours())
+  let minutes = formatDateItem(date.getMinutes())
+  let seconds = formatDateItem(date.getSeconds())
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+}
+
+const formatDateItem = (item) => {
+  if (item < 10) {
+    return '0' + item
+  }
+  return item
+}
 
 if (require.main === module) {
   console.log('average:', average(1, 2, 3, 4))
@@ -120,6 +141,8 @@ if (require.main === module) {
   // console.log('date validate:', isDateValid("December 17, 1995 03:24:00"))
   // console.log('day of year:', dayOfYear(new Date()))
   // console.log('day diff:', dayDiff(new Date("2020-10-21"), new Date("2021-10-22")))
+
+  console.log('date:', timestampToDate(1681353475358))
 
   console.log(__filename, 'DONE.')
 }
