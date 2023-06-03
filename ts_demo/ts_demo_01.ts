@@ -1,13 +1,13 @@
 /**
- * Create at 2022.1.23
+ * Create at 2022-1-23
  *
  */
 
 // demo01, var tag: ! and ?
 function tsdemo01(): void {
   class MyClass {
-    name!: string
-    age?: number
+    name!: string // name 不为空
+    age?: number  // age 属性有可能不存在
     private gender = 'male'
     getGender() {
       return this.gender
@@ -24,7 +24,7 @@ function tsdemo01(): void {
 }
 
 // demo02, 类型断言
-function tsdemo02(): void {
+function tsdemo0201(): void {
   // in
   interface Bird {
     sing(): void
@@ -40,14 +40,16 @@ function tsdemo02(): void {
 
   function trainAnimal(animial: Bird | Dog) {
     if ('bark' in animial) {
-      ;(animial as Dog).bark()
+      ; (animial as Dog).bark()
     } else {
-      ;(animial as Bird).sing()
+      ; (animial as Bird).sing()
     }
   }
   let dog = new MyDog()
   trainAnimal(dog)
+}
 
+function tsdemo0202(): void {
   // typeof 基础类型
   function add<T>(first: T, second: T) {
     if (typeof first === 'number' && typeof second === 'number') {
@@ -62,7 +64,7 @@ function tsdemo02(): void {
 
   // instanceof 引用类型
   class NumberObj {
-    constructor(public count: number) {}
+    constructor(public count: number) { }
   }
 
   function addObj(first: Object | NumberObj, second: Object | NumberObj) {
@@ -104,7 +106,7 @@ function tsdemo05(): void {
     name: string
   }
   class DataManager<T extends Item> {
-    constructor(public data: T[]) {}
+    constructor(public data: T[]) { }
     getItem(index: number): string {
       return this.data[index].name
     }
@@ -122,7 +124,7 @@ function tsdemo06(): void {
     gender: string
   }
   class Teacher {
-    constructor(public info: Person) {}
+    constructor(public info: Person) { }
     getInfo<T extends keyof Person>(key: T): Person[T] {
       return this.info[key]
     }
@@ -162,7 +164,7 @@ function tsdemo08(): void {
         }
       }
     }
-    return function (constructor: any) {}
+    return function (constructor: any) { }
   }
 
   @testDecorator(true)
@@ -173,7 +175,7 @@ function tsdemo08(): void {
   }
   console.log('start test')
   let test = new Test()
-  ;(test as any).print()
+    ; (test as any).print()
 }
 
 // demo09, 类装饰器
@@ -216,7 +218,7 @@ function tsdemo10(): void {
   }
 
   class Test {
-    constructor(public name: string) {}
+    constructor(public name: string) { }
     @getNameDecorator
     getName() {
       return this.name

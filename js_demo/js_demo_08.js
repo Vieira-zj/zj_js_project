@@ -405,7 +405,7 @@ function jsDemo16 () {
 }
 
 
-// demo17, map and object
+// demo17, iterator of map, object
 function jsDemo17 () {
   // map
   map = new Map()
@@ -428,11 +428,17 @@ function jsDemo17 () {
   for (let key in obj) {
     console.log(`key: ${key}, value: ${obj[key]}`)
   }
+  console.log()
+
+  Object.keys(obj).forEach(key => {
+    console.log('key:', key)
+  })
+  Object.values(obj).forEach(val => {
+    console.log('value:', val)
+  })
   Object.entries(obj).forEach(item => {
     console.log(`key: ${item[0]}, value: ${item[1]}`)
   })
-
-  console.log(Object.keys(obj).length)
 }
 
 
@@ -502,6 +508,6 @@ function jsDemo20 () {
 
 
 if (require.main === module) {
-  jsDemo20()
+  jsDemo17()
   console.log(__filename, 'DONE.')
 }

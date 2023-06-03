@@ -3,8 +3,10 @@
  * https://www.tutorialspoint.com/typescript/index.htm
  */
 
-var message: string = 'Hello World'
-console.log(message)
+function helloWorld(): void {
+  var message: string = 'Hello World'
+  console.log(message)
+}
 
 /**
  * 基本类型
@@ -15,21 +17,34 @@ console.log(message)
 // void 表示类型为 undefined 或 null
 // 例子：void 用于表示函数没有返回值，只是执行某些操作
 // 一个没有显式返回的函数，默认 return undefined. 符合 void 类型只能被赋值为 undefined 或 null
-function show(): void {
-  console.log('typescript')
+function demo01(): void {
+  function show(): void {
+    console.log('typescript')
+  }
+  show()
 }
 
 // never 表示永远不存在值
 // 例子：一个只会抛出异常的函数，它的返回值并不存在
-function error(): never {
-  throw new Error('mock error')
+function demo02(): void {
+  function error(): never {
+    throw new Error('mock error')
+  }
+
+  try {
+    error()
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 // any 表示可能为任何类型
 // 例子：不确定变量的类型或类型是动态的
-let dyn: any = 'dyn_var'
-dyn = true
-console.log(dyn)
+function demo03(): void {
+  let dyn: any = 'dyn_var'
+  dyn = true
+  console.log(dyn)
+}
 
 /**
  * 引用类型
@@ -38,44 +53,54 @@ console.log(dyn)
  */
 
 // 数组泛型
-let arr: Array<string> = ['one', 'two', 'three']
-arr.push('four')
-arr.forEach((item) => console.log(item))
-
-// 只读数组 不存在修改数组的方法
-let ro: ReadonlyArray<number> = [1, 2, 3]
+function demo04(): void {
+  let arr: Array<string> = ['one', 'two', 'three']
+  arr.push('four')
+  arr.forEach((item) => console.log(item))
+}
 
 // 对象object 除基本类型外的引用类型
 function myPrint(o: object) {
   console.log(o.toString())
 }
-myPrint(ro)
+
+// 只读数组 不存在修改数组的方法
+function demo05(): void {
+  let ro: ReadonlyArray<number> = [1, 2, 3]
+  myPrint(ro)
+}
 
 // 元组 由定长数组构成，数组中的元素是某（些）类型
-let x: [string, number]
-x = ['one', 1]
-myPrint(x)
+function demo06(): void {
+  let x: [string, number]
+  x = ['one', 1]
+  myPrint(x)
+}
 
 // 枚举 默认枚举值从 0 开始，可以手动赋值
-enum Color {
-  Red,
-  Green,
-  Blue,
+function demo07(): void {
+  enum Color {
+    Red,
+    Green,
+    Blue,
+  }
+
+  let color: Color = Color.Green
+  console.log(color)
 }
 
-let color: Color = Color.Green
-console.log(color)
+function demo08(): void {
+  enum Animal {
+    Dog = 2,
+    Cat,
+    Bird,
+  }
 
-enum Animal {
-  Dog = 2,
-  Cat,
-  Birl,
+  let animal: Animal = Animal.Cat
+  console.log(animal)
+  let animalName = Animal[4]
+  console.log(animalName)
 }
-
-let animal: Animal = Animal.Cat
-console.log(animal)
-let animalName = Animal[4]
-console.log(animalName)
 
 /**
  * 类型断言
@@ -83,14 +108,18 @@ console.log(animalName)
  * 断言发生在两种类型存在联系的情况，它并不是将一种类型转换成另一种类型。
  */
 
-let str: any = 'test'
-let strLen = (str as string).length
-console.log(strLen)
+function demo09(): void {
+  let str: any = 'test'
+  let strLen = (str as string).length
+  console.log(strLen)
+}
 
-// 联合类型
-let foo: string | number = 'typescript'
-let answer: string = foo as string
-console.log(answer)
+function demo10(): void {
+  // 联合类型
+  let foo: string | number = 'typescript'
+  let answer: string = foo as string
+  console.log(answer)
+}
 
 /**
  * 接口
@@ -98,118 +127,141 @@ console.log(answer)
  */
 
 // 匿名接口
-function getName(o: { name: string }): string {
-  return o.name
+function demo11(): void {
+  function getName(o: { name: string }): string {
+    return o.name
+  }
+
+  getName({ name: 'foo' })
 }
 
 // 可选属性
-interface Student {
-  name: string
-  age?: number
-}
+function demo12(): void {
+  interface Student {
+    name: string
+    age?: number
+  }
 
-function getStudentName(s: Student): string {
-  return s.name
-}
+  function getStudentName(s: Student): string {
+    return s.name
+  }
 
-let s: Student = { name: 'Foo' }
-console.log(JSON.stringify(s, null, 2))
-console.log(getStudentName(s))
+  let s: Student = { name: 'Foo' }
+  console.log(JSON.stringify(s, null, 2))
+  console.log(getStudentName(s))
+}
 
 // 只读属性
-interface Point {
-  readonly x: number
-  readonly y: number
-}
+function demo13(): void {
+  interface Point {
+    readonly x: number
+    readonly y: number
+  }
 
-let p: Point = { x: 10, y: 20 }
-console.log(p)
+  let p: Point = { x: 10, y: 20 }
+  console.log(p)
+}
 
 // 字符串索引类型
-interface Point1 {
-  [prop: string]: number
+function demo14(): void {
+  interface Point1 {
+    [prop: string]: number
+  }
+
+  let p1: Point1 = { x: 1, y: 2 }
+  console.log(p1)
 }
 
-let p1: Point1 = { x: 1, y: 2 }
-console.log(p1)
+function demo15(): void {
+  // 数字索引类型
+  interface StringArray {
+    [index: number]: string
+  }
 
-// 数字索引类型
-interface StringArray {
-  [index: number]: string
+  let myArray: StringArray = ['js', 'ts', 'java']
+  console.log(myArray)
 }
-
-let myArray: StringArray = ['js', 'ts', 'java']
-console.log(myArray)
 
 // 函数类型
-interface Sum {
-  (a: number, b: number): number
-}
+function demo16(): void {
+  interface Sum {
+    (a: number, b: number): number
+  }
 
-let sum: Sum = function (num1, num2) {
-  return num1 + num2
+  let sum: Sum = function (num1, num2) {
+    return num1 + num2
+  }
 }
 
 // 类类型 类的实例部分类型
-interface iPerson {
-  age: number
-  getAge(): number
-}
+function demo17(): void {
+  interface iPerson {
+    age: number
+    getAge(): number
+  }
 
-class Person implements iPerson {
-  age: number
-  constructor(age: number) {
-    this.age = age
+  class Person implements iPerson {
+    age: number
+    constructor(age: number) {
+      this.age = age
+    }
+    getAge(): number {
+      return this.age
+    }
   }
-  getAge(): number {
-    return this.age
-  }
+
+  let p: Person = new Person(31);
+  console.log('age:', p.getAge())
 }
 
 // 接口继承
-interface TwoD {
-  x: number
-  y: number
-}
+function demo18(): void {
+  interface TwoD {
+    x: number
+    y: number
+  }
 
-interface ThreeD extends TwoD {
-  z: number
-}
+  interface ThreeD extends TwoD {
+    z: number
+  }
 
-let p2: ThreeD = { x: 1, y: 2, z: 3 }
-console.log(p2)
+  let p2: ThreeD = { x: 1, y: 2, z: 3 }
+  console.log(p2)
+}
 
 // 接口继承类
-class Rect {
-  x: number
-  y: number
-  constructor(x: number, y: number) {
-    this.x = x
-    this.y = y
+function demo19(): void {
+  class Rect {
+    x: number
+    y: number
+    constructor(x: number, y: number) {
+      this.x = x
+      this.y = y
+    }
+    getRect(): number {
+      return this.x * this.y
+    }
   }
-  getRect(): number {
-    return this.x * this.y
-  }
-}
 
-interface iRect extends Rect {
-  z: number
-  getCube(): number
-}
-
-class Cube extends Rect implements iRect {
-  z: number
-  constructor(x: number, y: number, z: number) {
-    super(x, y)
-    this.z = z
+  interface iRect extends Rect {
+    z: number
+    getCube(): number
   }
-  getCube() {
-    return this.x * this.y * this.z
-  }
-}
 
-let cube: Cube = new Cube(2, 3, 4)
-console.log('results:', cube.getCube())
+  class Cube extends Rect implements iRect {
+    z: number
+    constructor(x: number, y: number, z: number) {
+      super(x, y)
+      this.z = z
+    }
+    getCube() {
+      return this.x * this.y * this.z
+    }
+  }
+
+  let cube: Cube = new Cube(2, 3, 4)
+  console.log('results:', cube.getCube())
+}
 
 /**
  * 类
@@ -219,75 +271,88 @@ console.log('results:', cube.getCube())
  */
 
 // 类的成员修饰符默认是 public, 也可以显式声明
-class A {
-  public a: string
-  private b: string
-  constructor(a: string, b: string) {
-    this.a = a
-    this.b = b
+function demo20(): void {
+  class A {
+    public a: string
+    private b: string
+    constructor(a: string, b: string) {
+      this.a = a
+      this.b = b
+    }
+    getB(): string {
+      return this.b
+    }
   }
-  getB(): string {
-    return this.b
-  }
+
+  let a: A = new A('one', 'two')
+  console.log(a.getB())
 }
 
 // static
-class Rect2 {
-  x: number
-  y: number
-  static version: number = 1
-  constructor(x: number, y: number) {
-    this.x = x
-    this.y = y
+function demo21(): void {
+  class Rect2 {
+    x: number
+    y: number
+    static version: number = 1
+    constructor(x: number, y: number) {
+      this.x = x
+      this.y = y
+    }
+    static getVersion() {
+      return Rect2.version
+    }
   }
-  static getVersion() {
-    return Rect2.version
-  }
+
+  console.log(Rect2.getVersion())
 }
 
 // 抽象类 不能实例化
-abstract class Rect3 {
-  x: number
-  y: number
-  constructor(x: number, y: number) {
-    this.x = x
-    this.y = y
+function demo22(): void {
+  abstract class Rect3 {
+    x: number
+    y: number
+    constructor(x: number, y: number) {
+      this.x = x
+      this.y = y
+    }
+    abstract getRect(): number
   }
-  abstract getRect(): number
-}
 
-class Cube3 extends Rect3 {
-  z: number
-  constructor(x: number, y: number, z: number) {
-    super(x, y)
-    this.z = z
+  class Cube3 extends Rect3 {
+    z: number
+    constructor(x: number, y: number, z: number) {
+      super(x, y)
+      this.z = z
+    }
+    getRect(): number {
+      return this.x * this.y * this.z
+    }
   }
-  getRect(): number {
-    return this.x * this.y * this.z
-  }
-}
 
-let cube3 = new Cube3(1, 2, 3)
-console.log('cube3:', cube3.getRect())
+  let cube3 = new Cube3(1, 2, 3)
+  console.log('cube3:', cube3.getRect())
+}
 
 // getter 和 setter
-class Name1 {
-  constructor(public first: string, public last: string) {}
-  get fullName(): string {
-    return `${this.first} ${this.last}`
+function demo23(): void {
+  class Name1 {
+    constructor(public first: string, public last: string) { }
+    get fullName(): string {
+      return `${this.first} ${this.last}`
+    }
+    set fullName(name: string) {
+      let items = name.split(' ')
+      this.first = items[0]
+      this.last = items[1]
+    }
   }
-  set fullName(name: string) {
-    let items = name.split(' ')
-    this.first = items[0]
-    this.last = items[1]
-  }
+
+  let name1 = new Name1('foo', 'bar')
+  console.log(name1.fullName)
+
+  name1.fullName = 'bar foo'
+  console.log(name1.fullName)
 }
-
-let name1 = new Name1('foo', 'bar')
-console.log(name1.fullName)
-
-name1.fullName = 'bar foo'
-console.log(name1.fullName)
 
 /**
  * 函数
@@ -296,57 +361,66 @@ console.log(name1.fullName)
 
 // 类型推断
 // 省略左侧类型描述
-let sum1 = function (a: number, b: number): number {
-  return a + b
+function demo24(): void {
+  let sum1 = function (a: number, b: number): number {
+    return a + b
+  }
+  console.log(sum1(1, 2))
 }
-console.log(sum1(1, 2))
 
 // 省略右侧类型描述
-let sum2: (a: number, b: number) => number = function (a, b) {
-  return a + b
+function demo25(): void {
+  let sum2: (a: number, b: number) => number = function (a, b) {
+    return a + b
+  }
+  console.log(sum2(1, 2))
 }
 
 // 可选参数
-function foo1(a: number, b?: number): number {
-  if (b) {
-    return b
-  } else {
-    return a
+function demo26(): void {
+  function foo1(a: number, b?: number): number {
+    return b ? b : a
   }
+  console.log(foo1(1))
 }
-console.log(foo1(1))
 
 // 默认参数
 // 在 TS 中，默认参数的类型是：默认值和 undefined 的联合类型
-function foo2(a: number, b: number = 1): number {
-  return a + b
+function demo27(): void {
+  function foo2(a: number, b: number = 1): number {
+    return a + b
+  }
+  console.log(foo2(1))
 }
-console.log(foo2(1))
 
 // 剩余参数
-function foo3(a: number, ...rest: number[]): number {
-  return a + rest.reduce((a, b) => a + b)
+function demo28(): void {
+  function foo3(a: number, ...rest: number[]): number {
+    return a + rest.reduce((a, b) => a + b)
+  }
+  console.log(foo3(1, 2, 3))
 }
-console.log(foo3(1, 2, 3))
 
 // 函数重载
-function foo4(a: number): boolean
-function foo4(a: boolean): number
-function foo4(a: any): undefined
+function demo29(): void {
+  function foo4(a: number): boolean
+  function foo4(a: boolean): number
+  function foo4(a: any): undefined
 
-// 并不是重载，而是具体的函数声明，所以例子中只有三个函数重载
-function foo4(a: any): any {
-  if (typeof a === 'number') {
-    return true
+  // 并不是重载，而是具体的函数声明，所以例子中只有三个函数重载
+  function foo4(a: any): any {
+    if (typeof a === 'number') {
+      return true
+    }
+    if (typeof a === 'boolean') {
+      return 0
+    }
+    return undefined
   }
-  if (typeof a === 'boolean') {
-    return 0
-  }
-  return undefined
+
+  console.log(foo4(1))
+  console.log(foo4(true))
 }
-
-console.log(foo4(1))
-console.log(foo4(true))
 
 /**
  * 泛型 类型变量
@@ -354,49 +428,64 @@ console.log(foo4(true))
  */
 
 // 泛型函数
-function foo5<T>(a: T): T {
-  return a
+function demo30(): void {
+  function foo5<T>(a: T): T {
+    return a
+  }
+
+  console.log(foo5<number>(1))
+  console.log(
+    foo5<number[]>([1, 2, 3])
+  )
 }
-console.log(foo5<number>(1))
-console.log(
-  foo5<number[]>([1, 2, 3])
-)
 
 // 泛型接口
-interface iFoo<T> {
-  (arg: T): T
+function demo31(): void {
+  interface iFoo<T> {
+    (arg: T): T
+  }
+
+  let hello: iFoo<string> = (name) => 'hello: ' + name
+  console.log(hello('foo'))
 }
 
 // 泛型类
-class Rect4<T> {
-  x: T
-  y: T
-  constructor(x: T, y: T) {
-    this.x = x
-    this.y = y
+function demo32(): void {
+  class Rect4<T> {
+    x: T
+    y: T
+    constructor(x: T, y: T) {
+      this.x = x
+      this.y = y
+    }
+    getRect!: () => T
   }
-  getRect!: () => T
-}
 
-let rect4 = new Rect4<number>(2, 3)
-rect4.getRect = function () {
-  return this.x * this.y
+  let rect4 = new Rect4<number>(2, 3)
+  rect4.getRect = function () {
+    return this.x * this.y
+  }
+  console.log(rect4.getRect())
 }
-console.log(rect4.getRect())
 
 /**
  * namespace 命名空间
  *
  */
 
-let skip = true
-if (!skip) {
-  class Page {
-    constructor() {
-      console.log('this is page')
-      new Content.Header()
-      new Content.Text()
+function demo33(): void {
+  let skip = true
+  if (!skip) {
+    class Page {
+      constructor() {
+        console.log('this is page')
+        new Content.Header()
+        new Content.Text()
+      }
     }
+    new Page()
   }
-  new Page()
 }
+
+demo32()
+console.log('ts hello demo done')
