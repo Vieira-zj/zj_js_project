@@ -507,7 +507,36 @@ function jsDemo20 () {
 }
 
 
+// demo21, flat paths to tree
+function jsDemo21 () {
+  let paths = [
+    'shopee.marketplace.order.qa.2e2test',
+    'shopee.marketplace.order.qa.automation',
+    'shopee.marketplace.order.eff.replayer',
+    'shopee.marketplace.promotion.eff.goc',
+  ]
+
+  let root = {}
+  for (let path of paths) {
+    let cur = root
+    let level = 1
+    for (let item of path.split('.')) {
+      let key = `l${level} ${item}`
+      if (!Object.keys(cur).includes(key)) {
+        cur[key] = {}
+      }
+      cur = cur[key]
+      level += 1
+    }
+    cur['id'] = path
+    cur['desc'] = 'leaf node'
+  }
+
+  console.log(JSON.stringify(root, null, 2))
+}
+
+
 if (require.main === module) {
-  jsDemo17()
+  jsDemo21()
   console.log(__filename, 'DONE.')
 }
