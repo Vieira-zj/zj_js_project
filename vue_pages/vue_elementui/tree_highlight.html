@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>tree highlight demo</title>
+    <style>
+      .default-border {
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+      }
+    </style>
+    <link rel="stylesheet" href="../css/element.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <h3 style="text-align: center">Tree Highlight Demo</h3>
+      <el-divider></el-divider>
+      <div class="default-border" style="width: 80%; margin: auto">
+        <el-tree
+          ref="tree"
+          node-key="id"
+          default-expand-all
+          highlight-current
+          :data="tree.data"
+          :props="tree.props"
+          @node-click="onClickTreeNode"
+        >
+          <span slot-scope="{ node, data }">
+            <span>{{ node.label }}: </span>
+            <!-- <span>{{ data.key }}: </span> -->
+            <span v-html="data.value"></span>
+          </span>
+        </el-tree>
+      </div>
+    </div>
+  </body>
+  <script src="../modules/vue.js"></script>
+  <script src="../modules/element.js"></script>
+  <script>
+    const getHighlightText = (text) => {
+      return `<span style="background-color: yellow">${text}</span>`
+    }
+
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          tree: {
+            props: {
+              label: 'key',
+              children: 'children',
+            },
+            data: [
+              {
+                id: 1,
+                key: 'project',
+                value: 'payment',
+                children: [
+                  { id: 2, key: 'namespace', value: 'sbs' },
+                  {
+                    id: 3,
+                    key: 'namespace',
+                    value: getHighlightText('channel'),
+                  },
+                ],
+              },
+            ],
+          },
+        }
+      },
+      mounted() {
+        console.info('page mounted')
+      },
+      methods: {
+        onClickTreeNode(node) {
+          console.info('click node:', node.key, node.value)
+        },
+      },
+    })
+  </script>
+</html>
