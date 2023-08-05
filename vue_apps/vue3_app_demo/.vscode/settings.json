@@ -1,0 +1,19 @@
+{
+  "window.zoomLevel": 0,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  "eslint.validate": ["html", "javascript", "vue"],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true
+}
