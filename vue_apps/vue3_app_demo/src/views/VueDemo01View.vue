@@ -2,14 +2,14 @@
 import { computed, reactive, ref, onMounted } from 'vue'
 
 // 入门
-const clickEvent = "click"
+const clickEvent = 'click'
 const count = ref(0)
 function increment () {
   count.value++
 }
 
 onMounted(() => {
-  console.log(`The initial count is ${count.value}`)
+  console.log(`The initial count is ${count.value}.`)
 })
 
 // 原始 HTML
@@ -56,7 +56,24 @@ const isActive = ref(true)
 const hasError = ref(false)
 
 // 绑定内联样式
-// TODO:
+const activeColor = ref('red')
+const fontSize = ref(14)
+const styleObject = reactive({
+  color: 'red',
+  fontSize: '12px'
+})
+
+// 条件渲染
+const awesome = ref(true)
+
+// 列表渲染
+const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
+
+const myObject = reactive({
+  title: 'How to do lists in Vue',
+  author: 'Jane Doe',
+  publishedAt: '2016-04-10'
+})
 </script>
 
 <template>
@@ -90,12 +107,30 @@ const hasError = ref(false)
     <hr class="div-line" />
 
     <!-- part3 -->
-    <div :class="{ active: isActive, 'text-danger': hasError }">Sytle class bind</div>
+    <p :class="{ active: isActive, 'text-danger': hasError }">Class bind</p>
+    <p :style="{ color: activeColor, fontSize: fontSize + 'px' }">Style bind</p>
+    <p :style="styleObject">Style object bind</p>
     <hr class="div-line" />
+
+    <button @click="awesome = !awesome">Toggle</button>
+    <template v-if="awesome">
+      <h3>Vue is awesome!</h3>
+      <p>One more thing</p>
+    </template>
+    <h3 v-else>Oh no</h3>
+    <hr class="div-line" />
+
+    <li v-for="(item, idx) of items" :key="item.message">
+      {{ idx }} - {{ item.message }}
+    </li>
+    <hr class="div-line" />
+    <li v-for="(value, key, idx) of myObject" :key="key">
+      {{ idx }} - {{ key }}:{{ value }}
+    </li>
   </div>
 </template>
 
-<style>
+<style scoped>
 .div-line {
   margin-top: 10px;
   margin-bottom: 10px;
