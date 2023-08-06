@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import BtnCounter from '../components/BtnCounter.vue'
+import BtnCounter from '../../components/BtnCounter.vue'
 
 // 事件处理
 const name = ref('vue.js')
