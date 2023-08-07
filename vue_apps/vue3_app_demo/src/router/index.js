@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VueHomeView from '../views/vue/HomeView.vue'
-import ABTestHomeView from '../views/abtest/HomeView.vue'
+import VueHomeView from '@/views/vue/HomeView.vue'
+import ABTestHomeView from '@/views/abtest/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      alias: ['/static/', '/static/index.html', '/pubilc/', '/pubilc/index.html'],
       name: 'home',
       redirect: '/vue',
     },
@@ -21,28 +22,29 @@ const router = createRouter({
           // route level code-splitting
           // this generates a separate chunk (About.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import('../views/vue/Demo01View.vue'),
+          component: () => import('@/views/vue/Demo01View.vue'),
         },
         {
           path: 'demo02',
           name: 'vuedemo02',
-          component: () => import('../views/vue/Demo02View.vue'),
+          component: () => import('@/views/vue/Demo02View.vue'),
         },
         {
           path: 'elem',
           name: 'elementplus',
-          component: () => import('../views/vue/ElemDemoView.vue'),
+          component: () => import('@/views/vue/ElemDemoView.vue'),
         },
         {
           path: 'glogin',
           name: 'googlelogin',
-          component: () => import('../views/vue/GloginView.vue'),
+          component: () => import('@/views/vue/GloginView.vue'),
         },
       ],
     },
     {
       path: '/abtest',
       name: 'abtest',
+      alias: ['/static/abtest', '/pubilc/abtest'],
       component: ABTestHomeView,
       children: [
         {
