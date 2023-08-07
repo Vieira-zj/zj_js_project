@@ -9,5 +9,31 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script>
+      function decodeJwt(token) {
+        let base64Payload = token.split('.')[1]
+        let payload = decodeURIComponent(
+          atob(base64Payload)
+            .split('')
+            .map(function (c) {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            })
+            .join('')
+        )
+        return JSON.parse(payload)
+      }
+
+      // refer: https://developers.google.com/identity/gsi/web/guides/handle-credential-responses-js-functions?hl=zh-cn
+      function onGoogleSignIn(resp) {
+        const respPayload = decodeJwt(resp.credential)
+        console.log('ID: ' + respPayload.sub)
+        console.log('Full Name: ' + respPayload.name)
+        console.log('Given Name: ' + respPayload.given_name)
+        console.log('Family Name: ' + respPayload.family_name)
+        console.log('Image URL: ' + respPayload.picture)
+        console.log('Email: ' + respPayload.email)
+      }
+    </script>
   </body>
 </html>

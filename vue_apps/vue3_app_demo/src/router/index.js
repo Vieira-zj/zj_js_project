@@ -44,7 +44,6 @@ const router = createRouter({
     {
       path: '/abtest',
       name: 'abtest',
-      alias: ['/static/abtest', '/pubilc/abtest'],
       component: ABTestHomeView,
       children: [
         {
