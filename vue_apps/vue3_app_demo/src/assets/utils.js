@@ -1,11 +1,40 @@
 import axios from 'axios'
 
-/*eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 
 // helper
 
 function getScreenHeight () {
   return window.screen.height
+}
+
+function deepCopy (obj) {
+  const str = JSON.stringify(obj)
+  return JSON.parse(str)
+}
+
+function sleep (mills) {
+  return new Promise((resolve, _) => {
+    setTimeout(() => resolve(), mills)
+  })
+}
+
+// storage
+
+function localStorageSet (key, value) {
+  localStorage.setItem(key, value)
+}
+
+function localStorageGet (key) {
+  return localStorage.getItem(key)
+}
+
+function sessionStorageSet (key, value) {
+  window.sessionStorage.setItem(key, value)
+}
+
+function sessionStorageGet (key) {
+  return window.sessionStorage.getItem(key)
 }
 
 // rest api
