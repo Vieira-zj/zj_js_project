@@ -19,6 +19,17 @@ function sleep (mills) {
   })
 }
 
+// env
+
+// getRunEnv returns run env as "development" or "production".
+function getRunEnv () {
+  return import.meta.env.MODE
+}
+
+function isDevEnv () {
+  return import.meta.env.DEV
+}
+
 // storage
 
 function localStorageSet (key, value) {
@@ -39,10 +50,17 @@ function sessionStorageGet (key) {
 
 // rest api
 
-const devHost = 'http://localhost:5173/api'
+
+function getServerHost () {
+  if (isDevEnv()) {
+    // go proxy for cors
+    return 'http://localhost:5173/api'
+  }
+  return 'http://localhost:8081'
+}
 
 async function apiPingServer () {
-  const url = devHost + '/ping'
+  const url = getServerHost() + '/ping'
   try {
     const { data } = await axios.get(url)
     console.log('ping resp:', data.message)
@@ -52,6 +70,10 @@ async function apiPingServer () {
 }
 
 export {
+  getRunEnv,
+  isDevEnv,
   getScreenHeight,
+  deepCopy,
+  sleep,
   apiPingServer,
 }

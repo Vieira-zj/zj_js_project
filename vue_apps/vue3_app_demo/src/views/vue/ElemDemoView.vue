@@ -1,8 +1,10 @@
 <script setup>
-import { apiPingServer } from '@/assets/utils.js'
+import { getRunEnv, isDevEnv, apiPingServer } from '@/assets/utils.js'
 
 function onClickPrimaryLink () {
   console.log('onClickPrimaryLink')
+  console.log('run env:', getRunEnv())
+  console.log('is dev env:', isDevEnv())
 }
 
 async function onClickHealthCheck () {

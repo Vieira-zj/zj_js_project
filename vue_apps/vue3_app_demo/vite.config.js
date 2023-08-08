@@ -2,11 +2,19 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    // Note: should rename css.gz/js.gz back to css/js after compression.
+    viteCompression({
+      algorithm: 'gzip',
+      verbose: false,
+      deleteOriginFile: true,
+      threshold: 10240, // 10kb
+    }),
   ],
   resolve: {
     alias: {
