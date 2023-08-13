@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <h1>ABTest Result: todo</h1>
+    <h1>ABTest Result: TODO</h1>
   </div>
 </template>

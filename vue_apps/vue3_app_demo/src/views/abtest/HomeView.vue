@@ -6,13 +6,13 @@ import ABTestHeader from '../../components/ABTestHeader.vue'
 import ABTestAside from '../../components/ABTestAside.vue'
 
 const fullscreenLoading = ref(false)
-const project = reactive({
+const app = reactive({
   selected: '',
 })
 
-function onSelectProject (value) {
-  console.log('selected project:', value)
-  project.selected = value
+function onSelectApp (value) {
+  console.log('selected application:', value)
+  app.selected = value
 }
 </script>
 
@@ -26,16 +26,16 @@ function onSelectProject (value) {
       <el-container>
         <el-header>
           <div style="float: right; margin-top: 15px">
-            <ABTestHeader @select-project="onSelectProject" />
+            <ABTestHeader @select-app="onSelectApp" />
           </div>
         </el-header>
         <el-divider></el-divider>
 
         <el-main>
-          <h3 v-show="project.selected.length === 0" class="default-font-color" style="text-align: center">
+          <h3 v-show="app.selected.length === 0" class="main-header">
             请选择特定的项目
           </h3>
-          <div style="width: 80%; margin: auto" v-show="project.selected.length > 0">
+          <div style="width: 80%; margin: auto" v-show="app.selected.length > 0">
             <RouterView />
           </div>
         </el-main>
@@ -45,7 +45,8 @@ function onSelectProject (value) {
 </template>
 
 <style scoped>
-.default-font-color {
+.main-header {
   color: #606266;
+  text-align: center;
 }
 </style>

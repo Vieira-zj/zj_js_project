@@ -50,7 +50,6 @@ function sessionStorageGet (key) {
 
 // rest api
 
-
 function getServerHost () {
   if (isDevEnv()) {
     // go proxy for cors
