@@ -5,20 +5,83 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>hello vue</title>
   </head>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- refer: https://vuejs.org/guide/quick-start.html#using-vue-from-cdn -->
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
   <body>
     <div id="app">
       <h3>{{ title }}</h3>
+      <hr />
+
+      <p>
+        <button @click="increment">count: {{ count }}</button>
+      </p>
+      <hr />
+
+      <p>
+        Has published books:<br />
+        <span>{{ publishedMsg }}</span>
+      </p>
+      <p>
+        <li v-for="book in author.books" :key="book">{{ book }}</li>
+      </p>
+      <hr />
+
+      <p>
+        <span>Mouse position is at: {{ x }}, {{ y }}</span>
+      </p>
+      <hr />
+
+      <p>
+        <span>Here is a child component</span><br />
+        <Counter></Counter>
+      </p>
     </div>
   </body>
-  <script>
-    const { createApp, ref } = Vue
+  <script type="module">
+    import { createApp, ref, reactive, computed } from 'vue'
+    import { useMouse } from './modules/mouse.js'
+    import Counter from './components/counter.js?v=1'
 
-    createApp({
+    const app = createApp({
+      components: {
+        Counter,
+      },
       setup() {
         const title = ref('Hello Vue')
+
+        const count = ref(0)
+        function increment() {
+          count.value += 1
+        }
+
+        const author = reactive({
+          name: 'John Doe',
+          books: [
+            'Vue 2 - Advanced Guide',
+            'Vue 3 - Basic Guide',
+            'Vue 4 - The Mystery',
+          ],
+        })
+        const publishedMsg = computed(() => {
+          return author.books.length > 0 ? 'Yes' : 'No'
+        })
+
+        const { x, y } = useMouse()
+
         return {
           title,
+          count,
+          increment,
+          author,
+          publishedMsg,
+          x,
+          y,
         }
       },
     }).mount('#app')
