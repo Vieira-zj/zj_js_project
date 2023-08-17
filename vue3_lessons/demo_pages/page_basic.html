@@ -39,9 +39,12 @@
 
       <p>
         <span>Here is a child component</span><br />
-        <Counter></Counter>
+        <Counter init-value="3" @count-add="onCountAdd"></Counter>
       </p>
     </div>
+    <!-- vue component template (for debug) -->
+    <!-- Note: template should be outside "app" div -->
+    <!-- <template id="my-template-element"></template> -->
   </body>
   <script type="module">
     import { createApp, ref, reactive, computed } from 'vue'
@@ -74,14 +77,20 @@
 
         const { x, y } = useMouse()
 
+        // listen component event
+        function onCountAdd(count) {
+          console.log('inner count value:', count.value)
+        }
+
         return {
           title,
           count,
-          increment,
           author,
           publishedMsg,
           x,
           y,
+          increment,
+          onCountAdd,
         }
       },
     }).mount('#app')

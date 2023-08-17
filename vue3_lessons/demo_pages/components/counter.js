@@ -1,14 +1,28 @@
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export default {
-  setup () {
-    const count = ref(0)
-    return { count }
+  props: ['initValue'],
+  emits: ['countAdd'],
+  setup (props, ctx) {
+    onMounted(() => {
+      console.log('counter component mounted')
+    })
+
+    const count = ref(parseInt(props.initValue))
+    function onAdd () {
+      count.value++
+      ctx.emit('countAdd', count)
+    }
+
+    return {
+      count,
+      onAdd,
+    }
   },
   template: `
-    <button @click="count++">
+    <button @click="onAdd">
       You clicked me {{ count }} times
-    </button>`
+    </button>`,
   // Can also target an in-DOM template:
   // template: '#my-template-element'
 }
