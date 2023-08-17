@@ -10,25 +10,14 @@
       <sub-form :data="user"></sub-form>
       <p>name={{ user.name }}, age={{ user.age }}</p>
     </div>
-    <template id="subform">
-      <div>
-        <p>Form</p>
-        <hr />
-        <label for="name">UserName</label>
-        <input v-model="data.name" id="name" />
-        <label for="age">UserAge</label>
-        <input v-model="data.age" id="age" />
-      </div>
-    </template>
+    <!-- vue component templates -->
+    <!-- for debug: <template id="subform"></template> -->
   </body>
-  <script src="../modules/vue.js"></script>
+  <!-- refer: https://v2.vuejs.org/v2/guide/installation -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+  <script src="./components/subform.js"></script>
   <script>
-    Vue.component('sub-form', {
-      template: '#subform',
-      props: {
-        data: Object,
-      },
-    })
+    Vue.component('sub-form', SubForm)
 
     let app = new Vue({
       el: '#app',

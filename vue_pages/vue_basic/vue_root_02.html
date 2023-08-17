@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue组件 - v-bind修饰符sync</title>
+  </head>
+  <body>
+    <div id="app">
+      <updater :text.sync="msg">
+        <span slot="desc">
+          父组件向子组件传值，同时子组件触发方法，需要修改父组件传递过来的数据，这个时候我们可以使用
+          <b>.sync</b>
+        </span>
+      </updater>
+      <p>{{ msg }}</p>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+  <script src="./components/updater.js"></script>
+  <script>
+    Vue.component('updater', Updater)
+
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          msg: 'hello vue2 component',
+        }
+      },
+    })
+  </script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue组件 - es module import</title>
+  </head>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.esm.browser.js"
+      }
+    }
+  </script>
+
+  <body>
+    <div id="app">
+      <p>{{ message }}</p>
+      <button @click="reverseMessage">Reverse Message</button>
+      <hr />
+
+      <todo :content="todo.text"></todo>
+      <hr />
+
+      <ol>
+        <todo-item
+          v-for="item in todos"
+          :todo="item"
+          :key="item.id"
+        ></todo-item>
+      </ol>
+    </div>
+    <!-- vue component templates -->
+    <template id="tmpl-todo">
+      <div>
+        <span>{{ content }}</span>
+      </div>
+    </template>
+  </body>
+  <script type="module">
+    import Vue from 'vue'
+    import TodoItem from './components/todo.js'
+
+    // self-contain component
+    Vue.component('todo', {
+      props: ['content'],
+      template: '#tmpl-todo',
+    })
+    Vue.component('todo-item', TodoItem)
+
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          message: 'Hello Vue2',
+          todo: {
+            text: 'This is a todo',
+          },
+          todos: [
+            { id: 0, text: 'Vegetables' },
+            { id: 1, text: 'Cheese' },
+            { id: 2, text: 'Whatever else humans are supposed to eat' },
+          ],
+        }
+      },
+      methods: {
+        reverseMessage() {
+          this.message = this.message.split('').reverse().join('')
+        },
+      },
+    })
+  </script>
+</html>
