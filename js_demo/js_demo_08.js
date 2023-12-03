@@ -2,47 +2,8 @@
  * Created by zhengjin on 2020/9/18.
  */
 
-// demo01, error handler in async func
-function jsDemo01 () {
-  let base = 1
-
-  let func1 = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (base <= 0) {
-          reject(-1)
-          return
-        }
-        base++
-        resolve(base)
-      }, 1000)
-    })
-  }
-
-  let func2 = () => {
-    return new Promise((resolve) => {
-      if (base > 10) {
-        throw new Error('mock error')
-      }
-      setTimeout(() => {
-        base++
-        resolve(base)
-      }, 1000)
-    })
-  }
-
-  let run = async function () {
-    try {
-      let res1 = await func1()
-      let res2 = await func2()
-      console.log('results:', (res1 + res2))
-    } catch (err) {
-      console.error('catch:', err)
-    }
-  }
-  run()
-}
-
+// demo01, import async func
+let { jsAsyncDemo01 } = require('./js_module')
 
 // demo02, object attribute
 function jsDemo02 () {
@@ -536,7 +497,33 @@ function jsDemo21 () {
 }
 
 
+// demo22, chain
+function jsDemo22 () {
+  let setups = []
+  let clearups = []
+  for (let i = 0; i < 3; i++) {
+    setups.unshift(`pre${i}`)
+    clearups.push(`after${i}`)
+  }
+  console.log('setups:', setups)
+  console.log('clearups:', clearups)
+
+  // apply() 方法接受数组形式的参数
+  let chain2 = ['process']
+  chain2.unshift.apply(chain2, setups)
+  chain2.push.apply(chain2, clearups)
+  console.log('final chain:', chain2)
+}
+
+
 if (require.main === module) {
-  jsDemo21()
-  console.log(__filename, 'DONE.')
+  let run = async () => {
+    await jsAsyncDemo01()
+    jsDemo22()
+    console.log(__filename, 'DONE.')
+  }
+
+  // SyntaxError: await is only valid in async functions and the top level bodies of modules
+  // await run()
+  run()
 }
