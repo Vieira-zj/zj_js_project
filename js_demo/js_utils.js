@@ -104,12 +104,15 @@ const dayOfYear = (date) => Math.floor((date - new Date(date.getFullYear(), 0, 0
 // 计算2个日期之间相差多少天
 const dayDiff = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86400000)
 
-// convert timestamp to date
 const timestampToDate = (ts) => {
   if (!ts) {
     return 'null'
   }
   let date = new Date(ts)
+  return formatDate(date)
+}
+
+const formatDate = (date) => {
   let year = date.getFullYear()
   let month = formatDateItem(date.getMonth() + 1)
   let day = formatDateItem(date.getDate())
@@ -124,6 +127,38 @@ const formatDateItem = (item) => {
     return '0' + item
   }
   return item
+}
+
+const getDateRangeByDays = (days) => {
+  let now = new Date()
+  let start = getDateInfo(now)
+  let end = getDateInfo(now)
+  let rStart = new Date(start.year + '/' + start.month + '/' + start.day + ' 00:00:00')
+  let rEnd = new Date(end.year + '/' + end.month + '/' + end.day + ' 23:59:59')
+  if (days) {
+    if (days < 0) {
+      rStart.setTime(rStart.getTime() + (1000 * 3600 * 24 * (days + 1)))
+    }
+    if (days > 0) {
+      rEnd.setTime(rEnd.getTime() + (1000 * 3600 * 24 * (days - 1)))
+    }
+  }
+  return [rStart, rEnd]
+}
+
+const getDateInfo = (date) => {
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+  }
+}
+
+const getDateRangeFromMonthStartToNow = () => {
+  let now = new Date()
+  let start = new Date(now.getFullYear(), now.getMonth(), 1, '00', '00', '00')
+  let end = now
+  return [start, end]
 }
 
 if (require.main === module) {
@@ -142,7 +177,15 @@ if (require.main === module) {
   // console.log('day of year:', dayOfYear(new Date()))
   // console.log('day diff:', dayDiff(new Date("2020-10-21"), new Date("2021-10-22")))
 
-  console.log('date:', timestampToDate(1681353475358))
+  // console.log('date:', timestampToDate(1681353475358))
+
+  // console.log('date info:', getDateInfo(new Date()))
+
+  // let [start, end] = getDateRangeByDays(-3)
+  // console.log(`get date range before 3 days:\n${formatDate(start)}\n${formatDate(end)}`)
+
+  // let [start, end] = getDateRangeFromMonthStartToNow()
+  // console.log(`start=${formatDate(start)}, end=${formatDate(end)}`)
 
   console.log(__filename, 'DONE.')
 }
