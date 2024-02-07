@@ -17,7 +17,7 @@ const scrollToTop = (element) =>
 const scrollToBottom = (element) =>
   element.scrollIntoView({ behavior: "smooth", block: "end" })
 
-// 获取浏览器Cookie的值
+// 获取浏览器 Cookie 值
 const getCookie = (name) =>
   `; ${document.cookie}`.split(`; ${name}=`).pop().split(';').shift()
 
@@ -64,7 +64,7 @@ const arrIsNotEmpty = (arr) => Array.isArray(arr) && arr.length > 0
 // 打乱数组
 const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random())
 
-// 颜色RGB转十六进制
+// 颜色 RGB 转十六进制
 const rgbToHex = (r, g, b) =>
   '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 
@@ -161,8 +161,42 @@ const getDateRangeFromMonthStartToNow = () => {
   return [start, end]
 }
 
+// 
+// Utils by Promise
+// 
+
+function sleep (millis) {
+  return new Promise((resolve, _) => {
+    setTimeout(() => {
+      resolve()
+    }, millis)
+  })
+}
+
+// 异步定时器函数
+async function asyncRunWithDelay (fn, ms) {
+  await new Promise(resolve => setTimeout(resolve, ms))
+  fn()
+}
+
+// 异步过滤函数
+async function asyncFilter (values, predicate) {
+  let results = await Promise.all(values.map(predicate))
+  return values.filter((_val, idx) => results[idx])
+}
+
+async function testAsyncFilter () {
+  let isOddNumber = async (n) => {
+    await sleep(100)
+    return n % 2 !== 0
+  }
+
+  let results = await asyncFilter([1, 2, 3, 4, 5], isOddNumber)
+  console.log('filter results:', results)
+}
+
 if (require.main === module) {
-  console.log('average:', average(1, 2, 3, 4))
+  // console.log('average:', average(1, 2, 3, 4))
   // console.log('capitalize:', capitalize("hello"))
   // console.log('array distinct:', arrayDistinct([1, 2, 3, 3, 4, 4, 5, 5, 6]))
   // console.log('string reverse:', reverse('hello world'))
@@ -186,6 +220,11 @@ if (require.main === module) {
 
   // let [start, end] = getDateRangeFromMonthStartToNow()
   // console.log(`start=${formatDate(start)}, end=${formatDate(end)}`)
+
+  // asyncRunWithDelay(() => {
+  //   console.log('run with delay test')
+  // }, 1000)
+  // testAsyncFilter()
 
   console.log(__filename, 'DONE.')
 }
