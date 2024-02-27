@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>window elements testcase</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">Window Events TestCase</h1>
+  </body>
+  <script>
+    let createScriptElement = () => {
+      let elem = document.createElement('script')
+      elem.setAttribute('type', 'text/javascript')
+      // elem.src = 'resource_url'
+      elem.textContent = 'console.log("hello from new script element")'
+      elem.onerror = (e) => {
+        console.log('create new <script> element failed:', e)
+      }
+      document.head.appendChild(elem)
+    }
+
+    createScriptElement()
+  </script>
+</html>
