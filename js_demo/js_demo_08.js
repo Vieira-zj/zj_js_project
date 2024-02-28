@@ -516,10 +516,27 @@ function jsDemo22 () {
 }
 
 
+// demo23, print html by template
+function jsDemo23 () {
+  const title = 'html template test'
+  const body = 'template body'
+  let tmpl = `<!doctype html>
+<html>
+  <head>
+    <title>${title}</title>
+  </head>
+  <body>
+    <h1>${body}</h1>
+  </body>
+</html>`
+  console.log('template:\n' + tmpl)
+}
+
+
 if (require.main === module) {
   let run = async () => {
     await jsAsyncDemo01()
-    jsDemo22()
+    jsDemo23()
     console.log(__filename, 'DONE.')
   }
 

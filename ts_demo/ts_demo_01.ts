@@ -23,6 +23,7 @@ function tsdemo01(): void {
   console.log(c.getGender())
 }
 
+
 // demo02, 类型断言
 function tsdemo0201(): void {
   // in
@@ -48,6 +49,7 @@ function tsdemo0201(): void {
   let dog = new MyDog()
   trainAnimal(dog)
 }
+
 
 function tsdemo0202(): void {
   // typeof 基础类型
@@ -76,6 +78,7 @@ function tsdemo0202(): void {
   console.log(addObj(new NumberObj(10), new NumberObj(12)))
 }
 
+
 // demo03, 字符串枚举
 function tsdemo03(): void {
   enum Direction {
@@ -92,6 +95,7 @@ function tsdemo03(): void {
   }
 }
 
+
 // demo04, 泛型 定义多个类型
 function tsdemo04(): void {
   function join<T, P>(first: T, second: P): string {
@@ -99,6 +103,7 @@ function tsdemo04(): void {
   }
   console.log(join<number, string>(1, 'one'))
 }
+
 
 // demo05, 泛型约束
 function tsdemo05(): void {
@@ -115,6 +120,7 @@ function tsdemo05(): void {
   const data = new DataManager([{ name: 'foo' }, { name: 'bar' }])
   console.log(data.getItem(1))
 }
+
 
 // demo06, 泛型 keyof
 function tsdemo06(): void {
@@ -138,6 +144,7 @@ function tsdemo06(): void {
   console.log(teacher.getInfo('name'))
 }
 
+
 // demo07, 命名空间
 namespace Content {
   export class Header {
@@ -151,6 +158,7 @@ namespace Content {
     }
   }
 }
+
 
 // demo08, 类装饰器
 function tsdemo08(): void {
@@ -178,6 +186,7 @@ function tsdemo08(): void {
     ; (test as any).print()
 }
 
+
 // demo09, 类装饰器
 function tsdemo09(): void {
   function testDecorator<T extends new (...args: any[]) => any>(
@@ -201,6 +210,7 @@ function tsdemo09(): void {
   const t = new Test('bar')
   console.log((t as any).getName())
 }
+
 
 // demo10, 方法装饰器
 function tsdemo10(): void {
@@ -228,6 +238,7 @@ function tsdemo10(): void {
   console.log(test.getName())
 }
 
+
 // demo11, 属性装饰器
 function tsdemo11(): void {
   function nameDecorator(target: any, key: string) {
@@ -244,6 +255,7 @@ function tsdemo11(): void {
   console.log(test.name)
   console.log((test as any).__proto__.name)
 }
+
 
 // demo12, 装饰器 例子
 function tsdemo12(): void {
@@ -276,6 +288,7 @@ function tsdemo12(): void {
   test.getName()
   test.getAge()
 }
+
 
 // main
 tsdemo12()

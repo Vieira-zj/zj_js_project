@@ -8,6 +8,7 @@ function helloWorld(): void {
   console.log(message)
 }
 
+
 /**
  * 基本类型
  *
@@ -45,6 +46,7 @@ function demo03(): void {
   dyn = true
   console.log(dyn)
 }
+
 
 /**
  * 引用类型
@@ -102,6 +104,7 @@ function demo08(): void {
   console.log(animalName)
 }
 
+
 /**
  * 类型断言
  *
@@ -120,6 +123,7 @@ function demo10(): void {
   let answer: string = foo as string
   console.log(answer)
 }
+
 
 /**
  * 接口
@@ -172,8 +176,8 @@ function demo14(): void {
   console.log(p1)
 }
 
+// 数字索引类型
 function demo15(): void {
-  // 数字索引类型
   interface StringArray {
     [index: number]: string
   }
@@ -262,6 +266,7 @@ function demo19(): void {
   let cube: Cube = new Cube(2, 3, 4)
   console.log('results:', cube.getCube())
 }
+
 
 /**
  * 类
@@ -354,6 +359,7 @@ function demo23(): void {
   console.log(name1.fullName)
 }
 
+
 /**
  * 函数
  *
@@ -422,6 +428,7 @@ function demo29(): void {
   console.log(foo4(true))
 }
 
+
 /**
  * 泛型 类型变量
  *
@@ -468,6 +475,7 @@ function demo32(): void {
   console.log(rect4.getRect())
 }
 
+
 /**
  * namespace 命名空间
  *
@@ -487,5 +495,7 @@ function demo33(): void {
   }
 }
 
+
+// main
 demo32()
 console.log('ts hello demo done')
