@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>main</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>iframe - postMessage</h1>
+    <iframe src="./iframe.html"></iframe>
+    <script>
+      const trustedOrigins = ['http://localhost:8080']
+
+      const elem = document.querySelector('iframe')
+      elem.addEventListener('load', () => {
+        console.log('[main] iframe loaded')
+        elem.contentWindow.postMessage(
+          JSON.stringify({
+            message: 'this should be delivered to an iframe.',
+          })
+        )
+      })
+
+      let onMessage = (msg) => {
+        if (!trustedOrigins.includes(msg.origin)) return
+        console.log('[main] message from an iframe:', msg.data)
+      }
+      window.addEventListener('message', onMessage, false)
+    </script>
+  </body>
+</html>
