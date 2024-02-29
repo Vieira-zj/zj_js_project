@@ -14,12 +14,12 @@ function get_file_name() {
 
 function run_ts_file() {
   name=$(get_file_name $1)
-  tsc ${name}.ts -t esnext --experimentalDecorators && node ${name}.js
+  tsc ${name}.ts -t esnext --experimentalDecorators && node dist/${name}.js
 }
 
 function run_ts() {
   name=$(get_file_name $1)
-  tsc && node ${name}.js
+  tsc && node dist/${name}.js
 }
 
 # Compile and package multiple ts files to one js file for namespaces.

@@ -4,6 +4,7 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
+    "outDir": "dist",
     "jsx": "preserve",
     "moduleResolution": "node",
     "importHelpers": true,

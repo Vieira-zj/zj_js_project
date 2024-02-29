@@ -1,7 +1,7 @@
 import fastify from 'fastify'
 import cors from '@fastify/cors'
 
-import { port } from './configs'
+import { port } from './config'
 import { SayMessage } from './model'
 
 async function httpServe() {
@@ -58,3 +58,5 @@ async function main() {
 }
 
 main()
+
+// TODO: add eslint

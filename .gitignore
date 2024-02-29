@@ -9,6 +9,3 @@ out/
 # dependency modules
 node_modules/
 dist/
-
-ts_demo/*.js
-ts_demo/*.js.map
