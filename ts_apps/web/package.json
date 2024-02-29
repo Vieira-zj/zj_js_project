@@ -1,0 +1,26 @@
+{
+  "name": "ts-web-server",
+  "version": "1.0.0",
+  "description": "my helloworld ts web server",
+  "main": "dist/src/server.js",
+  "scripts": {
+    "dev": "cd src && ENV=development ts-node server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node ./dist/server.js",
+    "lint": "eslint \"**/*.ts\" --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^8.0.0",
+    "fastify": "^4.26.1",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.22",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "private": true
+}

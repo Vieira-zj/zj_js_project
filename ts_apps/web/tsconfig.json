@@ -1,0 +1,31 @@
+// refer: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018"],
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "sourceMap": true,
+    "pretty": true,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowUnreachableCode": false,
+    "preserveWatchOutput": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "declaration": false
+  },
+  "exclude": ["./dist", "./scripts"]
+}
