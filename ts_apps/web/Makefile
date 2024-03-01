@@ -1,6 +1,6 @@
 dep:
 	npm install -D typescript @types/node ts-node
-	npm install fastify @fastify/cors tslib
+	npm install tslib fastify @fastify/cors @fastify/static
 
 dev:
 	npm run dev

@@ -1,8 +1,11 @@
+import path from 'path'
 import fastify from 'fastify'
 import cors from '@fastify/cors'
+import fstatic from '@fastify/static'
 
 import { port } from './config'
-import { SayMessage } from './model'
+import defaultGroup from './router'
+import testGroup from './router/test'
 
 async function httpServe() {
   const server = fastify()
@@ -24,29 +27,24 @@ async function httpServe() {
 
   server.register(cors, {
     origin: true,
-    methods: 'GET,PUT,POST,DELETE,PATCH,HEAD,CONNECT,OPTIONS',
+    methods: 'GET,PUT,POST,DELETE,OPTIONS',
     credentials: true,
+  })
+
+  const pubPath = path.join(__dirname, 'public')
+  console.log('set public to:', pubPath)
+  server.register(fstatic, {
+    root: pubPath,
+    prefix: '/public',
   })
 
   // router
 
-  server.get('/', (_, resp) => {
-    resp.redirect(307, '/healthz')
-  })
-
-  server.get('/healthz', (_, resp) => {
-    resp.send('pass')
-  })
-
-  server.post('/test/say', (req, resp) => {
-    let body = req.body as SayMessage
-    let name: string = (body.name || 'default')
-    console.log(`from ${name}, get message: ${body.msg}`)
-    resp.send(JSON.stringify({ "code": 0 }))
-  })
+  server.register(defaultGroup)
+  server.register(testGroup, { prefix: '/test' })
 
   await server.listen({ port: port as number })
-  console.info(`server listening at ${port}`)
+  console.info(`server listening at ${port} ...`)
 }
 
 async function main() {

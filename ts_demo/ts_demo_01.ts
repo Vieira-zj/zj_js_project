@@ -290,5 +290,30 @@ function tsdemo12(): void {
 }
 
 
+// demo13, enum and interface
+function tsdemo13(): void {
+  interface ProcessEnv {
+    readonly NODE_ENV: 'none' | 'development' | 'production' | 'test'
+    readonly APP_ENV: 'dev' | 'test' | 'uat' | 'staging' | 'live'
+  }
+
+  const getNodeEnv = (env: string): 'development' | 'production' | 'test' | undefined => {
+    const nodeEnvs = {
+      dev: 'development',
+      test: 'test',
+      live: 'production'
+    }
+    return nodeEnvs[env]
+  }
+
+  const env = 'dev'
+  let processEnv: ProcessEnv = {
+    APP_ENV: env,
+    NODE_ENV: getNodeEnv(env) ?? 'none',
+  }
+  console.log('process env:', JSON.stringify(processEnv))
+}
+
+
 // main
-tsdemo12()
+tsdemo13()
