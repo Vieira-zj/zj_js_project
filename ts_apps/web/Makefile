@@ -1,6 +1,6 @@
 dep:
 	npm install -D typescript @types/node ts-node
-	npm install tslib fastify @fastify/cors @fastify/static
+	npm install tslib fastify @fastify/cors
 
 dev:
 	npm run dev
@@ -11,6 +11,9 @@ build:
 
 start:
 	npm run start
+
+run-test:
+	./node_modules/.bin/ts-node src/test.ts
 
 api-test-index:
 	curl -v -L http://localhost:8080/

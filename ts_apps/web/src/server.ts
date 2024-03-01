@@ -6,6 +6,7 @@ import fstatic from '@fastify/static'
 import { port } from './config'
 import defaultGroup from './router'
 import testGroup from './router/test'
+import auth from './middlewares/auth'
 
 async function httpServe() {
   const server = fastify()
@@ -25,6 +26,8 @@ async function httpServe() {
     }
   )
 
+  server.addHook('preHandler', auth)
+
   server.register(cors, {
     origin: true,
     methods: 'GET,PUT,POST,DELETE,OPTIONS',
@@ -42,6 +45,8 @@ async function httpServe() {
 
   server.register(defaultGroup)
   server.register(testGroup, { prefix: '/test' })
+
+  // run server
 
   await server.listen({ port: port as number })
   console.info(`server listening at ${port} ...`)

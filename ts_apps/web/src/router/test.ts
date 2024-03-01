@@ -8,7 +8,7 @@ export default (server: FastifyInstance, _: any, done: any) => {
     let body = req.body as SayMessage
     let name: string = (body.name || 'default')
     console.log(`from ${name}, get message: ${body.msg}`)
-    resp.send(JSON.stringify({ "code": 0 }))
+    resp.send({ code: 0 })
   })
 
   done()
