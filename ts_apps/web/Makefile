@@ -15,6 +15,9 @@ start:
 run-test:
 	./node_modules/.bin/ts-node src/test.ts
 
+run-utils-test: build
+	node dist/utils/shell.js
+
 api-test-index:
 	curl -v -L http://localhost:8080/
 
