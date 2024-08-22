@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>layout: grid</title>
+    <style>
+      .grid-box {
+        border: 1px solid #999;
+        width: 200px;
+        height: 400px;
+        display: grid;
+        margin: 20px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        gap: 6px;
+        padding: 6px;
+        grid-auto-flow: dense;
+      }
+      .grid-box > div {
+        background-color: bisque;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      /* 1x2 icon */
+      .grid-box-item-1 {
+        grid-column-end: span 2;
+      }
+      /* 2x1 icon */
+      .grid-box-item-2 {
+        grid-row-end: span 2;
+      }
+      /* 2x2 icon */
+      .grid-box-item-3 {
+        grid-column-end: span 2;
+        grid-row-end: span 2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Icons By Grid</h1>
+    <div class="grid-box" id="box"></div>
+    <script>
+      function renderGridItem(isRandom) {
+        let iconKinds = [0, 0, 0, 0, 1, 1, 2, 3]
+        if (isRandom) {
+          iconKinds.sort(() => {
+            return Math.random() > 0.5 ? 1 : -1
+          })
+        }
+        let items = ''
+        for (let i = 0; i < iconKinds.length; i++) {
+          items += `<div class="grid-box-item-${iconKinds[i]}">${i}</div>`
+        }
+
+        let boxEl = document.querySelector('#box')
+        boxEl.innerHTML = items
+      }
+
+      renderGridItem(true)
+    </script>
+  </body>
+</html>
