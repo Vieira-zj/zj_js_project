@@ -3,7 +3,7 @@
  *
  */
 
-// demo01, var tag: ! and ?
+// demo01, prop tag: ! and ?
 function tsdemo01(): void {
   class MyClass {
     name!: string // name 不为空
@@ -182,8 +182,7 @@ function tsdemo08(): void {
     }
   }
   console.log('start test')
-  let test = new Test()
-    ; (test as any).print()
+  let test = new Test(); (test as any).print()
 }
 
 
@@ -208,7 +207,7 @@ function tsdemo09(): void {
   }
   console.log('start test')
   const t = new Test('bar')
-  console.log((t as any).getName())
+  console.log('name:', (t as any).getName())
 }
 
 
@@ -221,9 +220,10 @@ function tsdemo10(): void {
   ) {
     console.log('target:', target)
     console.log('key:', key)
-    console.log('descriptor:', descriptor)
-    descriptor.value = () => {
-      return 'decorator'
+    let fn = descriptor.value
+    descriptor.value = function (...args: any[]) {
+      console.log('decorator: before')
+      return fn.apply(this, args)
     }
   }
 
@@ -235,15 +235,15 @@ function tsdemo10(): void {
     }
   }
   const test = new Test('foo')
-  console.log(test.getName())
+  console.log('name:', test.getName())
 }
 
 
-// demo11, 属性装饰器
+// demo11, prop 属性装饰器
 function tsdemo11(): void {
   function nameDecorator(target: any, key: string) {
-    console.log(target)
-    console.log(key)
+    console.log('target:', target)
+    console.log('key:', key)
     target[key] = 'bar'
   }
 
@@ -252,12 +252,12 @@ function tsdemo11(): void {
     name = 'foo'
   }
   const test = new Test()
-  console.log(test.name)
-  console.log((test as any).__proto__.name)
+  console.log('name:', test.name) // foo
+  console.log('__proto__.name:', (test as any).__proto__.name) // bar
 }
 
 
-// demo12, 装饰器 例子
+// demo12, catch err 装饰器
 function tsdemo12(): void {
   function catchError(msg: string) {
     return function (target: any, key: string, descriptor: PropertyDescriptor) {
@@ -272,15 +272,17 @@ function tsdemo12(): void {
     }
   }
 
-  const userInfo: any = undefined
+  const user: any = undefined
+
   class Test {
-    @catchError('userInfo.name is null')
+    @catchError('unexpected error')
     getName() {
-      return userInfo.name
+      return 'foo'
     }
-    @catchError('userInfo.age is null')
+
+    @catchError('user is null')
     getAge() {
-      return userInfo.age
+      return user.age
     }
   }
 
@@ -316,4 +318,4 @@ function tsdemo13(): void {
 
 
 // main
-tsdemo13()
+tsdemo09()

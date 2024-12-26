@@ -16,8 +16,8 @@ function helloWorld(): void {
  */
 
 // void 表示类型为 undefined 或 null
-// 例子：void 用于表示函数没有返回值，只是执行某些操作
-// 一个没有显式返回的函数，默认 return undefined. 符合 void 类型只能被赋值为 undefined 或 null
+// 例子: void 用于表示函数没有返回值, 只是执行某些操作
+// 一个没有显式返回的函数, 默认 return undefined. 符合 void 类型只能被赋值为 undefined 或 null
 function demo01(): void {
   function show(): void {
     console.log('typescript')
@@ -26,7 +26,7 @@ function demo01(): void {
 }
 
 // never 表示永远不存在值
-// 例子：一个只会抛出异常的函数，它的返回值并不存在
+// 例子: 一个只会抛出异常的函数, 它的返回值并不存在
 function demo02(): void {
   function error(): never {
     throw new Error('mock error')
@@ -40,7 +40,7 @@ function demo02(): void {
 }
 
 // any 表示可能为任何类型
-// 例子：不确定变量的类型或类型是动态的
+// 例子: 不确定变量的类型或类型是动态的
 function demo03(): void {
   let dyn: any = 'dyn_var'
   dyn = true
@@ -51,7 +51,7 @@ function demo03(): void {
 /**
  * 引用类型
  *
- * 除了 JS 中的数组类型、对象类型，还扩展了枚举类型，元祖类型。
+ * 除了 JS 中的数组类型, 对象类型, 还扩展了枚举类型, 元祖类型。
  */
 
 // 数组泛型
@@ -61,7 +61,7 @@ function demo04(): void {
   arr.forEach((item) => console.log(item))
 }
 
-// 对象object 除基本类型外的引用类型
+// 对象 object: 除基本类型外的引用类型
 function myPrint(o: object) {
   console.log(o.toString())
 }
@@ -72,14 +72,14 @@ function demo05(): void {
   myPrint(ro)
 }
 
-// 元组 由定长数组构成，数组中的元素是某（些）类型
+// 元组 由定长数组构成, 数组中的元素是某（些）类型
 function demo06(): void {
   let x: [string, number]
   x = ['one', 1]
   myPrint(x)
 }
 
-// 枚举 默认枚举值从 0 开始，可以手动赋值
+// 枚举 默认枚举值从 0 开始, 可以手动赋值
 function demo07(): void {
   enum Color {
     Red,
@@ -108,7 +108,7 @@ function demo08(): void {
 /**
  * 类型断言
  *
- * 断言发生在两种类型存在联系的情况，它并不是将一种类型转换成另一种类型。
+ * 断言发生在两种类型存在联系的情况, 它并不是将一种类型转换成另一种类型.
  */
 
 function demo09(): void {
@@ -195,6 +195,8 @@ function demo16(): void {
   let sum: Sum = function (num1, num2) {
     return num1 + num2
   }
+
+  console.log('sum:', sum(2, 6))
 }
 
 // 类类型 类的实例部分类型
@@ -271,8 +273,8 @@ function demo19(): void {
 /**
  * 类
  *
- * 修饰符 protected 和 private 类似，区别在于使用 protected 修饰的成员，在派生类可以访问。
- * 修饰符 readonly 将属性设置为只读。
+ * 修饰符 protected 和 private 类似, 区别在于使用 protected 修饰的成员, 在派生类可以访问.
+ * 修饰符 readonly 将属性设置为只读.
  */
 
 // 类的成员修饰符默认是 public, 也可以显式声明
@@ -391,7 +393,7 @@ function demo26(): void {
 }
 
 // 默认参数
-// 在 TS 中，默认参数的类型是：默认值和 undefined 的联合类型
+// 在 TS 中, 默认参数的类型是: 默认值和 undefined 的联合类型
 function demo27(): void {
   function foo2(a: number, b: number = 1): number {
     return a + b
@@ -413,7 +415,7 @@ function demo29(): void {
   function foo4(a: boolean): number
   function foo4(a: any): undefined
 
-  // 并不是重载，而是具体的函数声明，所以例子中只有三个函数重载
+  // 并不是重载, 而是具体的函数声明, 所以例子中只有三个函数重载
   function foo4(a: any): any {
     if (typeof a === 'number') {
       return true
@@ -496,6 +498,87 @@ function demo33(): void {
 }
 
 
+/**
+ * 装饰器
+ *
+ */
+
+// 类装饰器
+function demo34(): void {
+  interface IClassConfig {
+    label?: string
+    isAdmin?: boolean
+  }
+
+  function DecoConfig(config: IClassConfig) {
+    return (target: any) => {
+      Reflect.set(target, 'config', config)
+    }
+  }
+
+  @DecoConfig({
+    label: 'test',
+    isAdmin: false,
+  })
+  class User { }
+
+  console.log('user:', Reflect.get(User, 'config'))
+}
+
+// prop 属性装饰器
+function demo35(): void {
+  interface IFieldConfig {
+    label?: string
+    isEmail?: boolean
+  }
+  function DecoField(config: IFieldConfig) {
+    return (target: any, propertyKey: string) => {
+      Reflect.set(target, propertyKey, config)
+    }
+  }
+
+  class User {
+    @DecoField({
+      label: 'admin',
+      isEmail: true,
+    })
+    account!: string
+  }
+
+  console.log('account:', Reflect.get(User.prototype, 'account'))
+}
+
+// 方法装饰器
+function demo36() {
+  function DecoGuestCheck(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    const originalFunc = descriptor.value
+    descriptor.value = function (...args: any[]) {
+      let name = args[0]
+      if (name === 'guest') {
+        throw new Error('no permission')
+      }
+      return originalFunc.apply(this, args)
+    }
+  }
+
+  class User {
+    @DecoGuestCheck
+    add(name: string) {
+      console.log(`user [${name}] added!`)
+    }
+  }
+
+  const user = new User()
+
+  try {
+    user.add('foo')
+    console.log(user.add('guest'))
+  } catch (err) {
+    console.log('add user failed:', err)
+  }
+}
+
+
 // main
-demo32()
+demo36()
 console.log('ts hello demo done')
