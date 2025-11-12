@@ -18,71 +18,91 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
       const expensiveCalculation = (num) => {
-        console.log('Calculating...')
+        console.log("Calculating...");
         for (let i = 0; i < 1000000000; i++) {
-          num += 1
+          num += 1;
         }
-        return num
-      }
+        return num;
+      };
 
-      const Todos = ({ todos, addTodo }) => {
-        console.log('child render')
-        return (
-          <>
-            <h2>My Todos</h2>
-            {todos.map((todo, index) => {
-              return <p key={index}>{todo}</p>
-            })}
-            <button onClick={addTodo}>Add Todo</button>
-          </>
-        )
-      }
+      const Count = React.memo(() => {
+        console.log("count render");
+        const [count, setCount] = React.useState(0);
+        const [calculation, setCalculation] = React.useState(0);
 
-      const App = () => {
         // useEffect: 在页面结构渲染完成后执行 useEffect 中的内容
-        const [count, setCount] = React.useState(0)
-        const increment = () => {
-          setCount(count + 1)
-        }
-
-        const [calculation, setCalculation] = React.useState(0)
         React.useEffect(() => {
-          console.log('count:', count)
-          setCalculation(count * 2)
-        }, [count])
+          console.log("count hook:", count);
+          if (count > 0) {
+            setCalculation(count * 2); // cause re-render
+          }
+        }, [count]);
 
-        // useCallback: 缓存一个函数，避免 react 渲染页面的时候，每次都生成一个新的函数对象
-        const [todos, setTodos] = React.useState([])
-        const addTodo = React.useCallback(() => {
-          setTodos([...todos, 'New Todo'])
-        }, [todos])
+        let cal = `${count * 2}`; // not in useEffect scope
 
-        // useMemo: 缓存计算的结果，为了避免随着页面的渲染而重新触发耗时逻辑的运行
-        const expcal = React.useMemo(() => expensiveCalculation(count), [count])
+        // useMemo: 缓存计算的结果, 为了避免随着页面的渲染而重新触发耗时逻辑的运行
+        // const expcal = expensiveCalculation(count)
+        const expcal = React.useMemo(
+          () => expensiveCalculation(count),
+          [count]
+        );
 
         return (
           <>
             <div>
               <p>Count: {count}</p>
-              <button onClick={() => setCount((c) => c + 1)}>+</button>
+              <button onClick={() => setCount(count + 1)}>+</button>
               <p>Calculation: {calculation}</p>
-            </div>
-            <hr />
-            <div>
-              <Todos todos={todos} addTodo={addTodo} />
-              <div>Count: {count}</div>
-              <button onClick={increment}>+</button>
+              <p>Calculation: {cal}</p>
             </div>
             <div>
               <h2>Expensive Calculation</h2>
               {expcal}
             </div>
           </>
-        )
-      }
+        );
+      });
 
-      const rootElement = document.querySelector('.root')
-      ReactDOM.render(<App />, rootElement)
+      const Todos = React.memo(({ todos, addTodo }) => {
+        console.log("todo render");
+        return (
+          <div>
+            <h2>My Todos</h2>
+            {todos.map((todo, index) => {
+              return <p key={index}>{todo}</p>;
+            })}
+            <button onClick={addTodo}>Add Todo</button>
+          </div>
+        );
+      });
+
+      const App = () => {
+        const [total, setTotal] = React.useState(0);
+        const increment = () => {
+          setTotal((t) => t + 1);
+        };
+
+        const [todos, setTodos] = React.useState([]);
+        // useCallback: 缓存一个函数, 避免 react 渲染页面的时候, 每次都生成一个新的函数对象
+        const addTodo = React.useCallback(() => {
+          setTodos((t) => [...t, "New Todo"]);
+        }, [todos]);
+
+        return (
+          <>
+            <Count />
+            <hr />
+            <Todos todos={todos} addTodo={addTodo} />
+            <div>
+              <p>Total: {total}</p>
+              <button onClick={increment}>+</button>
+            </div>
+          </>
+        );
+      };
+
+      const rootElement = document.querySelector(".root");
+      ReactDOM.render(<App />, rootElement);
     </script>
   </body>
 </html>
