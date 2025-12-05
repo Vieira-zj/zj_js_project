@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React: Memo and Loading</title>
+  </head>
+  <body>
+    <div class="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // case: memo components
+      const Card = React.memo(() => {
+        console.log('Card render')
+        return (
+          <div>
+            <h2>User Card</h2>
+          </div>
+        )
+      })
+
+      const Todos = React.memo(({ todos }) => {
+        console.log('Todos render')
+        return (
+          <div>
+            <h2>Todos</h2>
+            {todos.map((todo, index) => {
+              return <p key={index}>{todo}</p>
+            })}
+          </div>
+        )
+      })
+
+      // case: fetch users and loading
+      const mockFetchUsers = () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve([
+              { id: 1, name: 'Foo', email: 'foo@example.com' },
+              { id: 2, name: 'Bar', email: 'bar@example.com' },
+              { id: 3, name: 'Jim', email: 'jim@example.com' },
+            ])
+          }, 1000)
+        })
+      }
+
+      const UserList = React.memo(() => {
+        const [users, setUsers] = React.useState([])
+        const [loading, setLoading] = React.useState(true)
+        const [error, setError] = React.useState(null)
+
+        React.useEffect(() => {
+          const fetchUsers = async () => {
+            try {
+              const users = await mockFetchUsers()
+              setUsers(users)
+            } catch (err) {
+              setError('loading users failed')
+              console.error(err)
+            } finally {
+              setLoading(false)
+            }
+          }
+          fetchUsers()
+        }, []) // fetch users once when page load
+
+        console.log('UserList render')
+        if (loading) {
+          return <div>Loading...</div>
+        }
+        if (error) {
+          return <div>Error: {error}</div>
+        }
+        return (
+          <div>
+            <h2>User List</h2>
+            <ul>
+              {users.map((user) => (
+                <li key={user.id}>
+                  <strong>name:</strong> {user.name} <br />
+                  <strong>email:</strong> {user.email}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      })
+
+      const App = () => {
+        const [count, setCount] = React.useState(0)
+        const [todos, setTodos] = React.useState(['todo 1', 'todo 2'])
+        const multiply = count * 2
+
+        const onClick = () => {
+          setCount((prev) => prev + 1) // make refresh page
+        }
+
+        console.log('App render')
+        return (
+          <div>
+            <h2>React: Memo and Loading</h2>
+            <div>
+              <button onClick={onClick}>Add</button>
+              <p>Count: {count}</p>
+              <p>Multiply: {multiply}</p>
+            </div>
+
+            <Card />
+            <Todos todos={todos} />
+            <UserList />
+          </div>
+        )
+      }
+
+      const rootElement = document.querySelector('.root')
+      ReactDOM.render(<App />, rootElement)
+    </script>
+  </body>
+</html>

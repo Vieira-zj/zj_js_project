@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React: Input</title>
+  </head>
+  <body>
+    <div class="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // 表单元素的值由 state 控制, 通过 onChange 同步更新
+      const InputByState = () => {
+        const [value, setValue] = React.useState('')
+
+        const onChange = (e) => {
+          setValue(e.target.value)
+        }
+        const onSubmit = (e) => {
+          console.log('submit value:', value)
+        }
+
+        return (
+          <div>
+            <input type="text" value={value} onChange={onChange} />
+            <button onClick={onSubmit}>Submit</button>
+          </div>
+        )
+      }
+
+      // 让 DOM 自身管理输入值, 仅在需要时 (如提交) 通过 ref 读取
+      // 减少不必要的 re-render
+      const InputByRef = () => {
+        const inputRef = React.useRef(null)
+        const onSubmit = (e) => {
+          console.log('submit value:', inputRef.current.value)
+        }
+
+        return (
+          <div>
+            <input type="text" ref={inputRef} />
+            <button onClick={onSubmit}>Submit</button>
+          </div>
+        )
+      }
+
+      const App = () => {
+        return (
+          <div>
+            <h1>React: Input</h1>
+            <InputByState />
+            <br />
+            <InputByRef />
+          </div>
+        )
+      }
+
+      const rootElement = document.querySelector('.root')
+      ReactDOM.render(<App />, rootElement)
+    </script>
+  </body>
+</html>
