@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>monitor click event</title>
+</head>
+<body>
+    <h1>Monitor Click Event</h1>
+    <div id="container">
+        <div>
+            <button id="add_btn" data-track-click="add_button">Add</button>
+        </div><br>
+        <div>
+            <button id="remove_btn" data-track-click="remove_button">Remove</button>
+        </div>
+    </div>
+</body>
+<script>
+    // 在最外层的 document 上绑定一个监听器. 事件最终都会冒泡到 document, 我们在这里统一拦截处理
+    document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target && target.dataset.trackClick) {
+            console.log("monitor click event:", target.dataset.trackClick);
+        }
+    });
+
+    const addBtn = document.getElementById('add_btn');
+    addBtn.addEventListener('click', function() {
+        console.log("add button was clicked at", new Date().toLocaleString());
+    });
+    const removeBtn = document.querySelector("#remove_btn");
+    removeBtn.addEventListener('click', function() {
+        console.log("remove button was clicked at", new Date().toLocaleString());
+    });
+</script>
+</html>

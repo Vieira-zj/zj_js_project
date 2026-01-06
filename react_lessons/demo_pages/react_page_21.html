@@ -58,27 +58,42 @@
         const [error, setError] = React.useState(null)
 
         React.useEffect(() => {
+          let isMounted = true
           const fetchUsers = async () => {
             try {
+              setLoading(true)
               const users = await mockFetchUsers()
-              setUsers(users)
+              if (isMounted) {
+                console.log('UserList: fetch and set users')
+                setUsers(users)
+                setError(null)
+              }
             } catch (err) {
-              setError('loading users failed')
               console.error(err)
+              setUsers([])
+              setError('loading users failed')
             } finally {
-              setLoading(false)
+              if (isMounted) {
+                setLoading(false)
+              }
             }
           }
+
           fetchUsers()
+
+          return () => {
+            isMounted = false
+          }
         }, []) // fetch users once when page load
 
-        console.log('UserList render')
         if (loading) {
+          console.log('UserList render: loading')
           return <div>Loading...</div>
         }
         if (error) {
           return <div>Error: {error}</div>
         }
+        console.log('UserList render: loaded')
         return (
           <div>
             <h2>User List</h2>
