@@ -1,10 +1,6 @@
 #!/bin/bash
 set -eu
 
-function init() {
-  tsc --init
-}
-
 function get_file_name() {
   fullname=${1}
   end=${#fullname}-3

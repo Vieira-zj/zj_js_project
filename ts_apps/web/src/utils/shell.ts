@@ -3,13 +3,13 @@ import * as child_process from "child_process"
 export async function shOutput(cmd: string, args: string[], options?: child_process.SpawnOptionsWithoutStdio): Promise<string> {
   let c = child_process.spawn(cmd, args, options)
 
-  const bufs: Buffer[] = []
-  const errBuf: Buffer[] = []
+  const bufs: Uint8Array[] = []
+  const errBuf: Uint8Array[] = []
 
-  c.stdout.on('data', (chunk: Buffer) => {
+  c.stdout.on('data', (chunk: Uint8Array) => {
     bufs.push(chunk)
   })
-  c.stderr.on('data', (chunk: Buffer) => {
+  c.stderr.on('data', (chunk: Uint8Array) => {
     errBuf.push(chunk)
   })
 

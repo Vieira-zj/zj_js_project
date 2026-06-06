@@ -1,10 +1,10 @@
 /**
- * Create at 2022-1-23
+ * Create at 2022-01-23
  *
  */
 
 // demo01, prop tag: ! and ?
-function tsdemo01(): void {
+export function tsdemo01(): void {
   class MyClass {
     name!: string // name 不为空
     age?: number  // age 属性有可能不存在
@@ -25,7 +25,7 @@ function tsdemo01(): void {
 
 
 // demo02, 类型断言
-function tsdemo0201(): void {
+export function tsdemo0201(): void {
   // in
   interface Bird {
     sing(): void
@@ -51,7 +51,7 @@ function tsdemo0201(): void {
 }
 
 
-function tsdemo0202(): void {
+export function tsdemo0202(): void {
   // typeof 基础类型
   function add<T>(first: T, second: T) {
     if (typeof first === 'number' && typeof second === 'number') {
@@ -80,7 +80,7 @@ function tsdemo0202(): void {
 
 
 // demo03, 字符串枚举
-function tsdemo03(): void {
+export function tsdemo03(): void {
   enum Direction {
     Up = 'UP',
     Down = 'DOWN',
@@ -97,7 +97,7 @@ function tsdemo03(): void {
 
 
 // demo04, 泛型 定义多个类型
-function tsdemo04(): void {
+export function tsdemo04(): void {
   function join<T, P>(first: T, second: P): string {
     return `${first}-${second}`
   }
@@ -106,14 +106,14 @@ function tsdemo04(): void {
 
 
 // demo05, 泛型约束
-function tsdemo05(): void {
+export function tsdemo05(): void {
   interface Item {
     name: string
   }
   class DataManager<T extends Item> {
     constructor(public data: T[]) { }
-    getItem(index: number): string {
-      return this.data[index].name
+    getItem(index: number): string | undefined {
+      return this.data[index]?.name
     }
   }
 
@@ -123,7 +123,7 @@ function tsdemo05(): void {
 
 
 // demo06, 泛型 keyof
-function tsdemo06(): void {
+export function tsdemo06(): void {
   interface Person {
     name: string
     age: number
@@ -159,9 +159,22 @@ namespace Content {
   }
 }
 
+export function demo07(): void {
+  let skip = true
+  if (!skip) {
+    class Page {
+      constructor() {
+        console.log('this is page')
+        new Content.Header()
+        new Content.Text()
+      }
+    }
+    new Page()
+  }
+}
 
 // demo08, 类装饰器
-function tsdemo08(): void {
+export function tsdemo08(): void {
   function testDecorator(flag: boolean) {
     console.log('decorator: init')
     if (flag) {
@@ -187,7 +200,7 @@ function tsdemo08(): void {
 
 
 // demo09, 类装饰器
-function tsdemo09(): void {
+export function tsdemo09(): void {
   function testDecorator<T extends new (...args: any[]) => any>(
     constructor: T
   ) {
@@ -212,7 +225,7 @@ function tsdemo09(): void {
 
 
 // demo10, 方法装饰器
-function tsdemo10(): void {
+export function tsdemo10(): void {
   function getNameDecorator(
     target: any,
     key: string,
@@ -240,7 +253,7 @@ function tsdemo10(): void {
 
 
 // demo11, prop 属性装饰器
-function tsdemo11(): void {
+export function tsdemo11(): void {
   function nameDecorator(target: any, key: string) {
     console.log('target:', target)
     console.log('key:', key)
@@ -258,7 +271,7 @@ function tsdemo11(): void {
 
 
 // demo12, catch err 装饰器
-function tsdemo12(): void {
+export function tsdemo12(): void {
   function catchError(msg: string) {
     return function (target: any, key: string, descriptor: PropertyDescriptor) {
       const fn = descriptor.value
@@ -290,32 +303,3 @@ function tsdemo12(): void {
   test.getName()
   test.getAge()
 }
-
-
-// demo13, enum and interface
-function tsdemo13(): void {
-  interface ProcessEnv {
-    readonly NODE_ENV: 'none' | 'development' | 'production' | 'test'
-    readonly APP_ENV: 'dev' | 'test' | 'uat' | 'staging' | 'live'
-  }
-
-  const getNodeEnv = (env: string): 'development' | 'production' | 'test' | undefined => {
-    const nodeEnvs = {
-      dev: 'development',
-      test: 'test',
-      live: 'production'
-    }
-    return nodeEnvs[env]
-  }
-
-  const env = 'dev'
-  let processEnv: ProcessEnv = {
-    APP_ENV: env,
-    NODE_ENV: getNodeEnv(env) ?? 'none',
-  }
-  console.log('process env:', JSON.stringify(processEnv))
-}
-
-
-// main
-tsdemo09()

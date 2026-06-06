@@ -1,6 +1,9 @@
-dep:
-	npm install -D typescript @types/node ts-node
-	npm install tslib fastify @fastify/cors
+install-dep:
+	@npm install -D typescript @types/node ts-node
+	@npm install tslib fastify @fastify/cors
+
+ls-module:
+	@npm ls @fastify/static
 
 dev:
 	npm run dev
@@ -14,15 +17,7 @@ start:
 
 run-test:
 	./node_modules/.bin/ts-node src/test.ts
+# 	node dist/utils/shell.js
 
-run-utils-test: build
-	node dist/utils/shell.js
-
-api-test-index:
-	curl -v -L http://localhost:8080/
-
-api-test-healthz:
-	curl http://localhost:8080/healthz
-
-api-test-post:
-	curl http://localhost:8080/test/say -H 'content-type:application/json' -d '{"name":"foo", "msg":"hello"}'
+run-api-test:
+	sh run.sh
