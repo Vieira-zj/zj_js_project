@@ -1,8 +1,0 @@
-{
-    "esversion": 6,
-    "indent": true,
-    "asi": true,
-    "boss": true,
-    "node": true,
-    "mocha": true
-}

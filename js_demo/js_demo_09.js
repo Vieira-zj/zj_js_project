@@ -3,7 +3,7 @@
  */
 
 // demo01, base64 encode and decode
-function jsDemo01 () {
+function jsDemo01() {
   let res = Buffer.from('hello world').toString('base64')
   console.log('base64 encode:', res)
 
@@ -12,14 +12,14 @@ function jsDemo01 () {
 }
 
 // demo02, var and let
-function jsDemo02 () {
+function jsDemo02() {
   declareByVar()
   declareByLet()
 }
 
 var x = 1
 
-function declareByVar () {
+function declareByVar() {
   console.log(x) // undefined
   if (true) {
     var x = 2 // 声明被提升
@@ -29,14 +29,13 @@ function declareByVar () {
 
 let y = 11
 
-function declareByLet () {
+function declareByLet() {
   console.log(y) // 11
   if (true) {
     let y = 12
   }
   console.log(y) // 11
 }
-
 
 if (require.main === module) {
   // jsDemo01()
