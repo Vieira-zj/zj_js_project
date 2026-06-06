@@ -10,7 +10,9 @@ init:
 	@npx tsc --init --rootDir src --outDir dist
 
 install-dep:
-	@npm install -D typescript @types/node tsx
+	@npm install -D typescript @types/node ts-node tsx
+	@npm install langchain @langchain/openai
+	@npm install dotenv
 
 run-dev:
 	@npm run dev

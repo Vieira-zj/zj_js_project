@@ -12,10 +12,15 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "^25.9.2",
+    "ts-node": "^10.9.2",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@langchain/openai": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "langchain": "^1.4.4"
   }
 }

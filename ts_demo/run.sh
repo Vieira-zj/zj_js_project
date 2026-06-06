@@ -8,6 +8,10 @@ function get_file_name() {
   echo ${name}
 }
 
+function run_lint() {
+  npx eslint src/index.ts
+}
+
 function run_ts_file() {
   name=$(get_file_name $1)
   tsc ${name}.ts -t esnext --experimentalDecorators && node dist/${name}.js
