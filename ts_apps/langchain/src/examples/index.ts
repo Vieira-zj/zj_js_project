@@ -4,7 +4,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 
-export async function helloDemo01() {
+export async function HelloDemo01() {
   const model = new ChatOpenAI({
     model: "gpt-4o-mini",
     temperature: 0,
@@ -16,7 +16,7 @@ export async function helloDemo01() {
 }
 
 // PromptTemplate
-export async function helloDemo02() {
+export async function HelloDemo02() {
   const prompt = PromptTemplate.fromTemplate("请用{style}风格解释{topic}");
   const formatted = await prompt.format({
     style: "简单",
@@ -25,7 +25,7 @@ export async function helloDemo02() {
   console.log(formatted);
 }
 
-export async function helloDemo03() {
+export async function HelloDemo03() {
   const model = new ChatOpenAI({
     model: "gpt-4o-mini",
   });

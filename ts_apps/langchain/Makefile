@@ -12,6 +12,7 @@ init:
 install-dep:
 	@npm install -D typescript @types/node ts-node tsx
 	@npm install langchain @langchain/openai
+	@npm install @langchain/textsplitters
 	@npm install dotenv
 
 run-dev:
